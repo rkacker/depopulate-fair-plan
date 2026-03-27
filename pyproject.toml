@@ -1,0 +1,41 @@
+[project]
+name = "fairplan"
+version = "0.1.0"
+description = "Residential California FAIR Plan data collection and analysis pipeline."
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+  "cryptography>=45.0,<46.0",
+  "pypdf>=5.4,<6.0",
+]
+
+[project.scripts]
+fairplan = "fairplan.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src/fairplan"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = ""
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/src",
+  "/config",
+  "/README.md",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.3,<9.0",
+]
+
+[tool.uv]
+default-groups = ["dev"]
