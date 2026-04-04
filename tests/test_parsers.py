@@ -107,7 +107,8 @@ def test_fixture_pipeline_matches_golden_metrics(tmp_path: Path) -> None:
     assert (processed_dir / "cdi" / "county_yearly.csv").exists()
     assert (processed_dir / "cdi" / "distressed_counties.csv").exists()
     assert (processed_dir / "cdi" / "distressed_zips.csv").exists()
-    assert (processed_dir / "analysis" / "distressed_pif_growth.csv").exists()
+    assert (processed_dir / "analysis" / "distressed_county_pif.csv").exists()
+    assert (processed_dir / "analysis" / "distressed_zip_pif.csv").exists()
 
     # Exports exist
     assert (exports_dir / "site_stats.json").exists()

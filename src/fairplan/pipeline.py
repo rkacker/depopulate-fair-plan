@@ -147,41 +147,35 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
     distressed_county_set = frozenset(r["geo_name"] for r in distressed_county_rows)
     distressed_zip_set = frozenset(r["geo_id"] for r in distressed_zip_rows)
 
-    distressed_pif_rows = []
-    for r in pif_rows:
-        geo_id = r["geography_id"]
-        if geo_id == "Total":
-            continue
-        geo_level = r["geography_level"]
-        is_distressed = (
-            (geo_level == "county" and r["geography_name"] in distressed_county_set)
-            or (geo_level == "zip" and geo_id in distressed_zip_set)
-        )
-        distressed_pif_rows.append(
-            {
-                "fiscal_year": int(r["fiscal_year"]),
-                "geography_level": geo_level,
-                "geography_id": geo_id,
-                "geography_name": r["geography_name"],
-                "is_distressed": int(is_distressed),
-                "policy_count": int(r["value"]),
-                "yoy_growth_pct": r["yoy_growth_pct"],
-                "source_id": r["source_id"],
-            }
-        )
+    fiscal_years = sorted({int(r["fiscal_year"]) for r in pif_rows})
+    year_cols = [f"policy_count_{y}" for y in fiscal_years]
+    fieldnames = ["geography_name", "is_distressed"] + year_cols
+
+    def _build_distressed_wide(geo_level: str, distressed_set: frozenset[str], id_field: str) -> list[dict]:
+        lookup: dict[str, dict] = {}
+        for r in pif_rows:
+            if r["geography_level"] != geo_level or r["geography_id"] == "Total":
+                continue
+            name = r["geography_name"]
+            if name not in lookup:
+                lookup[name] = {
+                    "geography_name": name,
+                    "is_distressed": int(r[id_field] in distressed_set),
+                }
+                for col in year_cols:
+                    lookup[name][col] = ""
+            lookup[name][f"policy_count_{int(r['fiscal_year'])}"] = int(r["value"])
+        return sorted(lookup.values(), key=lambda row: row["geography_name"])
+
     write_csv(
-        processed_dir / "analysis" / "distressed_pif_growth.csv",
-        distressed_pif_rows,
-        [
-            "fiscal_year",
-            "geography_level",
-            "geography_id",
-            "geography_name",
-            "is_distressed",
-            "policy_count",
-            "yoy_growth_pct",
-            "source_id",
-        ],
+        processed_dir / "analysis" / "distressed_county_pif.csv",
+        _build_distressed_wide("county", distressed_county_set, "geography_name"),
+        fieldnames,
+    )
+    write_csv(
+        processed_dir / "analysis" / "distressed_zip_pif.csv",
+        _build_distressed_wide("zip", distressed_zip_set, "geography_id"),
+        fieldnames,
     )
 
 
