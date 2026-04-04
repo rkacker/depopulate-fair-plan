@@ -57,7 +57,7 @@ def test_distressed_parser_extracts_counties_and_zips() -> None:
     counties = [row for row in rows if row["geo_type"] == "county"]
     zips = [row for row in rows if row["geo_type"] == "zip"]
     assert len(counties) == 29
-    assert len(zips) == 664
+    assert len(zips) == 663
 
 
 def test_fixture_pipeline_matches_golden_metrics(tmp_path: Path) -> None:
@@ -69,13 +69,50 @@ def test_fixture_pipeline_matches_golden_metrics(tmp_path: Path) -> None:
     build_exports(processed_dir, exports_dir)
     report_path = build_report(processed_dir, exports_dir, reports_dir)
 
-    summary = json.loads((exports_dir / "summary.json").read_text(encoding="utf-8"))
     expected = json.loads((ROOT / "tests" / "golden" / "expected_metrics.json").read_text(encoding="utf-8"))
 
-    for key, value in expected.items():
-        assert summary["headline_metrics"][key] == value
+    from fairplan.io_utils import read_csv
 
-    assert (exports_dir / "chart_series.json").exists()
-    assert (exports_dir / "county_rankings.csv").exists()
-    assert (exports_dir / "zip_metrics.csv").exists()
+    pif_history = read_csv(processed_dir / "pif_history.csv")
+    cdi_county = read_csv(processed_dir / "cdi_county_yearly.csv")
+    distressed = read_csv(processed_dir / "distressed_geography.csv")
+
+    latest_zip_year = max(
+        int(row["fiscal_year"])
+        for row in pif_history
+        if row["geography_level"] == "zip"
+    )
+    zip_total_value = next(
+        int(row["value"])
+        for row in pif_history
+        if row["geography_level"] == "zip"
+        and row["geography_id"] == "Total"
+        and int(row["fiscal_year"]) == latest_zip_year
+    )
+    latest_cdi_year = max(int(row["year"]) for row in cdi_county if row["county"] == "State")
+    cdi_fair_renewed = next(
+        int(row["value"])
+        for row in cdi_county
+        if row["county"] == "State"
+        and int(row["year"]) == latest_cdi_year
+        and row["market_segment"] == "fair_plan"
+        and row["flow_metric"] == "renewed"
+    )
+    distressed_counties = sum(1 for row in distressed if row["geo_type"] == "county")
+    distressed_zip_codes = sum(1 for row in distressed if row["geo_type"] == "zip")
+
+    assert zip_total_value == expected["fair_total_residential_policies_latest_fiscal_year"]
+    assert cdi_fair_renewed == expected["cdi_statewide_fair_renewed_latest_year"]
+    assert distressed_counties == expected["distressed_counties"]
+    assert distressed_zip_codes == expected["distressed_zip_codes"]
+
+    # Processed CSVs exist
+    assert (processed_dir / "county_rankings.csv").exists()
+    assert (processed_dir / "distressed_pif_growth.csv").exists()
+
+    # JSON exports exist
+    assert (exports_dir / "site_stats.json").exists()
+    assert (exports_dir / "county_rankings.json").exists()
+    assert (exports_dir / "zip_pif_history.json").exists()
+
     assert report_path.exists()

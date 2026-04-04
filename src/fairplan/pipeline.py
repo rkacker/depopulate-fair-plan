@@ -1,19 +1,15 @@
 from __future__ import annotations
 
-from collections import defaultdict
 from datetime import UTC, datetime
 from pathlib import Path
-import json
 
 from fairplan.fetch import fetch_sources
-from fairplan.io_utils import ensure_directory, read_csv, sha256sum, unique_preserving_order, write_csv, write_json
+from fairplan.io_utils import ensure_directory, read_csv, sha256sum, write_csv, write_json
 from fairplan.manifest import load_sources
 from fairplan.models import SourceConfig
 from fairplan.parsers import (
     parse_cdi_county_pdf,
-    parse_cdi_fact_sheet_appendix_a,
     parse_distressed_geographies,
-    parse_fair_category_pdf,
     parse_fair_history_pdf,
 )
 
@@ -45,53 +41,29 @@ def build_source_releases(sources: list[SourceConfig], raw_dir: Path) -> list[di
 
 
 def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = None) -> None:
+    """Parse PDFs and write analysis-ready CSVs to processed_dir."""
     manifest = load_sources(manifest_path or default_manifest_path())
-    fair_rows: list[dict[str, object]] = []
-    fair_geography_rows: list[dict[str, object]] = []
+    pif_rows: list[dict[str, object]] = []
     cdi_county_rows: list[dict[str, object]] = []
-    cdi_fact_rows: list[dict[str, object]] = []
     distressed_rows: list[dict[str, object]] = []
 
     for source in manifest:
         file_path = source.output_path(raw_dir)
         if not file_path.exists():
             continue
-        if source.dataset == "residential_policy_count":
-            fair_rows.extend(parse_fair_category_pdf(file_path, source, "count"))
-        elif source.dataset == "residential_policy_premium":
-            fair_rows.extend(parse_fair_category_pdf(file_path, source, "premium"))
-        elif source.dataset == "residential_policy_exposure":
-            fair_rows.extend(parse_fair_category_pdf(file_path, source, "exposure"))
-        elif source.dataset == "residential_county_pif_history":
-            fair_geography_rows.extend(parse_fair_history_pdf(file_path, source, "county"))
+        if source.dataset == "residential_county_pif_history":
+            pif_rows.extend(parse_fair_history_pdf(file_path, source, "county"))
         elif source.dataset == "residential_zip_pif_history":
-            fair_geography_rows.extend(parse_fair_history_pdf(file_path, source, "zip"))
+            pif_rows.extend(parse_fair_history_pdf(file_path, source, "zip"))
         elif source.dataset == "residential_county_yearly":
             cdi_county_rows.extend(parse_cdi_county_pdf(file_path, source))
-        elif source.dataset == "residential_fact_sheet":
-            cdi_fact_rows.extend(parse_cdi_fact_sheet_appendix_a(file_path, source))
         elif source.dataset == "distressed_geographies":
             distressed_rows.extend(parse_distressed_geographies(file_path, source))
 
+    # --- Base tables ---
     write_csv(
-        processed_dir / "fair_residential_quarterly.csv",
-        fair_rows,
-        [
-            "coverage_end",
-            "zip",
-            "county",
-            "is_distressed_area",
-            "region",
-            "risk_band",
-            "policy_category",
-            "metric",
-            "value",
-            "source_id",
-        ],
-    )
-    write_csv(
-        processed_dir / "fair_residential_geography_quarterly.csv",
-        fair_geography_rows,
+        processed_dir / "pif_history.csv",
+        pif_rows,
         [
             "coverage_end",
             "fiscal_year",
@@ -106,19 +78,9 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         ],
     )
     write_csv(
-        processed_dir / "cdi_residential_county_yearly.csv",
+        processed_dir / "cdi_county_yearly.csv",
         cdi_county_rows,
         ["year", "county", "market_segment", "flow_metric", "value", "source_id"],
-    )
-    write_csv(
-        processed_dir / "cdi_residential_zip_yearly.csv",
-        [],
-        ["year", "zip", "market_segment", "flow_metric", "value", "source_id"],
-    )
-    write_csv(
-        processed_dir / "cdi_statewide_fact_sheet_yearly.csv",
-        cdi_fact_rows,
-        ["year", "market_segment", "flow_metric", "value", "source_id"],
     )
     write_csv(
         processed_dir / "distressed_geography.csv",
@@ -142,263 +104,237 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         ],
     )
 
+    # --- Derived analysis tables ---
+
+    # County rankings: latest fiscal year, sorted by policy count
+    county_pif = [r for r in pif_rows if r["geography_level"] == "county" and r["geography_id"] != "Total"]
+    if county_pif:
+        latest_county_year = max(int(r["fiscal_year"]) for r in county_pif)
+        county_latest = [r for r in county_pif if int(r["fiscal_year"]) == latest_county_year]
+        county_latest.sort(key=lambda r: int(r["value"]), reverse=True)
+        write_csv(
+            processed_dir / "county_rankings.csv",
+            [
+                {
+                    "county": r["geography_name"],
+                    "fiscal_year": r["fiscal_year"],
+                    "policy_count": r["value"],
+                    "yoy_growth_pct": r["yoy_growth_pct"],
+                    "coverage_end": r["coverage_end"],
+                    "source_id": r["source_id"],
+                }
+                for r in county_latest
+            ],
+            ["county", "fiscal_year", "policy_count", "yoy_growth_pct", "coverage_end", "source_id"],
+        )
+
+    # Distressed PIF growth: all years, flagged with distressed status
+    distressed_county_set = frozenset(
+        r["geo_name"] for r in distressed_rows if r["geo_type"] == "county"
+    )
+    distressed_zip_set = frozenset(
+        r["geo_id"] for r in distressed_rows if r["geo_type"] == "zip"
+    )
+    distressed_pif_rows = []
+    for r in pif_rows:
+        geo_id = r["geography_id"]
+        if geo_id == "Total":
+            continue
+        geo_level = r["geography_level"]
+        is_distressed = (
+            (geo_level == "county" and r["geography_name"] in distressed_county_set)
+            or (geo_level == "zip" and geo_id in distressed_zip_set)
+        )
+        distressed_pif_rows.append(
+            {
+                "fiscal_year": int(r["fiscal_year"]),
+                "geography_level": geo_level,
+                "geography_id": geo_id,
+                "geography_name": r["geography_name"],
+                "is_distressed": int(is_distressed),
+                "policy_count": int(r["value"]),
+                "yoy_growth_pct": r["yoy_growth_pct"],
+                "source_id": r["source_id"],
+            }
+        )
+    write_csv(
+        processed_dir / "distressed_pif_growth.csv",
+        distressed_pif_rows,
+        [
+            "fiscal_year",
+            "geography_level",
+            "geography_id",
+            "geography_name",
+            "is_distressed",
+            "policy_count",
+            "yoy_growth_pct",
+            "source_id",
+        ],
+    )
+
 
 def build_exports(processed_dir: Path, exports_dir: Path) -> None:
-    fair_quarterly = read_csv(processed_dir / "fair_residential_quarterly.csv")
-    fair_geography = read_csv(processed_dir / "fair_residential_geography_quarterly.csv")
-    cdi_county = read_csv(processed_dir / "cdi_residential_county_yearly.csv")
-    cdi_fact = read_csv(processed_dir / "cdi_statewide_fact_sheet_yearly.csv")
-    distressed = read_csv(processed_dir / "distressed_geography.csv")
-    sources = read_csv(processed_dir / "source_releases.csv")
+    """Generate JSON exports for reporting and visualization."""
+    pif_history = read_csv(processed_dir / "pif_history.csv")
+    county_rankings = read_csv(processed_dir / "county_rankings.csv")
 
-    source_urls = unique_preserving_order(row["url"] for row in sources if row["file_exists"] == "1")
-    coverage_dates = [row["coverage_end"] for row in sources if row["file_exists"] == "1"]
-    coverage_start = "2015-01-01"
-    coverage_end = max(coverage_dates) if coverage_dates else ""
-    generated_at = datetime.now(UTC).isoformat()
+    # --- site_stats.json ---
+    county_totals: dict[int, int] = {}
+    for row in pif_history:
+        if row["geography_level"] == "county" and row["geography_id"] == "Total":
+            county_totals[int(row["fiscal_year"])] = int(row["value"])
 
-    latest_zip_year = max(
-        int(row["fiscal_year"])
-        for row in fair_geography
-        if row["geography_level"] == "zip"
-    )
-    latest_county_year = max(
-        int(row["fiscal_year"])
-        for row in fair_geography
-        if row["geography_level"] == "county"
-    )
+    years = sorted(county_totals.keys())
+    current_year = years[-1]
+    prior_year = years[-2]
+    earliest_year = years[0]
+    current_value = county_totals[current_year]
+    prior_value = county_totals[prior_year]
+    earliest_value = county_totals[earliest_year]
 
-    zip_total_row = next(
-        row
-        for row in fair_geography
-        if row["geography_level"] == "zip"
-        and row["geography_id"] == "Total"
-        and int(row["fiscal_year"]) == latest_zip_year
-    )
-    county_rows_latest = [
-        row
-        for row in fair_geography
-        if row["geography_level"] == "county"
-        and row["geography_id"] != "Total"
-        and int(row["fiscal_year"]) == latest_county_year
-    ]
-    county_rows_latest.sort(key=lambda row: int(row["value"]), reverse=True)
+    growth_multiple = round(current_value / earliest_value, 1) if earliest_value else 0
+    growth_label = f"{growth_multiple:.0f}x" if growth_multiple == int(growth_multiple) else f"{growth_multiple}x"
 
-    latest_cdi_year = max(int(row["year"]) for row in cdi_county if row["county"] == "State")
-    cdi_latest_state = [
-        row for row in cdi_county if row["county"] == "State" and int(row["year"]) == latest_cdi_year
-    ]
-    cdi_state_lookup = {
-        (row["market_segment"], row["flow_metric"]): int(row["value"]) for row in cdi_latest_state
-    }
+    period_end_current = f"September 30, {current_year}"
+    period_end_prior = f"September 30, {prior_year}"
 
-    zip_lookup: dict[str, dict[str, object]] = defaultdict(
-        lambda: {
-            "zip": "",
-            "county": "",
-            "region": "",
-            "is_distressed_area": 0,
-            "latest_snapshot_policy_count": 0,
-            "low_policy_count": 0,
-            "medium_policy_count": 0,
-            "high_policy_count": 0,
-        }
-    )
-    for row in fair_quarterly:
-        if row["metric"] != "count":
-            continue
-        entry = zip_lookup[row["zip"]]
-        entry["zip"] = row["zip"]
-        entry["county"] = row["county"]
-        entry["region"] = row["region"]
-        entry["is_distressed_area"] = int(row["is_distressed_area"])
-        entry["latest_snapshot_policy_count"] = int(entry["latest_snapshot_policy_count"]) + int(row["value"])
-        risk_key = f"{row['risk_band']}_policy_count"
-        entry[risk_key] = int(entry[risk_key]) + int(row["value"])
-
-    history_lookup = {
-        row["geography_id"]: row
-        for row in fair_geography
-        if row["geography_level"] == "zip"
-        and row["geography_id"] != "Total"
-        and int(row["fiscal_year"]) == latest_zip_year
-    }
-    zip_metrics = []
-    for zip_code, entry in zip_lookup.items():
-        history_row = history_lookup.get(zip_code)
-        zip_metrics.append(
-            {
-                "zip": zip_code,
-                "county": entry["county"],
-                "region": entry["region"],
-                "is_distressed_area": entry["is_distressed_area"],
-                "latest_snapshot_policy_count": entry["latest_snapshot_policy_count"],
-                "latest_fiscal_year_policy_count": history_row["value"] if history_row else "",
-                "latest_fiscal_year": latest_zip_year if history_row else "",
-                "low_policy_count": entry["low_policy_count"],
-                "medium_policy_count": entry["medium_policy_count"],
-                "high_policy_count": entry["high_policy_count"],
-            }
-        )
-    zip_metrics.sort(key=lambda row: int(row["latest_snapshot_policy_count"]), reverse=True)
-
-    fair_history_points = [
-        {"year": int(row["fiscal_year"]), "value": int(row["value"])}
-        for row in fair_geography
-        if row["geography_level"] == "zip" and row["geography_id"] == "Total"
-    ]
-    fair_history_points.sort(key=lambda row: row["year"])
-
-    cdi_history_series = defaultdict(list)
-    for row in cdi_fact:
-        cdi_history_series[f"{row['market_segment']}_{row['flow_metric']}"].append(
-            {"year": int(row["year"]), "value": int(row["value"])}
-        )
-    for points in cdi_history_series.values():
-        points.sort(key=lambda row: row["year"])
-
-    top_counties_points = [
-        {"county": row["geography_name"], "value": int(row["value"])}
-        for row in county_rows_latest[:10]
-    ]
-    distressed_snapshot = {"distressed": 0, "non_distressed": 0}
-    for row in zip_metrics:
-        bucket = "distressed" if int(row["is_distressed_area"]) else "non_distressed"
-        distressed_snapshot[bucket] += int(row["latest_snapshot_policy_count"])
-
-    metadata = {
-        "as_of_date": coverage_end,
-        "coverage_start": coverage_start,
-        "coverage_end": coverage_end,
-        "generated_at": generated_at,
-        "methodology": (
-            "FAIR Plan PDF tables are normalized into canonical CSVs and then reshaped into "
-            "website-facing exports. CDI annual county and statewide fact-sheet data provide "
-            "market context. ZIP-level CDI data is not yet available in v1."
-        ),
-        "source_urls": source_urls,
-    }
-    summary = {
-        **metadata,
-        "headline_metrics": {
-            "fair_total_residential_policies_latest_fiscal_year": int(zip_total_row["value"]),
-            "fair_total_residential_policies_latest_snapshot": sum(
-                int(row["latest_snapshot_policy_count"]) for row in zip_metrics
+    site_stats = {
+        "hero": {
+            "total_policies_display": _format_display(current_value),
+            "description": (
+                "California's insurance market is broken. The FAIR Plan\u2014meant as a "
+                "last resort\u2014now insures over {total_policies_display} homes and "
+                "continues growing. We must act now to rebuild a market that works for families."
             ),
-            "fair_latest_fiscal_year": latest_zip_year,
-            "cdi_latest_year": latest_cdi_year,
-            "cdi_statewide_voluntary_renewed_latest_year": cdi_state_lookup.get(("voluntary", "renewed"), 0),
-            "cdi_statewide_fair_renewed_latest_year": cdi_state_lookup.get(("fair_plan", "renewed"), 0),
-            "distressed_counties": sum(1 for row in distressed if row["geo_type"] == "county"),
-            "distressed_zip_codes": sum(1 for row in distressed if row["geo_type"] == "zip"),
         },
-        "top_counties_latest_fiscal_year": top_counties_points[:5],
+        "stats_cards": {
+            "prior_year": {
+                "value": _format_short(prior_value),
+                "label": f"FY {prior_year}",
+                "detail": f"Policies as of {period_end_prior}",
+            },
+            "current_year": {
+                "value": _format_short(current_value),
+                "label": f"FY {current_year}",
+                "detail": f"Policies as of {period_end_current}",
+            },
+            "growth": {
+                "value": growth_label,
+                "label": "Growth Rate",
+                "detail": f"Since FY {earliest_year}",
+            },
+        },
+        "map": {
+            "title": f"FY {current_year} FAIR Plan Crisis Map",
+            "description": (
+                f"Explore how FAIR Plan policies are distributed across California's "
+                f"58 counties. Data current through {period_end_current}."
+            ),
+            "data_source": f"California FAIR Plan data through {period_end_current}",
+            "total_label": f"Total FAIR Plan Policies in California (FY {current_year})",
+        },
+        "table": {
+            "description": f"FAIR Plan policies by county as of {period_end_current}",
+            "data_source": f"Data source: California FAIR Plan through {period_end_current}",
+        },
     }
-    chart_series = {
-        **metadata,
-        "charts": [
-            {
-                "id": "fair_statewide_policy_history",
-                "title": "FAIR Plan Residential Policies by Fiscal Year",
-                "series": [{"name": "FAIR Plan policies", "points": fair_history_points}],
-            },
-            {
-                "id": "cdi_statewide_market_flows",
-                "title": "Statewide Residential Market Flows",
-                "series": [
-                    {"name": key, "points": points} for key, points in sorted(cdi_history_series.items())
-                ],
-            },
-            {
-                "id": "fair_top_counties_latest",
-                "title": "Top Counties by FAIR Plan Residential Policies",
-                "series": [{"name": str(latest_county_year), "points": top_counties_points}],
-            },
-            {
-                "id": "fair_distressed_vs_non_distressed_snapshot",
-                "title": "Latest Snapshot Policies in Distressed vs Non-Distressed ZIPs",
-                "series": [
-                    {
-                        "name": "snapshot_policy_count",
-                        "points": [
-                            {"label": "distressed", "value": distressed_snapshot["distressed"]},
-                            {"label": "non_distressed", "value": distressed_snapshot["non_distressed"]},
-                        ],
-                    }
-                ],
-            },
-        ],
-    }
+    write_json(exports_dir / "site_stats.json", site_stats)
 
-    write_json(exports_dir / "summary.json", summary)
-    write_json(exports_dir / "chart_series.json", chart_series)
-    write_csv(
-        exports_dir / "county_rankings.csv",
+    # --- county_rankings.json ---
+    write_json(
+        exports_dir / "county_rankings.json",
         [
             {
-                "county": row["geography_name"],
-                "fiscal_year": row["fiscal_year"],
-                "policy_count": row["value"],
-                "yoy_growth_pct": row["yoy_growth_pct"],
-                "coverage_end": row["coverage_end"],
-                "source_id": row["source_id"],
+                "county": r["county"],
+                "fiscal_year": int(r["fiscal_year"]),
+                "policy_count": int(r["policy_count"]),
+                "yoy_growth_pct": r["yoy_growth_pct"],
             }
-            for row in county_rows_latest
+            for r in county_rankings
         ],
-        ["county", "fiscal_year", "policy_count", "yoy_growth_pct", "coverage_end", "source_id"],
     )
-    write_csv(
-        exports_dir / "zip_metrics.csv",
-        zip_metrics,
+
+    # --- zip_pif_history.json ---
+    zip_rows = [
+        r for r in pif_history
+        if r["geography_level"] == "zip" and r["geography_id"] != "Total"
+    ]
+    write_json(
+        exports_dir / "zip_pif_history.json",
         [
-            "zip",
-            "county",
-            "region",
-            "is_distressed_area",
-            "latest_snapshot_policy_count",
-            "latest_fiscal_year_policy_count",
-            "latest_fiscal_year",
-            "low_policy_count",
-            "medium_policy_count",
-            "high_policy_count",
+            {
+                "zip": r["geography_id"],
+                "fiscal_year": int(r["fiscal_year"]),
+                "policy_count": int(r["value"]),
+                "yoy_growth_pct": r["yoy_growth_pct"],
+            }
+            for r in zip_rows
         ],
     )
 
 
 def build_report(processed_dir: Path, exports_dir: Path, reports_dir: Path) -> Path:
-    summary = read_csv(processed_dir / "source_releases.csv")
-    exports_summary = json.loads((exports_dir / "summary.json").read_text(encoding="utf-8"))
-    county_rankings = read_csv(exports_dir / "county_rankings.csv")
+    sources = read_csv(processed_dir / "source_releases.csv")
+    pif_history = read_csv(processed_dir / "pif_history.csv")
+    cdi_county = read_csv(processed_dir / "cdi_county_yearly.csv")
+    distressed = read_csv(processed_dir / "distressed_geography.csv")
+    county_rankings = read_csv(processed_dir / "county_rankings.csv")
 
-    latest_sources = [row for row in summary if row["file_exists"] == "1"]
+    latest_sources = [row for row in sources if row["file_exists"] == "1"]
     latest_sources.sort(key=lambda row: row["published_date"], reverse=True)
+    coverage_dates = [row["coverage_end"] for row in latest_sources]
+    as_of_date = max(coverage_dates) if coverage_dates else ""
+
+    latest_zip_year = max(
+        int(row["fiscal_year"])
+        for row in pif_history
+        if row["geography_level"] == "zip"
+    )
+    zip_total_value = next(
+        int(row["value"])
+        for row in pif_history
+        if row["geography_level"] == "zip"
+        and row["geography_id"] == "Total"
+        and int(row["fiscal_year"]) == latest_zip_year
+    )
+
+    latest_cdi_year = max(int(row["year"]) for row in cdi_county if row["county"] == "State")
+    cdi_latest_state = {
+        (row["market_segment"], row["flow_metric"]): int(row["value"])
+        for row in cdi_county
+        if row["county"] == "State" and int(row["year"]) == latest_cdi_year
+    }
+
+    distressed_counties = sum(1 for row in distressed if row["geo_type"] == "county")
+    distressed_zip_codes = sum(1 for row in distressed if row["geo_type"] == "zip")
+
     top_counties = county_rankings[:5]
+    generated_at = datetime.now(UTC).isoformat()
 
     lines = [
         "# California FAIR Plan Residential Market Report",
         "",
-        f"Generated: {exports_summary['generated_at']}",
-        f"As of: {exports_summary['as_of_date']}",
+        f"Generated: {generated_at}",
+        f"As of: {as_of_date}",
         "",
         "## Highlights",
         "",
         (
             f"- FAIR Plan residential policies across the ZIP-level fiscal-year history reached "
-            f"{exports_summary['headline_metrics']['fair_total_residential_policies_latest_fiscal_year']:,} "
-            f"in {exports_summary['headline_metrics']['fair_latest_fiscal_year']}."
+            f"{zip_total_value:,} in {latest_zip_year}."
         ),
         (
             f"- The latest CDI statewide residential market year is "
-            f"{exports_summary['headline_metrics']['cdi_latest_year']}, with "
-            f"{exports_summary['headline_metrics']['cdi_statewide_voluntary_renewed_latest_year']:,} "
+            f"{latest_cdi_year}, with "
+            f"{cdi_latest_state.get(('voluntary', 'renewed'), 0):,} "
             "voluntary-market renewed policies and "
-            f"{exports_summary['headline_metrics']['cdi_statewide_fair_renewed_latest_year']:,} "
+            f"{cdi_latest_state.get(('fair_plan', 'renewed'), 0):,} "
             "FAIR Plan renewed policies."
         ),
         (
-            f"- CDI's March 6, 2025 distressed geography list includes "
-            f"{exports_summary['headline_metrics']['distressed_counties']} counties and "
-            f"{exports_summary['headline_metrics']['distressed_zip_codes']} ZIP codes."
+            f"- CDI's distressed geography list includes "
+            f"{distressed_counties} counties and "
+            f"{distressed_zip_codes} ZIP codes."
         ),
         "",
         "## Top Counties",
@@ -424,8 +360,8 @@ def build_report(processed_dir: Path, exports_dir: Path, reports_dir: Path) -> P
             "",
             "## Methodology Notes",
             "",
-            "- FAIR Plan category, ZIP history, and county history PDFs are parsed directly from text-extractable source documents.",
-            "- CDI county annual counts and statewide historical fact-sheet tables provide market context.",
+            "- FAIR Plan ZIP history and county history PDFs are parsed directly from text-extractable source documents.",
+            "- CDI county annual counts provide market context.",
             "- CDI ZIP-level yearly policy data is scaffolded but not populated in v1 because a machine-readable source has not yet been added.",
         ]
     )
@@ -433,6 +369,17 @@ def build_report(processed_dir: Path, exports_dir: Path, reports_dir: Path) -> P
     ensure_directory(report_path.parent)
     report_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return report_path
+
+
+def _format_display(value: int) -> str:
+    """Round to nearest 10,000 and format with commas (e.g. 642010 -> '640,000')."""
+    rounded = round(value, -4)
+    return f"{rounded:,}"
+
+
+def _format_short(value: int) -> str:
+    """Format as compact string (e.g. 642010 -> '642K')."""
+    return f"{value // 1000}K"
 
 
 def fetch_command(raw_dir: Path, manifest_path: Path | None = None) -> None:

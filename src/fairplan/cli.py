@@ -14,12 +14,12 @@ def parse_args() -> argparse.Namespace:
     fetch.add_argument("--manifest", default="config/sources.toml")
     fetch.add_argument("--raw-dir", default="data/raw")
 
-    normalize_parser = subparsers.add_parser("normalize", help="Normalize raw files into canonical tables")
+    normalize_parser = subparsers.add_parser("normalize", help="Normalize raw files into analysis-ready CSVs")
     normalize_parser.add_argument("--manifest", default="config/sources.toml")
     normalize_parser.add_argument("--raw-dir", default="data/raw")
     normalize_parser.add_argument("--processed-dir", default="data/processed")
 
-    exports = subparsers.add_parser("build-exports", help="Build chart and website export outputs")
+    exports = subparsers.add_parser("build-exports", help="Build JSON exports for reporting and visualization")
     exports.add_argument("--processed-dir", default="data/processed")
     exports.add_argument("--exports-dir", default="data/exports")
 

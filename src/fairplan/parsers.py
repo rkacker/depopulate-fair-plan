@@ -8,6 +8,19 @@ from pypdf import PdfReader
 from fairplan.models import SourceConfig
 
 
+CA_COUNTIES = frozenset([
+    "Alameda", "Alpine", "Amador", "Butte", "Calaveras", "Colusa",
+    "Contra Costa", "Del Norte", "El Dorado", "Fresno", "Glenn",
+    "Humboldt", "Imperial", "Inyo", "Kern", "Kings", "Lake", "Lassen",
+    "Los Angeles", "Madera", "Marin", "Mariposa", "Mendocino", "Merced",
+    "Modoc", "Mono", "Monterey", "Napa", "Nevada", "Orange", "Placer",
+    "Plumas", "Riverside", "Sacramento", "San Benito", "San Bernardino",
+    "San Diego", "San Francisco", "San Joaquin", "San Luis Obispo",
+    "San Mateo", "Santa Barbara", "Santa Clara", "Santa Cruz", "Shasta",
+    "Sierra", "Siskiyou", "Solano", "Sonoma", "Stanislaus", "Sutter",
+    "Tehama", "Trinity", "Tulare", "Tuolumne", "Ventura", "Yolo", "Yuba",
+])
+
 FAIR_POLICY_CATEGORIES = [
     "owner_occupied_single_family",
     "tenant_occupied_renters",
@@ -111,6 +124,8 @@ def parse_fair_history_pdf(path: Path, source: SourceConfig, geography_level: st
             if geography_level == "county" and geography_id != "Total"
             else geography_id
         )
+        if geography_level == "county" and geography_name not in CA_COUNTIES and geography_name != "Total":
+            continue
         for year, value_token, growth_token in pairs:
             rows.append(
                 {
@@ -228,7 +243,7 @@ def parse_distressed_geographies(path: Path, source: SourceConfig) -> list[dict[
                     }
                 )
             continue
-        for zip_code in re.findall(r"\b\d{5}\b", stripped):
+        for zip_code in re.findall(r"\b9\d{4}\b", stripped):
             rows.append(
                 {
                     "effective_date": source.coverage_end,

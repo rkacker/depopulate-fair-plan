@@ -1,17 +1,8 @@
 {
-  "version": 1,
+  "version": 3,
   "exports": [
-    "summary.json",
-    "chart_series.json",
-    "county_rankings.csv",
-    "zip_metrics.csv"
-  ],
-  "required_metadata": [
-    "as_of_date",
-    "coverage_start",
-    "coverage_end",
-    "generated_at",
-    "methodology",
-    "source_urls"
+    "site_stats.json",
+    "county_rankings.json",
+    "zip_pif_history.json"
   ]
 }
