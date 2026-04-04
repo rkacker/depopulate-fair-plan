@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from fairplan.pipeline import build_exports, build_report, fetch_command, normalize
+from fairplan.pipeline import build_exports, build_report, build_senate_district_exports, fetch_command, normalize
 
 
 def parse_args() -> argparse.Namespace:
@@ -28,6 +28,10 @@ def parse_args() -> argparse.Namespace:
     report.add_argument("--exports-dir", default="data/exports")
     report.add_argument("--reports-dir", default="reports")
 
+    senate = subparsers.add_parser("build-senate", help="Build Senate district PIF estimates")
+    senate.add_argument("--processed-dir", default="data/processed")
+    senate.add_argument("--config-dir", default="config")
+
     return parser.parse_args()
 
 
@@ -41,6 +45,8 @@ def main() -> int:
         build_exports(Path(args.processed_dir), Path(args.exports_dir))
     elif args.command == "report":
         build_report(Path(args.processed_dir), Path(args.exports_dir), Path(args.reports_dir))
+    elif args.command == "build-senate":
+        build_senate_district_exports(Path(args.processed_dir), Path(args.config_dir))
     return 0
 
 

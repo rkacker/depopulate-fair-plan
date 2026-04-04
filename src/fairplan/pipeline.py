@@ -349,6 +349,65 @@ def build_report(processed_dir: Path, exports_dir: Path, reports_dir: Path) -> P
     return report_path
 
 
+def build_senate_district_exports(processed_dir: Path, config_dir: Path | None = None) -> None:
+    """Apportion county PIF data to Senate districts using population-weighted crosswalk."""
+    config_dir = config_dir or Path("config")
+    county_pif = read_csv(processed_dir / "fair" / "county_pif_history.csv")
+    crosswalk = read_csv(config_dir / "county_senate_district_crosswalk.csv")
+    members = read_csv(config_dir / "senate_members.csv")
+
+    # Build lookups
+    senator_lookup = {int(r["senate_district"]): r for r in members}
+
+    # county_name -> [(district, weight), ...]
+    from collections import defaultdict
+    county_to_districts: dict[str, list[tuple[int, float]]] = defaultdict(list)
+    for r in crosswalk:
+        county_to_districts[r["county_name"]].append(
+            (int(r["senate_district"]), float(r["population_weight"]))
+        )
+
+    # county_name -> {fiscal_year -> value}
+    county_pif_by_year: dict[str, dict[int, int]] = defaultdict(dict)
+    for r in county_pif:
+        if r["geography_id"] == "Total":
+            continue
+        county_pif_by_year[r["geography_name"]][int(r["fiscal_year"])] = int(r["value"])
+
+    fiscal_years = sorted({int(r["fiscal_year"]) for r in county_pif if r["geography_id"] != "Total"})
+
+    # Accumulate district totals
+    district_pif: dict[int, dict[int, float]] = defaultdict(lambda: defaultdict(float))
+    for county_name, year_vals in county_pif_by_year.items():
+        for district, weight in county_to_districts.get(county_name, []):
+            for fy, val in year_vals.items():
+                district_pif[district][fy] += val * weight
+
+    # Build wide-format rows
+    year_cols = [f"policy_count_{y}" for y in fiscal_years]
+    rows: list[dict[str, object]] = []
+    for district in sorted(district_pif.keys()):
+        senator = senator_lookup.get(district, {})
+        row: dict[str, object] = {
+            "senate_district": district,
+            "senator_name": senator.get("senator_name", ""),
+            "party": senator.get("party", ""),
+        }
+        for fy in fiscal_years:
+            row[f"policy_count_{fy}"] = round(district_pif[district].get(fy, 0))
+        rows.append(row)
+
+    # Sort by latest year descending
+    latest_col = f"policy_count_{fiscal_years[-1]}"
+    rows.sort(key=lambda r: r[latest_col], reverse=True)
+
+    write_csv(
+        processed_dir / "analysis" / "senate_district_pif.csv",
+        rows,
+        ["senate_district", "senator_name", "party"] + year_cols,
+    )
+
+
 def _format_display(value: int) -> str:
     """Round to nearest 10,000 and format with commas (e.g. 642010 -> '640,000')."""
     rounded = round(value, -4)

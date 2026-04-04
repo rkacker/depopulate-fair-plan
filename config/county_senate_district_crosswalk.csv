@@ -1,0 +1,115 @@
+county_name,senate_district,population_weight,district_county_pop,county_total_pop,source
+Alameda,5,0.145551,244868,1682353,census_2020_baf_sldu22
+Alameda,7,0.408769,687693,1682353,census_2020_baf_sldu22
+Alameda,9,0.134984,227090,1682353,census_2020_baf_sldu22
+Alameda,10,0.310697,522702,1682353,census_2020_baf_sldu22
+Alpine,4,1.0,1204,1204,census_2020_baf_sldu22
+Amador,4,1.0,40474,40474,census_2020_baf_sldu22
+Butte,1,1.0,211632,211632,census_2020_baf_sldu22
+Calaveras,4,1.0,45292,45292,census_2020_baf_sldu22
+Colusa,1,1.0,21839,21839,census_2020_baf_sldu22
+Contra Costa,3,0.112157,130767,1165927,census_2020_baf_sldu22
+Contra Costa,7,0.232508,271087,1165927,census_2020_baf_sldu22
+Contra Costa,9,0.655335,764073,1165927,census_2020_baf_sldu22
+Del Norte,2,1.0,27743,27743,census_2020_baf_sldu22
+El Dorado,4,1.0,191185,191185,census_2020_baf_sldu22
+Fresno,12,0.354831,357902,1008654,census_2020_baf_sldu22
+Fresno,14,0.630476,635932,1008654,census_2020_baf_sldu22
+Fresno,16,0.014693,14820,1008654,census_2020_baf_sldu22
+Glenn,1,1.0,28917,28917,census_2020_baf_sldu22
+Humboldt,2,1.0,136463,136463,census_2020_baf_sldu22
+Imperial,18,1.0,179702,179702,census_2020_baf_sldu22
+Inyo,4,1.0,19016,19016,census_2020_baf_sldu22
+Kern,12,0.462762,420759,909235,census_2020_baf_sldu22
+Kern,16,0.537238,488476,909235,census_2020_baf_sldu22
+Kings,16,1.0,152486,152486,census_2020_baf_sldu22
+Lake,2,1.0,68163,68163,census_2020_baf_sldu22
+Lassen,1,1.0,32730,32730,census_2020_baf_sldu22
+Los Angeles,20,0.094159,942908,10014009,census_2020_baf_sldu22
+Los Angeles,22,0.069273,693702,10014009,census_2020_baf_sldu22
+Los Angeles,23,0.070826,709255,10014009,census_2020_baf_sldu22
+Los Angeles,24,0.103175,1033200,10014009,census_2020_baf_sldu22
+Los Angeles,25,0.097126,972618,10014009,census_2020_baf_sldu22
+Los Angeles,26,0.094453,945855,10014009,census_2020_baf_sldu22
+Los Angeles,27,0.06675,668432,10014009,census_2020_baf_sldu22
+Los Angeles,28,0.097923,980597,10014009,census_2020_baf_sldu22
+Los Angeles,30,0.093861,939920,10014009,census_2020_baf_sldu22
+Los Angeles,33,0.10301,1031541,10014009,census_2020_baf_sldu22
+Los Angeles,34,0.006672,66809,10014009,census_2020_baf_sldu22
+Los Angeles,35,0.094772,949050,10014009,census_2020_baf_sldu22
+Los Angeles,36,0.008001,80122,10014009,census_2020_baf_sldu22
+Madera,4,0.279709,43706,156255,census_2020_baf_sldu22
+Madera,14,0.720291,112549,156255,census_2020_baf_sldu22
+Marin,2,1.0,262321,262321,census_2020_baf_sldu22
+Mariposa,4,1.0,17131,17131,census_2020_baf_sldu22
+Mendocino,2,1.0,91601,91601,census_2020_baf_sldu22
+Merced,4,0.089352,25126,281202,census_2020_baf_sldu22
+Merced,14,0.910648,256076,281202,census_2020_baf_sldu22
+Modoc,1,1.0,8700,8700,census_2020_baf_sldu22
+Mono,4,1.0,13195,13195,census_2020_baf_sldu22
+Monterey,17,1.0,439035,439035,census_2020_baf_sldu22
+Napa,3,1.0,138019,138019,census_2020_baf_sldu22
+Nevada,1,0.830225,84883,102241,census_2020_baf_sldu22
+Nevada,4,0.169775,17358,102241,census_2020_baf_sldu22
+Orange,30,0.015052,47972,3186989,census_2020_baf_sldu22
+Orange,32,0.021802,69483,3186989,census_2020_baf_sldu22
+Orange,34,0.2758,878972,3186989,census_2020_baf_sldu22
+Orange,36,0.28443,906474,3186989,census_2020_baf_sldu22
+Orange,37,0.319601,1018565,3186989,census_2020_baf_sldu22
+Orange,38,0.083315,265523,3186989,census_2020_baf_sldu22
+Placer,1,0.143581,58113,404739,census_2020_baf_sldu22
+Placer,4,0.0348,14085,404739,census_2020_baf_sldu22
+Placer,6,0.821618,332541,404739,census_2020_baf_sldu22
+Plumas,1,1.0,19790,19790,census_2020_baf_sldu22
+Riverside,18,0.07747,187336,2418185,census_2020_baf_sldu22
+Riverside,19,0.211545,511555,2418185,census_2020_baf_sldu22
+Riverside,31,0.38688,935547,2418185,census_2020_baf_sldu22
+Riverside,32,0.324105,783747,2418185,census_2020_baf_sldu22
+Sacramento,3,0.003731,5914,1585055,census_2020_baf_sldu22
+Sacramento,6,0.402011,637210,1585055,census_2020_baf_sldu22
+Sacramento,8,0.594258,941931,1585055,census_2020_baf_sldu22
+San Benito,17,1.0,64209,64209,census_2020_baf_sldu22
+San Bernardino,18,0.003201,6984,2181654,census_2020_baf_sldu22
+San Bernardino,19,0.200584,437604,2181654,census_2020_baf_sldu22
+San Bernardino,22,0.145357,317118,2181654,census_2020_baf_sldu22
+San Bernardino,23,0.150064,327387,2181654,census_2020_baf_sldu22
+San Bernardino,25,0.027062,59039,2181654,census_2020_baf_sldu22
+San Bernardino,29,0.430806,939869,2181654,census_2020_baf_sldu22
+San Bernardino,31,0.006986,15242,2181654,census_2020_baf_sldu22
+San Bernardino,32,0.035941,78411,2181654,census_2020_baf_sldu22
+San Diego,18,0.180713,596105,3298634,census_2020_baf_sldu22
+San Diego,32,0.003133,10336,3298634,census_2020_baf_sldu22
+San Diego,38,0.214607,707910,3298634,census_2020_baf_sldu22
+San Diego,39,0.31335,1033627,3298634,census_2020_baf_sldu22
+San Diego,40,0.288197,950656,3298634,census_2020_baf_sldu22
+San Francisco,2,0.0,0,873965,census_2020_baf_sldu22
+San Francisco,7,0.0,0,873965,census_2020_baf_sldu22
+San Francisco,11,1.0,873965,873965,census_2020_baf_sldu22
+San Joaquin,5,1.0,779233,779233,census_2020_baf_sldu22
+San Luis Obispo,17,0.803476,226921,282424,census_2020_baf_sldu22
+San Luis Obispo,21,0.196524,55503,282424,census_2020_baf_sldu22
+San Mateo,11,0.192493,147150,764442,census_2020_baf_sldu22
+San Mateo,13,0.807507,617292,764442,census_2020_baf_sldu22
+Santa Barbara,21,1.0,448229,448229,census_2020_baf_sldu22
+Santa Clara,10,0.264594,512323,1936259,census_2020_baf_sldu22
+Santa Clara,13,0.20343,393893,1936259,census_2020_baf_sldu22
+Santa Clara,15,0.531976,1030043,1936259,census_2020_baf_sldu22
+Santa Cruz,17,1.0,270861,270861,census_2020_baf_sldu22
+Shasta,1,1.0,182155,182155,census_2020_baf_sldu22
+Sierra,1,1.0,3236,3236,census_2020_baf_sldu22
+Siskiyou,1,1.0,44076,44076,census_2020_baf_sldu22
+Solano,3,1.0,453491,453491,census_2020_baf_sldu22
+Sonoma,2,0.806455,394246,488863,census_2020_baf_sldu22
+Sonoma,3,0.193545,94617,488863,census_2020_baf_sldu22
+Stanislaus,4,1.0,552878,552878,census_2020_baf_sldu22
+Sutter,1,1.0,99633,99633,census_2020_baf_sldu22
+Tehama,1,1.0,65829,65829,census_2020_baf_sldu22
+Trinity,2,1.0,16112,16112,census_2020_baf_sldu22
+Tulare,12,0.349541,165374,473117,census_2020_baf_sldu22
+Tulare,14,1.5e-05,7,473117,census_2020_baf_sldu22
+Tulare,16,0.650444,307736,473117,census_2020_baf_sldu22
+Tuolumne,4,1.0,55620,55620,census_2020_baf_sldu22
+Ventura,21,0.617364,520958,843843,census_2020_baf_sldu22
+Ventura,27,0.382636,322885,843843,census_2020_baf_sldu22
+Yolo,3,1.0,216403,216403,census_2020_baf_sldu22
+Yuba,1,1.0,81575,81575,census_2020_baf_sldu22
