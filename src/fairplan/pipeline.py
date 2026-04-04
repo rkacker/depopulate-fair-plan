@@ -9,6 +9,7 @@ from fairplan.manifest import load_sources
 from fairplan.models import SourceConfig
 from fairplan.parsers import (
     parse_cdi_county_pdf,
+    parse_cdi_fact_sheet_appendix_a,
     parse_distressed_geographies,
     parse_fair_history_pdf,
 )
@@ -68,6 +69,7 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
     manifest = load_sources(manifest_path or default_manifest_path())
     pif_rows: list[dict[str, object]] = []
     cdi_county_rows: list[dict[str, object]] = []
+    cdi_fact_rows: list[dict[str, object]] = []
     distressed_rows: list[dict[str, object]] = []
 
     for source in manifest:
@@ -80,6 +82,8 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
             pif_rows.extend(parse_fair_history_pdf(file_path, source, "zip"))
         elif source.dataset == "residential_county_yearly":
             cdi_county_rows.extend(parse_cdi_county_pdf(file_path, source))
+        elif source.dataset == "residential_fact_sheet":
+            cdi_fact_rows.extend(parse_cdi_fact_sheet_appendix_a(file_path, source))
         elif source.dataset == "distressed_geographies":
             distressed_rows.extend(parse_distressed_geographies(file_path, source))
 
@@ -90,10 +94,16 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
     write_csv(processed_dir / "fair" / "county_pif_history.csv", county_pif_rows, PIF_FIELDNAMES)
     write_csv(processed_dir / "fair" / "zip_pif_history.csv", zip_pif_rows, PIF_FIELDNAMES)
 
-    # --- cdi/ base tables ---
+    # --- cdi/ base tables (deduplicate: State rows repeat across PDF pages) ---
+    cdi_deduped: dict[tuple, dict] = {}
+    for r in cdi_county_rows:
+        key = (r["year"], r["county"], r["market_segment"], r["flow_metric"])
+        cdi_deduped[key] = r
+    cdi_county_deduped = list(cdi_deduped.values())
+
     write_csv(
         processed_dir / "cdi" / "county_yearly.csv",
-        cdi_county_rows,
+        cdi_county_deduped,
         ["year", "county", "market_segment", "flow_metric", "value", "source_id"],
     )
 
@@ -102,6 +112,18 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
 
     write_csv(processed_dir / "cdi" / "distressed_counties.csv", distressed_county_rows, DISTRESSED_FIELDNAMES)
     write_csv(processed_dir / "cdi" / "distressed_zips.csv", distressed_zip_rows, DISTRESSED_FIELDNAMES)
+
+    # --- cdi/ statewide fact sheet (2015-2023, includes surplus lines) ---
+    write_csv(
+        processed_dir / "cdi" / "statewide_yearly.csv",
+        cdi_fact_rows,
+        ["year", "market_segment", "flow_metric", "value", "source_id"],
+    )
+
+    # --- cdi/ wide: county market summary (one row per county, columns per segment) ---
+    cdi_years = sorted({int(r["year"]) for r in cdi_county_deduped})
+    if cdi_years:
+        _build_cdi_county_wide(processed_dir, cdi_county_deduped, cdi_years)
 
     # --- metadata ---
     write_csv(
@@ -383,8 +405,27 @@ def build_senate_district_exports(processed_dir: Path, config_dir: Path | None =
             for fy, val in year_vals.items():
                 district_pif[district][fy] += val * weight
 
+    # --- CDI total market PIF (2023) apportioned to districts ---
+    cdi_pif_wide_path = processed_dir / "cdi" / "county_pif_wide.csv"
+    district_total_pif: dict[int, float] = defaultdict(float)
+    district_fair_pif: dict[int, float] = defaultdict(float)
+    if cdi_pif_wide_path.exists():
+        cdi_pif_wide = read_csv(cdi_pif_wide_path)
+        for r in cdi_pif_wide:
+            county = r["county"]
+            if county == "State":
+                continue
+            total = int(r.get("total_pif_2023", 0))
+            fair = int(r.get("fair_plan_pif_2023", 0))
+            for district, weight in county_to_districts.get(county, []):
+                district_total_pif[district] += total * weight
+                district_fair_pif[district] += fair * weight
+
     # Build wide-format rows
     year_cols = [f"policy_count_{y}" for y in fiscal_years]
+    has_cdi = bool(district_total_pif)
+    cdi_cols = ["cdi_total_pif_2023", "cdi_fair_plan_pif_2023"] if has_cdi else []
+
     rows: list[dict[str, object]] = []
     for district in sorted(district_pif.keys()):
         senator = senator_lookup.get(district, {})
@@ -395,6 +436,9 @@ def build_senate_district_exports(processed_dir: Path, config_dir: Path | None =
         }
         for fy in fiscal_years:
             row[f"policy_count_{fy}"] = round(district_pif[district].get(fy, 0))
+        if has_cdi:
+            row["cdi_total_pif_2023"] = round(district_total_pif.get(district, 0))
+            row["cdi_fair_plan_pif_2023"] = round(district_fair_pif.get(district, 0))
         rows.append(row)
 
     # Sort by latest year descending
@@ -404,7 +448,90 @@ def build_senate_district_exports(processed_dir: Path, config_dir: Path | None =
     write_csv(
         processed_dir / "analysis" / "senate_district_pif.csv",
         rows,
-        ["senate_district", "senator_name", "party"] + year_cols,
+        ["senate_district", "senator_name", "party"] + year_cols + cdi_cols,
+    )
+
+
+def _build_cdi_county_wide(
+    processed_dir: Path,
+    cdi_county_deduped: list[dict],
+    cdi_years: list[int],
+) -> None:
+    """Build wide-format CDI county files for reuse in analyses.
+
+    Produces two files:
+    - cdi/county_pif_wide.csv: one row per county, columns = total PIF per year
+      (voluntary new+renewed + fair_plan new+renewed; DIC excluded as supplemental)
+    - cdi/county_market_wide.csv: one row per county, columns per segment/flow/year
+    """
+    # --- county_market_wide.csv: full detail, one row per county ---
+    segments = [
+        ("voluntary", "new"),
+        ("voluntary", "renewed"),
+        ("voluntary", "nonrenewed"),
+        ("fair_plan", "new"),
+        ("fair_plan", "renewed"),
+        ("dic", "new"),
+        ("dic", "renewed"),
+    ]
+    # Build lookup: (county, year, segment, flow) -> value
+    detail: dict[tuple[str, int, str, str], int] = {}
+    for r in cdi_county_deduped:
+        detail[(r["county"], int(r["year"]), r["market_segment"], r["flow_metric"])] = int(r["value"])
+
+    counties = sorted({r["county"] for r in cdi_county_deduped})
+
+    # Wide columns: segment_flow_year (e.g. voluntary_new_2020)
+    detail_cols: list[str] = []
+    for seg, flow in segments:
+        for y in cdi_years:
+            detail_cols.append(f"{seg}_{flow}_{y}")
+
+    detail_rows: list[dict[str, object]] = []
+    for county in counties:
+        row: dict[str, object] = {"county": county}
+        for seg, flow in segments:
+            for y in cdi_years:
+                row[f"{seg}_{flow}_{y}"] = detail.get((county, y, seg, flow), 0)
+        detail_rows.append(row)
+
+    write_csv(
+        processed_dir / "cdi" / "county_market_wide.csv",
+        detail_rows,
+        ["county"] + detail_cols,
+    )
+
+    # --- county_pif_wide.csv: total PIF estimate per county per year ---
+    # PIF ≈ new + renewed for voluntary + fair_plan only.
+    # DIC excluded: supplemental policies attached to FAIR Plan, not independent coverage.
+    pif_segments = [
+        ("voluntary", "new"),
+        ("voluntary", "renewed"),
+        ("fair_plan", "new"),
+        ("fair_plan", "renewed"),
+    ]
+    pif_cols = [f"total_pif_{y}" for y in cdi_years]
+    fair_cols = [f"fair_plan_pif_{y}" for y in cdi_years]
+    share_cols = [f"fair_plan_share_{y}" for y in cdi_years]
+
+    pif_rows: list[dict[str, object]] = []
+    for county in counties:
+        row = {"county": county}
+        for y in cdi_years:
+            total = sum(detail.get((county, y, seg, flow), 0) for seg, flow in pif_segments)
+            fair = (
+                detail.get((county, y, "fair_plan", "new"), 0)
+                + detail.get((county, y, "fair_plan", "renewed"), 0)
+            )
+            row[f"total_pif_{y}"] = total
+            row[f"fair_plan_pif_{y}"] = fair
+            row[f"fair_plan_share_{y}"] = round(fair / total * 100, 1) if total else 0
+        pif_rows.append(row)
+
+    write_csv(
+        processed_dir / "cdi" / "county_pif_wide.csv",
+        pif_rows,
+        ["county"] + pif_cols + fair_cols + share_cols,
     )
 
 

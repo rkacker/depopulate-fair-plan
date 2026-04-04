@@ -146,7 +146,8 @@ def parse_fair_history_pdf(path: Path, source: SourceConfig, geography_level: st
 
 def parse_cdi_county_pdf(path: Path, source: SourceConfig) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
-    line_pattern = re.compile(r"^(?P<county>[A-Z ]+|State)\s+(?P<year>\d{4})\s+(?P<tail>(?:[\d,]+\s+){6}[\d,]+)$")
+    county_line = re.compile(r"^(?P<county>[A-Z ]+|State)\s+(?P<year>\d{4})\s+(?P<tail>(?:[\d,]+\s+){6}[\d,]+)$")
+    continuation_line = re.compile(r"^(?P<year>\d{4})\s+(?P<tail>(?:[\d,]+\s+){6}[\d,]+)$")
     mappings = [
         ("voluntary", "new"),
         ("voluntary", "renewed"),
@@ -156,18 +157,26 @@ def parse_cdi_county_pdf(path: Path, source: SourceConfig) -> list[dict[str, obj
         ("dic", "new"),
         ("dic", "renewed"),
     ]
+    current_county: str = ""
     for line in extract_pdf_lines(path):
-        match = line_pattern.match(line.strip())
-        if not match:
-            continue
-        county = match.group("county")
-        county_name = county if county == "State" else normalize_county_name(county)
+        stripped = line.strip()
+        match = county_line.match(stripped)
+        if match:
+            county = match.group("county")
+            current_county = county if county == "State" else normalize_county_name(county)
+        else:
+            match = continuation_line.match(stripped)
+            if match and current_county:
+                pass  # use current_county
+            else:
+                continue
+        year = int(match.group("year"))
         values = match.group("tail").split()
         for (segment, flow), token in zip(mappings, values):
             rows.append(
                 {
-                    "year": int(match.group("year")),
-                    "county": county_name,
+                    "year": year,
+                    "county": current_county,
                     "market_segment": segment,
                     "flow_metric": flow,
                     "value": clean_int(token),
