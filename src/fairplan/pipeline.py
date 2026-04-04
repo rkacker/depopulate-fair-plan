@@ -40,6 +40,29 @@ def build_source_releases(sources: list[SourceConfig], raw_dir: Path) -> list[di
     return rows
 
 
+PIF_FIELDNAMES = [
+    "coverage_end",
+    "fiscal_year",
+    "period_end",
+    "geography_level",
+    "geography_id",
+    "geography_name",
+    "metric",
+    "value",
+    "yoy_growth_pct",
+    "source_id",
+]
+
+DISTRESSED_FIELDNAMES = [
+    "effective_date",
+    "geo_type",
+    "geo_id",
+    "geo_name",
+    "status",
+    "source_id",
+]
+
+
 def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = None) -> None:
     """Parse PDFs and write analysis-ready CSVs to processed_dir."""
     manifest = load_sources(manifest_path or default_manifest_path())
@@ -60,33 +83,27 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         elif source.dataset == "distressed_geographies":
             distressed_rows.extend(parse_distressed_geographies(file_path, source))
 
-    # --- Base tables ---
+    # --- fair/ base tables ---
+    county_pif_rows = [r for r in pif_rows if r["geography_level"] == "county"]
+    zip_pif_rows = [r for r in pif_rows if r["geography_level"] == "zip"]
+
+    write_csv(processed_dir / "fair" / "county_pif_history.csv", county_pif_rows, PIF_FIELDNAMES)
+    write_csv(processed_dir / "fair" / "zip_pif_history.csv", zip_pif_rows, PIF_FIELDNAMES)
+
+    # --- cdi/ base tables ---
     write_csv(
-        processed_dir / "pif_history.csv",
-        pif_rows,
-        [
-            "coverage_end",
-            "fiscal_year",
-            "period_end",
-            "geography_level",
-            "geography_id",
-            "geography_name",
-            "metric",
-            "value",
-            "yoy_growth_pct",
-            "source_id",
-        ],
-    )
-    write_csv(
-        processed_dir / "cdi_county_yearly.csv",
+        processed_dir / "cdi" / "county_yearly.csv",
         cdi_county_rows,
         ["year", "county", "market_segment", "flow_metric", "value", "source_id"],
     )
-    write_csv(
-        processed_dir / "distressed_geography.csv",
-        distressed_rows,
-        ["effective_date", "geo_type", "geo_id", "geo_name", "status", "source_id"],
-    )
+
+    distressed_county_rows = [r for r in distressed_rows if r["geo_type"] == "county"]
+    distressed_zip_rows = [r for r in distressed_rows if r["geo_type"] == "zip"]
+
+    write_csv(processed_dir / "cdi" / "distressed_counties.csv", distressed_county_rows, DISTRESSED_FIELDNAMES)
+    write_csv(processed_dir / "cdi" / "distressed_zips.csv", distressed_zip_rows, DISTRESSED_FIELDNAMES)
+
+    # --- metadata ---
     write_csv(
         processed_dir / "source_releases.csv",
         build_source_releases(manifest, raw_dir),
@@ -104,16 +121,14 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         ],
     )
 
-    # --- Derived analysis tables ---
-
-    # County rankings: latest fiscal year, sorted by policy count
-    county_pif = [r for r in pif_rows if r["geography_level"] == "county" and r["geography_id"] != "Total"]
-    if county_pif:
-        latest_county_year = max(int(r["fiscal_year"]) for r in county_pif)
-        county_latest = [r for r in county_pif if int(r["fiscal_year"]) == latest_county_year]
+    # --- fair/ derived: county rankings (latest FY, sorted by policy count) ---
+    county_pif_no_total = [r for r in county_pif_rows if r["geography_id"] != "Total"]
+    if county_pif_no_total:
+        latest_county_year = max(int(r["fiscal_year"]) for r in county_pif_no_total)
+        county_latest = [r for r in county_pif_no_total if int(r["fiscal_year"]) == latest_county_year]
         county_latest.sort(key=lambda r: int(r["value"]), reverse=True)
         write_csv(
-            processed_dir / "county_rankings.csv",
+            processed_dir / "fair" / "county_rankings.csv",
             [
                 {
                     "county": r["geography_name"],
@@ -128,13 +143,10 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
             ["county", "fiscal_year", "policy_count", "yoy_growth_pct", "coverage_end", "source_id"],
         )
 
-    # Distressed PIF growth: all years, flagged with distressed status
-    distressed_county_set = frozenset(
-        r["geo_name"] for r in distressed_rows if r["geo_type"] == "county"
-    )
-    distressed_zip_set = frozenset(
-        r["geo_id"] for r in distressed_rows if r["geo_type"] == "zip"
-    )
+    # --- analysis/ derived: distressed PIF growth (FAIR PIF + CDI distressed) ---
+    distressed_county_set = frozenset(r["geo_name"] for r in distressed_county_rows)
+    distressed_zip_set = frozenset(r["geo_id"] for r in distressed_zip_rows)
+
     distressed_pif_rows = []
     for r in pif_rows:
         geo_id = r["geography_id"]
@@ -158,7 +170,7 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
             }
         )
     write_csv(
-        processed_dir / "distressed_pif_growth.csv",
+        processed_dir / "analysis" / "distressed_pif_growth.csv",
         distressed_pif_rows,
         [
             "fiscal_year",
@@ -174,14 +186,14 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
 
 
 def build_exports(processed_dir: Path, exports_dir: Path) -> None:
-    """Generate JSON exports for reporting and visualization."""
-    pif_history = read_csv(processed_dir / "pif_history.csv")
-    county_rankings = read_csv(processed_dir / "county_rankings.csv")
+    """Generate JSON/CSV exports for website visualization."""
+    county_pif = read_csv(processed_dir / "fair" / "county_pif_history.csv")
+    county_rankings = read_csv(processed_dir / "fair" / "county_rankings.csv")
 
     # --- site_stats.json ---
     county_totals: dict[int, int] = {}
-    for row in pif_history:
-        if row["geography_level"] == "county" and row["geography_id"] == "Total":
+    for row in county_pif:
+        if row["geography_id"] == "Total":
             county_totals[int(row["fiscal_year"])] = int(row["value"])
 
     years = sorted(county_totals.keys())
@@ -240,61 +252,33 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
     }
     write_json(exports_dir / "site_stats.json", site_stats)
 
-    # --- county_rankings.json ---
-    write_json(
-        exports_dir / "county_rankings.json",
-        [
-            {
-                "county": r["county"],
-                "fiscal_year": int(r["fiscal_year"]),
-                "policy_count": int(r["policy_count"]),
-                "yoy_growth_pct": r["yoy_growth_pct"],
-            }
-            for r in county_rankings
-        ],
+    # --- california_county_data.csv ---
+    write_csv(
+        exports_dir / "california_county_data.csv",
+        [{"county": r["county"], "policies": r["policy_count"]} for r in county_rankings],
+        ["county", "policies"],
     )
 
-    # --- zip_pif_history.json ---
-    zip_rows = [
-        r for r in pif_history
-        if r["geography_level"] == "zip" and r["geography_id"] != "Total"
-    ]
-    write_json(
-        exports_dir / "zip_pif_history.json",
-        [
-            {
-                "zip": r["geography_id"],
-                "fiscal_year": int(r["fiscal_year"]),
-                "policy_count": int(r["value"]),
-                "yoy_growth_pct": r["yoy_growth_pct"],
-            }
-            for r in zip_rows
-        ],
-    )
 
 
 def build_report(processed_dir: Path, exports_dir: Path, reports_dir: Path) -> Path:
     sources = read_csv(processed_dir / "source_releases.csv")
-    pif_history = read_csv(processed_dir / "pif_history.csv")
-    cdi_county = read_csv(processed_dir / "cdi_county_yearly.csv")
-    distressed = read_csv(processed_dir / "distressed_geography.csv")
-    county_rankings = read_csv(processed_dir / "county_rankings.csv")
+    zip_pif = read_csv(processed_dir / "fair" / "zip_pif_history.csv")
+    cdi_county = read_csv(processed_dir / "cdi" / "county_yearly.csv")
+    distressed_counties_rows = read_csv(processed_dir / "cdi" / "distressed_counties.csv")
+    distressed_zips_rows = read_csv(processed_dir / "cdi" / "distressed_zips.csv")
+    county_rankings = read_csv(processed_dir / "fair" / "county_rankings.csv")
 
     latest_sources = [row for row in sources if row["file_exists"] == "1"]
     latest_sources.sort(key=lambda row: row["published_date"], reverse=True)
     coverage_dates = [row["coverage_end"] for row in latest_sources]
     as_of_date = max(coverage_dates) if coverage_dates else ""
 
-    latest_zip_year = max(
-        int(row["fiscal_year"])
-        for row in pif_history
-        if row["geography_level"] == "zip"
-    )
+    latest_zip_year = max(int(row["fiscal_year"]) for row in zip_pif)
     zip_total_value = next(
         int(row["value"])
-        for row in pif_history
-        if row["geography_level"] == "zip"
-        and row["geography_id"] == "Total"
+        for row in zip_pif
+        if row["geography_id"] == "Total"
         and int(row["fiscal_year"]) == latest_zip_year
     )
 
@@ -305,8 +289,8 @@ def build_report(processed_dir: Path, exports_dir: Path, reports_dir: Path) -> P
         if row["county"] == "State" and int(row["year"]) == latest_cdi_year
     }
 
-    distressed_counties = sum(1 for row in distressed if row["geo_type"] == "county")
-    distressed_zip_codes = sum(1 for row in distressed if row["geo_type"] == "zip")
+    distressed_counties = len(distressed_counties_rows)
+    distressed_zip_codes = len(distressed_zips_rows)
 
     top_counties = county_rankings[:5]
     generated_at = datetime.now(UTC).isoformat()

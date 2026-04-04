@@ -1,8 +1,7 @@
 {
-  "version": 3,
+  "version": 4,
   "exports": [
     "site_stats.json",
-    "county_rankings.json",
-    "zip_pif_history.json"
+    "california_county_data.csv"
   ]
 }

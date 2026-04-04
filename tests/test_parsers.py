@@ -73,20 +73,16 @@ def test_fixture_pipeline_matches_golden_metrics(tmp_path: Path) -> None:
 
     from fairplan.io_utils import read_csv
 
-    pif_history = read_csv(processed_dir / "pif_history.csv")
-    cdi_county = read_csv(processed_dir / "cdi_county_yearly.csv")
-    distressed = read_csv(processed_dir / "distressed_geography.csv")
+    zip_pif = read_csv(processed_dir / "fair" / "zip_pif_history.csv")
+    cdi_county = read_csv(processed_dir / "cdi" / "county_yearly.csv")
+    distressed_counties = read_csv(processed_dir / "cdi" / "distressed_counties.csv")
+    distressed_zips = read_csv(processed_dir / "cdi" / "distressed_zips.csv")
 
-    latest_zip_year = max(
-        int(row["fiscal_year"])
-        for row in pif_history
-        if row["geography_level"] == "zip"
-    )
+    latest_zip_year = max(int(row["fiscal_year"]) for row in zip_pif)
     zip_total_value = next(
         int(row["value"])
-        for row in pif_history
-        if row["geography_level"] == "zip"
-        and row["geography_id"] == "Total"
+        for row in zip_pif
+        if row["geography_id"] == "Total"
         and int(row["fiscal_year"]) == latest_zip_year
     )
     latest_cdi_year = max(int(row["year"]) for row in cdi_county if row["county"] == "State")
@@ -98,21 +94,23 @@ def test_fixture_pipeline_matches_golden_metrics(tmp_path: Path) -> None:
         and row["market_segment"] == "fair_plan"
         and row["flow_metric"] == "renewed"
     )
-    distressed_counties = sum(1 for row in distressed if row["geo_type"] == "county")
-    distressed_zip_codes = sum(1 for row in distressed if row["geo_type"] == "zip")
 
     assert zip_total_value == expected["fair_total_residential_policies_latest_fiscal_year"]
     assert cdi_fair_renewed == expected["cdi_statewide_fair_renewed_latest_year"]
-    assert distressed_counties == expected["distressed_counties"]
-    assert distressed_zip_codes == expected["distressed_zip_codes"]
+    assert len(distressed_counties) == expected["distressed_counties"]
+    assert len(distressed_zips) == expected["distressed_zip_codes"]
 
-    # Processed CSVs exist
-    assert (processed_dir / "county_rankings.csv").exists()
-    assert (processed_dir / "distressed_pif_growth.csv").exists()
+    # Processed CSVs exist in correct subdirectories
+    assert (processed_dir / "fair" / "county_pif_history.csv").exists()
+    assert (processed_dir / "fair" / "zip_pif_history.csv").exists()
+    assert (processed_dir / "fair" / "county_rankings.csv").exists()
+    assert (processed_dir / "cdi" / "county_yearly.csv").exists()
+    assert (processed_dir / "cdi" / "distressed_counties.csv").exists()
+    assert (processed_dir / "cdi" / "distressed_zips.csv").exists()
+    assert (processed_dir / "analysis" / "distressed_pif_growth.csv").exists()
 
-    # JSON exports exist
+    # Exports exist
     assert (exports_dir / "site_stats.json").exists()
-    assert (exports_dir / "county_rankings.json").exists()
-    assert (exports_dir / "zip_pif_history.json").exists()
+    assert (exports_dir / "california_county_data.csv").exists()
 
     assert report_path.exists()
