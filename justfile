@@ -8,10 +8,9 @@ test:
 	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run pytest
 
 build:
-	mkdir -p data/processed/fair data/processed/cdi data/processed/analysis data/exports insights
+	mkdir -p data/processed/fair data/processed/cdi data/processed/analysis data/exports
 	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli normalize --processed-dir data/processed
 	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli exports --processed-dir data/processed --exports-dir data/exports
-	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli insights --processed-dir data/processed --exports-dir data/exports --insights-dir insights
 
 publish site_repo="../depopulate-fair-plan-new":
 	just build

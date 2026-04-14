@@ -32,10 +32,9 @@ jobs:
 
       - name: Run pipeline
         run: |
-          mkdir -p data/processed/fair data/processed/cdi data/processed/analysis data/exports insights
+          mkdir -p data/processed/fair data/processed/cdi data/processed/analysis data/exports
           PYTHONPATH=src uv run python -m fairplan.cli normalize --processed-dir data/processed
           PYTHONPATH=src uv run python -m fairplan.cli exports --processed-dir data/processed --exports-dir data/exports
-          PYTHONPATH=src uv run python -m fairplan.cli insights --processed-dir data/processed --exports-dir data/exports --insights-dir insights
 
       - name: Build site
         run: PYTHONPATH=src uv run python site/build.py --output-dir _site

@@ -1,7 +1,7 @@
 """Build a static GitHub Pages site from pipeline outputs.
 
-Reads CSVs from data/processed/ and data/exports/, Markdown from insights/,
-and generates a single-page HTML site with rendered tables and formatted text.
+Reads normalized CSVs from data/processed/fair/ and data/processed/cdi/
+and generates a single-page HTML site with rendered tables.
 
 Usage:
     PYTHONPATH=src python site/build.py --output-dir _site
@@ -12,7 +12,6 @@ from __future__ import annotations
 import argparse
 import csv
 import html
-import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,65 +25,7 @@ CSV_SECTIONS: list[tuple[str, str]] = [
     ("CDI Statewide Yearly", "data/processed/cdi/statewide_yearly.csv"),
     ("Distressed Counties", "data/processed/cdi/distressed_counties.csv"),
     ("Distressed ZIPs", "data/processed/cdi/distressed_zips.csv"),
-    ("Distressed County PIF", "data/processed/analysis/distressed_county_pif.csv"),
-    ("Distressed ZIP PIF", "data/processed/analysis/distressed_zip_pif.csv"),
-    ("Site Stats Export", "data/exports/site_stats.json"),
-    ("County Data Export", "data/exports/california_county_data.csv"),
 ]
-
-
-def render_markdown(text: str) -> str:
-    """Minimal Markdown to HTML: headings, bold, code, lists, paragraphs."""
-    lines = text.split("\n")
-    out: list[str] = []
-    in_list = False
-
-    for line in lines:
-        stripped = line.strip()
-
-        # Headings
-        if m := re.match(r"^(#{1,6})\s+(.*)", stripped):
-            if in_list:
-                out.append("</ul>")
-                in_list = False
-            level = len(m.group(1))
-            content = inline_format(m.group(2))
-            out.append(f"<h{level}>{content}</h{level}>")
-            continue
-
-        # List items
-        if stripped.startswith("- "):
-            if not in_list:
-                out.append("<ul>")
-                in_list = True
-            content = inline_format(stripped[2:])
-            out.append(f"<li>{content}</li>")
-            continue
-
-        # Close list if we hit a non-list line
-        if in_list and not stripped.startswith("- "):
-            out.append("</ul>")
-            in_list = False
-
-        # Empty line
-        if not stripped:
-            continue
-
-        # Paragraph
-        out.append(f"<p>{inline_format(stripped)}</p>")
-
-    if in_list:
-        out.append("</ul>")
-
-    return "\n".join(out)
-
-
-def inline_format(text: str) -> str:
-    """Handle bold, inline code, backtick spans."""
-    text = html.escape(text)
-    text = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", text)
-    text = re.sub(r"`(.+?)`", r"<code>\1</code>", text)
-    return text
 
 
 def csv_to_table(path: Path) -> str:
@@ -114,24 +55,12 @@ def csv_to_table(path: Path) -> str:
     return "\n".join(parts)
 
 
-def json_to_block(path: Path) -> str:
-    """Render a JSON file as a formatted code block."""
-    text = path.read_text(encoding="utf-8")
-    return f'<pre><code>{html.escape(text)}</code></pre>'
-
-
-def build_nav(insight_files: list[Path]) -> str:
+def build_nav() -> str:
     """Build navigation sidebar content."""
     parts = ['<nav id="nav">']
-    parts.append('<h2>Insights</h2><ul>')
-    for f in insight_files:
-        slug = f.stem
-        label = f.stem.replace("_", " ").title()
-        parts.append(f'<li><a href="#insight-{slug}">{label}</a></li>')
-    parts.append("</ul>")
     parts.append('<h2>Data Tables</h2><ul>')
     for label, path_str in CSV_SECTIONS:
-        if Path(ROOT / path_str).exists():
+        if (ROOT / path_str).exists():
             slug = Path(path_str).stem
             parts.append(f'<li><a href="#table-{slug}">{label}</a></li>')
     parts.append("</ul></nav>")
@@ -141,21 +70,6 @@ def build_nav(insight_files: list[Path]) -> str:
 def build_site(output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Collect insights
-    insights_dir = ROOT / "insights"
-    insight_files = sorted(insights_dir.glob("*.md")) if insights_dir.exists() else []
-
-    # Build insights HTML
-    insights_html = []
-    for f in insight_files:
-        slug = f.stem
-        label = f.stem.replace("_", " ").title()
-        content = render_markdown(f.read_text(encoding="utf-8"))
-        insights_html.append(
-            f'<section id="insight-{slug}" class="insight">'
-            f"<h2>{label}</h2>{content}</section>"
-        )
-
     # Build tables HTML
     tables_html = []
     for label, path_str in CSV_SECTIONS:
@@ -163,10 +77,7 @@ def build_site(output_dir: Path) -> None:
         if not path.exists():
             continue
         slug = path.stem
-        if path.suffix == ".json":
-            content = json_to_block(path)
-        else:
-            content = csv_to_table(path)
+        content = csv_to_table(path)
         tables_html.append(
             f'<section id="table-{slug}" class="data-table">'
             f"<h2>{label}</h2>"
@@ -174,7 +85,7 @@ def build_site(output_dir: Path) -> None:
             f"{content}</section>"
         )
 
-    nav = build_nav(insight_files)
+    nav = build_nav()
 
     page = f"""<!DOCTYPE html>
 <html lang="en">
@@ -219,14 +130,6 @@ table {{ border-collapse: collapse; width: 100%; font-size: 0.8125rem; }}
 th, td {{ padding: 0.4rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }}
 th {{ background: var(--card-bg); font-weight: 600; position: sticky; top: 0; }}
 tr:hover {{ background: #f0f4ff; }}
-pre {{ background: var(--card-bg); padding: 1rem; border-radius: 4px; overflow-x: auto; font-size: 0.8125rem; }}
-code {{ font-family: var(--mono); }}
-.insight {{ background: var(--card-bg); padding: 1.5rem; border-radius: 6px; }}
-.insight h2 {{ border: none; padding: 0; }}
-.insight h3 {{ margin-top: 1rem; }}
-.insight p {{ margin: 0.5rem 0; }}
-.insight ul {{ margin: 0.5rem 0 0.5rem 1.5rem; }}
-.insight li {{ margin: 0.25rem 0; }}
 @media (max-width: 768px) {{
   .layout {{ flex-direction: column; }}
   nav {{ width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); }}
@@ -240,11 +143,10 @@ code {{ font-family: var(--mono); }}
 <main>
 <header>
 <h1>CA FAIR Plan Data</h1>
-<p>Pipeline outputs from <a href="https://github.com/rkacker/depopulate-fair-plan">depopulate-fair-plan</a>.
+<p>Normalized tables from <a href="https://github.com/rkacker/depopulate-fair-plan">depopulate-fair-plan</a>.
 Data from the <a href="https://www.cfpnet.com/key-statistics-data/">California FAIR Plan</a>
 and <a href="https://www.insurance.ca.gov/01-consumers/200-wrr/DataAnalysisOnWildfiresAndInsurance.cfm">California Department of Insurance</a>.</p>
 </header>
-{"".join(insights_html)}
 {"".join(tables_html)}
 </main>
 </div>
