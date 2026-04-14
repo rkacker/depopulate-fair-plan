@@ -1,7 +1,7 @@
 """Build a static GitHub Pages site from pipeline outputs.
 
 Reads normalized CSVs from data/processed/fair/ and data/processed/cdi/
-and generates a single-page HTML site with rendered tables.
+and generates a single-page HTML site with tab-switched full-page tables.
 
 Usage:
     PYTHONPATH=src python site/build.py --output-dir _site
@@ -40,7 +40,7 @@ def csv_to_table(path: Path) -> str:
     header = rows[0]
     body = rows[1:]
 
-    parts = ['<div class="table-wrap"><table>']
+    parts = ["<table>"]
     parts.append("<thead><tr>")
     for col in header:
         parts.append(f"<th>{html.escape(col)}</th>")
@@ -51,41 +51,44 @@ def csv_to_table(path: Path) -> str:
         for cell in row:
             parts.append(f"<td>{html.escape(cell)}</td>")
         parts.append("</tr>")
-    parts.append("</tbody></table></div>")
-    return "\n".join(parts)
-
-
-def build_nav() -> str:
-    """Build navigation sidebar content."""
-    parts = ['<nav id="nav">']
-    parts.append('<h2>Data Tables</h2><ul>')
-    for label, path_str in CSV_SECTIONS:
-        if (ROOT / path_str).exists():
-            slug = Path(path_str).stem
-            parts.append(f'<li><a href="#table-{slug}">{label}</a></li>')
-    parts.append("</ul></nav>")
+    parts.append("</tbody></table>")
     return "\n".join(parts)
 
 
 def build_site(output_dir: Path) -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Build tables HTML
-    tables_html = []
+    # Collect available tables
+    available: list[tuple[str, str, str]] = []  # (slug, label, path_str)
     for label, path_str in CSV_SECTIONS:
         path = ROOT / path_str
-        if not path.exists():
-            continue
-        slug = path.stem
-        content = csv_to_table(path)
-        tables_html.append(
-            f'<section id="table-{slug}" class="data-table">'
-            f"<h2>{label}</h2>"
-            f'<p class="file-path">{path_str}</p>'
-            f"{content}</section>"
+        if path.exists():
+            available.append((Path(path_str).stem, label, path_str))
+
+    # Build tab buttons
+    tab_buttons = []
+    for i, (slug, label, _) in enumerate(available):
+        active = " active" if i == 0 else ""
+        tab_buttons.append(
+            f'<button class="tab{active}" data-target="{slug}">{label}</button>'
         )
 
-    nav = build_nav()
+    # Build table panels
+    panels = []
+    for i, (slug, label, path_str) in enumerate(available):
+        path = ROOT / path_str
+        hidden = "" if i == 0 else " hidden"
+        row_count = sum(1 for _ in open(path)) - 1
+        table_html = csv_to_table(path)
+        panels.append(
+            f'<div id="panel-{slug}" class="panel{hidden}">'
+            f'<div class="panel-header">'
+            f"<h2>{label}</h2>"
+            f'<span class="meta">{path_str} &middot; {row_count:,} rows</span>'
+            f"</div>"
+            f'<div class="table-wrap">{table_html}</div>'
+            f"</div>"
+        )
 
     page = f"""<!DOCTYPE html>
 <html lang="en">
@@ -100,56 +103,153 @@ def build_site(output_dir: Path) -> None:
   --muted: #666;
   --border: #e0e0e0;
   --accent: #1a56db;
+  --accent-light: #e8eefb;
   --card-bg: #f8f9fa;
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
 }}
 * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-body {{ font-family: var(--font); color: var(--fg); background: var(--bg); line-height: 1.6; }}
-.layout {{ display: flex; min-height: 100vh; }}
-nav {{
-  width: 260px; flex-shrink: 0; padding: 2rem 1.5rem;
-  border-right: 1px solid var(--border); position: sticky; top: 0;
-  height: 100vh; overflow-y: auto; background: var(--card-bg);
+body {{ font-family: var(--font); color: var(--fg); background: var(--bg); }}
+
+/* Header */
+.site-header {{
+  padding: 1.25rem 2rem 0;
+  border-bottom: 1px solid var(--border);
 }}
-nav h2 {{ font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 1.5rem 0 0.5rem; }}
-nav h2:first-child {{ margin-top: 0; }}
-nav ul {{ list-style: none; }}
-nav li {{ margin: 0.25rem 0; }}
-nav a {{ color: var(--fg); text-decoration: none; font-size: 0.875rem; }}
-nav a:hover {{ color: var(--accent); }}
-main {{ flex: 1; padding: 2rem 3rem; max-width: 1200px; }}
-header {{ margin-bottom: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }}
-header h1 {{ font-size: 1.75rem; margin-bottom: 0.25rem; }}
-header p {{ color: var(--muted); }}
-section {{ margin-bottom: 3rem; }}
-section h2 {{ font-size: 1.25rem; margin-bottom: 0.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }}
-.file-path {{ font-family: var(--mono); font-size: 0.75rem; color: var(--muted); margin-bottom: 0.75rem; }}
-.table-wrap {{ overflow-x: auto; }}
-table {{ border-collapse: collapse; width: 100%; font-size: 0.8125rem; }}
-th, td {{ padding: 0.4rem 0.75rem; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }}
-th {{ background: var(--card-bg); font-weight: 600; position: sticky; top: 0; }}
-tr:hover {{ background: #f0f4ff; }}
+.site-header h1 {{
+  font-size: 1.25rem;
+  margin-bottom: 0.15rem;
+}}
+.site-header h1 a {{
+  color: var(--fg);
+  text-decoration: none;
+}}
+.site-header p {{
+  color: var(--muted);
+  font-size: 0.8125rem;
+  margin-bottom: 1rem;
+}}
+.site-header p a {{
+  color: var(--muted);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+}}
+.site-header p a:hover {{
+  color: var(--accent);
+}}
+
+/* Tabs */
+.tabs {{
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}}
+.tab {{
+  padding: 0.6rem 1.25rem;
+  border: none;
+  background: none;
+  font-family: var(--font);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}}
+.tab:hover {{
+  color: var(--fg);
+}}
+.tab.active {{
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}}
+
+/* Panels */
+.panel {{
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px);
+}}
+.panel.hidden {{
+  display: none;
+}}
+.panel-header {{
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  flex-shrink: 0;
+}}
+.panel-header h2 {{
+  font-size: 1.1rem;
+  font-weight: 600;
+}}
+.meta {{
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}}
+
+/* Table */
+.table-wrap {{
+  flex: 1;
+  overflow: auto;
+  padding: 0 2rem 2rem;
+}}
+table {{
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}}
+th, td {{
+  padding: 0.4rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}}
+th {{
+  background: var(--card-bg);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}}
+tr:hover td {{
+  background: var(--accent-light);
+}}
+
 @media (max-width: 768px) {{
-  .layout {{ flex-direction: column; }}
-  nav {{ width: 100%; height: auto; position: static; border-right: none; border-bottom: 1px solid var(--border); }}
-  main {{ padding: 1.5rem; }}
+  .site-header {{ padding: 1rem 1rem 0; }}
+  .panel-header {{ padding: 0.75rem 1rem; }}
+  .table-wrap {{ padding: 0 1rem 1rem; }}
+  .tab {{ padding: 0.5rem 0.75rem; font-size: 0.75rem; }}
 }}
 </style>
 </head>
 <body>
-<div class="layout">
-{nav}
-<main>
-<header>
-<h1>CA FAIR Plan Data</h1>
-<p>Normalized tables from <a href="https://github.com/rkacker/depopulate-fair-plan">depopulate-fair-plan</a>.
-Data from the <a href="https://www.cfpnet.com/key-statistics-data/">California FAIR Plan</a>
-and <a href="https://www.insurance.ca.gov/01-consumers/200-wrr/DataAnalysisOnWildfiresAndInsurance.cfm">California Department of Insurance</a>.</p>
-</header>
-{"".join(tables_html)}
-</main>
+<div class="site-header">
+<h1><a href="https://github.com/rkacker/depopulate-fair-plan">CA FAIR Plan Data</a></h1>
+<p>Normalized tables from the
+<a href="https://www.cfpnet.com/key-statistics-data/">California FAIR Plan</a> and
+<a href="https://www.insurance.ca.gov/01-consumers/200-wrr/DataAnalysisOnWildfiresAndInsurance.cfm">CA Department of Insurance</a></p>
+<div class="tabs">
+{"".join(tab_buttons)}
 </div>
+</div>
+{"".join(panels)}
+<script>
+document.querySelectorAll(".tab").forEach(btn => {{
+  btn.addEventListener("click", () => {{
+    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p => p.classList.add("hidden"));
+    btn.classList.add("active");
+    document.getElementById("panel-" + btn.dataset.target).classList.remove("hidden");
+  }});
+}});
+</script>
 </body>
 </html>"""
 
