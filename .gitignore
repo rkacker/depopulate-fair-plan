@@ -1,4 +1,5 @@
 .DS_Store
+.claude/
 .venv/
 .uv-cache/
 __pycache__/

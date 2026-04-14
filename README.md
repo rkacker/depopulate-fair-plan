@@ -1,16 +1,22 @@
 # CA FAIR Plan Residential Data Platform
 
-Local-first Python data pipeline for collecting, normalizing, and publishing California FAIR Plan residential property insurance market data. Powers `depopulatefairplan.com`.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-## Overview
+Local-first Python data pipeline for collecting, normalizing, and publishing California FAIR Plan residential property insurance market data. Powers [depopulatefairplan.com](https://depopulatefairplan.com).
 
-The California FAIR Plan (Fair Access to Insurance Requirements) is the insurer of last resort for homeowners who cannot obtain coverage in the voluntary market. This pipeline tracks residential market data across three sources:
+## Why This Exists
 
-- **FAIR Plan** — quarterly policy counts, premiums, exposures, and 5-year PIF history (county + ZIP)
-- **CDI** — California Department of Insurance annual county analysis and statewide residential fact sheet
-- **CDI Distressed Geographies** — official list of distressed counties and undermarketed ZIPs
+California's homeowners insurance market is in crisis. The FAIR Plan -- the state's insurer of last resort -- has grown from 236,000 policies in 2021 to over 640,000 by September 2025, a 2.6x increase in four years. Hundreds of thousands of families can no longer find coverage in the voluntary market.
 
-Pipeline stages: `fetch → normalize → build-exports → report`
+The public data that tracks this crisis is scattered across PDF reports from the [California FAIR Plan](https://www.cfpnet.com/key-statistics-data/) and the [California Department of Insurance](https://www.insurance.ca.gov/01-consumers/200-wrr/DataAnalysisOnWildfiresAndInsurance.cfm), published on different calendars, in inconsistent formats, with significant reporting lags. This pipeline collects those sources, normalizes them into a consistent data model, and produces exports for public analysis and the [depopulatefairplan.com](https://depopulatefairplan.com) website.
+
+## Data Sources
+
+- **FAIR Plan** -- quarterly policy counts, premiums, exposures, and 5-year PIF history by county and ZIP code (fiscal year ending September 30)
+- **CDI** -- California Department of Insurance annual county-level market analysis and statewide residential fact sheet (calendar year, typically 12-18 month reporting lag)
+- **CDI Distressed Geographies** -- official list of distressed counties and undermarketed ZIP codes
+
+Pipeline stages: `fetch -> normalize -> build-exports -> report`
 
 ## Quick Start
 
@@ -127,19 +133,31 @@ To add a new quarterly release: add a new `[[sources]]` block with an incremente
 | `fairplan build-exports` | Canonical CSVs → website JSON/CSV exports |
 | `fairplan report` | Exports → Markdown market report |
 
-## Golden Test Metrics (v1 fixtures)
+## Golden Test Metrics (v1 fixtures, FY2025)
 
 The integration test validates end-to-end pipeline output against:
 
-- **621,234** total residential FAIR Plan policies (latest FY)
-- **232,507** FAIR renewals (CDI latest, 2023)
+- **621,234** total residential FAIR Plan policies (FY2025, ending September 30, 2025)
+- **232,507** FAIR renewals (CDI, calendar year 2023)
 - **29** distressed counties
 - **664** distressed ZIPs
 
+## Reporting Calendars
+
+| Source | Reporting Period | Typical Publication Lag |
+|--------|-----------------|------------------------|
+| FAIR Plan | Fiscal year (Oct 1 -- Sep 30) | 2-3 months after quarter end |
+| CDI Annual Data | Calendar year (Jan 1 -- Dec 31) | 12-18 months |
+| CDI Distressed List | Point-in-time | Updated periodically |
+
 ## Notes
 
-- Python-only in v1. No JS, no database, no external APIs beyond source document downloads.
+- Python-only. No JS, no database, no external APIs beyond source document downloads.
 - Residential-only. Commercial property data appears incidentally in source PDFs but is not modeled.
 - Full-refresh pipeline. No incremental update logic; re-run to pick up new data.
 - FAIR Plan sources update quarterly; CDI annual sources typically publish in January.
 - All `data/` and `reports/` output directories are git-ignored. Fixture PDFs in `tests/fixtures/raw/` are committed.
+
+## License
+
+[MIT](LICENSE)
