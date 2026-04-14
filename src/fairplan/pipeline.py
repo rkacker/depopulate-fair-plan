@@ -200,6 +200,9 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         fieldnames,
     )
 
+    # --- analysis/ derived: Senate district PIF estimates ---
+    build_senate_district_exports(processed_dir)
+
 
 def build_exports(processed_dir: Path, exports_dir: Path) -> None:
     """Generate JSON/CSV exports for website visualization."""

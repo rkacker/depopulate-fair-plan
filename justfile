@@ -10,15 +10,13 @@ test:
 build:
 	mkdir -p data/processed/fair data/processed/cdi data/processed/analysis data/exports reports
 	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli normalize --raw-dir data/raw --processed-dir data/processed
-	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli build-exports --processed-dir data/processed --exports-dir data/exports
-	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli build-senate --processed-dir data/processed
+	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli exports --processed-dir data/processed --exports-dir data/exports
 	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli report --processed-dir data/processed --exports-dir data/exports --reports-dir reports
 
 fixture-build:
 	mkdir -p data/processed/fair data/processed/cdi data/processed/analysis data/exports reports
 	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli normalize --raw-dir tests/fixtures/raw --processed-dir data/processed
-	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli build-exports --processed-dir data/processed --exports-dir data/exports
-	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli build-senate --processed-dir data/processed
+	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli exports --processed-dir data/processed --exports-dir data/exports
 	export UV_CACHE_DIR=.uv-cache && PYTHONPATH=src uv run python -m fairplan.cli report --processed-dir data/processed --exports-dir data/exports --reports-dir reports
 
 publish site_repo="../depopulate-fair-plan-new":

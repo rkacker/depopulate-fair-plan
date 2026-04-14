@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from fairplan.pipeline import build_exports, build_report, build_senate_district_exports, fetch_command, normalize
+from fairplan.pipeline import build_exports, build_report, fetch_command, normalize
 
 
 def parse_args() -> argparse.Namespace:
@@ -19,7 +19,7 @@ def parse_args() -> argparse.Namespace:
     normalize_parser.add_argument("--raw-dir", default="data/raw")
     normalize_parser.add_argument("--processed-dir", default="data/processed")
 
-    exports = subparsers.add_parser("build-exports", help="Build JSON exports for reporting and visualization")
+    exports = subparsers.add_parser("exports", help="Build JSON exports for reporting and visualization")
     exports.add_argument("--processed-dir", default="data/processed")
     exports.add_argument("--exports-dir", default="data/exports")
 
@@ -27,10 +27,6 @@ def parse_args() -> argparse.Namespace:
     report.add_argument("--processed-dir", default="data/processed")
     report.add_argument("--exports-dir", default="data/exports")
     report.add_argument("--reports-dir", default="reports")
-
-    senate = subparsers.add_parser("build-senate", help="Build Senate district PIF estimates")
-    senate.add_argument("--processed-dir", default="data/processed")
-    senate.add_argument("--config-dir", default="config")
 
     return parser.parse_args()
 
@@ -41,12 +37,10 @@ def main() -> int:
         fetch_command(Path(args.raw_dir), Path(args.manifest))
     elif args.command == "normalize":
         normalize(Path(args.raw_dir), Path(args.processed_dir), Path(args.manifest))
-    elif args.command == "build-exports":
+    elif args.command == "exports":
         build_exports(Path(args.processed_dir), Path(args.exports_dir))
     elif args.command == "report":
         build_report(Path(args.processed_dir), Path(args.exports_dir), Path(args.reports_dir))
-    elif args.command == "build-senate":
-        build_senate_district_exports(Path(args.processed_dir), Path(args.config_dir))
     return 0
 
 
