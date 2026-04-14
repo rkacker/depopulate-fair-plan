@@ -9,12 +9,12 @@ from fairplan.parsers import (
     parse_distressed_geographies,
     parse_fair_category_pdf,
 )
-from fairplan.pipeline import build_exports, build_report, normalize
+from fairplan.pipeline import build_exports, build_insights, normalize
 
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "config" / "sources.toml"
-FIXTURES = ROOT / "tests" / "fixtures" / "raw"
+FIXTURES = ROOT / "sources"
 
 
 def source_by_dataset(dataset: str):
@@ -63,11 +63,11 @@ def test_distressed_parser_extracts_counties_and_zips() -> None:
 def test_fixture_pipeline_matches_golden_metrics(tmp_path: Path) -> None:
     processed_dir = tmp_path / "processed"
     exports_dir = tmp_path / "exports"
-    reports_dir = tmp_path / "reports"
+    insights_dir = tmp_path / "insights"
 
     normalize(FIXTURES, processed_dir, MANIFEST)
     build_exports(processed_dir, exports_dir)
-    report_path = build_report(processed_dir, exports_dir, reports_dir)
+    insight_path = build_insights(processed_dir, exports_dir, insights_dir)
 
     expected = json.loads((ROOT / "tests" / "golden" / "expected_metrics.json").read_text(encoding="utf-8"))
 
@@ -114,4 +114,4 @@ def test_fixture_pipeline_matches_golden_metrics(tmp_path: Path) -> None:
     assert (exports_dir / "site_stats.json").exists()
     assert (exports_dir / "california_county_data.csv").exists()
 
-    assert report_path.exists()
+    assert insight_path.exists()

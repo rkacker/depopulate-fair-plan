@@ -16,17 +16,18 @@ This is a **data pipeline**, not a web app. It downloads PDFs from the Californi
 |---|---|
 | `config/sources.toml` | Single source of truth for all data sources. Add new quarters here. |
 | `src/fairplan/parsers.py` | All PDF parsing logic. Most bugs and new parser work happens here. |
-| `src/fairplan/pipeline.py` | ETL orchestration: `normalize()`, `build_exports()`, `build_report()`. |
+| `src/fairplan/pipeline.py` | ETL orchestration: `normalize()`, `build_exports()`, `build_insights()`. |
 | `src/fairplan/models.py` | Dataclasses for canonical rows — change schema here first. |
 | `tests/golden/expected_metrics.json` | Golden metrics; update when new fixture data changes expected output. |
-| `tests/fixtures/raw/` | Committed PDFs used by tests. Do not delete. |
+| `sources/` | Committed source PDFs used by tests and the pipeline. Do not delete. |
+| `site/build.py` | Static site generator for GitHub Pages (renders CSVs + insights as HTML). |
 
 ## Development Environment
 
 ```bash
 just setup      # always run first in a fresh clone or after pyproject.toml changes
-just test       # run before any commit — tests use fixtures, no network needed
-just fixture-build  # end-to-end smoke test without live fetches
+just test       # run before any commit — tests use sources/, no network needed
+just build      # run full pipeline: normalize → exports → insights
 ```
 
 Python is **3.11 only** (`requires-python = ">=3.11,<3.12"`). Use `uv` for all package operations — do not use `pip` directly.
@@ -39,11 +40,10 @@ PYTHONPATH=src uv run python -m fairplan.cli <command>
 ## Adding a New Quarterly Release
 
 1. Add a new `[[sources]]` block to `config/sources.toml` with a versioned `id` (e.g. `fair_residential_policy_count_2026q1`).
-2. Run `just fixture-build` to verify the existing pipeline still works.
-3. Run `fairplan fetch` to download the new PDF.
+2. Run `just build` to verify the existing pipeline still works.
+3. Run `fairplan fetch` to download the new PDF into `sources/`.
 4. If the new PDF has a different format than the prior quarter, update the relevant parser in `parsers.py`.
-5. Add or update fixture PDFs in `tests/fixtures/raw/` if format changed.
-6. Update `tests/golden/expected_metrics.json` to match new expected output.
+5. Update `tests/golden/expected_metrics.json` to match new expected output.
 
 ## Parser Conventions (`parsers.py`)
 
@@ -72,8 +72,8 @@ PYTHONPATH=src uv run python -m fairplan.cli <command>
 ## Testing
 
 - Tests live in `tests/test_parsers.py` — unit tests per parser + one integration test.
-- The integration test (`test_fixture_pipeline_matches_golden_metrics`) runs the full pipeline on fixtures and asserts against `tests/golden/expected_metrics.json`.
-- To update golden metrics after a legitimate data change: run `just fixture-build`, inspect the outputs, and update `expected_metrics.json` manually.
+- The integration test (`test_fixture_pipeline_matches_golden_metrics`) runs the full pipeline on `sources/` and asserts against `tests/golden/expected_metrics.json`.
+- To update golden metrics after a legitimate data change: run `just build`, inspect the outputs, and update `expected_metrics.json` manually.
 - Never commit a change that breaks `just test`.
 
 ## What Is Out of Scope (v1)
@@ -89,8 +89,8 @@ PYTHONPATH=src uv run python -m fairplan.cli <command>
 
 **"The parser is failing on a new PDF"** → Read `parsers.py` and the PDF structure via `extract_pdf_lines()`. The regex patterns are sensitive to column alignment changes in the source PDFs.
 
-**"Add a new export field"** → Update `export_contract.json` first, then `build_exports()` in `pipeline.py`, then verify `just fixture-build` produces the new field.
+**"Add a new export field"** → Update `export_contract.json` first, then `build_exports()` in `pipeline.py`, then verify `just build` produces the new field.
 
 **"Add a new canonical table"** → Add dataclass to `models.py`, add parser or pipeline transform, add CSV writer in `pipeline.py`, update `export_contract.json` if it surfaces in exports.
 
-**"Run tests without the network"** → `just test` always works offline. `just fixture-build` also works offline. Only `fairplan fetch` requires network access.
+**"Run tests without the network"** → `just test` always works offline. `just build` also works offline. Only `fairplan fetch` requires network access.

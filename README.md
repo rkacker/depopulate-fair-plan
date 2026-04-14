@@ -4,13 +4,15 @@
 
 Data pipeline that collects, normalizes, and publishes California FAIR Plan residential property insurance market data. Powers [depopulatefairplan.com](https://depopulatefairplan.com).
 
+Browse the data: **[GitHub Pages site](https://rkacker.github.io/depopulate-fair-plan/)**
+
 ## Why This Exists
 
 California's homeowners insurance market is in crisis. The FAIR Plan -- the state's insurer of last resort -- has grown from 236,000 policies in 2021 to over 640,000 by September 2025, a 2.6x increase in four years. Hundreds of thousands of families can no longer find coverage in the voluntary market.
 
 The public data that tracks this crisis is scattered across PDF reports from the [California FAIR Plan](https://www.cfpnet.com/key-statistics-data/) and the [California Department of Insurance](https://www.insurance.ca.gov/01-consumers/200-wrr/DataAnalysisOnWildfiresAndInsurance.cfm), published on different calendars, in inconsistent formats, with significant reporting lags. This pipeline collects those sources, normalizes them into a consistent data model, and produces exports for public analysis and the [depopulatefairplan.com](https://depopulatefairplan.com) website.
 
-## Key Metrics (FY2025 fixtures)
+## Key Metrics (FY2025)
 
 - **621,234** total residential FAIR Plan policies (fiscal year ending September 30, 2025)
 - **232,507** FAIR Plan renewals (CDI, calendar year 2023)
@@ -44,7 +46,6 @@ The public data that tracks this crisis is scattered across PDF reports from the
 | `cdi/statewide_yearly.csv` | CDI statewide residential market totals by year |
 | `cdi/distressed_counties.csv` | CDI-designated distressed counties |
 | `cdi/distressed_zips.csv` | CDI-designated distressed ZIP codes |
-| `analysis/senate_district_pif.csv` | FAIR Plan policies apportioned to state Senate districts |
 | `analysis/distressed_county_pif.csv` | County PIF history with distressed status |
 | `analysis/distressed_zip_pif.csv` | ZIP PIF history with distressed status |
 | `source_releases.csv` | Metadata and hashes for all source documents |
@@ -56,11 +57,11 @@ The public data that tracks this crisis is scattered across PDF reports from the
 | `site_stats.json` | Headline metrics, map labels, and card content for the website |
 | `california_county_data.csv` | County policy counts for the interactive map |
 
-### Reports (`reports/`)
+### Insights (`insights/`)
 
 | File | Purpose |
 |---|---|
-| `market_health_report.md` | Human-readable summary with highlights, top counties, and source freshness |
+| `market_health_report.md` | Market summary with highlights, top counties, and source freshness |
 
 ## Running the Pipeline
 
@@ -87,29 +88,30 @@ just build    # runs all three stages below in sequence
 | 1. Fetch | `fairplan fetch` | Downloads source PDFs from cfpnet.com and insurance.ca.gov |
 | 2. Normalize | `fairplan normalize` | Parses PDFs into structured CSVs in `data/processed/` |
 | 3. Export | `fairplan exports` | Builds website JSON/CSV from processed data |
-| 4. Report | `fairplan report` | Generates Markdown market report |
+| 4. Insights | `fairplan insights` | Generates Markdown market insights |
 
 All commands are run via `just build` or individually with `PYTHONPATH=src uv run python -m fairplan.cli <command>`.
 
 ## Development
 
 ```bash
-just test           # run test suite (uses fixture PDFs, no network needed)
-just fixture-build  # full pipeline against checked-in fixture PDFs
-just clean          # remove all generated output
+just test     # run test suite (no network needed)
+just clean    # remove all generated output
 ```
 
 ## Project Layout
 
 ```
+sources/                    # committed source PDFs (also the fetch target)
+  fair/                     # FAIR Plan PDFs
+  cdi/                      # CDI PDFs
+
 config/
   sources.toml              # registry of upstream PDF sources (URLs, dates, dataset types)
   export_contract.json      # schema for website-facing exports
-  county_senate_district_crosswalk.csv
-  senate_members.csv
 
 src/fairplan/
-  cli.py                    # CLI entry point (fetch / normalize / exports / report)
+  cli.py                    # CLI entry point (fetch / normalize / exports / insights)
   pipeline.py               # ETL orchestration
   parsers.py                # PDF text extraction and table parsing
   fetch.py                  # source document downloader
@@ -117,9 +119,11 @@ src/fairplan/
   models.py                 # dataclass definitions for canonical rows
   io_utils.py               # CSV/JSON read-write helpers
 
+site/
+  build.py                  # static site generator for GitHub Pages
+
 tests/
   test_parsers.py           # unit + integration tests
-  fixtures/raw/             # committed PDFs for reproducible testing
   golden/expected_metrics.json
 ```
 
@@ -128,7 +132,7 @@ tests/
 - Residential-only. Commercial property data appears in source PDFs but is not modeled.
 - Full-refresh pipeline. No incremental updates; re-run to pick up new data.
 - FAIR Plan sources update quarterly; CDI annual sources typically publish in January.
-- All `data/` and `reports/` output directories are git-ignored.
+- Pipeline outputs are rebuilt and deployed to GitHub Pages on every push to main.
 
 ## License
 

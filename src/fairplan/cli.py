@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from fairplan.pipeline import build_exports, build_report, fetch_command, normalize
+from fairplan.pipeline import build_exports, build_insights, fetch_command, normalize
 
 
 def parse_args() -> argparse.Namespace:
@@ -12,21 +12,21 @@ def parse_args() -> argparse.Namespace:
 
     fetch = subparsers.add_parser("fetch", help="Download upstream source documents")
     fetch.add_argument("--manifest", default="config/sources.toml")
-    fetch.add_argument("--raw-dir", default="data/raw")
+    fetch.add_argument("--raw-dir", default="sources")
 
     normalize_parser = subparsers.add_parser("normalize", help="Normalize raw files into analysis-ready CSVs")
     normalize_parser.add_argument("--manifest", default="config/sources.toml")
-    normalize_parser.add_argument("--raw-dir", default="data/raw")
+    normalize_parser.add_argument("--raw-dir", default="sources")
     normalize_parser.add_argument("--processed-dir", default="data/processed")
 
     exports = subparsers.add_parser("exports", help="Build JSON exports for reporting and visualization")
     exports.add_argument("--processed-dir", default="data/processed")
     exports.add_argument("--exports-dir", default="data/exports")
 
-    report = subparsers.add_parser("report", help="Build the Markdown market report")
-    report.add_argument("--processed-dir", default="data/processed")
-    report.add_argument("--exports-dir", default="data/exports")
-    report.add_argument("--reports-dir", default="reports")
+    insights = subparsers.add_parser("insights", help="Build Markdown market insights")
+    insights.add_argument("--processed-dir", default="data/processed")
+    insights.add_argument("--exports-dir", default="data/exports")
+    insights.add_argument("--insights-dir", default="insights")
 
     return parser.parse_args()
 
@@ -39,8 +39,8 @@ def main() -> int:
         normalize(Path(args.raw_dir), Path(args.processed_dir), Path(args.manifest))
     elif args.command == "exports":
         build_exports(Path(args.processed_dir), Path(args.exports_dir))
-    elif args.command == "report":
-        build_report(Path(args.processed_dir), Path(args.exports_dir), Path(args.reports_dir))
+    elif args.command == "insights":
+        build_insights(Path(args.processed_dir), Path(args.exports_dir), Path(args.insights_dir))
     return 0
 
 

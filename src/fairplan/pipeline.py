@@ -280,7 +280,7 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
 
 
 
-def build_report(processed_dir: Path, exports_dir: Path, reports_dir: Path) -> Path:
+def build_insights(processed_dir: Path, exports_dir: Path, insights_dir: Path) -> Path:
     sources = read_csv(processed_dir / "source_releases.csv")
     zip_pif = read_csv(processed_dir / "fair" / "zip_pif_history.csv")
     cdi_county = read_csv(processed_dir / "cdi" / "county_yearly.csv")
@@ -368,10 +368,10 @@ def build_report(processed_dir: Path, exports_dir: Path, reports_dir: Path) -> P
             "- CDI ZIP-level yearly policy data is scaffolded but not populated in v1 because a machine-readable source has not yet been added.",
         ]
     )
-    report_path = reports_dir / "market_health_report.md"
-    ensure_directory(report_path.parent)
-    report_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    return report_path
+    insight_path = insights_dir / "market_health_report.md"
+    ensure_directory(insight_path.parent)
+    insight_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return insight_path
 
 
 def build_senate_district_exports(processed_dir: Path, config_dir: Path | None = None) -> None:

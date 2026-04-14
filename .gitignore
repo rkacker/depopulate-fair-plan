@@ -11,11 +11,10 @@ build/
 *.pyo
 *.pyd
 
-data/raw/**
-!data/raw/.gitkeep
 data/processed/**
 !data/processed/.gitkeep
 data/exports/**
 !data/exports/.gitkeep
-reports/**
-!reports/.gitkeep
+insights/**
+!insights/.gitkeep
+_site/
