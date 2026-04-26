@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { scrollToSection } from "@/lib/utils";
 
 const NAV_ITEMS: Array<{ id: string; label: string }> = [
   { id: "mission", label: "Mission" },
@@ -6,10 +7,6 @@ const NAV_ITEMS: Array<{ id: string; label: string }> = [
   { id: "heatmap", label: "Data" },
   { id: "solutions", label: "Solutions" },
 ];
-
-function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
 
 export function Header() {
   return (

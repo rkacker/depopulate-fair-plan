@@ -1,9 +1,6 @@
-import { Button } from "@/components/ui/button";
 import { Building2, FileText, ShieldCheck } from "lucide-react";
-
-function scrollTo(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+import { Button } from "@/components/ui/button";
+import { scrollToSection } from "@/lib/utils";
 
 const PILLARS = [
   {
@@ -75,7 +72,7 @@ export function Solutions() {
         </div>
 
         <div className="mt-8 text-center">
-          <Button size="lg" onClick={() => scrollTo("signup")}>
+          <Button size="lg" onClick={() => scrollToSection("signup")}>
             Get Involved
           </Button>
         </div>

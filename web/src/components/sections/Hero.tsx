@@ -1,11 +1,8 @@
 import { Button } from "@/components/ui/button";
+import { scrollToSection } from "@/lib/utils";
 import type { SiteStats } from "@/types";
 
 const HERO_IMAGE = "/assets/hero.webp";
-
-function scrollTo(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
 
 export function Hero({ stats }: { stats: SiteStats | null }) {
   const total = stats?.hero.total_policies_display ?? "640,000";
@@ -45,13 +42,13 @@ export function Hero({ stats }: { stats: SiteStats | null }) {
         </p>
 
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button size="lg" onClick={() => scrollTo("signup")}>
+          <Button size="lg" onClick={() => scrollToSection("signup")}>
             Stay Informed
           </Button>
           <Button
             variant="outline"
             size="lg"
-            onClick={() => scrollTo("heatmap")}
+            onClick={() => scrollToSection("heatmap")}
           >
             View Crisis Map
           </Button>
