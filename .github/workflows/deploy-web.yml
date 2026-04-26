@@ -1,12 +1,8 @@
-name: Deploy web/ to GitHub Pages
+name: Deploy depopulatefairplan.com
 
 on:
   push:
     branches: [main]
-    paths:
-      - "web/**"
-      - "data/exports/**"
-      - ".github/workflows/deploy-web.yml"
   workflow_dispatch:
 
 permissions:
@@ -21,25 +17,43 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: web
     steps:
       - uses: actions/checkout@v4
 
+      # --- Pipeline: regenerate data/exports/ from committed sources/ ---
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+
+      - name: Install pipeline dependencies
+        run: uv sync
+
+      - name: Run pipeline (normalize + exports)
+        run: |
+          mkdir -p data/processed/fair data/processed/cdi data/processed/analysis data/exports
+          PYTHONPATH=src uv run python -m fairplan.cli normalize --processed-dir data/processed
+          PYTHONPATH=src uv run python -m fairplan.cli exports --processed-dir data/processed --exports-dir data/exports
+
+      # --- Website: sync data, install, build ---
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: "npm"
           cache-dependency-path: web/package-lock.json
 
-      - name: Install
-        run: npm ci
-
-      - name: Sync data files from pipeline exports
+      - name: Sync pipeline exports into web/public/data/
+        working-directory: web
         run: ./scripts/sync-data.sh
 
-      - name: Build
+      - name: Install web dependencies
+        working-directory: web
+        run: npm ci
+
+      - name: Build web/
+        working-directory: web
         run: npm run build
 
       - uses: actions/configure-pages@v5
