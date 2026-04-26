@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "@fontsource-variable/geist";
+
+@theme {
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-patriot-red: hsl(355 68% 45%);
+  --color-patriot-red-dark: hsl(355 73% 35%);
+  --color-navy-blue: hsl(220 100% 20%);
+  --color-coastal-beige: hsl(60 33% 95%);
+  --color-charcoal: hsl(0 0% 11%);
+  --color-golden-yellow: hsl(51 100% 50%);
+  --color-golden-yellow-soft: hsl(51 100% 70%);
+
+  --color-tier-extreme: #67000d;
+  --color-tier-high: #cb181d;
+  --color-tier-moderate: #fb6a4a;
+  --color-tier-low: #fcbba1;
+  --color-tier-none: #f0f0f0;
+
+  --radius-md: 0.5rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: white;
+    color: var(--color-charcoal);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

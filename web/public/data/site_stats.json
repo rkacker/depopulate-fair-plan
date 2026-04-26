@@ -1,0 +1,33 @@
+{
+  "hero": {
+    "total_policies_display": "640,000",
+    "description": "California's insurance market is broken. The FAIR Plan\u2014meant as a last resort\u2014now insures over {total_policies_display} homes and continues growing. We must act now to rebuild a market that works for families."
+  },
+  "stats_cards": {
+    "prior_year": {
+      "value": "463K",
+      "label": "FY 2024",
+      "detail": "Policies as of September 30, 2024"
+    },
+    "current_year": {
+      "value": "642K",
+      "label": "FY 2025",
+      "detail": "Policies as of September 30, 2025"
+    },
+    "growth": {
+      "value": "2.6x",
+      "label": "Growth Rate",
+      "detail": "Since FY 2021"
+    }
+  },
+  "map": {
+    "title": "FY 2025 FAIR Plan Crisis Map",
+    "description": "Explore how FAIR Plan policies are distributed across California's 58 counties. Data current through September 30, 2025.",
+    "data_source": "California FAIR Plan data through September 30, 2025",
+    "total_label": "Total FAIR Plan Policies in California (FY 2025)"
+  },
+  "table": {
+    "description": "FAIR Plan policies by county as of September 30, 2025",
+    "data_source": "Data source: California FAIR Plan through September 30, 2025"
+  }
+}
