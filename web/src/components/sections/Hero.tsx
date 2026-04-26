@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
 import type { SiteStats } from "@/types";
 
-const HERO_IMAGE = "/assets/hero.webp";
+const HERO_IMAGE = "assets/hero.webp";
 
 export function Hero({ stats }: { stats: SiteStats | null }) {
   const total = stats?.hero.total_policies_display ?? "640,000";

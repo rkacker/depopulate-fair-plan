@@ -2,7 +2,7 @@ import Papa from "papaparse";
 import type { CountyData, CountyRow, SiteStats } from "@/types";
 
 export async function loadSiteStats(): Promise<SiteStats> {
-  const res = await fetch("/data/site_stats.json");
+  const res = await fetch("data/site_stats.json");
   if (!res.ok) throw new Error(`site_stats.json: ${res.status}`);
   return res.json();
 }
@@ -10,7 +10,7 @@ export async function loadSiteStats(): Promise<SiteStats> {
 export function loadCountyData(): Promise<CountyData> {
   return new Promise((resolve, reject) => {
     Papa.parse<{ county?: string; policies?: string }>(
-      "/data/california_county_data.csv",
+      "data/california_county_data.csv",
       {
         download: true,
         header: true,

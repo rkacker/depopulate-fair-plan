@@ -65,7 +65,7 @@ export function CrisisMap({ countyData, stats, loading }: CrisisMapProps) {
                     width={800}
                     height={600}
                   >
-                    <Geographies geography="/data/california-counties.json">
+                    <Geographies geography="data/california-counties.json">
                       {({ geographies }) =>
                         geographies.map((geo) => {
                           const props = geo.properties as Record<string, unknown>;

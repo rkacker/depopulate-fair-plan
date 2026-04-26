@@ -82,11 +82,15 @@ fresh data automatically.
      `depopulatefairplan.com` and enable "Enforce HTTPS" once the cert
      provisions (~10 min after DNS).
 
-Until DNS is flipped, the site will be unreachable at the custom domain.
-The fallback `<user>.github.io/<repo>/` URL won't help here because the
-site is built with `base: "/"` (custom-domain mode). If you need a
-short stretch where both work, set `base` to `/depopulate-fair-plan/`
-in `vite.config.ts` and remove the CNAME until DNS is ready.
+The site is built with `base: "./"` (relative URLs), so the same
+`dist/` artifact serves correctly at:
+- `https://depopulatefairplan.com/` (after DNS flip)
+- `https://rkacker.github.io/depopulate-fair-plan/` (always)
+- a local `file://` open of `dist/index.html`
+
+Both URLs keep working in parallel — the github.io URL is a useful
+soak/preview channel even while the custom domain is the production
+home.
 
 ## Source layout
 

@@ -3,10 +3,12 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
 
-// Custom domain (depopulatefairplan.com) → base "/".
-// If we ever publish at <user>.github.io/<repo>/ instead, change this to "/<repo>/".
+// Relative base — same dist/ serves correctly at any URL prefix:
+// custom domain apex (depopulatefairplan.com), github.io subpath
+// (<user>.github.io/<repo>/), even file://. Keep all asset/data
+// references in code as relative paths (no leading slash).
 export default defineConfig({
-  base: "/",
+  base: "./",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
