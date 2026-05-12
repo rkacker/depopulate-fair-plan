@@ -1,59 +1,59 @@
-county,policies
-Los Angeles,153229
-San Bernardino,68143
-Riverside,63001
-San Diego,62114
-El Dorado,27866
-Orange,25848
-Nevada,23334
-Placer,19078
-Ventura,15922
-Tuolumne,13882
-Contra Costa,13375
-Santa Cruz,12824
-Alameda,11803
-Kern,11464
-Calaveras,10401
-Butte,9282
-Sonoma,8523
-Santa Barbara,6868
-Shasta,6690
-Santa Clara,6306
-Amador,6088
-Lake,5872
-Fresno,5755
-Madera,5602
-Monterey,5367
-San Luis Obispo,4892
-Mendocino,4744
-Marin,4578
-San Mateo,3884
-Plumas,3857
-Mariposa,3277
-Siskiyou,3171
-Humboldt,3125
-Tulare,2983
-Napa,2790
-Mono,2096
-San Francisco,2016
-Sacramento,1883
-Tehama,1807
-Yuba,1543
-Trinity,1409
-Solano,1337
-San Joaquin,1192
-Lassen,1098
-Imperial,694
-Del Norte,667
-Stanislaus,666
-Sierra,506
-San Benito,410
-Alpine,378
-Inyo,313
-Merced,311
-Modoc,292
-Yolo,242
-Kings,155
-Sutter,114
-Colusa,70
-Glenn,67
+county,policies,prior_policies,change_pct,direction
+Los Angeles,153229,147515,3.9,up
+San Bernardino,68143,64040,6.4,up
+Riverside,63001,56170,12.2,up
+San Diego,62114,57949,7.2,up
+El Dorado,27866,27593,1.0,up
+Orange,25848,23251,11.2,up
+Nevada,23334,22930,1.8,up
+Placer,19078,18670,2.2,up
+Ventura,15922,14609,9.0,up
+Tuolumne,13882,13723,1.2,up
+Contra Costa,13375,12609,6.1,up
+Santa Cruz,12824,12559,2.1,up
+Alameda,11803,10864,8.6,up
+Kern,11464,10983,4.4,up
+Calaveras,10401,10315,0.8,up
+Butte,9282,9167,1.3,up
+Sonoma,8523,8254,3.3,up
+Santa Barbara,6868,6568,4.6,up
+Shasta,6690,6304,6.1,up
+Santa Clara,6306,5915,6.6,up
+Amador,6088,6017,1.2,up
+Lake,5872,5594,5.0,up
+Fresno,5755,5577,3.2,up
+Madera,5602,5483,2.2,up
+Monterey,5367,5137,4.5,up
+San Luis Obispo,4892,4595,6.5,up
+Mendocino,4744,4483,5.8,up
+Marin,4578,4151,10.3,up
+San Mateo,3884,3528,10.1,up
+Plumas,3857,3753,2.8,up
+Mariposa,3277,3259,0.6,up
+Siskiyou,3171,3029,4.7,up
+Humboldt,3125,2728,14.6,up
+Tulare,2983,2887,3.3,up
+Napa,2790,2708,3.0,up
+Mono,2096,1876,11.7,up
+San Francisco,2016,1861,8.3,up
+Sacramento,1883,1877,0.3,flat
+Tehama,1807,1718,5.2,up
+Yuba,1543,1523,1.3,up
+Trinity,1409,1382,2.0,up
+Solano,1337,1236,8.2,up
+San Joaquin,1192,1177,1.3,up
+Lassen,1098,1056,4.0,up
+Imperial,694,632,9.8,up
+Del Norte,667,551,21.1,up
+Stanislaus,666,685,-2.8,down
+Sierra,506,507,-0.2,flat
+San Benito,410,375,9.3,up
+Alpine,378,370,2.2,up
+Inyo,313,291,7.6,up
+Merced,311,300,3.7,up
+Modoc,292,267,9.4,up
+Yolo,242,229,5.7,up
+Kings,155,173,-10.4,down
+Sutter,114,111,2.7,up
+Colusa,70,65,7.7,up
+Glenn,67,55,21.8,up

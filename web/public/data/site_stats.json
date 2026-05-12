@@ -1,13 +1,13 @@
 {
   "hero": {
-    "total_policies_display": "660,000",
+    "total_policies_display": "650,000",
     "description": "California's insurance market is broken. The FAIR Plan\u2014meant as a last resort\u2014now insures over {total_policies_display} homes and continues growing. We must act now to rebuild a market that works for families."
   },
   "stats_cards": {
     "prior_year": {
-      "value": "621K",
-      "label": "Sep 30, 2025",
-      "detail": "Policies as of September 30, 2025"
+      "value": "449K",
+      "label": "Sep 30, 2024",
+      "detail": "Policies as of September 30, 2024"
     },
     "current_year": {
       "value": "655K",

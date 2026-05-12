@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 from fairplan.fetch import fetch_sources
@@ -317,9 +317,7 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         key=lambda r: r["coverage_end"],
     )
     current_row = count_rows[-1]
-    prior_row = count_rows[-2]
     current_value = int(current_row["value"])
-    prior_value = int(prior_row["value"])
 
     fy_totals: dict[int, int] = {}
     for row in zip_pif:
@@ -327,14 +325,19 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
             fy_totals[int(row["fiscal_year"])] = int(row["value"])
     earliest_year = min(fy_totals.keys())
     earliest_value = fy_totals[earliest_year]
+    current_date = date.fromisoformat(current_row["coverage_end"])
+    target_date = date(current_date.year - 1, current_date.month, current_date.day)
+    fy_prior_year = max(y for y in fy_totals if date(y, 9, 30) <= target_date)
+    fy_prior_value = fy_totals[fy_prior_year]
+    fy_prior_coverage_end = f"{fy_prior_year}-09-30"
 
     growth_multiple = round(current_value / earliest_value, 1) if earliest_value else 0
     growth_label = f"{growth_multiple:.0f}x" if growth_multiple == int(growth_multiple) else f"{growth_multiple}x"
 
     current_label = _format_snapshot_label(current_row["coverage_end"])
-    prior_label = _format_snapshot_label(prior_row["coverage_end"])
+    prior_label = _format_snapshot_label(fy_prior_coverage_end)
     current_long = _format_snapshot_long(current_row["coverage_end"])
-    prior_long = _format_snapshot_long(prior_row["coverage_end"])
+    prior_long = _format_snapshot_long(fy_prior_coverage_end)
 
     site_stats = {
         "hero": {
@@ -347,7 +350,7 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         },
         "stats_cards": {
             "prior_year": {
-                "value": _format_short(prior_value),
+                "value": _format_short(fy_prior_value),
                 "label": prior_label,
                 "detail": f"Policies as of {prior_long}",
             },
@@ -378,11 +381,44 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
     }
     write_json(exports_dir / "site_stats.json", site_stats)
 
-    # --- california_county_data.csv ---
+    # --- california_county_data.csv (with per-county quarterly velocity) ---
+    county_quarterly = read_csv(processed_dir / "fair" / "county_quarterly.csv")
+    coverage_ends = sorted({r["coverage_end"] for r in county_quarterly})
+    latest_ce = coverage_ends[-1] if coverage_ends else ""
+    prior_ce = coverage_ends[-2] if len(coverage_ends) >= 2 else ""
+    prior_by_county = {
+        r["county"]: int(r["policy_count"])
+        for r in county_quarterly
+        if r["coverage_end"] == prior_ce
+    }
+    county_rows = []
+    for r in county_rankings:
+        county = r["county"]
+        policies = int(r["policy_count"])
+        prior_policies = prior_by_county.get(county)
+        if prior_policies is None or prior_policies == 0:
+            change_pct = ""
+            direction = "new"
+        else:
+            change = (policies - prior_policies) / prior_policies * 100
+            change_pct = f"{change:.1f}"
+            if change > 0.5:
+                direction = "up"
+            elif change < -0.5:
+                direction = "down"
+            else:
+                direction = "flat"
+        county_rows.append({
+            "county": county,
+            "policies": policies,
+            "prior_policies": prior_policies if prior_policies is not None else "",
+            "change_pct": change_pct,
+            "direction": direction,
+        })
     write_csv(
         exports_dir / "california_county_data.csv",
-        [{"county": r["county"], "policies": r["policy_count"]} for r in county_rankings],
-        ["county", "policies"],
+        county_rows,
+        ["county", "policies", "prior_policies", "change_pct", "direction"],
     )
 
     # --- quarterly_totals.json (statewide totals by coverage_end × metric) ---
@@ -749,8 +785,7 @@ def _format_snapshot_long(coverage_end: str) -> str:
 
 
 def _format_display(value: int) -> str:
-    """Round to nearest 10,000 and format with commas (e.g. 642010 -> '640,000')."""
-    rounded = round(value, -4)
+    rounded = (value // 10_000) * 10_000
     return f"{rounded:,}"
 
 

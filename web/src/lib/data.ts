@@ -1,5 +1,5 @@
 import Papa from "papaparse";
-import type { CountyData, CountyRow, SiteStats } from "@/types";
+import type { CountyData, CountyDirection, CountyRow, SiteStats } from "@/types";
 
 export async function loadSiteStats(): Promise<SiteStats> {
   const res = await fetch("data/site_stats.json");
@@ -7,9 +7,17 @@ export async function loadSiteStats(): Promise<SiteStats> {
   return res.json();
 }
 
+interface RawCountyRow {
+  county?: string;
+  policies?: string;
+  prior_policies?: string;
+  change_pct?: string;
+  direction?: string;
+}
+
 export function loadCountyData(): Promise<CountyData> {
   return new Promise((resolve, reject) => {
-    Papa.parse<{ county?: string; policies?: string }>(
+    Papa.parse<RawCountyRow>(
       "data/california_county_data.csv",
       {
         download: true,
@@ -24,7 +32,18 @@ export function loadCountyData(): Promise<CountyData> {
             if (!r.county || !r.policies) continue;
             const policies = parseInt(r.policies, 10);
             if (Number.isNaN(policies)) continue;
-            rows.push({ county: r.county, policies });
+            const priorPolicies = r.prior_policies
+              ? parseInt(r.prior_policies, 10)
+              : NaN;
+            const changePct = r.change_pct ? parseFloat(r.change_pct) : NaN;
+            const direction = (r.direction as CountyDirection) ?? "new";
+            rows.push({
+              county: r.county,
+              policies,
+              priorPolicies: Number.isNaN(priorPolicies) ? null : priorPolicies,
+              changePct: Number.isNaN(changePct) ? null : changePct,
+              direction,
+            });
             byCountyUpper.set(r.county.toUpperCase(), policies);
             total += policies;
             if (policies > max) max = policies;

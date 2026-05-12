@@ -26,9 +26,14 @@ export interface SiteStats {
   };
 }
 
+export type CountyDirection = "up" | "down" | "flat" | "new";
+
 export interface CountyRow {
   county: string;
   policies: number;
+  priorPolicies: number | null;
+  changePct: number | null;
+  direction: CountyDirection;
 }
 
 export interface CountyData {
