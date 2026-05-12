@@ -362,7 +362,7 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
             },
         },
         "map": {
-            "title": f"FAIR Plan Crisis Map ({current_label})",
+            "title": "FAIR Plan Crisis Map",
             "description": (
                 f"Explore how FAIR Plan policies are distributed across California's "
                 f"58 counties. Data current through {current_long}."

@@ -21,7 +21,7 @@
     }
   },
   "map": {
-    "title": "FAIR Plan Crisis Map (Mar 31, 2026)",
+    "title": "FAIR Plan Crisis Map",
     "description": "Explore how FAIR Plan policies are distributed across California's 58 counties. Data current through March 31, 2026.",
     "data_source": "California FAIR Plan data through March 31, 2026",
     "total_label": "Total FAIR Plan Policies in California (Mar 31, 2026)"
