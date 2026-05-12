@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 // Replace this placeholder with the /exec URL from your deployed Google Apps Script.
 // See web/docs/apps-script.md for the full deploy guide.
 const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/REPLACE_ME/exec";
+  "https://script.google.com/macros/s/AKfycbweo_ENLybalis8rhv5A3pTYUkpzinZXkcwtRB668uw4mVQrnnQolnp0i8aVpQU47xwhg/exec";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
