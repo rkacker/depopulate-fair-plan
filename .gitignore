@@ -10,6 +10,7 @@ build/
 *.pyc
 *.pyo
 *.pyd
+sources/**/*.metadata.json
 
 data/processed/**
 !data/processed/.gitkeep

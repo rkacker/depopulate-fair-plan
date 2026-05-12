@@ -11,8 +11,29 @@ from fairplan.parsers import (
     parse_cdi_county_pdf,
     parse_cdi_fact_sheet_appendix_a,
     parse_distressed_geographies,
+    parse_fair_category_pdf,
     parse_fair_history_pdf,
 )
+
+
+CATEGORY_DATASETS = {
+    "residential_policy_count": "count",
+    "residential_policy_premium": "premium",
+    "residential_policy_exposure": "exposure",
+}
+
+CATEGORY_FIELDNAMES = [
+    "coverage_end",
+    "zip",
+    "county",
+    "is_distressed_area",
+    "region",
+    "risk_band",
+    "policy_category",
+    "metric",
+    "value",
+    "source_id",
+]
 
 
 def default_manifest_path() -> Path:
@@ -71,6 +92,7 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
     cdi_county_rows: list[dict[str, object]] = []
     cdi_fact_rows: list[dict[str, object]] = []
     distressed_rows: list[dict[str, object]] = []
+    category_rows: list[dict[str, object]] = []
 
     for source in manifest:
         file_path = source.output_path(raw_dir)
@@ -86,6 +108,9 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
             cdi_fact_rows.extend(parse_cdi_fact_sheet_appendix_a(file_path, source))
         elif source.dataset == "distressed_geographies":
             distressed_rows.extend(parse_distressed_geographies(file_path, source))
+        elif source.dataset in CATEGORY_DATASETS:
+            metric = CATEGORY_DATASETS[source.dataset]
+            category_rows.extend(parse_fair_category_pdf(file_path, source, metric))
 
     # --- fair/ base tables ---
     county_pif_rows = [r for r in pif_rows if r["geography_level"] == "county"]
@@ -93,6 +118,24 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
 
     write_csv(processed_dir / "fair" / "county_pif_history.csv", county_pif_rows, PIF_FIELDNAMES)
     write_csv(processed_dir / "fair" / "zip_pif_history.csv", zip_pif_rows, PIF_FIELDNAMES)
+
+    # --- fair/ category breakdown (zip × county × risk_band × policy_category × metric) ---
+    write_csv(processed_dir / "fair" / "category_breakdown.csv", category_rows, CATEGORY_FIELDNAMES)
+
+    # --- fair/ quarterly totals (one row per coverage_end × metric) ---
+    totals: dict[tuple[str, str, str], int] = {}
+    for r in category_rows:
+        key = (str(r["coverage_end"]), str(r["metric"]), str(r["source_id"]))
+        totals[key] = totals.get(key, 0) + int(r["value"])
+    quarterly_total_rows = [
+        {"coverage_end": coverage_end, "metric": metric, "value": value, "source_id": source_id}
+        for (coverage_end, metric, source_id), value in sorted(totals.items())
+    ]
+    write_csv(
+        processed_dir / "fair" / "quarterly_totals.csv",
+        quarterly_total_rows,
+        ["coverage_end", "metric", "value", "source_id"],
+    )
 
     # --- cdi/ base tables (deduplicate: State rows repeat across PDF pages) ---
     cdi_deduped: dict[tuple, dict] = {}
@@ -277,6 +320,19 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         [{"county": r["county"], "policies": r["policy_count"]} for r in county_rankings],
         ["county", "policies"],
     )
+
+    # --- quarterly_totals.json (statewide totals by coverage_end × metric) ---
+    quarterly_rows = read_csv(processed_dir / "fair" / "quarterly_totals.csv")
+    by_period: dict[str, dict[str, object]] = {}
+    for row in quarterly_rows:
+        entry = by_period.setdefault(
+            row["coverage_end"],
+            {"coverage_end": row["coverage_end"], "source_ids": {}, "totals": {}},
+        )
+        entry["totals"][row["metric"]] = int(row["value"])
+        entry["source_ids"][row["metric"]] = row["source_id"]
+    periods = sorted(by_period.values(), key=lambda r: r["coverage_end"])
+    write_json(exports_dir / "quarterly_totals.json", {"periods": periods})
 
 
 

@@ -20,7 +20,7 @@ fi
 
 mkdir -p "$WEB_ROOT/public/data"
 
-for f in california_county_data.csv site_stats.json; do
+for f in california_county_data.csv site_stats.json quarterly_totals.json; do
   src="$PIPELINE_EXPORTS/$f"
   dst="$WEB_ROOT/public/data/$f"
   if [[ ! -f "$src" ]]; then

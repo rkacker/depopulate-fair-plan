@@ -21,6 +21,7 @@ CSV_SECTIONS: list[tuple[str, str]] = [
     ("County PIF History", "data/processed/fair/county_pif_history.csv"),
     ("ZIP PIF History", "data/processed/fair/zip_pif_history.csv"),
     ("County Rankings", "data/processed/fair/county_rankings.csv"),
+    ("Quarterly Totals", "data/processed/fair/quarterly_totals.csv"),
     ("CDI County Yearly", "data/processed/cdi/county_yearly.csv"),
     ("CDI Statewide Yearly", "data/processed/cdi/statewide_yearly.csv"),
     ("Distressed Counties", "data/processed/cdi/distressed_counties.csv"),
