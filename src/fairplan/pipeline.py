@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import UTC, date, datetime
+from datetime import UTC, datetime
 from pathlib import Path
 
 from fairplan.fetch import fetch_sources
@@ -325,19 +325,15 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
             fy_totals[int(row["fiscal_year"])] = int(row["value"])
     earliest_year = min(fy_totals.keys())
     earliest_value = fy_totals[earliest_year]
-    current_date = date.fromisoformat(current_row["coverage_end"])
-    target_date = date(current_date.year - 1, current_date.month, current_date.day)
-    fy_prior_year = max(y for y in fy_totals if date(y, 9, 30) <= target_date)
-    fy_prior_value = fy_totals[fy_prior_year]
-    fy_prior_coverage_end = f"{fy_prior_year}-09-30"
+    earliest_coverage_end = f"{earliest_year}-09-30"
 
     growth_multiple = round(current_value / earliest_value, 1) if earliest_value else 0
     growth_label = f"{growth_multiple:.0f}x" if growth_multiple == int(growth_multiple) else f"{growth_multiple}x"
 
     current_label = _format_snapshot_label(current_row["coverage_end"])
-    prior_label = _format_snapshot_label(fy_prior_coverage_end)
+    prior_label = _format_snapshot_label(earliest_coverage_end)
     current_long = _format_snapshot_long(current_row["coverage_end"])
-    prior_long = _format_snapshot_long(fy_prior_coverage_end)
+    prior_long = _format_snapshot_long(earliest_coverage_end)
 
     site_stats = {
         "hero": {
@@ -350,7 +346,7 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         },
         "stats_cards": {
             "prior_year": {
-                "value": _format_short(fy_prior_value),
+                "value": _format_short(earliest_value),
                 "label": prior_label,
                 "detail": f"Policies as of {prior_long}",
             },
