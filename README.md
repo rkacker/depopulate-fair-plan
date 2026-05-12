@@ -8,29 +8,31 @@ Browse the data: **[GitHub Pages site](https://rkacker.github.io/depopulate-fair
 
 ## Why This Exists
 
-California's homeowners insurance market is in crisis. The FAIR Plan -- the state's insurer of last resort -- has grown from 242,440 policies in FY2021 to 642,010 by September 30, 2025, a 2.6x increase in four years, and continued growing into Q1 2026 (+5.5% in a single quarter on category-PDF totals). Hundreds of thousands of families can no longer find coverage in the voluntary market.
+California's homeowners insurance market is in crisis. The FAIR Plan -- the state's insurer of last resort -- has grown from 236,515 residential policies in FY2021 to 655,204 by March 31, 2026, a 2.8x increase in five years. Growth is now running at ~5.5% per quarter and accelerating. Hundreds of thousands of families can no longer find coverage in the voluntary market.
 
 The public data that tracks this crisis is scattered across PDF reports from the [California FAIR Plan](https://www.cfpnet.com/key-statistics-data/) and the [California Department of Insurance](https://www.insurance.ca.gov/01-consumers/200-wrr/DataAnalysisOnWildfiresAndInsurance.cfm), published on different calendars, in inconsistent formats, with significant reporting lags. This pipeline collects those sources, normalizes them into a consistent data model, and produces exports for public analysis and the [depopulatefairplan.com](https://depopulatefairplan.com) website.
 
 ## Key Metrics
 
-**Fiscal year ending September 30, 2025** (annual PIF history):
+**Quarterly snapshots** (from FAIR Plan category PDFs, residential only):
 
-- **642,010** total residential FAIR Plan policies (county-level Total)
-- **621,234** total via ZIP-level Total (slightly different aggregation)
-- **232,507** FAIR Plan renewals (CDI, calendar year 2023)
-- **29** distressed counties designated by CDI
-- **664** distressed ZIP codes designated by CDI
-
-**Latest quarterly snapshot, March 31, 2026** (from FAIR Plan category PDFs, parsed total):
-
-| Metric | 2025-09-30 | 2026-03-31 | Δ |
+| Metric | 2025-06-30 | 2025-09-30 | 2026-03-31 |
 |---|---|---|---|
-| Residential policies | 587,060 | 619,498 | +5.5% |
-| Total exposure | $616.95B | $661.56B | +7.2% |
-| Total premium | $1.615B | $1.690B | +4.6% |
+| Residential policies | 587,677 | 621,234 | **655,204** |
+| Total exposure | $602.7B | $645.1B | **$691.8B** |
+| Total premium | $1.640B | $1.709B | **$1.789B** |
 
-Category-PDF parsed totals run ~5% below the FAIR Plan's own methodology summary (621,404 at 9/30/2025) — a known parser-coverage gap; see `data/processed/fair/quarterly_totals.csv` for the canonical figures the pipeline emits.
+Quarter-over-quarter growth from 2025-09-30 to 2026-03-31: policies +5.5%, exposure +7.2%, premium +4.6%. Premium growing slower than policy count is a signal that new policies are concentrated in lower-rate ZIPs.
+
+**Other context:**
+
+- **236,515** residential FAIR Plan policies at FY2021 end (statewide ZIP Total) — anchors the 2.8x growth multiple
+- **232,507** FAIR Plan renewals (CDI, calendar year 2023, carrier-reported)
+- **29** distressed counties designated by CDI
+- **663** distressed ZIP codes designated by CDI
+- **436** additional ZIPs the FAIR Plan flags as distressed but CDI doesn't list (see `data/processed/analysis/distressed_zip_reconciliation.csv`)
+
+Parsed quarterly totals match the FAIR Plan's authoritative methodology summary to within 0.03%.
 
 ## Data Sources
 
@@ -52,17 +54,19 @@ Category-PDF parsed totals run ~5% below the FAIR Plan's own methodology summary
 
 | File | What it contains |
 |---|---|
-| `fair/county_pif_history.csv` | FAIR Plan policies-in-force by county, 5-year fiscal-year history |
-| `fair/zip_pif_history.csv` | FAIR Plan policies-in-force by ZIP code, 5-year fiscal-year history |
-| `fair/county_rankings.csv` | Counties ranked by latest-year policy count with YoY growth |
-| `fair/category_breakdown.csv` | Quarterly ZIP × county × risk-band × policy-category breakdown for count / premium / exposure |
+| `fair/category_breakdown.csv` | **Canonical residential source.** Quarterly ZIP × county × risk-band × policy-category breakdown for count / premium / exposure |
 | `fair/quarterly_totals.csv` | Statewide totals per (coverage_end, metric) — aggregates `category_breakdown.csv` |
+| `fair/county_quarterly.csv` | Per-county totals per coverage_end × metric (count / premium / exposure) — aggregates `category_breakdown.csv` |
+| `fair/county_pif_history.csv` | Residential-only county FY history, synthesized by rolling the DWE ZIP file up to county via the ZIP→county map baked into the category PDFs |
+| `fair/zip_pif_history.csv` | Residential ZIP-level FY21–FY25 history (FAIR Plan DWE file, parsed directly) |
+| `fair/county_rankings.csv` | Counties ranked by latest-quarter policy count |
 | `cdi/county_yearly.csv` | CDI county-level market segments (voluntary, FAIR, DIC) by year |
 | `cdi/statewide_yearly.csv` | CDI statewide residential market totals by year |
 | `cdi/distressed_counties.csv` | CDI-designated distressed counties |
 | `cdi/distressed_zips.csv` | CDI-designated distressed ZIP codes |
-| `analysis/distressed_county_pif.csv` | County PIF history with distressed status |
-| `analysis/distressed_zip_pif.csv` | ZIP PIF history with distressed status |
+| `analysis/distressed_county_pif.csv` | County FY history with distressed status |
+| `analysis/distressed_zip_pif.csv` | ZIP FY history with distressed status |
+| `analysis/distressed_zip_reconciliation.csv` | Per-ZIP comparison of FAIR Plan inline distressed flag vs CDI list |
 | `source_releases.csv` | Metadata and hashes for all source documents |
 
 ### Website Exports (`data/exports/`)

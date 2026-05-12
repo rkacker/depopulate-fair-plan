@@ -5,7 +5,7 @@ import type { SiteStats } from "@/types";
 const HERO_IMAGE = "assets/hero.webp";
 
 export function Hero({ stats }: { stats: SiteStats | null }) {
-  const total = stats?.hero.total_policies_display ?? "640,000";
+  const total = stats?.hero.total_policies_display ?? "660,000";
   return (
     <section
       id="mission"

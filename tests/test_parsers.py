@@ -24,8 +24,15 @@ def source_by_dataset(dataset: str):
     raise AssertionError(f"missing dataset {dataset}")
 
 
+def source_by_id(source_id: str):
+    for source in load_sources(MANIFEST):
+        if source.id == source_id:
+            return source
+    raise AssertionError(f"missing source {source_id}")
+
+
 def test_fair_count_parser_extracts_known_zip_values() -> None:
-    source = source_by_dataset("residential_policy_count")
+    source = source_by_id("fair_residential_policy_count_2025q4")
     rows = parse_fair_category_pdf(FIXTURES / "fair" / source.file_name, source, "count")
     target = next(
         row
@@ -35,6 +42,27 @@ def test_fair_count_parser_extracts_known_zip_values() -> None:
         and row["policy_category"] == "owner_occupied_single_family"
     )
     assert target["value"] == 709
+
+
+def test_fair_count_parser_handles_sb_mountains_region() -> None:
+    source = source_by_id("fair_residential_policy_count_2025q4")
+    rows = parse_fair_category_pdf(FIXTURES / "fair" / source.file_name, source, "count")
+    sb_mountains_rows = [r for r in rows if r["region"] == "SB Mountains"]
+    assert len(sb_mountains_rows) > 0
+    assert sum(int(r["value"]) for r in sb_mountains_rows) > 30_000
+
+
+def test_fair_premium_parser_handles_decimal_format() -> None:
+    source = source_by_id("fair_residential_policy_premium_2025_06")
+    rows = parse_fair_category_pdf(FIXTURES / "fair" / source.file_name, source, "premium")
+    target = next(
+        row
+        for row in rows
+        if row["zip"] == "94501"
+        and row["risk_band"] == "low"
+        and row["policy_category"] == "owner_occupied_single_family"
+    )
+    assert target["value"] == 137_390
 
 
 def test_cdi_county_parser_extracts_statewide_renewals() -> None:
@@ -99,6 +127,22 @@ def test_fixture_pipeline_matches_golden_metrics(tmp_path: Path) -> None:
     assert cdi_fair_renewed == expected["cdi_statewide_fair_renewed_latest_year"]
     assert len(distressed_counties) == expected["distressed_counties"]
     assert len(distressed_zips) == expected["distressed_zip_codes"]
+
+    quarterly = read_csv(processed_dir / "fair" / "quarterly_totals.csv")
+    count_rows = sorted([r for r in quarterly if r["metric"] == "count"], key=lambda r: r["coverage_end"])
+    latest_count = int(count_rows[-1]["value"])
+    q3_2025_count = next(int(r["value"]) for r in count_rows if r["coverage_end"] == "2025-09-30")
+    assert latest_count == expected["fair_category_policy_count_latest_quarter"]
+    assert q3_2025_count == expected["fair_category_policy_count_2025q3"]
+
+    county_quarterly = read_csv(processed_dir / "fair" / "county_quarterly.csv")
+    latest_coverage_end = max(r["coverage_end"] for r in county_quarterly)
+    alameda_latest = next(
+        int(r["policy_count"])
+        for r in county_quarterly
+        if r["county"] == "Alameda" and r["coverage_end"] == latest_coverage_end
+    )
+    assert alameda_latest == expected["fair_category_alameda_policy_count_latest_quarter"]
 
     # Processed CSVs exist in correct subdirectories
     assert (processed_dir / "fair" / "county_pif_history.csv").exists()

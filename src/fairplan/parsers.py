@@ -48,6 +48,8 @@ def clean_int(token: str) -> int:
     cleaned = token.replace(",", "").replace("$", "").strip()
     if cleaned in {"-", ""}:
         return 0
+    if "." in cleaned:
+        cleaned = cleaned.split(".", 1)[0]
     return int(cleaned)
 
 
@@ -55,9 +57,9 @@ def parse_fair_category_pdf(path: Path, source: SourceConfig, metric: str) -> li
     rows: list[dict[str, object]] = []
     line_pattern = re.compile(
         r"^(?P<zip>\d{5}) (?P<county>[A-Za-z .'-]+?) (?P<distressed>[01]) "
-        r"(?P<region>(?:Northern|Central|Southern) CA) (?P<tail>.+)$"
+        r"(?P<region>(?:Northern|Central|Southern) CA|SB Mountains) (?P<tail>.+)$"
     )
-    token_pattern = r"(?:[\d,]+|-)\$" if metric in {"premium", "exposure"} else r"[\d,]+"
+    token_pattern = r"(?:[\d,]+(?:\.\d+)?|-)\$" if metric in {"premium", "exposure"} else r"[\d,]+"
     for line in extract_pdf_lines(path):
         if not line or line.startswith("Policy count by category") or line.startswith("Premium by category"):
             continue

@@ -1,6 +1,36 @@
 version = 1
 
 [[sources]]
+id = "fair_residential_policy_count_2025_06"
+family = "fair"
+dataset = "residential_policy_count"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2025/07/Policies-by-category-DWE-as-of-250630-DL-250730.pdf"
+published_date = "2025-07-30"
+coverage_end = "2025-06-30"
+file_name = "residential_policy_count_2025_06.pdf"
+
+[[sources]]
+id = "fair_residential_policy_premium_2025_06"
+family = "fair"
+dataset = "residential_policy_premium"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2025/07/Premium-by-category-DWE-as-of-250630-DL-250730.pdf"
+published_date = "2025-07-30"
+coverage_end = "2025-06-30"
+file_name = "residential_policy_premium_2025_06.pdf"
+
+[[sources]]
+id = "fair_residential_policy_exposure_2025_06"
+family = "fair"
+dataset = "residential_policy_exposure"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2025/07/Exposure-by-category-DWE-as-of-250630-DL-250730.pdf"
+published_date = "2025-07-30"
+coverage_end = "2025-06-30"
+file_name = "residential_policy_exposure_2025_06.pdf"
+
+[[sources]]
 id = "fair_residential_policy_count_2025q4"
 family = "fair"
 dataset = "residential_policy_count"
@@ -29,16 +59,6 @@ url = "https://www.cfpnet.com/wp-content/uploads/2025/12/Exposure-by-category-DW
 published_date = "2025-12-11"
 coverage_end = "2025-09-30"
 file_name = "residential_policy_exposure_2025q4.pdf"
-
-[[sources]]
-id = "fair_residential_county_pif_history_2025q4"
-family = "fair"
-dataset = "residential_county_pif_history"
-format = "pdf"
-url = "https://www.cfpnet.com/wp-content/uploads/2025/11/CFP-5-yr-PIF-County-FY25-All-251114.pdf"
-published_date = "2025-11-14"
-coverage_end = "2025-09-30"
-file_name = "residential_county_pif_history_2025q4.pdf"
 
 [[sources]]
 id = "fair_residential_zip_pif_history_2025q4"

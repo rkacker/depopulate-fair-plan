@@ -1,9 +1,9 @@
 import type { SiteStats } from "@/types";
 
 const FALLBACK = {
-  prior_year: { value: "463K", label: "FY 2024", detail: "Policies as of September 30, 2024" },
-  current_year: { value: "642K", label: "FY 2025", detail: "Policies as of September 30, 2025" },
-  growth: { value: "2.6x", label: "Growth Rate", detail: "Since FY 2021" },
+  prior_year: { value: "621K", label: "Sep 30, 2025", detail: "Policies as of September 30, 2025" },
+  current_year: { value: "655K", label: "Mar 31, 2026", detail: "Policies as of March 31, 2026" },
+  growth: { value: "2.8x", label: "Growth Rate", detail: "Since FY 2021" },
 };
 
 export function CrisisStats({ stats }: { stats: SiteStats | null }) {

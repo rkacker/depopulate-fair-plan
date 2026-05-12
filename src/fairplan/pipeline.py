@@ -98,9 +98,7 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         file_path = source.output_path(raw_dir)
         if not file_path.exists():
             continue
-        if source.dataset == "residential_county_pif_history":
-            pif_rows.extend(parse_fair_history_pdf(file_path, source, "county"))
-        elif source.dataset == "residential_zip_pif_history":
+        if source.dataset == "residential_zip_pif_history":
             pif_rows.extend(parse_fair_history_pdf(file_path, source, "zip"))
         elif source.dataset == "residential_county_yearly":
             cdi_county_rows.extend(parse_cdi_county_pdf(file_path, source))
@@ -112,17 +110,14 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
             metric = CATEGORY_DATASETS[source.dataset]
             category_rows.extend(parse_fair_category_pdf(file_path, source, metric))
 
-    # --- fair/ base tables ---
-    county_pif_rows = [r for r in pif_rows if r["geography_level"] == "county"]
     zip_pif_rows = [r for r in pif_rows if r["geography_level"] == "zip"]
 
-    write_csv(processed_dir / "fair" / "county_pif_history.csv", county_pif_rows, PIF_FIELDNAMES)
     write_csv(processed_dir / "fair" / "zip_pif_history.csv", zip_pif_rows, PIF_FIELDNAMES)
 
     # --- fair/ category breakdown (zip × county × risk_band × policy_category × metric) ---
     write_csv(processed_dir / "fair" / "category_breakdown.csv", category_rows, CATEGORY_FIELDNAMES)
 
-    # --- fair/ quarterly totals (one row per coverage_end × metric) ---
+    # --- fair/ quarterly totals (statewide totals per coverage_end × metric) ---
     totals: dict[tuple[str, str, str], int] = {}
     for r in category_rows:
         key = (str(r["coverage_end"]), str(r["metric"]), str(r["source_id"]))
@@ -136,6 +131,46 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         quarterly_total_rows,
         ["coverage_end", "metric", "value", "source_id"],
     )
+
+    # --- fair/ county_quarterly: per-county totals per coverage_end × metric ---
+    county_metric_totals: dict[tuple[str, str, str], int] = {}
+    county_source_ids: dict[tuple[str, str], str] = {}
+    for r in category_rows:
+        key = (str(r["coverage_end"]), str(r["county"]), str(r["metric"]))
+        county_metric_totals[key] = county_metric_totals.get(key, 0) + int(r["value"])
+        county_source_ids[(str(r["coverage_end"]), str(r["metric"]))] = str(r["source_id"])
+    county_quarterly_rows: list[dict[str, object]] = []
+    seen_pairs: set[tuple[str, str]] = set()
+    for (coverage_end, county, _metric), _value in sorted(county_metric_totals.items()):
+        pair = (coverage_end, county)
+        if pair in seen_pairs:
+            continue
+        seen_pairs.add(pair)
+        county_quarterly_rows.append({
+            "coverage_end": coverage_end,
+            "county": county,
+            "policy_count": county_metric_totals.get((coverage_end, county, "count"), 0),
+            "premium": county_metric_totals.get((coverage_end, county, "premium"), 0),
+            "exposure": county_metric_totals.get((coverage_end, county, "exposure"), 0),
+            "source_id_count": county_source_ids.get((coverage_end, "count"), ""),
+            "source_id_premium": county_source_ids.get((coverage_end, "premium"), ""),
+            "source_id_exposure": county_source_ids.get((coverage_end, "exposure"), ""),
+        })
+    write_csv(
+        processed_dir / "fair" / "county_quarterly.csv",
+        county_quarterly_rows,
+        ["coverage_end", "county", "policy_count", "premium", "exposure",
+         "source_id_count", "source_id_premium", "source_id_exposure"],
+    )
+
+    # --- fair/ county_pif_history: synthetic, residential-only, derived by rolling up
+    # the DWE ZIP file using the ZIP -> county mapping baked into the category PDFs. ---
+    zip_to_county: dict[str, str] = {}
+    for r in category_rows:
+        zip_to_county.setdefault(str(r["zip"]), str(r["county"]))
+    county_pif_rows = _build_county_pif_from_zip_rollup(zip_pif_rows, zip_to_county)
+    write_csv(processed_dir / "fair" / "county_pif_history.csv", county_pif_rows, PIF_FIELDNAMES)
+    pif_rows = zip_pif_rows + county_pif_rows
 
     # --- cdi/ base tables (deduplicate: State rows repeat across PDF pages) ---
     cdi_deduped: dict[tuple, dict] = {}
@@ -186,26 +221,25 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         ],
     )
 
-    # --- fair/ derived: county rankings (latest FY, sorted by policy count) ---
-    county_pif_no_total = [r for r in county_pif_rows if r["geography_id"] != "Total"]
-    if county_pif_no_total:
-        latest_county_year = max(int(r["fiscal_year"]) for r in county_pif_no_total)
-        county_latest = [r for r in county_pif_no_total if int(r["fiscal_year"]) == latest_county_year]
-        county_latest.sort(key=lambda r: int(r["value"]), reverse=True)
+    # --- fair/ derived: county rankings (latest quarterly snapshot, sorted by policy count) ---
+    if county_quarterly_rows:
+        latest_coverage_end = max(r["coverage_end"] for r in county_quarterly_rows)
+        latest_rows = [r for r in county_quarterly_rows if r["coverage_end"] == latest_coverage_end]
+        latest_rows.sort(key=lambda r: int(r["policy_count"]), reverse=True)
         write_csv(
             processed_dir / "fair" / "county_rankings.csv",
             [
                 {
-                    "county": r["geography_name"],
-                    "fiscal_year": r["fiscal_year"],
-                    "policy_count": r["value"],
-                    "yoy_growth_pct": r["yoy_growth_pct"],
+                    "county": r["county"],
+                    "policy_count": r["policy_count"],
+                    "premium": r["premium"],
+                    "exposure": r["exposure"],
                     "coverage_end": r["coverage_end"],
-                    "source_id": r["source_id"],
+                    "source_id": r["source_id_count"],
                 }
-                for r in county_latest
+                for r in latest_rows
             ],
-            ["county", "fiscal_year", "policy_count", "yoy_growth_pct", "coverage_end", "source_id"],
+            ["county", "policy_count", "premium", "exposure", "coverage_end", "source_id"],
         )
 
     # --- analysis/ derived: distressed PIF growth (FAIR PIF + CDI distressed) ---
@@ -243,34 +277,64 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         fieldnames,
     )
 
+    # --- analysis/ derived: distressed-flag reconciliation (FAIR Plan inline vs CDI list) ---
+    if category_rows:
+        latest_coverage_end = max(str(r["coverage_end"]) for r in category_rows)
+        zip_flags: dict[str, dict[str, object]] = {}
+        for r in category_rows:
+            if str(r["coverage_end"]) != latest_coverage_end:
+                continue
+            z = str(r["zip"])
+            if z not in zip_flags:
+                zip_flags[z] = {
+                    "zip": z,
+                    "county": str(r["county"]),
+                    "fair_plan_flag": int(r["is_distressed_area"]),
+                    "cdi_flag": int(z in distressed_zip_set),
+                }
+        reconciliation_rows = sorted(zip_flags.values(), key=lambda r: r["zip"])
+        for r in reconciliation_rows:
+            r["agree"] = int(r["fair_plan_flag"] == r["cdi_flag"])
+        write_csv(
+            processed_dir / "analysis" / "distressed_zip_reconciliation.csv",
+            reconciliation_rows,
+            ["zip", "county", "fair_plan_flag", "cdi_flag", "agree"],
+        )
+
     # --- analysis/ derived: Senate district PIF estimates ---
     build_senate_district_exports(processed_dir)
 
 
 def build_exports(processed_dir: Path, exports_dir: Path) -> None:
     """Generate JSON/CSV exports for website visualization."""
-    county_pif = read_csv(processed_dir / "fair" / "county_pif_history.csv")
+    quarterly = read_csv(processed_dir / "fair" / "quarterly_totals.csv")
     county_rankings = read_csv(processed_dir / "fair" / "county_rankings.csv")
+    zip_pif = read_csv(processed_dir / "fair" / "zip_pif_history.csv")
 
     # --- site_stats.json ---
-    county_totals: dict[int, int] = {}
-    for row in county_pif:
-        if row["geography_id"] == "Total":
-            county_totals[int(row["fiscal_year"])] = int(row["value"])
+    count_rows = sorted(
+        [r for r in quarterly if r["metric"] == "count"],
+        key=lambda r: r["coverage_end"],
+    )
+    current_row = count_rows[-1]
+    prior_row = count_rows[-2]
+    current_value = int(current_row["value"])
+    prior_value = int(prior_row["value"])
 
-    years = sorted(county_totals.keys())
-    current_year = years[-1]
-    prior_year = years[-2]
-    earliest_year = years[0]
-    current_value = county_totals[current_year]
-    prior_value = county_totals[prior_year]
-    earliest_value = county_totals[earliest_year]
+    fy_totals: dict[int, int] = {}
+    for row in zip_pif:
+        if row["geography_id"] == "Total":
+            fy_totals[int(row["fiscal_year"])] = int(row["value"])
+    earliest_year = min(fy_totals.keys())
+    earliest_value = fy_totals[earliest_year]
 
     growth_multiple = round(current_value / earliest_value, 1) if earliest_value else 0
     growth_label = f"{growth_multiple:.0f}x" if growth_multiple == int(growth_multiple) else f"{growth_multiple}x"
 
-    period_end_current = f"September 30, {current_year}"
-    period_end_prior = f"September 30, {prior_year}"
+    current_label = _format_snapshot_label(current_row["coverage_end"])
+    prior_label = _format_snapshot_label(prior_row["coverage_end"])
+    current_long = _format_snapshot_long(current_row["coverage_end"])
+    prior_long = _format_snapshot_long(prior_row["coverage_end"])
 
     site_stats = {
         "hero": {
@@ -284,13 +348,13 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         "stats_cards": {
             "prior_year": {
                 "value": _format_short(prior_value),
-                "label": f"FY {prior_year}",
-                "detail": f"Policies as of {period_end_prior}",
+                "label": prior_label,
+                "detail": f"Policies as of {prior_long}",
             },
             "current_year": {
                 "value": _format_short(current_value),
-                "label": f"FY {current_year}",
-                "detail": f"Policies as of {period_end_current}",
+                "label": current_label,
+                "detail": f"Policies as of {current_long}",
             },
             "growth": {
                 "value": growth_label,
@@ -299,17 +363,17 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
             },
         },
         "map": {
-            "title": f"FY {current_year} FAIR Plan Crisis Map",
+            "title": f"FAIR Plan Crisis Map ({current_label})",
             "description": (
                 f"Explore how FAIR Plan policies are distributed across California's "
-                f"58 counties. Data current through {period_end_current}."
+                f"58 counties. Data current through {current_long}."
             ),
-            "data_source": f"California FAIR Plan data through {period_end_current}",
-            "total_label": f"Total FAIR Plan Policies in California (FY {current_year})",
+            "data_source": f"California FAIR Plan data through {current_long}",
+            "total_label": f"Total FAIR Plan Policies in California ({current_label})",
         },
         "table": {
-            "description": f"FAIR Plan policies by county as of {period_end_current}",
-            "data_source": f"Data source: California FAIR Plan through {period_end_current}",
+            "description": f"FAIR Plan policies by county as of {current_long}",
+            "data_source": f"Data source: California FAIR Plan through {current_long}",
         },
     }
     write_json(exports_dir / "site_stats.json", site_stats)
@@ -401,7 +465,7 @@ def build_insights(processed_dir: Path, exports_dir: Path, insights_dir: Path) -
     ]
     for row in top_counties:
         lines.append(
-            f"- {row['county']}: {int(row['policy_count']):,} policies in fiscal year {row['fiscal_year']}."
+            f"- {row['county']}: {int(row['policy_count']):,} policies as of {row['coverage_end']}."
         )
     lines.extend(
         [
@@ -592,6 +656,96 @@ def _build_cdi_county_wide(
         pif_rows,
         ["county"] + pif_cols + fair_cols + share_cols,
     )
+
+
+def _build_county_pif_from_zip_rollup(
+    zip_pif_rows: list[dict[str, object]],
+    zip_to_county: dict[str, str],
+) -> list[dict[str, object]]:
+    if not zip_pif_rows:
+        return []
+    by_county_fy: dict[tuple[str, int], dict[str, object]] = {}
+    state_by_fy: dict[int, dict[str, object]] = {}
+    for r in zip_pif_rows:
+        if r["metric"] != "policy_count":
+            continue
+        fy = int(r["fiscal_year"])
+        if r["geography_id"] == "Total":
+            existing = state_by_fy.get(fy)
+            current_total = int(existing["value"]) if existing else 0
+            state_by_fy[fy] = {
+                "coverage_end": r["coverage_end"],
+                "fiscal_year": fy,
+                "period_end": r["period_end"],
+                "geography_level": "county",
+                "geography_id": "Total",
+                "geography_name": "Total",
+                "metric": "policy_count",
+                "value": max(current_total, int(r["value"])),
+                "yoy_growth_pct": "",
+                "source_id": r["source_id"],
+            }
+            continue
+        county = zip_to_county.get(str(r["geography_id"]))
+        if not county:
+            continue
+        key = (county, fy)
+        entry = by_county_fy.get(key)
+        if entry is None:
+            entry = {
+                "coverage_end": r["coverage_end"],
+                "fiscal_year": fy,
+                "period_end": r["period_end"],
+                "geography_level": "county",
+                "geography_id": county,
+                "geography_name": county,
+                "metric": "policy_count",
+                "value": 0,
+                "yoy_growth_pct": "",
+                "source_id": r["source_id"],
+            }
+            by_county_fy[key] = entry
+        entry["value"] = int(entry["value"]) + int(r["value"])
+
+    counties = sorted({county for (county, _fy) in by_county_fy})
+    years = sorted({fy for (_county, fy) in by_county_fy})
+    prior: dict[tuple[str, int], int] = {}
+    for fy in years:
+        for county in counties:
+            entry = by_county_fy.get((county, fy))
+            if entry is None:
+                continue
+            prior_val = prior.get((county, fy - 1))
+            if prior_val is not None and prior_val > 0:
+                growth = (int(entry["value"]) - prior_val) / prior_val * 100
+                entry["yoy_growth_pct"] = f"{growth:.1f}"
+            prior[(county, fy)] = int(entry["value"])
+
+    rows: list[dict[str, object]] = []
+    for fy in years:
+        for county in counties:
+            entry = by_county_fy.get((county, fy))
+            if entry is not None:
+                rows.append(entry)
+        if fy in state_by_fy:
+            rows.append(state_by_fy[fy])
+    return rows
+
+
+_MONTH_NAMES = [
+    "", "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+]
+
+
+def _format_snapshot_label(coverage_end: str) -> str:
+    year, month, day = coverage_end.split("-")
+    return f"{_MONTH_NAMES[int(month)][:3]} {int(day)}, {year}"
+
+
+def _format_snapshot_long(coverage_end: str) -> str:
+    year, month, day = coverage_end.split("-")
+    return f"{_MONTH_NAMES[int(month)]} {int(day)}, {year}"
 
 
 def _format_display(value: int) -> str:

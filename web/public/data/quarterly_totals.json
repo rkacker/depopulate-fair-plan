@@ -1,0 +1,43 @@
+{
+  "periods": [
+    {
+      "coverage_end": "2025-06-30",
+      "source_ids": {
+        "count": "fair_residential_policy_count_2025_06",
+        "exposure": "fair_residential_policy_exposure_2025_06",
+        "premium": "fair_residential_policy_premium_2025_06"
+      },
+      "totals": {
+        "count": 587677,
+        "exposure": 602699009130,
+        "premium": 1639654634
+      }
+    },
+    {
+      "coverage_end": "2025-09-30",
+      "source_ids": {
+        "count": "fair_residential_policy_count_2025q4",
+        "exposure": "fair_residential_policy_exposure_2025q4",
+        "premium": "fair_residential_policy_premium_2025q4"
+      },
+      "totals": {
+        "count": 621234,
+        "exposure": 645115692650,
+        "premium": 1709422795
+      }
+    },
+    {
+      "coverage_end": "2026-03-31",
+      "source_ids": {
+        "count": "fair_residential_policy_count_2026_03",
+        "exposure": "fair_residential_policy_exposure_2026_03",
+        "premium": "fair_residential_policy_premium_2026_03"
+      },
+      "totals": {
+        "count": 655204,
+        "exposure": 691806787207,
+        "premium": 1788773322
+      }
+    }
+  ]
+}
