@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://depopulatefairplan.com/sitemap.xml
