@@ -1,11 +1,12 @@
 {
-  "version": 8,
+  "version": 9,
   "exports": [
     "site_stats.json",
     "california_county_data.csv",
     "california_zip_data.csv",
     "california_city_data.csv",
     "cdi_county_market_share.csv",
+    "fair_statewide_history.csv",
     "quarterly_totals.json"
   ]
 }

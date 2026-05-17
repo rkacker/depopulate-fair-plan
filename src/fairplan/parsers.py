@@ -91,18 +91,40 @@ def parse_fair_category_pdf(path: Path, source: SourceConfig, metric: str) -> li
     return rows
 
 
-def parse_fair_history_pdf(path: Path, source: SourceConfig, geography_level: str) -> list[dict[str, object]]:
+def parse_fair_history_pdf(
+    path: Path,
+    source: SourceConfig,
+    geography_level: str,
+    metric: str = "policy_count",
+) -> list[dict[str, object]]:
+    """Parse a 5-year fiscal-year history PDF (PIF or TIV) into long-format rows.
+
+    PIF (Policies In Force) files use `metric="policy_count"`; TIV (Total
+    Insured Value, i.e. exposure) files use `metric="exposure"`. Schema is
+    identical except for value formatting ($/commas on TIV).
+
+    Some older PIF files have an extra leftmost column that's a partial-year
+    snapshot (e.g. the FY2023 file's leftmost col is ~12/31/2023, not a
+    fiscal year). That column is detected by token count (11 instead of 9)
+    and skipped — only the standard 5-year FY history is emitted.
+    """
     rows: list[dict[str, object]] = []
     coverage_year = int(source.coverage_end[:4])
     line_pattern = (
-        re.compile(r"^(?P<geo>\d{5}|Total)\s+(?P<tail>(?:-?\d+%|[\d,]+).+)$")
+        re.compile(r"^(?P<geo>\d{5}|Total)\s+(?P<tail>(?:-?[\d.]+%|[\d,]+).+)$")
         if geography_level == "zip"
-        else re.compile(r"^(?P<geo>[A-Za-z .'-]+|Total)\s+(?P<tail>(?:-?\d+%|[\d,]+).+)$")
+        else re.compile(r"^(?P<geo>[A-Za-z .'-]+|Total)\s+(?P<tail>(?:-?[\d.]+%|[\d,]+).+)$")
+    )
+    skip_prefixes = (
+        "Policy Growth by Fiscal Year",
+        "Exposure Growth by Fiscal Year",
+        "Data by ",
+        "Page ",
+        "County Year",
+        "ZIP Code Year",
     )
     for line in extract_pdf_lines(path):
-        if not line or line.startswith("Policy Growth by Fiscal Year") or line.startswith("Data by "):
-            continue
-        if line.startswith("Page ") or line.startswith("County Year") or line.startswith("ZIP Code Year"):
+        if not line or line.startswith(skip_prefixes):
             continue
         if "Report Year" in line:
             line = line.split("Report Year", 1)[0].strip()
@@ -110,6 +132,11 @@ def parse_fair_history_pdf(path: Path, source: SourceConfig, geography_level: st
         if not match:
             continue
         tokens = match.group("tail").split()
+        # Standard layout: 4 yoy% + 5 values = 9 tokens (5 fiscal years).
+        # Some legacy PIF files prepend an extra (yoy%, value) for a partial-
+        # quarter snapshot — 11 tokens total. Skip those 2 tokens.
+        if len(tokens) >= 11:
+            tokens = tokens[2:]
         if len(tokens) < 9:
             continue
         years = [coverage_year - offset for offset in range(5)]
@@ -137,7 +164,7 @@ def parse_fair_history_pdf(path: Path, source: SourceConfig, geography_level: st
                     "geography_level": geography_level,
                     "geography_id": geography_id,
                     "geography_name": geography_name,
-                    "metric": "policy_count",
+                    "metric": metric,
                     "value": clean_int(value_token),
                     "yoy_growth_pct": None if growth_token is None else growth_token.replace("%", ""),
                     "source_id": source.id,

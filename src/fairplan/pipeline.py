@@ -86,10 +86,31 @@ DISTRESSED_FIELDNAMES = [
 ]
 
 
+def _is_ca_zip(z: str) -> bool:
+    """California ZIPs are 90000-96199. Any 5-digit ZIP starting with '9'
+    qualifies. Filters out mailing-address artifacts like 76132 (Fort Worth TX)
+    that occasionally appear in the FAIR Plan 5-year history PDFs."""
+    return len(z) == 5 and z.isdigit() and z.startswith("9")
+
+
+def _dedupe_history_rows(rows: list[dict[str, object]], pub_dates: dict[str, str]) -> list[dict[str, object]]:
+    """When multiple 5-year history files overlap on the same geography/fiscal_year,
+    keep the row from the source with the most recent published_date."""
+    best: dict[tuple, dict[str, object]] = {}
+    for r in rows:
+        key = (r["geography_level"], r["geography_id"], int(r["fiscal_year"]), r["metric"])
+        existing = best.get(key)
+        if existing is None or pub_dates.get(str(r["source_id"]), "") > pub_dates.get(str(existing["source_id"]), ""):
+            best[key] = r
+    return list(best.values())
+
+
 def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = None) -> None:
     """Parse PDFs and write analysis-ready CSVs to processed_dir."""
     manifest = load_sources(manifest_path or default_manifest_path())
+    pub_dates: dict[str, str] = {s.id: s.published_date or "" for s in manifest}
     pif_rows: list[dict[str, object]] = []
+    tiv_rows: list[dict[str, object]] = []
     cdi_county_rows: list[dict[str, object]] = []
     cdi_fact_rows: list[dict[str, object]] = []
     distressed_rows: list[dict[str, object]] = []
@@ -100,7 +121,9 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         if not file_path.exists():
             continue
         if source.dataset == "residential_zip_pif_history":
-            pif_rows.extend(parse_fair_history_pdf(file_path, source, "zip"))
+            pif_rows.extend(parse_fair_history_pdf(file_path, source, "zip", metric="policy_count"))
+        elif source.dataset == "residential_zip_tiv_history":
+            tiv_rows.extend(parse_fair_history_pdf(file_path, source, "zip", metric="exposure"))
         elif source.dataset == "residential_county_yearly":
             cdi_county_rows.extend(parse_cdi_county_pdf(file_path, source))
         elif source.dataset == "residential_fact_sheet":
@@ -111,9 +134,19 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
             metric = CATEGORY_DATASETS[source.dataset]
             category_rows.extend(parse_fair_category_pdf(file_path, source, metric))
 
-    zip_pif_rows = [r for r in pif_rows if r["geography_level"] == "zip"]
+    # Dedupe overlapping fiscal years across history files; newer file wins.
+    pif_rows = _dedupe_history_rows(pif_rows, pub_dates)
+    tiv_rows = _dedupe_history_rows(tiv_rows, pub_dates)
+    # Drop non-California ZIPs (mailing-address artifacts in the source PDFs).
+    # The "Total" sentinel rows are kept intact.
+    def _keep(r: dict[str, object]) -> bool:
+        gid = str(r["geography_id"])
+        return gid == "Total" or _is_ca_zip(gid)
+    zip_pif_rows = [r for r in pif_rows if r["geography_level"] == "zip" and _keep(r)]
+    zip_tiv_rows = [r for r in tiv_rows if r["geography_level"] == "zip" and _keep(r)]
 
     write_csv(processed_dir / "fair" / "zip_pif_history.csv", zip_pif_rows, PIF_FIELDNAMES)
+    write_csv(processed_dir / "fair" / "zip_tiv_history.csv", zip_tiv_rows, PIF_FIELDNAMES)
 
     # --- fair/ category breakdown (zip × county × risk_band × policy_category × metric) ---
     write_csv(processed_dir / "fair" / "category_breakdown.csv", category_rows, CATEGORY_FIELDNAMES)
@@ -200,6 +233,17 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         zip_quarterly_rows,
         ["coverage_end", "zip", "city", "county", "region", "policy_count", "premium", "exposure",
          "source_id_count", "source_id_premium", "source_id_exposure"],
+    )
+
+    # --- fair/ zip_wide.csv: one row per ZIP, columns per (metric, period).
+    # Combines granular quarterly snapshots (count + exposure) with FY-end
+    # annual values from the PIF/TIV history files. Periods present depend on
+    # the source files we have ingested; missing values render as empty.
+    _write_zip_wide(
+        processed_dir,
+        zip_quarterly_rows=zip_quarterly_rows,
+        zip_pif_rows=zip_pif_rows,
+        zip_tiv_rows=zip_tiv_rows,
     )
 
     # --- fair/ city_quarterly: per-city totals (ZIPs grouped by GeoNames city) ---
@@ -610,6 +654,15 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
     cdi_pif_wide = processed_dir / "cdi" / "county_pif_wide.csv"
     if cdi_pif_wide.exists():
         shutil.copy(cdi_pif_wide, exports_dir / "cdi_county_market_share.csv")
+
+    # --- fair_statewide_history.csv: long-running statewide quarterly + annual series ---
+    # Merges three sources, newest wins for any (coverage_end, metric):
+    #   1. quarterly_totals.csv      — granular DWE files (count + premium + exposure)
+    #   2. zip_pif/tiv_history Total — FY-end annual rows from 5-year history PDFs
+    #   3. config/fair_statewide_quarterly_history.csv — hand-curated gap quarters
+    #      from webpage chart snapshots (Mar 2024 / July 2024 / Aug 2024 /
+    #      Mar 2025 / April 2025 captures)
+    _write_statewide_history(processed_dir, exports_dir)
 
 
 
@@ -1036,6 +1089,137 @@ def _classify_change(policies: int, prior: int | None) -> tuple[str, str]:
     change = (policies - prior) / prior * 100
     direction = "up" if change > 0.5 else "down" if change < -0.5 else "flat"
     return f"{change:.1f}", direction
+
+
+def _write_statewide_history(processed_dir: Path, exports_dir: Path) -> None:
+    """Build fair_statewide_history.csv — one row per coverage_end, columns
+    policy_count / exposure / premium / source. Order of precedence per cell:
+    granular quarterly > FY history (Total row) > curated snapshot CSV.
+    """
+    series: dict[str, dict[str, object]] = {}
+    sources: dict[str, dict[str, str]] = {}
+
+    def write_cell(ce: str, metric: str, value: int | None, source_label: str) -> None:
+        if value in (None, ""):
+            return
+        row = series.setdefault(
+            ce,
+            {"coverage_end": ce, "policy_count": "", "exposure": "", "premium": "", "source": ""},
+        )
+        row[metric] = int(value)
+        sources.setdefault(ce, {})[metric] = source_label
+
+    # Curated snapshot rows (lowest precedence — overwritten by anything below)
+    curated = Path("config") / "fair_statewide_quarterly_history.csv"
+    if curated.exists():
+        for r in read_csv(curated):
+            for metric in ("policy_count", "exposure", "premium"):
+                write_cell(r["coverage_end"], metric, _safe_int(r.get(metric)), "snapshot")
+
+    # FY-end values from history files (Total rows)
+    pif = processed_dir / "fair" / "zip_pif_history.csv"
+    if pif.exists():
+        for r in read_csv(pif):
+            if r["geography_id"] != "Total":
+                continue
+            ce = f"{int(r['fiscal_year'])}-09-30"
+            write_cell(ce, "policy_count", _safe_int(r["value"]), "fy_history")
+    tiv = processed_dir / "fair" / "zip_tiv_history.csv"
+    if tiv.exists():
+        for r in read_csv(tiv):
+            if r["geography_id"] != "Total":
+                continue
+            ce = f"{int(r['fiscal_year'])}-09-30"
+            write_cell(ce, "exposure", _safe_int(r["value"]), "fy_history")
+
+    # Granular quarterly totals — highest precedence
+    quarterly = processed_dir / "fair" / "quarterly_totals.csv"
+    if quarterly.exists():
+        for r in read_csv(quarterly):
+            ce = r["coverage_end"]
+            metric_map = {"count": "policy_count", "premium": "premium", "exposure": "exposure"}
+            metric = metric_map.get(r["metric"])
+            if metric:
+                write_cell(ce, metric, _safe_int(r["value"]), "quarterly")
+
+    # Stitch the source provenance per row (compact, comma-joined when mixed).
+    for ce, row in series.items():
+        provs = sources.get(ce, {})
+        unique = sorted(set(provs.values()))
+        row["source"] = ",".join(unique)
+
+    ordered = sorted(series.values(), key=lambda r: r["coverage_end"])
+    write_csv(
+        exports_dir / "fair_statewide_history.csv",
+        ordered,
+        ["coverage_end", "policy_count", "exposure", "premium", "source"],
+    )
+
+
+def _safe_int(token: object) -> int | None:
+    if token is None or token == "":
+        return None
+    try:
+        return int(str(token).replace(",", "").replace("$", "").strip())
+    except ValueError:
+        return None
+
+
+def _write_zip_wide(
+    processed_dir: Path,
+    zip_quarterly_rows: list[dict[str, object]],
+    zip_pif_rows: list[dict[str, object]],
+    zip_tiv_rows: list[dict[str, object]],
+) -> None:
+    """Write data/processed/fair/zip_wide.csv — one row per ZIP, columns
+    per (metric, period) for both granular quarters and FY-end annuals."""
+    meta: dict[str, dict[str, str]] = {}
+    counts: dict[tuple[str, str], int] = {}      # (zip, period) -> policy_count
+    exposures: dict[tuple[str, str], int] = {}   # (zip, period) -> exposure
+
+    # Granular quarterly snapshots (count + exposure, from category_breakdown).
+    for r in zip_quarterly_rows:
+        z, ce = str(r["zip"]), str(r["coverage_end"])
+        meta.setdefault(z, {"city": str(r.get("city", "")), "county": str(r["county"]), "region": str(r["region"])})
+        counts[(z, ce)] = int(r["policy_count"])
+        exposures[(z, ce)] = int(r["exposure"])
+
+    # FY-end annual values from history files.
+    for r in zip_pif_rows:
+        z = str(r["geography_id"])
+        if z == "Total":
+            continue
+        period = str(r["period_end"])
+        counts[(z, period)] = int(r["value"])
+        meta.setdefault(z, {"city": "", "county": "", "region": ""})
+
+    for r in zip_tiv_rows:
+        z = str(r["geography_id"])
+        if z == "Total":
+            continue
+        period = str(r["period_end"])
+        exposures[(z, period)] = int(r["value"])
+        meta.setdefault(z, {"city": "", "county": "", "region": ""})
+
+    periods = sorted({p for (_z, p) in (*counts.keys(), *exposures.keys())})
+    zips = sorted(meta)
+
+    fieldnames = ["zip", "city", "county", "region"]
+    for p in periods:
+        fieldnames.append(f"policy_count_{p}")
+    for p in periods:
+        fieldnames.append(f"exposure_{p}")
+
+    rows: list[dict[str, object]] = []
+    for z in zips:
+        m = meta[z]
+        row: dict[str, object] = {"zip": z, "city": m["city"], "county": m["county"], "region": m["region"]}
+        for p in periods:
+            row[f"policy_count_{p}"] = counts.get((z, p), "")
+        for p in periods:
+            row[f"exposure_{p}"] = exposures.get((z, p), "")
+        rows.append(row)
+    write_csv(processed_dir / "fair" / "zip_wide.csv", rows, fieldnames)
 
 
 def _load_zip_cities(config_dir: Path | None = None) -> dict[str, str]:

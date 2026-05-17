@@ -2,6 +2,7 @@ import { type ReactNode } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Info } from "lucide-react";
 import { FairShareTab } from "@/components/sections/FairShareTab";
+import { StatewideHistoryTab } from "@/components/sections/StatewideHistoryTab";
 
 // GitHub mark — official monochrome logo, inline so we don't depend on a
 // lucide-react version that exports `Github`.
@@ -19,10 +20,7 @@ function GitHubMark({ className }: { className?: string }) {
   );
 }
 
-// Tab scaffolding: v1 ships one tab. Next iterations add:
-//   - "fair_quarterly": FAIR Plan policies per coverage_end (county, ZIP, city)
-//   - "fair_fy":        FAIR Plan FY annual history (Sep-30 snapshots, 2021-2025)
-type TabId = "fair_share";
+type TabId = "fair_share" | "statewide_history";
 
 interface TabDef {
   id: TabId;
@@ -35,6 +33,11 @@ const TABS: TabDef[] = [
     id: "fair_share",
     label: "FAIR Share of Total Market",
     render: () => <FairShareTab />,
+  },
+  {
+    id: "statewide_history",
+    label: "FAIR Plan Statewide History",
+    render: () => <StatewideHistoryTab />,
   },
 ];
 

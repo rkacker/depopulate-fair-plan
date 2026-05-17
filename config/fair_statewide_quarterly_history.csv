@@ -1,0 +1,7 @@
+coverage_end,policy_count,exposure,premium,source_note
+2023-09-30,320572,284000000000,,FY2023 PIF history (zip-level rollup). Exposure imputed from Aug 2024 snapshot statement "$393B at June 2024 is a 38.3% increase since September 2023" -> $393B / 1.383.
+2023-12-31,407568,311640000000,,FY2023 PIF history leftmost partial-quarter column (statewide Total). Exposure from Mar 2024 web snapshot ($311.64B).
+2024-03-31,,340000000000,,July 2024 web snapshot ("as of March 2024, total exposure is $340 billion"). Policy count not stated explicitly in that snapshot text.
+2024-06-30,,393000000000,,Aug 2024 web snapshot ("as of June 2024, total exposure is $393 billion"; "policies up 27% since Sep 2023" implies ~407K but mixes residential + DIC).
+2024-12-31,516313,529000000000,1600000000,Mar 2025 web snapshot ("as of December 2024, total PIF 516,313, exposure $529B, written premium $1.6B").
+2025-03-31,573739,599000000000,1740000000,April 2025 web snapshot ("as of March 2025, total PIF 573,739, exposure $599B, written premium $1.74B").
