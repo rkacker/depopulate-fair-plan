@@ -65,6 +65,15 @@ export interface ZipData {
   byZip: Map<string, ZipRow>;
 }
 
+export interface CountyMarketShareRow {
+  county: string;
+  fairShareLatest: number;
+  fairPifLatest: number;
+  totalPifLatest: number;
+  fairShareSeries: number[];
+  years: number[];
+}
+
 export interface CityRow {
   city: string;
   county: string;

@@ -3,6 +3,7 @@ import type {
   CityData,
   CityRow,
   CountyData,
+  CountyMarketShareRow,
   CountyRow,
   Direction,
   SiteStats,
@@ -219,6 +220,44 @@ export function loadCityData(): Promise<CityData> {
           if (policies > max) max = policies;
         }
         resolve({ rows, total, max, byCity });
+      },
+      error: (err) => reject(err),
+    });
+  });
+}
+
+export function loadCountyMarketShare(): Promise<CountyMarketShareRow[]> {
+  return new Promise((resolve, reject) => {
+    Papa.parse<Record<string, string>>("data/cdi_county_market_share.csv", {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        const fields = results.meta.fields ?? [];
+        const years = fields
+          .filter((f) => f.startsWith("fair_plan_share_"))
+          .map((f) => parseInt(f.replace("fair_plan_share_", ""), 10))
+          .filter((y) => !Number.isNaN(y))
+          .sort();
+        const latest = years[years.length - 1];
+        const rows: CountyMarketShareRow[] = [];
+        for (const r of results.data) {
+          if (!r.county || r.county === "State") continue;
+          const series = years.map((y) => parseFloat(r[`fair_plan_share_${y}`] ?? "0"));
+          const share = parseFloat(r[`fair_plan_share_${latest}`] ?? "0");
+          const fair = parseInt(r[`fair_plan_pif_${latest}`] ?? "0", 10);
+          const total = parseInt(r[`total_pif_${latest}`] ?? "0", 10);
+          if (Number.isNaN(share) || Number.isNaN(fair) || Number.isNaN(total)) continue;
+          rows.push({
+            county: r.county,
+            fairShareLatest: share,
+            fairPifLatest: fair,
+            totalPifLatest: total,
+            fairShareSeries: series,
+            years,
+          });
+        }
+        resolve(rows);
       },
       error: (err) => reject(err),
     });

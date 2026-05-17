@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import shutil
 from datetime import UTC, datetime
 from pathlib import Path
 
@@ -602,6 +603,13 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         entry["source_ids"][row["metric"]] = row["source_id"]
     periods = sorted(by_period.values(), key=lambda r: r["coverage_end"])
     write_json(exports_dir / "quarterly_totals.json", {"periods": periods})
+
+    # --- cdi_county_market_share.csv: FAIR share of total CA homeowners market ---
+    # Sourced from CDI annual data (2020-2023). Renamed on copy for friendlier
+    # download labelling on the /data page.
+    cdi_pif_wide = processed_dir / "cdi" / "county_pif_wide.csv"
+    if cdi_pif_wide.exists():
+        shutil.copy(cdi_pif_wide, exports_dir / "cdi_county_market_share.csv")
 
 
 

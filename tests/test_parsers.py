@@ -264,6 +264,29 @@ def test_california_city_data_export_schema_and_zips(tmp_path: Path) -> None:
     assert int(oakland["zip_count"]) > 1
 
 
+def test_cdi_county_market_share_export_schema(tmp_path: Path) -> None:
+    """cdi_county_market_share.csv exposes per-county FAIR-share metrics 2020-2023."""
+    from fairplan.io_utils import read_csv
+
+    processed_dir = tmp_path / "processed"
+    exports_dir = tmp_path / "exports"
+    normalize(FIXTURES, processed_dir, MANIFEST)
+    build_exports(processed_dir, exports_dir)
+
+    path = exports_dir / "cdi_county_market_share.csv"
+    assert path.exists()
+    rows = read_csv(path)
+    assert rows, "cdi_county_market_share.csv must not be empty"
+
+    expected = {"county", "total_pif_2023", "fair_plan_pif_2023", "fair_plan_share_2023"}
+    assert expected.issubset(rows[0].keys())
+
+    # Sanity-check the 2023 share for a well-known county where FAIR has grown materially.
+    nevada = next((r for r in rows if r["county"] == "Nevada"), None)
+    assert nevada is not None
+    assert float(nevada["fair_plan_share_2023"]) > 10.0
+
+
 def test_yoy_velocity_present_in_all_exports(tmp_path: Path) -> None:
     """county/zip/city exports should expose a Y/Y change for ~99% of rows
     (the small leakage is new geographies that didn't exist in the prior FY)."""

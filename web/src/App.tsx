@@ -8,6 +8,7 @@ import { CityMap } from "@/components/sections/CityMap";
 import { CityTable } from "@/components/sections/CityTable";
 import { ZipMap } from "@/components/sections/ZipMap";
 import { ZipTable } from "@/components/sections/ZipTable";
+import { DataPage } from "@/components/sections/DataPage";
 import { Solutions } from "@/components/sections/Solutions";
 import { Signup } from "@/components/sections/Signup";
 import { Footer } from "@/components/sections/Footer";
@@ -20,8 +21,15 @@ import {
 import type { CityData, CountyData, SiteStats, ZipData } from "@/types";
 
 type View = "county" | "city" | "zip";
+type Page = "home" | "data";
 
 export default function App() {
+  const [page] = useState<Page>(() => {
+    if (typeof window === "undefined") return "home";
+    return new URLSearchParams(window.location.search).get("page") === "data"
+      ? "data"
+      : "home";
+  });
   const [view] = useState<View>(() => {
     if (typeof window === "undefined") return "county";
     const v = new URLSearchParams(window.location.search).get("view");
@@ -34,6 +42,10 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (page === "data") {
+      setLoading(false);
+      return;
+    }
     let cancelled = false;
     const dataLoader =
       view === "city" ? loadCityData()
@@ -53,32 +65,38 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [page, view]);
 
   return (
     <div className="min-h-screen bg-coastal-beige">
       <Header />
       <main>
-        <Hero stats={stats} />
-        <CrisisStats stats={stats} />
-        {view === "city" ? (
-          <>
-            <CityMap cityData={cityData} stats={stats} loading={loading} />
-            <CityTable cityData={cityData} stats={stats} loading={loading} />
-          </>
-        ) : view === "zip" ? (
-          <>
-            <ZipMap zipData={zipData} stats={stats} loading={loading} />
-            <ZipTable zipData={zipData} stats={stats} loading={loading} />
-          </>
+        {page === "data" ? (
+          <DataPage />
         ) : (
           <>
-            <CrisisMap countyData={countyData} stats={stats} loading={loading} />
-            <CountyTable countyData={countyData} stats={stats} loading={loading} />
+            <Hero stats={stats} />
+            <CrisisStats stats={stats} />
+            {view === "city" ? (
+              <>
+                <CityMap cityData={cityData} stats={stats} loading={loading} />
+                <CityTable cityData={cityData} stats={stats} loading={loading} />
+              </>
+            ) : view === "zip" ? (
+              <>
+                <ZipMap zipData={zipData} stats={stats} loading={loading} />
+                <ZipTable zipData={zipData} stats={stats} loading={loading} />
+              </>
+            ) : (
+              <>
+                <CrisisMap countyData={countyData} stats={stats} loading={loading} />
+                <CountyTable countyData={countyData} stats={stats} loading={loading} />
+              </>
+            )}
+            <Solutions />
+            <Signup />
           </>
         )}
-        <Solutions />
-        <Signup />
       </main>
       <Footer />
     </div>
