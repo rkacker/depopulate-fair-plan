@@ -30,14 +30,14 @@ interface TabDef {
 
 const TABS: TabDef[] = [
   {
+    id: "statewide_history",
+    label: "FAIR Plan History (Quarterly)",
+    render: () => <StatewideHistoryTab />,
+  },
+  {
     id: "fair_share",
     label: "FAIR Share of Total Market",
     render: () => <FairShareTab />,
-  },
-  {
-    id: "statewide_history",
-    label: "FAIR Plan Statewide History",
-    render: () => <StatewideHistoryTab />,
   },
 ];
 

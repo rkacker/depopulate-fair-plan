@@ -46,7 +46,8 @@ function loadHistory(): Promise<HistoryRow[]> {
             source: r.source ?? "",
           });
         }
-        rows.sort((a, b) => a.coverage_end.localeCompare(b.coverage_end));
+        // Latest first so the headline numbers are at the top of the table.
+        rows.sort((a, b) => b.coverage_end.localeCompare(a.coverage_end));
         resolve(rows);
       },
       error: (err) => reject(err),
@@ -66,14 +67,25 @@ const SOURCE_COLOR: Record<string, string> = {
   snapshot: "bg-amber-100 text-amber-800",
 };
 
+// Em-dash with figure-spaces around it so null cells span the same character
+// width as the populated cells (combined with tabular-nums on the cell).
+const EMPTY_CELL = "—";
+
 function fmtPolicies(n: number | null): string {
-  if (n === null) return "—";
+  if (n === null) return EMPTY_CELL;
   return n.toLocaleString();
 }
 
 function fmtBillions(n: number | null): string {
-  if (n === null) return "—";
-  return `$${(n / 1e9).toFixed(1)}B`;
+  if (n === null) return EMPTY_CELL;
+  // Always one decimal place, comma-separated thousands for clean alignment
+  // (e.g. "$115.3 B", "$1,000.0 B" should both line up under tabular-nums).
+  const billions = n / 1e9;
+  const formatted = billions.toLocaleString(undefined, {
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  });
+  return `$${formatted} B`;
 }
 
 function fmtCoverage(s: string): string {
@@ -110,15 +122,25 @@ export function StatewideHistoryTab() {
     };
   }, []);
 
-  const countSeries = rows
-    ? rows.map((r) => r.policy_count).filter((v): v is number => v !== null)
-    : [];
-  const exposureSeries = rows
-    ? rows.map((r) => r.exposure).filter((v): v is number => v !== null)
-    : [];
+  // Reverse to chronological (ascending) for the sparkline trajectory.
+  const chronological = rows ? [...rows].reverse() : [];
+  const countSeries = chronological
+    .map((r) => r.policy_count)
+    .filter((v): v is number => v !== null);
+  const exposureSeries = chronological
+    .map((r) => r.exposure)
+    .filter((v): v is number => v !== null);
 
-  const latest = rows && rows.length > 0 ? rows[rows.length - 1] : null;
-  const earliest = rows && rows.length > 0 ? rows[0] : null;
+  // rows is sorted descending (latest first) for table display.
+  // Per-metric span: find latest and earliest rows that actually have the metric
+  // populated, so the trajectory card reads from real data to real data.
+  function span<K extends "policy_count" | "exposure">(key: K) {
+    if (!rows) return { earliest: null as HistoryRow | null, latest: null as HistoryRow | null };
+    const populated = rows.filter((r) => r[key] !== null);
+    return { latest: populated[0] ?? null, earliest: populated[populated.length - 1] ?? null };
+  }
+  const policySpan = span("policy_count");
+  const exposureSpan = span("exposure");
 
   return (
     <Card className="border-0 lg:p-8">
@@ -145,17 +167,17 @@ export function StatewideHistoryTab() {
         </a>
       </div>
 
-      {rows && earliest && latest && (
+      {rows && policySpan.earliest && policySpan.latest && exposureSpan.earliest && exposureSpan.latest && (
         <div className="mb-6 grid gap-4 sm:grid-cols-3">
           <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
               Policy count trajectory
             </p>
-            <p className="mt-1 text-2xl font-bold text-charcoal">
-              {fmtPolicies(earliest.policy_count)} → {fmtPolicies(latest.policy_count)}
+            <p className="mt-1 text-2xl font-bold text-charcoal tabular-nums">
+              {fmtPolicies(policySpan.earliest.policy_count)} → {fmtPolicies(policySpan.latest.policy_count)}
             </p>
             <p className="text-xs text-gray-500">
-              {fmtCoverage(earliest.coverage_end)} to {fmtCoverage(latest.coverage_end)}
+              {fmtCoverage(policySpan.earliest.coverage_end)} to {fmtCoverage(policySpan.latest.coverage_end)}
             </p>
             <div className="mt-2">
               <Sparkline values={countSeries} width={180} height={28} />
@@ -165,11 +187,11 @@ export function StatewideHistoryTab() {
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
               Total exposure trajectory
             </p>
-            <p className="mt-1 text-2xl font-bold text-charcoal">
-              {fmtBillions(earliest.exposure)} → {fmtBillions(latest.exposure)}
+            <p className="mt-1 text-2xl font-bold text-charcoal tabular-nums">
+              {fmtBillions(exposureSpan.earliest.exposure)} → {fmtBillions(exposureSpan.latest.exposure)}
             </p>
             <p className="text-xs text-gray-500">
-              {fmtCoverage(earliest.coverage_end)} to {fmtCoverage(latest.coverage_end)}
+              {fmtCoverage(exposureSpan.earliest.coverage_end)} to {fmtCoverage(exposureSpan.latest.coverage_end)}
             </p>
             <div className="mt-2">
               <Sparkline values={exposureSeries} width={180} height={28} />
@@ -205,14 +227,14 @@ export function StatewideHistoryTab() {
                 <th className="px-4 py-3 text-left font-semibold text-charcoal">
                   Coverage End
                 </th>
-                <th className="px-4 py-3 text-right font-semibold text-charcoal">
+                <th className="px-4 py-3 text-right font-semibold text-charcoal tabular-nums">
                   Policies
                 </th>
-                <th className="px-4 py-3 text-right font-semibold text-charcoal">
+                <th className="px-4 py-3 text-right font-semibold text-charcoal tabular-nums">
                   Exposure
                 </th>
-                <th className="px-4 py-3 text-right font-semibold text-charcoal">
-                  Premium
+                <th className="px-4 py-3 text-right font-semibold text-charcoal tabular-nums">
+                  Premiums
                 </th>
                 <th className="px-4 py-3 text-left font-semibold text-charcoal">
                   Source
@@ -230,13 +252,13 @@ export function StatewideHistoryTab() {
                   <td className="px-4 py-3 font-medium text-charcoal">
                     {fmtCoverage(row.coverage_end)}
                   </td>
-                  <td className="px-4 py-3 text-right text-gray-700">
+                  <td className="px-4 py-3 text-right text-gray-700 tabular-nums">
                     {fmtPolicies(row.policy_count)}
                   </td>
-                  <td className="px-4 py-3 text-right text-gray-700">
+                  <td className="px-4 py-3 text-right text-gray-700 tabular-nums">
                     {fmtBillions(row.exposure)}
                   </td>
-                  <td className="px-4 py-3 text-right text-gray-700">
+                  <td className="px-4 py-3 text-right text-gray-700 tabular-nums">
                     {fmtBillions(row.premium)}
                   </td>
                   <td className="px-4 py-3">
