@@ -269,11 +269,11 @@ interface RawZipHistoryRow {
   zip?: string;
   city?: string;
   county?: string;
-  fy_2020?: string;
   fy_2021?: string;
   fy_2022?: string;
   fy_2023?: string;
   fy_2024?: string;
+  fy_2025?: string;
 }
 
 function parseIntOrNull(s: string | undefined): number | null {
@@ -293,13 +293,13 @@ export function loadZipHistory(): Promise<ZipHistoryRow[]> {
         for (const r of results.data) {
           if (!r.zip) continue;
           const fy = {
-            2020: parseIntOrNull(r.fy_2020),
             2021: parseIntOrNull(r.fy_2021),
             2022: parseIntOrNull(r.fy_2022),
             2023: parseIntOrNull(r.fy_2023),
             2024: parseIntOrNull(r.fy_2024),
+            2025: parseIntOrNull(r.fy_2025),
           };
-          const series = ([2020, 2021, 2022, 2023, 2024] as const)
+          const series = ([2021, 2022, 2023, 2024, 2025] as const)
             .map((y) => fy[y])
             .filter((v): v is number => v !== null);
           rows.push({

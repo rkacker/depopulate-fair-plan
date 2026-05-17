@@ -13,12 +13,12 @@ import { Sparkline } from "@/components/Sparkline";
 import { loadZipHistory, titleCaseCounty } from "@/lib/data";
 import type { ZipHistoryRow } from "@/types";
 
-type SortField = "zip" | "city" | "county" | "fy_2020" | "fy_2021" | "fy_2022" | "fy_2023" | "fy_2024";
+type SortField = "zip" | "city" | "county" | "fy_2021" | "fy_2022" | "fy_2023" | "fy_2024" | "fy_2025";
 type SortOrder = "asc" | "desc";
 
 const DEFAULT_LIMIT = 25;
 const DOWNLOAD_HREF = "/data/california_zip_history.csv";
-const YEARS = [2020, 2021, 2022, 2023, 2024] as const;
+const YEARS = [2021, 2022, 2023, 2024, 2025] as const;
 
 function fmt(n: number | null): string {
   if (n === null) return "—";
@@ -28,7 +28,7 @@ function fmt(n: number | null): string {
 export function ZipHistoryTab() {
   const [rows, setRows] = useState<ZipHistoryRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [sortField, setSortField] = useState<SortField>("fy_2024");
+  const [sortField, setSortField] = useState<SortField>("fy_2025");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [showAll, setShowAll] = useState(false);
   const [query, setQuery] = useState("");
@@ -104,7 +104,7 @@ export function ZipHistoryTab() {
           </h2>
           <p className="max-w-2xl text-sm text-gray-600">
             Per-ZIP FAIR Plan policy counts at each California fiscal year-end
-            (Sep 30), 2020 through 2024. The Trendline shows the 5-year
+            (Sep 30), 2021 through 2025. The Trendline shows the 5-year
             trajectory. Search by ZIP prefix, city, or county.
           </p>
         </div>

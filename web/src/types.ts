@@ -69,7 +69,7 @@ export interface ZipHistoryRow {
   zip: string;
   city: string;
   county: string;
-  fy: Record<2020 | 2021 | 2022 | 2023 | 2024, number | null>;
+  fy: Record<2021 | 2022 | 2023 | 2024 | 2025, number | null>;
   series: number[];
 }
 

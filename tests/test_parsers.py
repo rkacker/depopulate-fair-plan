@@ -365,18 +365,20 @@ def test_california_zip_history_export_schema(tmp_path: Path) -> None:
     rows = read_csv(path)
     assert len(rows) >= 1500, f"expected ~1681 ZIPs, got {len(rows)}"
 
-    expected = {"zip", "city", "county", "fy_2020", "fy_2021", "fy_2022", "fy_2023", "fy_2024"}
+    expected = {"zip", "city", "county", "fy_2021", "fy_2022", "fy_2023", "fy_2024", "fy_2025"}
     assert expected.issubset(rows[0].keys())
 
-    # Sorted by FY2024 desc — first row must have the largest FY2024 value.
-    fy2024_values = [int(r["fy_2024"]) if r["fy_2024"] else 0 for r in rows]
-    assert fy2024_values == sorted(fy2024_values, reverse=True)
+    # Sorted by FY2025 desc — first row must have the largest FY2025 value.
+    fy2025_values = [int(r["fy_2025"]) if r["fy_2025"] else 0 for r in rows]
+    assert fy2025_values == sorted(fy2025_values, reverse=True)
 
-    # Spot-check ZIP 90001 (Los Angeles): FY2024 = 1673.
+    # Spot-check ZIP 90001 (Los Angeles): FY2024 = 1673, FY2025 jumped to 1976
+    # after the wildfire-driven uptick.
     la = next((r for r in rows if r["zip"] == "90001"), None)
     assert la is not None
     assert la["city"] == "Los Angeles"
     assert int(la["fy_2024"]) == 1673
+    assert int(la["fy_2025"]) == 1976
 
 
 def test_cdi_county_market_share_export_schema(tmp_path: Path) -> None:
