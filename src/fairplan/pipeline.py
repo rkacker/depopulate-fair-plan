@@ -655,6 +655,31 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
     if cdi_pif_wide.exists():
         shutil.copy(cdi_pif_wide, exports_dir / "cdi_county_market_share.csv")
 
+    # --- california_zip_history.csv: ZIP-level FY2020-FY2024 policy counts ---
+    # Project the full zip_wide table to just the columns the /data ZIP history
+    # tab needs. Sorted by FY2024 descending (latest year, biggest first).
+    zip_wide_path = processed_dir / "fair" / "zip_wide.csv"
+    if zip_wide_path.exists():
+        zip_history_rows = []
+        for r in read_csv(zip_wide_path):
+            row = {
+                "zip": r["zip"],
+                "city": r.get("city", ""),
+                "county": r.get("county", ""),
+            }
+            for fy in (2020, 2021, 2022, 2023, 2024):
+                row[f"fy_{fy}"] = r.get(f"policy_count_{fy}-09-30", "")
+            zip_history_rows.append(row)
+        zip_history_rows.sort(
+            key=lambda row: int(row["fy_2024"]) if row["fy_2024"] != "" else 0,
+            reverse=True,
+        )
+        write_csv(
+            exports_dir / "california_zip_history.csv",
+            zip_history_rows,
+            ["zip", "city", "county", "fy_2020", "fy_2021", "fy_2022", "fy_2023", "fy_2024"],
+        )
+
     # --- fair_statewide_history.csv: long-running statewide quarterly + annual series ---
     # Merges three sources, newest wins for any (coverage_end, metric):
     #   1. quarterly_totals.csv      — granular DWE files (count + premium + exposure)

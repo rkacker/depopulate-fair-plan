@@ -350,6 +350,35 @@ def test_fair_statewide_history_export(tmp_path: Path) -> None:
     assert int(snap["policy_count"]) == 516313
 
 
+def test_california_zip_history_export_schema(tmp_path: Path) -> None:
+    """california_zip_history.csv exposes per-ZIP FY2020-FY2024 policy counts
+    with city + county joined in. Sorted by FY2024 desc."""
+    from fairplan.io_utils import read_csv
+
+    processed_dir = tmp_path / "processed"
+    exports_dir = tmp_path / "exports"
+    normalize(FIXTURES, processed_dir, MANIFEST)
+    build_exports(processed_dir, exports_dir)
+
+    path = exports_dir / "california_zip_history.csv"
+    assert path.exists()
+    rows = read_csv(path)
+    assert len(rows) >= 1500, f"expected ~1681 ZIPs, got {len(rows)}"
+
+    expected = {"zip", "city", "county", "fy_2020", "fy_2021", "fy_2022", "fy_2023", "fy_2024"}
+    assert expected.issubset(rows[0].keys())
+
+    # Sorted by FY2024 desc — first row must have the largest FY2024 value.
+    fy2024_values = [int(r["fy_2024"]) if r["fy_2024"] else 0 for r in rows]
+    assert fy2024_values == sorted(fy2024_values, reverse=True)
+
+    # Spot-check ZIP 90001 (Los Angeles): FY2024 = 1673.
+    la = next((r for r in rows if r["zip"] == "90001"), None)
+    assert la is not None
+    assert la["city"] == "Los Angeles"
+    assert int(la["fy_2024"]) == 1673
+
+
 def test_cdi_county_market_share_export_schema(tmp_path: Path) -> None:
     """cdi_county_market_share.csv exposes per-county FAIR-share metrics 2020-2023."""
     from fairplan.io_utils import read_csv

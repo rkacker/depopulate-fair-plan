@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Info } from "lucide-react";
 import { FairShareTab } from "@/components/sections/FairShareTab";
 import { StatewideHistoryTab } from "@/components/sections/StatewideHistoryTab";
+import { ZipHistoryTab } from "@/components/sections/ZipHistoryTab";
 
 // GitHub mark — official monochrome logo, inline so we don't depend on a
 // lucide-react version that exports `Github`.
@@ -20,7 +21,7 @@ function GitHubMark({ className }: { className?: string }) {
   );
 }
 
-type TabId = "fair_share" | "statewide_history";
+type TabId = "fair_share" | "statewide_history" | "zip_history";
 
 interface TabDef {
   id: TabId;
@@ -33,6 +34,11 @@ const TABS: TabDef[] = [
     id: "statewide_history",
     label: "FAIR Plan History (Quarterly)",
     render: () => <StatewideHistoryTab />,
+  },
+  {
+    id: "zip_history",
+    label: "FAIR Plan History (by ZIP)",
+    render: () => <ZipHistoryTab />,
   },
   {
     id: "fair_share",

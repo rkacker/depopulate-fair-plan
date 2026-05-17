@@ -8,6 +8,7 @@ import type {
   Direction,
   SiteStats,
   ZipData,
+  ZipHistoryRow,
   ZipRow,
 } from "@/types";
 
@@ -255,6 +256,58 @@ export function loadCountyMarketShare(): Promise<CountyMarketShareRow[]> {
             totalPifLatest: total,
             fairShareSeries: series,
             years,
+          });
+        }
+        resolve(rows);
+      },
+      error: (err) => reject(err),
+    });
+  });
+}
+
+interface RawZipHistoryRow {
+  zip?: string;
+  city?: string;
+  county?: string;
+  fy_2020?: string;
+  fy_2021?: string;
+  fy_2022?: string;
+  fy_2023?: string;
+  fy_2024?: string;
+}
+
+function parseIntOrNull(s: string | undefined): number | null {
+  if (!s) return null;
+  const n = parseInt(s, 10);
+  return Number.isNaN(n) ? null : n;
+}
+
+export function loadZipHistory(): Promise<ZipHistoryRow[]> {
+  return new Promise((resolve, reject) => {
+    Papa.parse<RawZipHistoryRow>("/data/california_zip_history.csv", {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => {
+        const rows: ZipHistoryRow[] = [];
+        for (const r of results.data) {
+          if (!r.zip) continue;
+          const fy = {
+            2020: parseIntOrNull(r.fy_2020),
+            2021: parseIntOrNull(r.fy_2021),
+            2022: parseIntOrNull(r.fy_2022),
+            2023: parseIntOrNull(r.fy_2023),
+            2024: parseIntOrNull(r.fy_2024),
+          };
+          const series = ([2020, 2021, 2022, 2023, 2024] as const)
+            .map((y) => fy[y])
+            .filter((v): v is number => v !== null);
+          rows.push({
+            zip: r.zip,
+            city: r.city ?? "",
+            county: r.county ?? "",
+            fy,
+            series,
           });
         }
         resolve(rows);
