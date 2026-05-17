@@ -1,5 +1,11 @@
 version = 1
 
+# CDI source landing pages (where new PDFs/xlsx are published):
+#   Sustainable Insurance Strategy: https://www.insurance.ca.gov/01-consumers/180-climate-change/Sustainable-Insurance-Strategy.cfm
+#   Wildfires & Insurance data:     https://www.insurance.ca.gov/01-consumers/200-wrr/DataAnalysisOnWildfiresAndInsurance.cfm
+#   FAIR Plan landing:              https://www.insurance.ca.gov/01-consumers/200-wrr/California-FAIR-Plan.cfm
+# FAIR Plan operator stats:         https://www.cfpnet.com/key-statistics-data/
+
 [[sources]]
 id = "fair_residential_policy_count_2025_06"
 family = "fair"

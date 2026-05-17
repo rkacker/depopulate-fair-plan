@@ -26,14 +26,14 @@ export interface SiteStats {
   };
 }
 
-export type CountyDirection = "up" | "down" | "flat" | "new";
+export type Direction = "up" | "down" | "flat" | "new";
 
 export interface CountyRow {
   county: string;
   policies: number;
   priorPolicies: number | null;
   changePct: number | null;
-  direction: CountyDirection;
+  direction: Direction;
 }
 
 export interface CountyData {
@@ -41,4 +41,40 @@ export interface CountyData {
   total: number;
   max: number;
   byCountyUpper: Map<string, number>;
+}
+
+export interface ZipRow {
+  zip: string;
+  city: string;
+  county: string;
+  region: string;
+  policies: number;
+  priorPolicies: number | null;
+  changePct: number | null;
+  direction: Direction;
+}
+
+export interface ZipData {
+  rows: ZipRow[];
+  total: number;
+  max: number;
+  byZip: Map<string, ZipRow>;
+}
+
+export interface CityRow {
+  city: string;
+  county: string;
+  zipCount: number;
+  zips: string[];
+  policies: number;
+  priorPolicies: number | null;
+  changePct: number | null;
+  direction: Direction;
+}
+
+export interface CityData {
+  rows: CityRow[];
+  total: number;
+  max: number;
+  byCity: Map<string, CityRow>;
 }

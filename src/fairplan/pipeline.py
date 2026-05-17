@@ -163,6 +163,91 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
          "source_id_count", "source_id_premium", "source_id_exposure"],
     )
 
+    # --- fair/ zip_quarterly: per-ZIP totals per coverage_end × metric ---
+    zip_to_city = _load_zip_cities()
+    zip_metric_totals: dict[tuple[str, str, str], int] = {}
+    zip_meta: dict[str, dict[str, str]] = {}
+    zip_source_ids: dict[tuple[str, str], str] = {}
+    zip_pairs: set[tuple[str, str]] = set()
+    for r in category_rows:
+        ce = str(r["coverage_end"])
+        z = str(r["zip"])
+        zip_metric_totals[(ce, z, str(r["metric"]))] = (
+            zip_metric_totals.get((ce, z, str(r["metric"])), 0) + int(r["value"])
+        )
+        zip_meta.setdefault(z, {"county": str(r["county"]), "region": str(r["region"])})
+        zip_source_ids[(ce, str(r["metric"]))] = str(r["source_id"])
+        zip_pairs.add((ce, z))
+    zip_quarterly_rows: list[dict[str, object]] = [
+        {
+            "coverage_end": ce,
+            "zip": z,
+            "city": zip_to_city.get(z, ""),
+            "county": zip_meta[z]["county"],
+            "region": zip_meta[z]["region"],
+            "policy_count": zip_metric_totals.get((ce, z, "count"), 0),
+            "premium": zip_metric_totals.get((ce, z, "premium"), 0),
+            "exposure": zip_metric_totals.get((ce, z, "exposure"), 0),
+            "source_id_count": zip_source_ids.get((ce, "count"), ""),
+            "source_id_premium": zip_source_ids.get((ce, "premium"), ""),
+            "source_id_exposure": zip_source_ids.get((ce, "exposure"), ""),
+        }
+        for ce, z in sorted(zip_pairs)
+    ]
+    write_csv(
+        processed_dir / "fair" / "zip_quarterly.csv",
+        zip_quarterly_rows,
+        ["coverage_end", "zip", "city", "county", "region", "policy_count", "premium", "exposure",
+         "source_id_count", "source_id_premium", "source_id_exposure"],
+    )
+
+    # --- fair/ city_quarterly: per-city totals (ZIPs grouped by GeoNames city) ---
+    city_metric_totals: dict[tuple[str, str, str], int] = {}
+    city_zip_policies: dict[tuple[str, str], dict[str, int]] = {}
+    city_county_counts: dict[str, dict[str, int]] = {}
+    for row in zip_quarterly_rows:
+        city = str(row["city"])
+        if not city:
+            continue
+        ce = str(row["coverage_end"])
+        for metric in ("policy_count", "premium", "exposure"):
+            key = (ce, city, metric)
+            city_metric_totals[key] = city_metric_totals.get(key, 0) + int(row[metric])
+        city_zip_policies.setdefault((ce, city), {})[str(row["zip"])] = int(row["policy_count"])
+        counties = city_county_counts.setdefault(city, {})
+        counties[str(row["county"])] = counties.get(str(row["county"]), 0) + 1
+
+    city_quarterly_rows: list[dict[str, object]] = []
+    for ce, city in sorted(city_zip_policies):
+        # ZIPs sorted by their own policy count desc so truncation preserves the largest.
+        zips_sorted = sorted(
+            city_zip_policies[(ce, city)].items(),
+            key=lambda kv: (-kv[1], kv[0]),
+        )
+        counties = city_county_counts[city]
+        # Alphabetical tiebreak when a city straddles counties (only ~2 in CA).
+        dominant_county = max(sorted(counties), key=counties.get)
+        city_quarterly_rows.append({
+            "coverage_end": ce,
+            "city": city,
+            "county": dominant_county,
+            "zip_count": len(zips_sorted),
+            "zips": ",".join(z for z, _ in zips_sorted),
+            "policy_count": city_metric_totals.get((ce, city, "policy_count"), 0),
+            "premium": city_metric_totals.get((ce, city, "premium"), 0),
+            "exposure": city_metric_totals.get((ce, city, "exposure"), 0),
+            "source_id_count": zip_source_ids.get((ce, "count"), ""),
+            "source_id_premium": zip_source_ids.get((ce, "premium"), ""),
+            "source_id_exposure": zip_source_ids.get((ce, "exposure"), ""),
+        })
+    write_csv(
+        processed_dir / "fair" / "city_quarterly.csv",
+        city_quarterly_rows,
+        ["coverage_end", "city", "county", "zip_count", "zips",
+         "policy_count", "premium", "exposure",
+         "source_id_count", "source_id_premium", "source_id_exposure"],
+    )
+
     # --- fair/ county_pif_history: synthetic, residential-only, derived by rolling up
     # the DWE ZIP file using the ZIP -> county mapping baked into the category PDFs. ---
     zip_to_county: dict[str, str] = {}
@@ -392,18 +477,7 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         county = r["county"]
         policies = int(r["policy_count"])
         prior_policies = prior_by_county.get(county)
-        if prior_policies is None or prior_policies == 0:
-            change_pct = ""
-            direction = "new"
-        else:
-            change = (policies - prior_policies) / prior_policies * 100
-            change_pct = f"{change:.1f}"
-            if change > 0.5:
-                direction = "up"
-            elif change < -0.5:
-                direction = "down"
-            else:
-                direction = "flat"
+        change_pct, direction = _classify_change(policies, prior_policies)
         county_rows.append({
             "county": county,
             "policies": policies,
@@ -415,6 +489,74 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         exports_dir / "california_county_data.csv",
         county_rows,
         ["county", "policies", "prior_policies", "change_pct", "direction"],
+    )
+
+    # --- california_zip_data.csv (with per-ZIP quarterly velocity) ---
+    zip_quarterly = read_csv(processed_dir / "fair" / "zip_quarterly.csv")
+    zip_coverage_ends = sorted({r["coverage_end"] for r in zip_quarterly})
+    zip_latest_ce = zip_coverage_ends[-1] if zip_coverage_ends else ""
+    zip_prior_ce = zip_coverage_ends[-2] if len(zip_coverage_ends) >= 2 else ""
+    prior_by_zip = {
+        r["zip"]: int(r["policy_count"])
+        for r in zip_quarterly
+        if r["coverage_end"] == zip_prior_ce
+    }
+    zip_rows: list[dict[str, object]] = []
+    for r in zip_quarterly:
+        if r["coverage_end"] != zip_latest_ce:
+            continue
+        policies = int(r["policy_count"])
+        prior_policies = prior_by_zip.get(r["zip"])
+        change_pct, direction = _classify_change(policies, prior_policies)
+        zip_rows.append({
+            "zip": r["zip"],
+            "city": r.get("city", ""),
+            "county": r["county"],
+            "region": r["region"],
+            "policies": policies,
+            "prior_policies": prior_policies if prior_policies is not None else "",
+            "change_pct": change_pct,
+            "direction": direction,
+        })
+    zip_rows.sort(key=lambda r: int(r["policies"]), reverse=True)
+    write_csv(
+        exports_dir / "california_zip_data.csv",
+        zip_rows,
+        ["zip", "city", "county", "region", "policies", "prior_policies", "change_pct", "direction"],
+    )
+
+    # --- california_city_data.csv (with per-city quarterly velocity) ---
+    city_quarterly = read_csv(processed_dir / "fair" / "city_quarterly.csv")
+    city_coverage_ends = sorted({r["coverage_end"] for r in city_quarterly})
+    city_latest_ce = city_coverage_ends[-1] if city_coverage_ends else ""
+    city_prior_ce = city_coverage_ends[-2] if len(city_coverage_ends) >= 2 else ""
+    prior_by_city = {
+        r["city"]: int(r["policy_count"])
+        for r in city_quarterly
+        if r["coverage_end"] == city_prior_ce
+    }
+    city_rows: list[dict[str, object]] = []
+    for r in city_quarterly:
+        if r["coverage_end"] != city_latest_ce:
+            continue
+        policies = int(r["policy_count"])
+        prior_policies = prior_by_city.get(r["city"])
+        change_pct, direction = _classify_change(policies, prior_policies)
+        city_rows.append({
+            "city": r["city"],
+            "county": r["county"],
+            "zip_count": r["zip_count"],
+            "zips": r["zips"],
+            "policies": policies,
+            "prior_policies": prior_policies if prior_policies is not None else "",
+            "change_pct": change_pct,
+            "direction": direction,
+        })
+    city_rows.sort(key=lambda r: int(r["policies"]), reverse=True)
+    write_csv(
+        exports_dir / "california_city_data.csv",
+        city_rows,
+        ["city", "county", "zip_count", "zips", "policies", "prior_policies", "change_pct", "direction"],
     )
 
     # --- quarterly_totals.json (statewide totals by coverage_end × metric) ---
@@ -762,6 +904,28 @@ def _build_county_pif_from_zip_rollup(
         if fy in state_by_fy:
             rows.append(state_by_fy[fy])
     return rows
+
+
+def _classify_change(policies: int, prior: int | None) -> tuple[str, str]:
+    """Compute (change_pct_str, direction) for the latest vs prior comparison.
+
+    Direction is "new" when there's no prior, otherwise "up"/"down"/"flat"
+    against a ±0.5% threshold. Used identically for county, ZIP, and city exports.
+    """
+    if not prior:
+        return "", "new"
+    change = (policies - prior) / prior * 100
+    direction = "up" if change > 0.5 else "down" if change < -0.5 else "flat"
+    return f"{change:.1f}", direction
+
+
+def _load_zip_cities(config_dir: Path | None = None) -> dict[str, str]:
+    """Return a zip -> city mapping from config/zip_cities.csv (GeoNames-derived)."""
+    config_dir = config_dir or Path("config")
+    path = config_dir / "zip_cities.csv"
+    if not path.exists():
+        return {}
+    return {r["zip"]: r["city"] for r in read_csv(path)}
 
 
 _MONTH_NAMES = [
