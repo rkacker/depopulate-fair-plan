@@ -48,7 +48,9 @@ export function ZipHistoryTab() {
   const filtered = useMemo(() => {
     if (!rows) return [];
     if (!trimmedQuery) return rows;
-    const q = trimmedQuery.toLowerCase();
+    // Strip a trailing " county" so "Sonoma County" matches "Sonoma" (the
+    // display form includes " County" suffix; the raw value doesn't).
+    const q = trimmedQuery.toLowerCase().replace(/\s+county$/, "");
     return rows.filter(
       (r) =>
         r.zip.startsWith(trimmedQuery) ||
