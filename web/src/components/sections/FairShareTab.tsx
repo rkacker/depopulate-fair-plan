@@ -10,7 +10,7 @@ type SortField = "county" | "fairShareLatest" | "fairPifLatest" | "totalPifLates
 type SortOrder = "asc" | "desc";
 
 const DEFAULT_LIMIT = 10;
-const DOWNLOAD_HREF = "data/cdi_county_market_share.csv";
+const DOWNLOAD_HREF = "/data/cdi_county_market_share.csv";
 
 export function FairShareTab() {
   const [rows, setRows] = useState<CountyMarketShareRow[] | null>(null);

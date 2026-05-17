@@ -12,7 +12,7 @@ import type {
 } from "@/types";
 
 export async function loadSiteStats(): Promise<SiteStats> {
-  const res = await fetch("data/site_stats.json");
+  const res = await fetch("/data/site_stats.json");
   if (!res.ok) throw new Error(`site_stats.json: ${res.status}`);
   return res.json();
 }
@@ -30,7 +30,7 @@ interface RawCountyRow {
 export function loadCountyData(): Promise<CountyData> {
   return new Promise((resolve, reject) => {
     Papa.parse<RawCountyRow>(
-      "data/california_county_data.csv",
+      "/data/california_county_data.csv",
       {
         download: true,
         header: true,
@@ -125,7 +125,7 @@ interface RawZipRow {
 
 export function loadZipData(): Promise<ZipData> {
   return new Promise((resolve, reject) => {
-    Papa.parse<RawZipRow>("data/california_zip_data.csv", {
+    Papa.parse<RawZipRow>("/data/california_zip_data.csv", {
       download: true,
       header: true,
       skipEmptyLines: true,
@@ -182,7 +182,7 @@ interface RawCityRow {
 
 export function loadCityData(): Promise<CityData> {
   return new Promise((resolve, reject) => {
-    Papa.parse<RawCityRow>("data/california_city_data.csv", {
+    Papa.parse<RawCityRow>("/data/california_city_data.csv", {
       download: true,
       header: true,
       skipEmptyLines: true,
@@ -228,7 +228,7 @@ export function loadCityData(): Promise<CityData> {
 
 export function loadCountyMarketShare(): Promise<CountyMarketShareRow[]> {
   return new Promise((resolve, reject) => {
-    Papa.parse<Record<string, string>>("data/cdi_county_market_share.csv", {
+    Papa.parse<Record<string, string>>("/data/cdi_county_market_share.csv", {
       download: true,
       header: true,
       skipEmptyLines: true,

@@ -60,7 +60,7 @@ export function CityMap({ cityData, stats, loading }: CityMapProps) {
                     width={800}
                     height={600}
                   >
-                    <Geographies geography="data/california-counties.json">
+                    <Geographies geography="/data/california-counties.json">
                       {({ geographies }) =>
                         geographies.map((geo) => (
                           <Geography
@@ -78,7 +78,7 @@ export function CityMap({ cityData, stats, loading }: CityMapProps) {
                         ))
                       }
                     </Geographies>
-                    <Geographies geography="data/california-places.json">
+                    <Geographies geography="/data/california-places.json">
                       {({ geographies }) =>
                         geographies.map((geo) => {
                           const props = geo.properties as Record<string, unknown>;

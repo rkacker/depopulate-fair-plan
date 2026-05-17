@@ -61,7 +61,7 @@ export function ZipMap({ zipData, stats, loading }: ZipMapProps) {
                     width={800}
                     height={600}
                   >
-                    <Geographies geography="data/california-counties.json">
+                    <Geographies geography="/data/california-counties.json">
                       {({ geographies }) =>
                         geographies.map((geo) => (
                           <Geography
@@ -79,7 +79,7 @@ export function ZipMap({ zipData, stats, loading }: ZipMapProps) {
                         ))
                       }
                     </Geographies>
-                    <Geographies geography="data/california-zips.json">
+                    <Geographies geography="/data/california-zips.json">
                       {({ geographies }) =>
                         geographies.map((geo) => {
                           const props = geo.properties as Record<string, unknown>;
