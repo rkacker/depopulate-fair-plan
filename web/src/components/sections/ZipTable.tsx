@@ -6,7 +6,7 @@ import { VelocityIndicator } from "@/components/VelocityIndicator";
 import { titleCaseCounty } from "@/lib/data";
 import type { SiteStats, ZipData } from "@/types";
 
-type SortField = "zip" | "city" | "county" | "policies" | "changePct";
+type SortField = "zip" | "city" | "county" | "policies" | "changePct" | "yoyChangePct";
 type SortOrder = "asc" | "desc";
 
 const DEFAULT_LIMIT = 25;
@@ -56,9 +56,9 @@ export function ZipTable({ zipData, stats, loading }: ZipTableProps) {
           ? a.county.localeCompare(b.county)
           : b.county.localeCompare(a.county);
       }
-      if (sortField === "changePct") {
-        const av = a.changePct ?? Number.NEGATIVE_INFINITY;
-        const bv = b.changePct ?? Number.NEGATIVE_INFINITY;
+      if (sortField === "changePct" || sortField === "yoyChangePct") {
+        const av = a[sortField] ?? Number.NEGATIVE_INFINITY;
+        const bv = b[sortField] ?? Number.NEGATIVE_INFINITY;
         return sortOrder === "asc" ? av - bv : bv - av;
       }
       return sortOrder === "asc"
@@ -188,7 +188,13 @@ export function ZipTable({ zipData, stats, loading }: ZipTableProps) {
                       </button>
                     </th>
                     <th className="px-4 py-3 text-right">
-                      <span className="font-semibold text-charcoal">% of State</span>
+                      <button
+                        onClick={() => handleSort("yoyChangePct")}
+                        className="ml-auto flex items-center gap-2 font-semibold text-charcoal transition-colors hover:text-patriot-red"
+                      >
+                        Last Year
+                        {sortIcon("yoyChangePct")}
+                      </button>
                     </th>
                   </tr>
                 </thead>
@@ -225,11 +231,11 @@ export function ZipTable({ zipData, stats, loading }: ZipTableProps) {
                           changePct={row.changePct}
                         />
                       </td>
-                      <td className="px-4 py-3 text-right text-gray-600">
-                        {total > 0
-                          ? ((row.policies / total) * 100).toFixed(2)
-                          : "0.00"}
-                        %
+                      <td className="px-4 py-3 text-right">
+                        <VelocityIndicator
+                          direction={row.yoyDirection}
+                          changePct={row.yoyChangePct}
+                        />
                       </td>
                     </tr>
                   ))}

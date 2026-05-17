@@ -244,7 +244,8 @@ def test_california_city_data_export_schema_and_zips(tmp_path: Path) -> None:
     assert rows, "california_city_data.csv must not be empty"
 
     expected_cols = {"city", "county", "zip_count", "zips",
-                     "policies", "prior_policies", "change_pct", "direction"}
+                     "policies", "prior_policies", "change_pct", "direction",
+                     "yoy_change_pct", "yoy_direction"}
     assert expected_cols.issubset(rows[0].keys())
 
     # Sorted by policies desc.
@@ -263,6 +264,29 @@ def test_california_city_data_export_schema_and_zips(tmp_path: Path) -> None:
     assert int(oakland["zip_count"]) > 1
 
 
+def test_yoy_velocity_present_in_all_exports(tmp_path: Path) -> None:
+    """county/zip/city exports should expose a Y/Y change for ~99% of rows
+    (the small leakage is new geographies that didn't exist in the prior FY)."""
+    from fairplan.io_utils import read_csv
+
+    processed_dir = tmp_path / "processed"
+    exports_dir = tmp_path / "exports"
+    normalize(FIXTURES, processed_dir, MANIFEST)
+    build_exports(processed_dir, exports_dir)
+
+    # city_pif_history is a new processed table.
+    assert (processed_dir / "fair" / "city_pif_history.csv").exists()
+
+    for name in ("county", "zip", "city"):
+        rows = read_csv(exports_dir / f"california_{name}_data.csv")
+        with_yoy = [r for r in rows if r["yoy_change_pct"]]
+        assert len(with_yoy) / len(rows) >= 0.95, (
+            f"{name}: only {len(with_yoy)}/{len(rows)} rows have yoy_change_pct"
+        )
+        # All yoy_direction values must be from the canonical set.
+        assert {r["yoy_direction"] for r in rows} <= {"up", "down", "flat", "new"}
+
+
 def test_california_zip_data_export_has_quarterly_velocity(tmp_path: Path) -> None:
     """california_zip_data.csv should expose Q/Q change for the latest pair of coverage_ends."""
     from fairplan.io_utils import read_csv
@@ -276,7 +300,8 @@ def test_california_zip_data_export_has_quarterly_velocity(tmp_path: Path) -> No
     assert rows, "california_zip_data.csv must not be empty"
 
     # Schema
-    expected_cols = {"zip", "city", "county", "region", "policies", "prior_policies", "change_pct", "direction"}
+    expected_cols = {"zip", "city", "county", "region", "policies", "prior_policies",
+                     "change_pct", "direction", "yoy_change_pct", "yoy_direction"}
     assert expected_cols.issubset(rows[0].keys())
 
     # At least 95% of ZIPs must have a city populated from config/zip_cities.csv.

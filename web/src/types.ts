@@ -34,6 +34,8 @@ export interface CountyRow {
   priorPolicies: number | null;
   changePct: number | null;
   direction: Direction;
+  yoyChangePct: number | null;
+  yoyDirection: Direction;
 }
 
 export interface CountyData {
@@ -52,6 +54,8 @@ export interface ZipRow {
   priorPolicies: number | null;
   changePct: number | null;
   direction: Direction;
+  yoyChangePct: number | null;
+  yoyDirection: Direction;
 }
 
 export interface ZipData {
@@ -70,6 +74,8 @@ export interface CityRow {
   priorPolicies: number | null;
   changePct: number | null;
   direction: Direction;
+  yoyChangePct: number | null;
+  yoyDirection: Direction;
 }
 
 export interface CityData {

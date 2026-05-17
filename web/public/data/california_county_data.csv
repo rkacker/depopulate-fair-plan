@@ -1,59 +1,59 @@
-county,policies,prior_policies,change_pct,direction
-Los Angeles,153229,147515,3.9,up
-San Bernardino,68143,64040,6.4,up
-Riverside,63001,56170,12.2,up
-San Diego,62114,57949,7.2,up
-El Dorado,27866,27593,1.0,up
-Orange,25848,23251,11.2,up
-Nevada,23334,22930,1.8,up
-Placer,19078,18670,2.2,up
-Ventura,15922,14609,9.0,up
-Tuolumne,13882,13723,1.2,up
-Contra Costa,13375,12609,6.1,up
-Santa Cruz,12824,12559,2.1,up
-Alameda,11803,10864,8.6,up
-Kern,11464,10983,4.4,up
-Calaveras,10401,10315,0.8,up
-Butte,9282,9167,1.3,up
-Sonoma,8523,8254,3.3,up
-Santa Barbara,6868,6568,4.6,up
-Shasta,6690,6304,6.1,up
-Santa Clara,6306,5915,6.6,up
-Amador,6088,6017,1.2,up
-Lake,5872,5594,5.0,up
-Fresno,5755,5577,3.2,up
-Madera,5602,5483,2.2,up
-Monterey,5367,5137,4.5,up
-San Luis Obispo,4892,4595,6.5,up
-Mendocino,4744,4483,5.8,up
-Marin,4578,4151,10.3,up
-San Mateo,3884,3528,10.1,up
-Plumas,3857,3753,2.8,up
-Mariposa,3277,3259,0.6,up
-Siskiyou,3171,3029,4.7,up
-Humboldt,3125,2728,14.6,up
-Tulare,2983,2887,3.3,up
-Napa,2790,2708,3.0,up
-Mono,2096,1876,11.7,up
-San Francisco,2016,1861,8.3,up
-Sacramento,1883,1877,0.3,flat
-Tehama,1807,1718,5.2,up
-Yuba,1543,1523,1.3,up
-Trinity,1409,1382,2.0,up
-Solano,1337,1236,8.2,up
-San Joaquin,1192,1177,1.3,up
-Lassen,1098,1056,4.0,up
-Imperial,694,632,9.8,up
-Del Norte,667,551,21.1,up
-Stanislaus,666,685,-2.8,down
-Sierra,506,507,-0.2,flat
-San Benito,410,375,9.3,up
-Alpine,378,370,2.2,up
-Inyo,313,291,7.6,up
-Merced,311,300,3.7,up
-Modoc,292,267,9.4,up
-Yolo,242,229,5.7,up
-Kings,155,173,-10.4,down
-Sutter,114,111,2.7,up
-Colusa,70,65,7.7,up
-Glenn,67,55,21.8,up
+county,policies,prior_policies,change_pct,direction,yoy_change_pct,yoy_direction
+Los Angeles,153229,147515,3.9,up,36.2,up
+San Bernardino,68143,64040,6.4,up,28.0,up
+Riverside,63001,56170,12.2,up,70.6,up
+San Diego,62114,57949,7.2,up,57.8,up
+El Dorado,27866,27593,1.0,up,17.6,up
+Orange,25848,23251,11.2,up,73.8,up
+Nevada,23334,22930,1.8,up,17.8,up
+Placer,19078,18670,2.2,up,20.9,up
+Ventura,15922,14609,9.0,up,59.1,up
+Tuolumne,13882,13723,1.2,up,8.6,up
+Contra Costa,13375,12609,6.1,up,96.3,up
+Santa Cruz,12824,12559,2.1,up,60.3,up
+Alameda,11803,10864,8.6,up,69.5,up
+Kern,11464,10983,4.4,up,32.0,up
+Calaveras,10401,10315,0.8,up,10.5,up
+Butte,9282,9167,1.3,up,14.4,up
+Sonoma,8523,8254,3.3,up,39.0,up
+Santa Barbara,6868,6568,4.6,up,41.7,up
+Shasta,6690,6304,6.1,up,23.5,up
+Santa Clara,6306,5915,6.6,up,67.9,up
+Amador,6088,6017,1.2,up,12.6,up
+Lake,5872,5594,5.0,up,18.6,up
+Fresno,5755,5577,3.2,up,23.7,up
+Madera,5602,5483,2.2,up,18.2,up
+Monterey,5367,5137,4.5,up,26.2,up
+San Luis Obispo,4892,4595,6.5,up,56.2,up
+Mendocino,4744,4483,5.8,up,21.2,up
+Marin,4578,4151,10.3,up,50.2,up
+San Mateo,3884,3528,10.1,up,64.6,up
+Plumas,3857,3753,2.8,up,12.8,up
+Mariposa,3277,3259,0.6,up,9.4,up
+Siskiyou,3171,3029,4.7,up,32.2,up
+Humboldt,3125,2728,14.6,up,37.2,up
+Tulare,2983,2887,3.3,up,26.3,up
+Napa,2790,2708,3.0,up,25.8,up
+Mono,2096,1876,11.7,up,45.0,up
+San Francisco,2016,1861,8.3,up,72.5,up
+Sacramento,1883,1877,0.3,flat,77.1,up
+Tehama,1807,1718,5.2,up,17.8,up
+Yuba,1543,1523,1.3,up,10.8,up
+Trinity,1409,1382,2.0,up,9.9,up
+Solano,1337,1236,8.2,up,82.3,up
+San Joaquin,1192,1177,1.3,up,57.4,up
+Lassen,1098,1056,4.0,up,32.2,up
+Imperial,694,632,9.8,up,47.0,up
+Del Norte,667,551,21.1,up,60.6,up
+Stanislaus,666,685,-2.8,down,77.0,up
+Sierra,506,507,-0.2,flat,12.2,up
+San Benito,410,375,9.3,up,75.2,up
+Alpine,378,370,2.2,up,11.8,up
+Inyo,313,291,7.6,up,60.8,up
+Merced,311,300,3.7,up,58.7,up
+Modoc,292,267,9.4,up,51.7,up
+Yolo,242,229,5.7,up,38.0,up
+Kings,155,173,-10.4,down,57.3,up
+Sutter,114,111,2.7,up,131.2,up
+Colusa,70,65,7.7,up,38.3,up
+Glenn,67,55,21.8,up,17.0,up

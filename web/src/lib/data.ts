@@ -22,6 +22,8 @@ interface RawCountyRow {
   prior_policies?: string;
   change_pct?: string;
   direction?: string;
+  yoy_change_pct?: string;
+  yoy_direction?: string;
 }
 
 export function loadCountyData(): Promise<CountyData> {
@@ -46,12 +48,16 @@ export function loadCountyData(): Promise<CountyData> {
               : NaN;
             const changePct = r.change_pct ? parseFloat(r.change_pct) : NaN;
             const direction = (r.direction as Direction) ?? "new";
+            const yoyChangePct = r.yoy_change_pct ? parseFloat(r.yoy_change_pct) : NaN;
+            const yoyDirection = (r.yoy_direction as Direction) ?? "new";
             rows.push({
               county: r.county,
               policies,
               priorPolicies: Number.isNaN(priorPolicies) ? null : priorPolicies,
               changePct: Number.isNaN(changePct) ? null : changePct,
               direction,
+              yoyChangePct: Number.isNaN(yoyChangePct) ? null : yoyChangePct,
+              yoyDirection,
             });
             byCountyUpper.set(r.county.toUpperCase(), policies);
             total += policies;
@@ -112,6 +118,8 @@ interface RawZipRow {
   prior_policies?: string;
   change_pct?: string;
   direction?: string;
+  yoy_change_pct?: string;
+  yoy_direction?: string;
 }
 
 export function loadZipData(): Promise<ZipData> {
@@ -132,6 +140,8 @@ export function loadZipData(): Promise<ZipData> {
           const priorPolicies = r.prior_policies ? parseInt(r.prior_policies, 10) : NaN;
           const changePct = r.change_pct ? parseFloat(r.change_pct) : NaN;
           const direction = (r.direction as Direction) ?? "new";
+          const yoyChangePct = r.yoy_change_pct ? parseFloat(r.yoy_change_pct) : NaN;
+          const yoyDirection = (r.yoy_direction as Direction) ?? "new";
           const row: ZipRow = {
             zip: r.zip,
             city: r.city ?? "",
@@ -141,6 +151,8 @@ export function loadZipData(): Promise<ZipData> {
             priorPolicies: Number.isNaN(priorPolicies) ? null : priorPolicies,
             changePct: Number.isNaN(changePct) ? null : changePct,
             direction,
+            yoyChangePct: Number.isNaN(yoyChangePct) ? null : yoyChangePct,
+            yoyDirection,
           };
           rows.push(row);
           byZip.set(r.zip, row);
@@ -163,6 +175,8 @@ interface RawCityRow {
   prior_policies?: string;
   change_pct?: string;
   direction?: string;
+  yoy_change_pct?: string;
+  yoy_direction?: string;
 }
 
 export function loadCityData(): Promise<CityData> {
@@ -185,6 +199,8 @@ export function loadCityData(): Promise<CityData> {
             : NaN;
           const changePct = r.change_pct ? parseFloat(r.change_pct) : NaN;
           const direction = (r.direction as Direction) ?? "new";
+          const yoyChangePct = r.yoy_change_pct ? parseFloat(r.yoy_change_pct) : NaN;
+          const yoyDirection = (r.yoy_direction as Direction) ?? "new";
           const row: CityRow = {
             city: r.city,
             county: r.county ?? "",
@@ -194,6 +210,8 @@ export function loadCityData(): Promise<CityData> {
             priorPolicies: Number.isNaN(priorPolicies) ? null : priorPolicies,
             changePct: Number.isNaN(changePct) ? null : changePct,
             direction,
+            yoyChangePct: Number.isNaN(yoyChangePct) ? null : yoyChangePct,
+            yoyDirection,
           };
           rows.push(row);
           byCity.set(r.city.toLowerCase(), row);

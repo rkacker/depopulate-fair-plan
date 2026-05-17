@@ -1,1111 +1,1111 @@
-city,county,zip_count,zips,policies,prior_policies,change_pct,direction
-Los Angeles,Los Angeles,60,"90011,90046,90044,90049,90077,90003,90001,90068,90037,90063,90002,90022,90023,90047,90042,90018,90065,90062,90026,90031,90059,90043,90019,90032,90033,90016,90006,90061,90027,90007,90039,90004,90041,90029,90008,90040,90036,90024,90048,90038,90035,90005,90034,90066,90012,90015,90025,90045,90064,90057,90020,90028,90058,90056,90017,90021,90067,90013,90014,90089",42444,42054,0.9,up
-San Diego,San Diego,32,"92127,92131,92129,92130,92128,92126,92119,92124,92105,92154,92120,92115,92117,92113,92116,92114,92103,92102,92111,92122,92104,92121,92123,92110,92108,92109,92107,92139,92101,92106,92145,92140",14224,13087,8.7,up
-Grass Valley,Nevada,2,"95949,95945",9189,9125,0.7,up
-Placerville,El Dorado,1,95667,7398,7405,-0.1,flat
-Corona,Riverside,5,"92883,92882,92880,92881,92879",6887,6091,13.1,up
-Lake Arrowhead,San Bernardino,1,92352,6831,6696,2.0,up
-Riverside,Riverside,8,"92503,92509,92507,92506,92508,92504,92505,92501",6813,6054,12.5,up
-Truckee,Nevada,1,96161,6316,6079,3.9,up
-Escondido,San Diego,4,"92026,92027,92029,92025",5867,5472,7.2,up
-Big Bear Lake,San Bernardino,1,92315,5718,5571,2.6,up
-Oakland,Alameda,14,"94611,94605,94619,94602,94601,94618,94606,94621,94603,94610,94609,94607,94612,94613",5695,5205,9.4,up
-Big Bear City,San Bernardino,1,92314,5488,5300,3.5,up
-Sonora,Tuolumne,1,95370,5103,5031,1.4,up
-South Lake Tahoe,El Dorado,1,96150,5072,4955,2.4,up
-Auburn,Placer,2,"95602,95603",5068,4991,1.5,up
-Murrieta,Riverside,2,"92562,92563",4742,4151,14.2,up
-Arnold,Calaveras,1,95223,4735,4674,1.3,up
-Nevada City,Nevada,1,95959,4711,4646,1.4,up
-San Bernardino,San Bernardino,7,"92407,92404,92410,92405,92411,92408,92401",4596,4226,8.8,up
-Santa Barbara,Santa Barbara,7,"93108,93105,93103,93111,93110,93101,93109",4590,4357,5.3,up
-Lake Elsinore,Riverside,2,"92530,92532",4336,3799,14.1,up
-Crestline,San Bernardino,1,92325,4280,4257,0.5,up
-Moreno Valley,Riverside,4,"92555,92557,92553,92551",4236,3700,14.5,up
-Hemet,Riverside,3,"92544,92545,92543",4220,3810,10.8,up
-Perris,Riverside,2,"92570,92571",4031,3640,10.7,up
-El Cajon,San Diego,3,"92019,92021,92020",3816,3503,8.9,up
-Fallbrook,San Diego,1,92028,3793,3519,7.8,up
-Ramona,San Diego,1,92065,3768,3480,8.3,up
-Oroville,Butte,2,"95966,95965",3671,3604,1.9,up
-Glendale,Los Angeles,9,"91208,91206,91202,91207,91201,91205,91203,91204,91210",3536,3361,5.2,up
-Temecula,Riverside,3,"92592,92591,92590",3455,3178,8.7,up
-Trabuco Canyon,Orange,1,92679,3200,2851,12.2,up
-Simi Valley,Ventura,2,"93065,93063",3166,2784,13.7,up
-Yucaipa,San Bernardino,1,92399,3122,2732,14.3,up
-Canyon Country,Los Angeles,2,"91387,91351",3109,2833,9.7,up
-Santa Clarita,Los Angeles,2,"91390,91350",3032,2791,8.6,up
-Los Gatos,Santa Clara,3,"95033,95030,95032",3003,2926,2.6,up
-Alpine,San Diego,1,91901,3002,2873,4.5,up
-Beaumont,Riverside,1,92223,2944,2443,20.5,up
-Chino Hills,San Bernardino,1,91709,2924,2627,11.3,up
-Valley Center,San Diego,1,92082,2852,2755,3.5,up
-Running Springs,San Bernardino,1,92382,2801,2756,1.6,up
-Idyllwild,Riverside,1,92549,2775,2756,0.7,up
-Calabasas,Los Angeles,1,91302,2757,2642,4.4,up
-Beverly Hills,Los Angeles,3,"90210,90211,90212",2755,2725,1.1,up
-Redding,Shasta,3,"96003,96001,96002",2754,2518,9.4,up
-Bakersfield,Kern,11,"93307,93306,93308,93304,93305,93309,93313,93312,93301,93311,93314",2716,2654,2.3,up
-Pollock Pines,El Dorado,1,95726,2691,2701,-0.4,flat
-Orinda,Contra Costa,1,94563,2674,2617,2.2,up
-Palmdale,Los Angeles,4,"93551,93550,93552,93591",2632,2438,8.0,up
-San Marcos,San Diego,2,"92078,92069",2593,2320,11.8,up
-Shingle Springs,El Dorado,1,95682,2577,2525,2.1,up
-Sylmar,Los Angeles,1,91342,2500,2267,10.3,up
-Compton,Los Angeles,3,"90221,90220,90222",2497,2445,2.1,up
-Malibu,Los Angeles,1,90265,2492,2528,-1.4,down
-Hesperia,San Bernardino,2,"92345,92344",2456,2213,11.0,up
-Santa Rosa,Sonoma,6,"95404,95409,95403,95405,95407,95401",2400,2413,-0.5,down
-Thousand Oaks,Ventura,2,"91362,91360",2400,2283,5.1,up
-Long Beach,Los Angeles,11,"90805,90813,90806,90810,90802,90804,90803,90807,90814,90808,90815",2367,2317,2.2,up
-Fontana,San Bernardino,3,"92336,92335,92337",2320,2131,8.9,up
-Castaic,Los Angeles,1,91384,2225,2128,4.6,up
-Pioneer,Amador,1,95666,2216,2207,0.4,flat
-Pasadena,Los Angeles,6,"91107,91103,91104,91105,91106,91101",2183,2144,1.8,up
-Berkeley,Alameda,9,"94708,94705,94707,94704,94703,94709,94702,94710,94720",2178,1970,10.6,up
-Twain Harte,Tuolumne,1,95383,2145,2123,1.0,up
-Mariposa,Mariposa,1,95338,2139,2126,0.6,up
-Groveland,Tuolumne,1,95321,2117,2130,-0.6,down
-Tehachapi,Kern,1,93561,2108,2018,4.5,up
-Magalia,Butte,1,95954,2105,2097,0.4,flat
-Santa Cruz,Santa Cruz,4,"95060,95065,95062,95064",2056,2038,0.9,up
-San Jose,Santa Clara,27,"95120,95127,95111,95148,95112,95135,95122,95123,95138,95116,95132,95136,95121,95124,95125,95126,95110,95129,95118,95128,95134,95131,95119,95133,95117,95139,95130",2053,1880,9.2,up
-Paradise,Butte,1,95969,2028,1967,3.1,up
-San Francisco,San Francisco,24,"94112,94110,94122,94134,94114,94117,94121,94116,94131,94118,94124,94127,94123,94115,94133,94132,94109,94107,94103,94102,94105,94158,94108,94111",2016,1861,8.3,up
-Irvine,Orange,9,"92618,92603,92620,92602,92612,92604,92614,92606,92617",2013,1812,11.1,up
-Colfax,Placer,1,95713,2006,1984,1.1,up
-Wildomar,Riverside,1,92595,2006,1771,13.3,up
-Woodland Hills,Los Angeles,2,"91364,91367",1975,1906,3.6,up
-Topanga,Los Angeles,1,90290,1972,1966,0.3,flat
-Sugarloaf,San Bernardino,1,92386,1950,1900,2.6,up
-Oceanside,San Diego,4,"92057,92056,92058,92054",1922,1763,9.0,up
-Victorville,San Bernardino,3,"92392,92395,92394",1919,1689,13.6,up
-Chula Vista,San Diego,5,"91914,91913,91915,91910,91911",1878,1682,11.7,up
-Lafayette,Contra Costa,1,94549,1869,1773,5.4,up
-Lancaster,Los Angeles,3,"93535,93536,93534",1849,1659,11.5,up
-Anaheim,Orange,7,"92808,92807,92804,92805,92801,92806,92802",1818,1642,10.7,up
-Whittier,Los Angeles,6,"90601,90605,90602,90606,90604,90603",1816,1699,6.9,up
-Diamond Bar,Los Angeles,1,91765,1808,1655,9.2,up
-Danville,Contra Costa,2,"94506,94526",1797,1745,3.0,up
-Encino,Los Angeles,2,"91436,91316",1792,1750,2.4,up
-Penn Valley,Nevada,1,95946,1748,1730,1.0,up
-Foresthill,Placer,1,95631,1742,1715,1.6,up
-Coarsegold,Madera,1,93614,1735,1701,2.0,up
-Lakeside,San Diego,1,92040,1732,1564,10.7,up
-Wrightwood,San Bernardino,1,92397,1726,1682,2.6,up
-Sherman Oaks,Los Angeles,2,"91423,91403",1704,1696,0.5,flat
-Agoura Hills,Los Angeles,1,91301,1702,1626,4.7,up
-Ojai,Ventura,1,93023,1684,1603,5.1,up
-Redlands,San Bernardino,2,"92373,92374",1681,1515,11.0,up
-El Dorado Hills,El Dorado,1,95762,1668,1621,2.9,up
-Carlsbad,San Diego,4,"92009,92011,92010,92008",1663,1537,8.2,up
-Yorba Linda,Orange,2,"92887,92886",1662,1521,9.3,up
-Pomona,Los Angeles,3,"91766,91767,91768",1656,1575,5.1,up
-Tahoe City,Placer,1,96145,1654,1572,5.2,up
-Oakhurst,Madera,1,93644,1650,1589,3.8,up
-Jamul,San Diego,1,91935,1626,1584,2.7,up
-San Clemente,Orange,2,"92673,92672",1625,1402,15.9,up
-Westlake Village,Ventura,1,91361,1585,1474,7.5,up
-Mammoth Lakes,Mono,1,93546,1583,1372,15.4,up
-Poway,San Diego,1,92064,1569,1434,9.4,up
-Laguna Beach,Orange,1,92651,1568,1434,9.3,up
-South Gate,Los Angeles,1,90280,1562,1531,2.0,up
-Banning,Riverside,1,92220,1552,1340,15.8,up
-Bell Gardens,Los Angeles,1,90201,1548,1500,3.2,up
-Boulder Creek,Santa Cruz,1,95006,1542,1492,3.4,up
-Shaver Lake,Fresno,1,93664,1534,1507,1.8,up
-Menifee,Riverside,1,92584,1522,1325,14.9,up
-Scotts Valley,Santa Cruz,1,95066,1484,1454,2.1,up
-Vista,San Diego,3,"92084,92081,92083",1483,1439,3.1,up
-Kelseyville,Lake,1,95451,1448,1385,4.5,up
-Rancho Cucamonga,San Bernardino,4,"91739,91737,91701,91730",1445,1334,8.3,up
-Tujunga,Los Angeles,1,91042,1442,1322,9.1,up
-Inglewood,Los Angeles,5,"90304,90303,90301,90302,90305",1426,1363,4.6,up
-Felton,Santa Cruz,1,95018,1421,1417,0.3,flat
-Huntington Park,Los Angeles,1,90255,1410,1372,2.8,up
-Pacific Palisades,Los Angeles,1,90272,1391,1557,-10.7,down
-Sun City,Riverside,2,"92585,92586",1352,1178,14.8,up
-Phelan,San Bernardino,1,92371,1351,1243,8.7,up
-Rancho Santa Margarita,Orange,1,92688,1351,1093,23.6,up
-Meadow Vista,Placer,1,95722,1334,1347,-1.0,down
-Carmel,Monterey,1,93923,1323,1259,5.1,up
-Murphys,Calaveras,1,95247,1308,1315,-0.5,down
-Burbank,Los Angeles,5,"91504,91501,91505,91506,91502",1301,1182,10.1,up
-Porter Ranch,Los Angeles,1,91326,1301,1098,18.5,up
-Apple Valley,San Bernardino,2,"92308,92307",1295,1137,13.9,up
-Ventura,Ventura,3,"93001,93003,93004",1279,1184,8.0,up
-Pacoima,Los Angeles,1,91331,1271,1218,4.4,up
-Salinas,Monterey,5,"93907,93908,93905,93906,93901",1270,1210,5.0,up
-Winchester,Riverside,1,92596,1262,996,26.7,up
-Aptos,Santa Cruz,1,95003,1248,1206,3.5,up
-La Puente,Los Angeles,2,"91744,91746",1237,1225,1.0,up
-Santee,San Diego,1,92071,1237,1092,13.3,up
-Tarzana,Los Angeles,1,91356,1227,1223,0.3,flat
-Ladera Ranch,Orange,1,92694,1225,1023,19.7,up
-Ukiah,Mendocino,1,95482,1225,1144,7.1,up
-Newbury Park,Ventura,1,91320,1217,1092,11.4,up
-Newhall,Los Angeles,1,91321,1208,1096,10.2,up
-Valencia,Los Angeles,2,"91354,91355",1206,1074,12.3,up
-Highland,San Bernardino,1,92346,1203,1070,12.4,up
-Quail Valley,Riverside,1,92587,1180,1058,11.5,up
-La Canada Flintridge,Los Angeles,1,91011,1178,1104,6.7,up
-Chatsworth,Los Angeles,1,91311,1138,1064,7.0,up
-Pine Grove,Amador,1,95665,1138,1125,1.2,up
-La Crescenta,Los Angeles,1,91214,1136,1034,9.9,up
-Canoga Park,Los Angeles,2,"91304,91303",1100,1024,7.4,up
-Julian,San Diego,1,92036,1078,1067,1.0,up
-Westwood,Plumas,1,96137,1074,1055,1.8,up
-Colton,San Bernardino,1,92324,1069,991,7.9,up
-North Hollywood,Los Angeles,4,"91605,91606,91601,91602",1067,1059,0.8,up
-Santa Ana,Orange,6,"92705,92704,92703,92707,92701,92706",1062,1012,4.9,up
-Camino,El Dorado,1,95709,1061,1065,-0.4,flat
-Napa,Napa,2,"94558,94559",1061,1014,4.6,up
-Guerneville,Sonoma,1,95446,1060,1009,5.1,up
-Lynwood,Los Angeles,1,90262,1060,1012,4.7,up
-Spring Valley,San Diego,2,"91977,91978",1051,981,7.1,up
-Laguna Niguel,Orange,1,92677,1049,885,18.5,up
-Calimesa,Riverside,1,92320,1045,907,15.2,up
-Hacienda Heights,Los Angeles,1,91745,1042,948,9.9,up
-Sunland,Los Angeles,1,91040,1040,971,7.1,up
-Willits,Mendocino,1,95490,1024,981,4.4,up
-San Jacinto,Riverside,2,"92583,92582",1022,926,10.4,up
-Studio City,Los Angeles,1,91604,1022,1013,0.9,up
-Ontario,San Bernardino,3,"91761,91762,91764",1009,942,7.1,up
-Rancho Santa Fe,San Diego,2,"92067,92091",1003,1016,-1.3,down
-Watsonville,Santa Cruz,1,95076,1002,938,6.8,up
-Twin Peaks,San Bernardino,1,92391,997,985,1.2,up
-Altadena,Los Angeles,1,91001,992,1001,-0.9,down
-Ben Lomond,Santa Cruz,1,95005,991,983,0.8,up
-Pine Mountain Club,Kern,1,93222,985,970,1.5,up
-Stevenson Ranch,Los Angeles,1,91381,973,856,13.7,up
-Camarillo,Ventura,2,"93012,93010",945,841,12.4,up
-Acton,Los Angeles,1,93510,943,913,3.3,up
-Sun Valley,Los Angeles,1,91352,940,877,7.2,up
-Mill Valley,Marin,1,94941,935,840,11.3,up
-Rialto,San Bernardino,2,"92376,92377",933,861,8.4,up
-Rowland Heights,Los Angeles,1,91748,933,807,15.6,up
-Walnut,Los Angeles,1,91789,924,814,13.5,up
-Fresno,Fresno,19,"93702,93706,93727,93722,93728,93725,93703,93720,93705,93650,93704,93726,93711,93701,93730,93723,93710,93721,93737",923,913,1.1,up
-Glendora,Los Angeles,2,"91741,91740",915,814,12.4,up
-Long Barn,Tuolumne,1,95335,911,892,2.1,up
-Shingletown,Shasta,1,96088,905,880,2.8,up
-Copperopolis,Calaveras,1,95228,902,901,0.1,flat
-Clearlake,Lake,1,95422,897,844,6.3,up
-Olympic Valley,Placer,1,96146,897,874,2.6,up
-West Covina,Los Angeles,3,"91791,91790,91792",897,791,13.4,up
-Frazier Park,Kern,1,93225,895,882,1.5,up
-Van Nuys,Los Angeles,4,"91406,91405,91401,91411",880,846,4.0,up
-Moorpark,Ventura,1,93021,878,789,11.3,up
-Garden Valley,El Dorado,1,95633,875,882,-0.8,down
-Carmel Valley,Monterey,1,93924,873,852,2.5,up
-Sacramento,Sacramento,28,"95828,95823,95822,95820,95838,95829,95815,95818,95824,95833,95816,95817,95827,95835,95821,95826,95864,95842,95832,95834,95841,95811,95825,95831,95819,95814,95837,95830",862,876,-1.6,down
-Mount Shasta,Siskiyou,1,96067,854,803,6.4,up
-Alamo,Contra Costa,1,94507,845,827,2.2,up
-Paso Robles,San Luis Obispo,1,93446,834,758,10.0,up
-Tahoma,El Dorado,1,96142,833,803,3.7,up
-Atascadero,San Luis Obispo,1,93422,826,806,2.5,up
-Palm Springs,Riverside,2,"92264,92262",824,714,15.4,up
-Georgetown,El Dorado,1,95634,817,814,0.4,flat
-Jamestown,Tuolumne,1,95327,817,786,3.9,up
-Castro Valley,Alameda,2,"94552,94546",816,713,14.4,up
-Anderson,Shasta,1,96007,814,758,7.4,up
-Carnelian Bay,Placer,1,96140,813,781,4.1,up
-La Verne,Los Angeles,1,91750,813,745,9.1,up
-Oak Park,Ventura,1,91377,810,729,11.1,up
-Yucca Valley,San Bernardino,1,92284,793,678,17.0,up
-Wofford Heights,Kern,1,93285,792,792,0.0,flat
-San Luis Obispo,San Luis Obispo,2,"93401,93405",791,759,4.2,up
-Cottonwood,Tehama,1,96022,788,734,7.4,up
-El Dorado,El Dorado,1,95623,785,755,4.0,up
-Granada Hills,Los Angeles,1,91344,784,772,1.6,up
-Stockton,San Joaquin,11,"95205,95206,95215,95204,95203,95207,95210,95209,95212,95202,95219",783,774,1.2,up
-Cool,El Dorado,1,95614,779,758,2.8,up
-Arcadia,Los Angeles,2,"91006,91007",776,749,3.6,up
-Tuolumne,Tuolumne,1,95379,775,773,0.3,flat
-Mi Wuk Village,Tuolumne,1,95346,774,771,0.4,flat
-Somerset,El Dorado,1,95684,774,770,0.5,up
-Lake Isabella,Kern,1,93240,764,734,4.1,up
-West Hills,Los Angeles,1,91307,764,766,-0.3,flat
-Monrovia,Los Angeles,1,91016,749,674,11.1,up
-El Monte,Los Angeles,2,"91732,91731",748,749,-0.1,flat
-Anza,Riverside,1,92539,746,763,-2.2,down
-Valley Springs,Calaveras,1,95252,746,759,-1.7,down
-Azusa,Los Angeles,1,91702,745,647,15.1,up
-Soquel,Santa Cruz,1,95073,739,725,1.9,up
-Springville,Tulare,1,93265,738,727,1.5,up
-Adelanto,San Bernardino,1,92301,736,636,15.7,up
-San Dimas,Los Angeles,1,91773,735,656,12.0,up
-San Juan Capistrano,Orange,1,92675,731,621,17.7,up
-Loomis,Placer,1,95650,725,695,4.3,up
-Saratoga,Santa Clara,1,95070,719,691,4.1,up
-Granite Bay,Placer,1,95746,709,692,2.5,up
-Sonoma,Sonoma,1,95476,704,655,7.5,up
-Baldwin Park,Los Angeles,1,91706,693,668,3.7,up
-Rescue,El Dorado,1,95672,693,686,1.0,up
-Fawnskin,San Bernardino,1,92333,692,666,3.9,up
-Novato,Marin,3,"94947,94945,94949",689,615,12.0,up
-Green Valley Lake,San Bernardino,1,92341,683,675,1.2,up
-Rosemead,Los Angeles,1,91770,680,633,7.4,up
-North Fork,Madera,1,93643,669,688,-2.8,down
-Downey,Los Angeles,3,"90242,90241,90240",668,644,3.7,up
-Eureka,Humboldt,2,"95503,95501",665,503,32.2,up
-La Habra,Orange,1,90631,657,636,3.3,up
-Angels Camp,Calaveras,1,95222,656,628,4.5,up
-Los Altos,Santa Clara,2,"94022,94024",653,621,5.2,up
-Homewood,Placer,1,96141,648,631,2.7,up
-Desert Hot Springs,Riverside,2,"92240,92241",647,589,9.8,up
-Jackson,Amador,1,95642,641,638,0.5,flat
-Kings Beach,Placer,1,96143,641,607,5.6,up
-Mission Viejo,Orange,2,"92692,92691",638,566,12.7,up
-Redwood City,San Mateo,4,"94062,94061,94063,94065",637,611,4.3,up
-Newcastle,Placer,1,95658,636,646,-1.5,down
-Susanville,Lassen,1,96130,635,616,3.1,up
-Three Rivers,Tulare,1,93271,635,632,0.5,flat
-Clovis,Fresno,3,"93619,93612,93611",634,560,13.2,up
-Encinitas,San Diego,1,92024,633,595,6.4,up
-Moraga,Contra Costa,1,94556,632,582,8.6,up
-Hayward,Alameda,4,"94542,94541,94544,94545",625,593,5.4,up
-Healdsburg,Sonoma,1,95448,623,622,0.2,flat
-Diamond Springs,El Dorado,1,95619,622,612,1.6,up
-Morgan Hill,Santa Clara,1,95037,621,596,4.2,up
-Brea,Orange,2,"92821,92823",616,563,9.4,up
-Reseda,Los Angeles,1,91335,615,588,4.6,up
-Alhambra,Los Angeles,2,"91801,91803",612,576,6.2,up
-Silverado,Orange,1,92676,611,594,2.9,up
-Sutter Creek,Amador,1,95685,611,603,1.3,up
-Portola,Plumas,1,96122,605,593,2.0,up
-Quincy,Plumas,1,95971,600,584,2.7,up
-Blairsden Graeagle,Plumas,1,96103,593,569,4.2,up
-Walnut Creek,Contra Costa,4,"94595,94597,94596,94598",592,536,10.4,up
-Saint Helena,Napa,1,94574,591,573,3.1,up
-Martinez,Contra Costa,1,94553,589,543,8.5,up
-Lake Hughes,Los Angeles,1,93532,588,576,2.1,up
-Auberry,Fresno,1,93602,587,575,2.1,up
-Bass Lake,Madera,1,93604,585,575,1.7,up
-Orange,Orange,5,"92869,92867,92868,92866,92865",585,536,9.1,up
-Aguanga,Riverside,1,92536,580,577,0.5,up
-Aliso Viejo,Orange,1,92656,580,521,11.3,up
-Newport Coast,Orange,1,92657,578,506,14.2,up
-Nuevo,Riverside,1,92567,577,519,11.2,up
-Santa Paula,Ventura,1,93060,577,548,5.3,up
-Norwalk,Los Angeles,1,90650,576,561,2.7,up
-Duarte,Los Angeles,2,"91010,91008",571,510,12.0,up
-Calistoga,Napa,1,94515,565,546,3.5,up
-Carson,Los Angeles,2,"90746,90745",564,561,0.5,up
-San Rafael,Marin,2,"94901,94903",559,485,15.3,up
-Pinon Hills,San Bernardino,1,92372,555,513,8.2,up
-Chico,Butte,3,"95928,95973,95926",553,550,0.5,up
-Pico Rivera,Los Angeles,1,90660,549,528,4.0,up
-Covina,Los Angeles,3,"91724,91722,91723",547,532,2.8,up
-Loma Linda,San Bernardino,1,92354,541,448,20.8,up
-Sierra Madre,Los Angeles,1,91024,541,488,10.9,up
-Upland,San Bernardino,2,"91784,91786",540,509,6.1,up
-Homeland,Riverside,1,92548,536,487,10.1,up
-West Hollywood,Los Angeles,1,90069,536,537,-0.2,flat
-Pleasanton,Alameda,2,"94566,94588",533,525,1.5,up
-Soda Springs,Nevada,1,95728,533,509,4.7,up
-Lakeport,Lake,1,95453,524,489,7.2,up
-Chino,San Bernardino,2,"91710,91708",523,465,12.5,up
-El Sobrante,Contra Costa,1,94803,521,482,8.1,up
-Arroyo Grande,San Luis Obispo,1,93420,520,484,7.4,up
-Campo,San Diego,1,91906,520,497,4.6,up
-Fairfield,Solano,2,"94534,94533",517,489,5.7,up
-Middletown,Lake,1,95461,515,498,3.4,up
-San Ramon,Contra Costa,2,"94583,94582",514,485,6.0,up
-Tahoe Vista,Placer,1,96148,514,485,6.0,up
-Richmond,Contra Costa,3,"94804,94805,94801",511,448,14.1,up
-San Fernando,Los Angeles,1,91340,506,483,4.8,up
-Pine Valley,San Diego,1,91962,504,486,3.7,up
-Cedarpines Park,San Bernardino,1,92322,498,502,-0.8,down
-Lower Lake,Lake,1,95457,491,486,1.0,up
-Fort Bragg,Mendocino,1,95437,490,430,14.0,up
-Crescent City,Del Norte,1,95531,489,379,29.0,up
-Forest Falls,San Bernardino,1,92339,489,490,-0.2,flat
-Montebello,Los Angeles,1,90640,485,461,5.2,up
-Torrance,Los Angeles,5,"90501,90502,90505,90503,90504",484,453,6.8,up
-Sausalito,Marin,1,94965,481,444,8.3,up
-Santa Maria,Santa Barbara,3,"93455,93454,93458",478,471,1.5,up
-Foothill Ranch,Orange,1,92610,477,409,16.6,up
-Yreka,Siskiyou,1,96097,477,460,3.7,up
-Gardena,Los Angeles,3,"90247,90249,90248",475,462,2.8,up
-Red Bluff,Tehama,1,96080,474,438,8.2,up
-Bellflower,Los Angeles,1,90706,473,454,4.2,up
-Forest Ranch,Butte,1,95942,468,489,-4.3,down
-Bonsall,San Diego,1,92003,465,446,4.3,up
-Mentone,San Bernardino,1,92359,460,420,9.5,up
-Shasta Lake,Shasta,2,"96019,96089",460,427,7.7,up
-South El Monte,Los Angeles,1,91733,457,439,4.1,up
-Hidden Valley Lake,Lake,1,95467,453,406,11.6,up
-Paramount,Los Angeles,1,90723,453,444,2.0,up
-Porterville,Tulare,1,93257,453,416,8.9,up
-Norco,Riverside,1,92860,452,387,16.8,up
-Weed,Siskiyou,1,96094,447,429,4.2,up
-Ione,Amador,1,95640,444,416,6.7,up
-Santa Monica,Los Angeles,5,"90402,90405,90404,90403,90401",443,438,1.1,up
-Westminster,Orange,1,92683,443,427,3.7,up
-Monterey,Monterey,1,93940,435,410,6.1,up
-West Point,Calaveras,1,95255,433,427,1.4,up
-Mountain Center,Riverside,1,92561,432,420,2.9,up
-San Gabriel,Los Angeles,2,"91776,91775",432,418,3.3,up
-Claremont,Los Angeles,1,91711,431,378,14.0,up
-Hawthorne,Los Angeles,1,90250,431,428,0.7,up
-San Andreas,Calaveras,1,95249,429,426,0.7,up
-Sebastopol,Sonoma,1,95472,428,406,5.4,up
-Lake Forest,Orange,1,92630,426,412,3.4,up
-Maywood,Los Angeles,1,90270,426,429,-0.7,down
-Cobb,Lake,1,95426,423,414,2.2,up
-Descanso,San Diego,1,91916,423,422,0.2,flat
-Yokuts,Fresno,1,93675,419,405,3.5,up
-Joshua Tree,San Bernardino,1,92252,416,339,22.7,up
-San Pedro,Los Angeles,2,"90731,90732",416,414,0.5,flat
-El Cerrito,Contra Costa,1,94530,413,372,11.0,up
-Soulsbyville,Tuolumne,1,95372,413,408,1.2,up
-Mira Loma,Riverside,1,91752,411,379,8.4,up
-Bodfish,Kern,1,93205,409,391,4.6,up
-La Jolla,San Diego,1,92037,409,393,4.1,up
-Wilmington,Los Angeles,1,90744,409,386,6.0,up
-Oxnard,Ventura,4,"93033,93035,93036,93030",408,394,3.6,up
-Northridge,Los Angeles,2,"91325,91324",407,386,5.4,up
-Rough And Ready,Nevada,1,95975,407,415,-1.9,down
-Gilroy,Santa Clara,1,95020,404,370,9.2,up
-Goleta,Santa Barbara,1,93117,404,388,4.1,up
-Pacifica,San Mateo,1,94044,403,356,13.2,up
-La Grange,Tuolumne,1,95329,402,394,2.0,up
-Rancho Palos Verdes,Los Angeles,1,90275,402,364,10.4,up
-Bloomington,San Bernardino,1,92316,400,371,7.8,up
-Cloverdale,Sonoma,1,95425,400,357,12.0,up
-Columbia,Tuolumne,1,95310,397,389,2.1,up
-Bradley,Monterey,1,93426,392,382,2.6,up
-Volcano,Amador,1,95689,391,390,0.3,flat
-Burlingame,San Mateo,1,94010,390,347,12.4,up
-Clearlake Oaks,Lake,1,95423,389,373,4.3,up
-Coulterville,Mariposa,1,95311,388,394,-1.5,down
-Panorama City,Los Angeles,1,91402,387,378,2.4,up
-Applegate,Placer,1,95703,383,384,-0.3,flat
-Mokelumne Hill,Calaveras,1,95245,383,389,-1.5,down
-Garden Grove,Orange,5,"92843,92841,92840,92844,92845",382,366,4.4,up
-Warner Springs,San Diego,1,92086,381,382,-0.3,flat
-Lompoc,Santa Barbara,1,93436,376,366,2.7,up
-Glen Ellen,Sonoma,1,95442,373,357,4.5,up
-Chester,Plumas,1,96020,369,359,2.8,up
-Monterey Park,Los Angeles,2,"91754,91755",369,396,-6.8,down
-Forestville,Sonoma,1,95436,363,351,3.4,up
-Palm Desert,Riverside,2,"92260,92211",363,323,12.4,up
-North Hills,Los Angeles,1,91343,360,348,3.4,up
-Vallejo,Solano,4,"94591,94590,94589,94592",360,313,15.0,up
-Dunsmuir,Siskiyou,1,96025,358,353,1.4,up
-Gualala,Mendocino,1,95445,358,342,4.7,up
-Portola Valley,San Mateo,1,94028,354,325,8.9,up
-Cambria,San Luis Obispo,1,93428,351,326,7.7,up
-Antioch,Contra Costa,2,"94509,94531",350,315,11.1,up
-Carpinteria,Santa Barbara,1,93013,349,328,6.4,up
-Mountain Ranch,Calaveras,1,95246,344,339,1.5,up
-Fillmore,Ventura,1,93015,341,302,12.9,up
-Ahwahnee,Madera,1,93601,339,327,3.7,up
-Petaluma,Sonoma,2,"94952,94954",339,324,4.6,up
-Avalon,Los Angeles,1,90704,338,315,7.3,up
-Oak View,Ventura,1,93022,337,327,3.1,up
-Plymouth,Amador,1,95669,337,328,2.7,up
-Livermore,Alameda,2,"94551,94550",336,320,5.0,up
-Fullerton,Orange,4,"92833,92831,92835,92832",335,331,1.2,up
-Ridgecrest,Kern,1,93555,330,282,17.0,up
-Twentynine Palms,San Bernardino,1,92277,329,291,13.1,up
-Angwin,Napa,1,94508,327,324,0.9,up
-Winnetka,Los Angeles,1,91306,327,307,6.5,up
-Yosemite National Park,Mariposa,1,95389,319,307,3.9,up
-Madera,Madera,3,"93638,93636,93637",317,298,6.4,up
-Littlerock,Los Angeles,1,93543,316,281,12.5,up
-The Sea Ranch,Sonoma,1,95497,316,262,20.6,up
-Folsom,Sacramento,1,95630,313,296,5.7,up
-La Mesa,San Diego,2,"91941,91942",310,303,2.3,up
-Cathedral City,Riverside,1,92234,307,303,1.3,up
-Pilot Hill,El Dorado,1,95664,307,311,-1.3,down
-San Leandro,Alameda,3,"94577,94578,94579",307,294,4.4,up
-South Pasadena,Los Angeles,1,91030,306,311,-1.6,down
-Huntington Beach,Orange,4,"92646,92648,92647,92649",305,309,-1.3,down
-Kernville,Kern,1,93238,304,277,9.7,up
-Modesto,Stanislaus,7,"95351,95350,95355,95358,95354,95356,95357",304,318,-4.4,down
-Pittsburg,Contra Costa,1,94565,304,267,13.9,up
-Grand Terrace,San Bernardino,1,92313,303,276,9.8,up
-Greenwood,El Dorado,1,95635,300,309,-2.9,down
-Fairfax,Marin,1,94930,298,281,6.0,up
-Tollhouse,Fresno,1,93667,296,290,2.1,up
-Angelus Oaks,San Bernardino,1,92305,295,292,1.0,up
-Mckinleyville,Humboldt,1,95519,295,257,14.8,up
-Inverness,Marin,1,94937,293,305,-3.9,down
-Janesville,Lassen,1,96114,290,279,3.9,up
-Pauma Valley,San Diego,1,92061,290,282,2.8,up
-Lincoln,Placer,1,95648,289,267,8.2,up
-Redwood Valley,Mendocino,1,95470,289,272,6.2,up
-Alta,Placer,1,95701,287,293,-2.0,down
-Fremont,Alameda,4,"94536,94539,94538,94555",287,288,-0.3,flat
-Dublin,Alameda,1,94568,283,254,11.4,up
-Lakehead,Shasta,1,96051,281,272,3.3,up
-Smartsville,Nevada,1,95977,281,280,0.4,flat
-June Lake,Mono,1,93529,280,272,2.9,up
-Arcata,Humboldt,1,95521,279,244,14.3,up
-Lucerne,Lake,1,95458,279,261,6.9,up
-Palos Verdes Peninsula,Los Angeles,1,90274,276,253,9.1,up
-Vacaville,Solano,2,"95688,95687",276,262,5.3,up
-Clayton,Contra Costa,1,94517,275,256,7.4,up
-Indio,Riverside,2,"92201,92203",275,280,-1.8,down
-Corning,Tehama,1,96021,274,279,-1.8,down
-Burney,Shasta,1,96013,272,273,-0.4,flat
-Marysville,Yuba,1,95901,271,255,6.3,up
-Cedar Glen,San Bernardino,1,92321,270,277,-2.5,down
-Pismo Beach,San Luis Obispo,1,93449,267,243,9.9,up
-Barstow,San Bernardino,1,92311,261,238,9.7,up
-Oregon House,Yuba,1,95962,261,264,-1.1,down
-Brownsville,Yuba,1,95919,257,257,0.0,flat
-Cazadero,Sonoma,1,95421,257,255,0.8,up
-Daly City,San Mateo,2,"94014,94015",255,218,17.0,up
-Monte Rio,Sonoma,1,95462,254,251,1.2,up
-Trinity Center,Trinity,1,96091,250,248,0.8,up
-Blythe,Riverside,1,92225,249,221,12.7,up
-Hollister,San Benito,1,95023,247,212,16.5,up
-Weaverville,Trinity,1,96093,246,214,15.0,up
-Newport Beach,Orange,4,"92660,92663,92661,92662",245,217,12.9,up
-Weldon,Kern,1,93283,244,242,0.8,up
-San Anselmo,Marin,1,94960,243,200,21.5,up
-La Quinta,Riverside,1,92253,242,207,16.9,up
-Morongo Valley,San Bernardino,1,92256,242,212,14.2,up
-Willow Creek,Humboldt,1,95573,240,242,-0.8,down
-Posey,Tulare,1,93260,233,231,0.9,up
-Fiddletown,Amador,1,95629,230,233,-1.3,down
-Del Mar,San Diego,1,92014,228,226,0.9,up
-Temple City,Los Angeles,1,91780,226,207,9.2,up
-Boulevard,San Diego,1,91905,224,222,0.9,up
-Browns Valley,Yuba,1,95918,224,213,5.2,up
-Concord,Contra Costa,4,"94521,94520,94518,94519",224,212,5.7,up
-San Mateo,San Mateo,4,"94402,94403,94401,94404",224,211,6.2,up
-Cupertino,Santa Clara,1,95014,223,213,4.7,up
-Bishop,Inyo,1,93514,222,209,6.2,up
-Lytle Creek,San Bernardino,1,92358,220,226,-2.7,down
-Garberville,Humboldt,1,95542,219,217,0.9,up
-El Centro,Imperial,1,92243,218,199,9.5,up
-Friant,Fresno,1,93626,214,218,-1.8,down
-Alameda,Alameda,2,"94501,94502",213,204,4.4,up
-San Pablo,Contra Costa,1,94806,212,168,26.2,up
-Caliente,Kern,1,93518,210,206,1.9,up
-Fortuna,Humboldt,1,95540,210,163,28.8,up
-Tustin,Orange,2,"92782,92780",210,203,3.4,up
-Lakewood,Los Angeles,3,"90715,90712,90713",207,213,-2.8,down
-Rosamond,Kern,1,93560,207,176,17.6,up
-King City,Monterey,1,93930,206,199,3.5,up
-Lewiston,Trinity,1,96052,206,206,0.0,flat
-Nice,Lake,1,95464,206,194,6.2,up
-Calexico,Imperial,1,92231,205,186,10.2,up
-Markleeville,Alpine,1,96120,205,202,1.5,up
-Lawndale,Los Angeles,1,90260,203,203,0.0,flat
-Bonita,San Diego,1,91902,198,188,5.3,up
-Rancho Mirage,Riverside,1,92270,198,179,10.6,up
-Santa Ynez,Santa Barbara,1,93460,198,197,0.5,up
-Fort Jones,Siskiyou,1,96032,197,168,17.3,up
-Visalia,Tulare,3,"93291,93277,93292",197,193,2.1,up
-Santa Margarita,San Luis Obispo,1,93453,195,193,1.0,up
-Mission Hills,Los Angeles,1,91345,194,181,7.2,up
-Mccloud,Siskiyou,1,96057,193,189,2.1,up
-Pebble Beach,Monterey,1,93953,192,162,18.5,up
-California City,Kern,1,93505,191,160,19.4,up
-Templeton,San Luis Obispo,1,93465,191,180,6.1,up
-Lucerne Valley,San Bernardino,1,92356,189,171,10.5,up
-Rimforest,San Bernardino,1,92378,189,178,6.2,up
-San Bruno,San Mateo,1,94066,189,160,18.1,up
-Emeryville,Alameda,1,94608,188,162,16.0,up
-Half Moon Bay,San Mateo,1,94019,188,178,5.6,up
-Landers,San Bernardino,1,92285,188,147,27.9,up
-La Mirada,Los Angeles,1,90638,186,170,9.4,up
-Lebec,Kern,1,93243,182,182,0.0,flat
-Buena Park,Orange,2,"90621,90620",181,177,2.3,up
-Venice,Los Angeles,1,90291,181,189,-4.2,down
-Greenbrae,Marin,1,94904,179,152,17.8,up
-Prather,Fresno,1,93651,178,174,2.3,up
-Mendocino,Mendocino,1,95460,177,158,12.0,up
-Palo Alto,Santa Clara,4,"94303,94301,94306,94304",176,165,6.7,up
-Redondo Beach,Los Angeles,2,"90278,90277",176,182,-3.3,down
-Brentwood,Contra Costa,1,94513,175,176,-0.6,down
-Upper Lake,Lake,1,95485,174,177,-1.7,down
-Pinecrest,Alpine,1,95364,173,168,3.0,up
-Dobbins,Yuba,1,95935,172,172,0.0,flat
-Laguna Woods,Orange,1,92637,171,129,32.6,up
-Taft,Kern,1,93268,171,150,14.0,up
-Culver City,Los Angeles,2,"90230,90232",170,164,3.7,up
-Whitethorn,Humboldt,1,95589,170,161,5.6,up
-Arvin,Kern,1,93203,169,151,11.9,up
-Elk Grove,Sacramento,3,"95624,95758,95757",169,171,-1.2,down
-San Carlos,San Mateo,1,94070,168,156,7.7,up
-Alturas,Modoc,1,96101,166,146,13.7,up
-Vallecito,Calaveras,1,95251,166,163,1.8,up
-California Hot Springs,Tulare,1,93207,165,174,-5.2,down
-Pleasant Hill,Contra Costa,1,94523,164,153,7.2,up
-Sierra City,Sierra,1,96125,164,170,-3.5,down
-Cabazon,Riverside,1,92230,163,136,19.9,up
-Avila Beach,San Luis Obispo,1,93424,162,145,11.7,up
-Wilseyville,Calaveras,1,95257,161,156,3.2,up
-Los Osos,San Luis Obispo,1,93402,159,150,6.0,up
-Trinidad,Humboldt,1,95570,159,139,14.4,up
-Nipomo,San Luis Obispo,1,93444,158,142,11.3,up
-Montague,Siskiyou,1,96064,157,156,0.6,up
-Skyforest,San Bernardino,1,92385,157,149,5.4,up
-Brookdale,Santa Cruz,1,95007,156,148,5.4,up
-Kyburz,El Dorado,1,95720,156,156,0.0,flat
-Laguna Hills,Orange,1,92653,156,132,18.2,up
-Salyer,Trinity,1,95563,156,161,-3.1,down
-Kenwood,Sonoma,1,95452,155,155,0.0,flat
-Pinole,Contra Costa,1,94564,155,139,11.5,up
-Potter Valley,Mendocino,1,95469,154,156,-1.3,down
-Midpines,Mariposa,1,95345,152,156,-2.6,down
-Mount Baldy,San Bernardino,1,91759,150,154,-2.6,down
-Corte Madera,Marin,1,94925,149,136,9.6,up
-Lakeshore,Fresno,1,93634,149,149,0.0,flat
-Laytonville,Mendocino,1,95454,149,148,0.7,up
-Bella Vista,Shasta,1,96008,148,140,5.7,up
-Harbor City,Los Angeles,1,90710,147,148,-0.7,down
-Little River,Mendocino,1,95456,147,142,3.5,up
-Aromas,Monterey,1,95004,146,139,5.0,up
-Geyserville,Sonoma,1,95441,146,142,2.8,up
-Grizzly Flats,El Dorado,1,95636,145,150,-3.3,down
-Pope Valley,Napa,1,94567,145,149,-2.7,down
-Solvang,Santa Barbara,1,93463,145,141,2.8,up
-Palo Cedro,Shasta,1,96073,143,133,7.5,up
-Thousand Palms,Riverside,1,92276,143,143,0.0,flat
-Dana Point,Orange,1,92629,142,129,10.1,up
-Hume,Fresno,1,93628,142,134,6.0,up
-Somis,Ventura,1,93066,142,132,7.6,up
-Blue Jay,San Bernardino,1,92317,141,144,-2.1,down
-Cerritos,Los Angeles,1,90703,141,153,-7.8,down
-Penryn,Placer,1,95663,140,135,3.7,up
-Tracy,San Joaquin,4,"95377,95376,95304,95391",140,135,3.7,up
-Clio,Plumas,1,96106,139,129,7.8,up
-Douglas City,Trinity,1,96024,139,147,-5.4,down
-Big Sur,Monterey,1,93920,138,139,-0.7,down
-Santa Ysabel,San Diego,1,92070,137,136,0.7,up
-Etna,Siskiyou,1,96027,134,123,8.9,up
-National City,San Diego,1,91950,134,127,5.5,up
-Palomar Mountain,San Diego,1,92060,133,132,0.8,up
-Menlo Park,San Mateo,1,94025,132,120,10.0,up
-Sanger,Fresno,1,93657,131,114,14.9,up
-Belmont,San Mateo,1,94002,130,106,22.6,up
-Lotus,El Dorado,1,95651,130,128,1.6,up
-Solana Beach,San Diego,1,92075,129,124,4.0,up
-South San Francisco,San Mateo,1,94080,129,110,17.3,up
-Twin Bridges,El Dorado,1,95735,128,132,-3.0,down
-Montclair,San Bernardino,1,91763,127,120,5.8,up
-Roseville,Placer,3,"95747,95678,95661",127,115,10.4,up
-Catheys Valley,Mariposa,1,95306,126,124,1.6,up
-Hayfork,Trinity,1,96041,126,124,1.6,up
-Strawberry Valley,Yuba,1,95981,126,129,-2.3,down
-Larkspur,Marin,1,94939,125,115,8.7,up
-Montrose,Los Angeles,1,91020,125,102,22.5,up
-San Marino,Los Angeles,1,91108,125,139,-10.1,down
-Whitewater,Riverside,1,92282,125,112,11.6,up
-La Honda,San Mateo,1,94020,124,121,2.5,up
-Rocklin,Placer,2,"95677,95765",124,121,2.5,up
-Benicia,Solano,1,94510,123,111,10.8,up
-Berry Creek,Butte,1,95916,123,127,-3.1,down
-Belvedere Tiburon,Marin,1,94920,120,98,22.4,up
-Hercules,Contra Costa,1,94547,120,101,18.8,up
-North San Juan,Nevada,1,95960,120,114,5.3,up
-Wishon,Madera,1,93669,120,120,0.0,flat
-Diablo,Contra Costa,1,94528,119,116,2.6,up
-Redway,Humboldt,1,95560,119,123,-3.3,down
-Merced,Merced,3,"95348,95340,95341",118,107,10.3,up
-Bridgeport,Mono,1,93517,117,118,-0.8,down
-Windsor,Sonoma,1,95492,117,126,-7.1,down
-Dutch Flat,Placer,1,95714,116,112,3.6,up
-Fountain Valley,Orange,1,92708,115,121,-5.0,down
-Mojave,Kern,1,93501,115,90,27.8,up
-Pescadero,San Mateo,1,94060,114,108,5.6,up
-Sunnyvale,Santa Clara,4,"94089,94087,94086,94085",114,109,4.6,up
-Bodega Bay,Sonoma,1,94923,113,93,21.5,up
-Keene,Kern,1,93531,113,112,0.9,up
-Millbrae,San Mateo,1,94030,112,93,20.4,up
-Raymond,Madera,1,93653,112,109,2.8,up
-Whitmore,Shasta,1,96096,112,109,2.8,up
-Crockett,Contra Costa,1,94525,111,99,12.1,up
-Placentia,Orange,1,92870,111,111,0.0,flat
-Morro Bay,San Luis Obispo,1,93442,110,101,8.9,up
-Needles,San Bernardino,1,92363,110,102,7.8,up
-Milpitas,Santa Clara,1,95035,109,110,-0.9,down
-Myers Flat,Humboldt,1,95554,109,119,-8.4,down
-Valley Village,Los Angeles,1,91607,108,107,0.9,up
-Costa Mesa,Orange,2,"92627,92626",106,110,-3.6,down
-Gasquet,Del Norte,1,95543,106,106,0.0,flat
-Igo,Shasta,1,96047,106,102,3.9,up
-Occidental,Sonoma,1,95465,105,99,6.1,up
-Oak Run,Shasta,1,96069,104,103,1.0,up
-Thermal,Riverside,1,92274,104,99,5.1,up
-Union City,Alameda,1,94587,104,103,1.0,up
-Greenville,Plumas,1,95947,102,97,5.2,up
-Rancho Cordova,Sacramento,2,"95670,95742",102,101,1.0,up
-Rio Dell,Humboldt,1,95562,100,70,42.9,up
-Camptonville,Yuba,1,95922,99,98,1.0,up
-Mill Creek,Tehama,1,96061,99,96,3.1,up
-Brawley,Imperial,1,92227,98,95,3.2,up
-Lemon Grove,San Diego,1,91945,98,92,6.5,up
-Montgomery Creek,Shasta,1,96065,98,106,-7.5,down
-Borrego Springs,San Diego,1,92004,97,94,3.2,up
-Loyalton,Sierra,1,96118,97,87,11.5,up
-Indian Wells,Riverside,1,92210,96,76,26.3,up
-Mount Hermon,Santa Cruz,1,95041,95,93,2.2,up
-San Miguel,San Luis Obispo,1,93451,95,85,11.8,up
-Clipper Mills,Butte,1,95930,94,94,0.0,flat
-Downieville,Sierra,1,95936,94,97,-3.1,down
-Fish Camp,Mariposa,1,93623,94,93,1.1,up
-Jenner,Sonoma,1,95450,94,93,1.1,up
-Piru,Ventura,1,93040,94,73,28.8,up
-San Juan Bautista,San Benito,1,95045,94,90,4.4,up
-Pioneertown,San Bernardino,1,92268,93,83,12.0,up
-Artesia,Los Angeles,1,90701,92,89,3.4,up
-Hawaiian Gardens,Los Angeles,1,90716,92,92,0.0,flat
-Lomita,Los Angeles,1,90717,92,92,0.0,flat
-Stanton,Orange,1,90680,92,89,3.4,up
-Oakley,Contra Costa,1,94561,91,87,4.6,up
-Sunol,Alameda,1,94586,91,93,-2.2,down
-Manhattan Beach,Los Angeles,1,90266,90,93,-3.2,down
-Philo,Mendocino,1,95466,90,90,0.0,flat
-Cypress,Orange,1,90630,89,95,-6.3,down
-Earp,San Bernardino,1,92242,89,93,-4.3,down
-Hanford,Kings,1,93230,89,109,-18.3,down
-Boonville,Mendocino,1,95415,88,85,3.5,up
-Tulare,Tulare,1,93274,88,86,2.3,up
-Fall River Mills,Shasta,1,96028,87,87,0.0,flat
-Pearblossom,Los Angeles,1,93553,87,88,-1.1,down
-Yuba City,Sutter,2,"95991,95993",87,79,10.1,up
-Dulzura,San Diego,1,91917,86,80,7.5,up
-Inyokern,Kern,1,93527,86,84,2.4,up
-Potrero,San Diego,1,91963,85,82,3.7,up
-Bangor,Butte,1,95914,84,87,-3.4,down
-Guatay,San Diego,1,91931,84,79,6.3,up
-Manteca,San Joaquin,2,"95336,95337",84,83,1.2,up
-San Martin,Santa Clara,1,95046,84,71,18.3,up
-Calpine,Sierra,1,96124,83,81,2.5,up
-Kings Canyon National Pk,Fresno,1,93633,83,82,1.2,up
-Albion,Mendocino,1,95410,82,77,6.5,up
-Citrus Heights,Sacramento,2,"95610,95621",82,88,-6.8,down
-Buellton,Santa Barbara,1,93427,81,83,-2.4,down
-Creston,San Luis Obispo,1,93432,81,85,-4.7,down
-Manton,Tehama,1,96059,81,75,8.0,up
-Summerland,Santa Barbara,1,93067,81,81,0.0,flat
-Delano,Kern,1,93215,80,75,6.7,up
-Lodi,San Joaquin,2,"95240,95242",80,77,3.9,up
-Pala,San Diego,1,92059,80,88,-9.1,down
-Happy Camp,Siskiyou,1,96039,79,81,-2.5,down
-Marina Del Rey,Los Angeles,1,90292,79,80,-1.2,down
-Llano,Los Angeles,1,93544,78,68,14.7,up
-Meadow Valley,Plumas,1,95956,78,74,5.4,up
-Shasta,Shasta,1,96087,78,75,4.0,up
-Oakdale,Stanislaus,1,95361,77,68,13.2,up
-Penngrove,Sonoma,1,94951,77,73,5.5,up
-Forbestown,Butte,1,95941,76,80,-5.0,down
-Greenfield,Monterey,1,93927,76,76,0.0,flat
-Helendale,San Bernardino,1,92342,76,67,13.4,up
-Hopland,Mendocino,1,95449,76,71,7.0,up
-Hornbrook,Siskiyou,1,96044,76,72,5.6,up
-Albany,Alameda,1,94706,75,76,-1.3,down
-San Ysidro,San Diego,1,92173,75,68,10.3,up
-Marina,Monterey,1,93933,74,71,4.2,up
-Emigrant Gap,Placer,1,95715,73,74,-1.4,down
-Mineral,Plumas,1,96063,73,77,-5.2,down
-Atherton,San Mateo,1,94027,72,61,18.0,up
-Norden,Placer,1,95724,71,69,2.9,up
-Old Station,Shasta,1,96071,71,74,-4.1,down
-Sloughhouse,Sacramento,1,95683,70,59,18.6,up
-Woodlake,Tulare,1,93286,70,54,29.6,up
-Blue Lake,Humboldt,1,95525,69,53,30.2,up
-Coachella,Riverside,1,92236,69,58,19.0,up
-Newberry Springs,San Bernardino,1,92365,69,67,3.0,up
-Santa Clara,Santa Clara,3,"95050,95051,95054",69,68,1.5,up
-Canyon Dam,Plumas,1,95923,68,67,1.5,up
-Cardiff By The Sea,San Diego,1,92007,68,68,0.0,flat
-Cassel,Shasta,1,96016,68,61,11.5,up
-Corona Del Mar,Orange,1,92625,66,65,1.5,up
-Junction City,Trinity,1,96048,66,63,4.8,up
-Mendota,Fresno,1,93640,66,70,-5.7,down
-Carlotta,Humboldt,1,95528,65,51,27.5,up
-Los Olivos,Santa Barbara,1,93441,65,60,8.3,up
-Rohnert Park,Sonoma,1,94928,65,73,-11.0,down
-Santa Fe Springs,Los Angeles,1,90670,65,66,-1.5,down
-Woodacre,Marin,1,94973,65,63,3.2,up
-Burnt Ranch,Trinity,1,95527,64,68,-5.9,down
-Ceres,Stanislaus,1,95307,64,67,-4.5,down
-Millville,Shasta,1,96062,64,68,-5.9,down
-Point Reyes Station,Marin,1,94956,64,70,-8.6,down
-Castroville,Monterey,1,95012,63,59,6.8,up
-Coalinga,Fresno,1,93210,63,56,12.5,up
-Lamont,Kern,1,93241,63,57,10.5,up
-Cayucos,San Luis Obispo,1,93430,62,54,14.8,up
-Stinson Beach,Marin,1,94970,62,56,10.7,up
-Exeter,Tulare,1,93221,61,52,17.3,up
-Parker Dam,San Bernardino,1,92267,61,50,22.0,up
-Manchester,Mendocino,1,95459,60,58,3.4,up
-Miramonte,Fresno,1,93641,60,58,3.4,up
-Patterson,Stanislaus,1,95363,60,65,-7.7,down
-Turlock,Stanislaus,2,"95380,95382",60,65,-7.7,down
-Bayside,Humboldt,1,95524,59,50,18.0,up
-El Portal,Mariposa,1,95318,59,59,0.0,flat
-Lee Vining,Mono,1,93541,59,59,0.0,flat
-Mad River,Trinity,1,95552,59,58,1.7,up
-Port Hueneme,Ventura,1,93041,59,54,9.3,up
-American Canyon,Napa,1,94503,58,56,3.6,up
-Forest Knolls,Marin,1,94933,58,54,7.4,up
-Glencoe,Calaveras,1,95232,57,56,1.8,up
-Hermosa Beach,Los Angeles,1,90254,57,57,0.0,flat
-Winters,Yolo,1,95694,57,51,11.8,up
-Amador City,Amador,1,95601,56,51,9.8,up
-Shafter,Kern,1,93263,56,50,12.0,up
-Echo Lake,El Dorado,1,95721,55,55,0.0,flat
-Mountain View,Santa Clara,3,"94040,94043,94041",55,48,14.6,up
-Paicines,San Benito,1,95043,55,58,-5.2,down
-Bridgeville,Trinity,1,95526,54,50,8.0,up
-Chilcoot,Plumas,1,96105,54,52,3.8,up
-Mcarthur,Lassen,1,96056,54,52,3.8,up
-Imperial Beach,San Diego,1,91932,53,56,-5.4,down
-Badger,Tulare,1,93603,52,53,-1.9,down
-Lagunitas,Marin,1,94938,52,49,6.1,up
-Selma,Fresno,1,93662,52,49,6.1,up
-West Sacramento,Yolo,2,"95691,95605",52,51,2.0,up
-Yorkville,Mendocino,1,95494,52,53,-1.9,down
-Brisbane,San Mateo,1,94005,51,44,15.9,up
-O Neals,Madera,1,93645,51,53,-3.8,down
-Capistrano Beach,Orange,1,92624,50,42,19.0,up
-Kneeland,Humboldt,1,95549,50,53,-5.7,down
-Mecca,Riverside,1,92254,50,44,13.6,up
-Point Arena,Mendocino,1,95468,50,48,4.2,up
-Imperial,Imperial,1,92251,49,41,19.5,up
-Pacific Grove,Monterey,1,93950,49,46,6.5,up
-Sierraville,Sierra,1,96126,49,50,-2.0,down
-Glenhaven,Lake,1,95443,48,43,11.6,up
-Los Alamos,Santa Barbara,1,93440,48,47,2.1,up
-Gold Run,Placer,1,95717,47,47,0.0,flat
-Palermo,Butte,1,95968,47,47,0.0,flat
-Wasco,Kern,1,93280,47,41,14.6,up
-Ross,Marin,1,94957,46,43,7.0,up
-Challenge,Yuba,1,95925,45,48,-6.2,down
-Covelo,Mendocino,1,95428,45,45,0.0,flat
-El Granada,San Mateo,1,94018,45,31,45.2,up
-Nicasio,Marin,1,94946,45,41,9.8,up
-Orland,Glenn,1,95963,45,33,36.4,up
-Orleans,Humboldt,1,95556,45,43,4.7,up
-Reedley,Fresno,1,93654,45,43,4.7,up
-Camp Meeker,Sonoma,1,95419,44,41,7.3,up
-Coleville,Mono,1,96107,43,41,4.9,up
-Playa Del Rey,Los Angeles,1,90293,43,44,-2.3,down
-Scotia,Humboldt,1,95565,43,31,38.7,up
-Castella,Shasta,1,96017,42,39,7.7,up
-French Gulch,Shasta,1,96033,42,43,-2.3,down
-Montara,San Mateo,1,94037,42,42,0.0,flat
-San Lorenzo,Alameda,1,94580,42,38,10.5,up
-Seaside,Monterey,1,93955,41,44,-6.8,down
-Signal Hill,Los Angeles,1,90755,41,40,2.5,up
-Boron,Kern,1,93516,40,32,25.0,up
-Burson,Calaveras,1,95225,40,43,-7.0,down
-Camp Nelson,Tulare,1,93208,40,43,-7.0,down
-Ferndale,Humboldt,1,95536,40,32,25.0,up
-Taylorsville,Plumas,1,95983,40,39,2.6,up
-Fair Oaks,Sacramento,1,95628,39,42,-7.1,down
-Firebaugh,Fresno,1,93622,39,39,0.0,flat
-Hoopa,Humboldt,1,95546,39,36,8.3,up
-Lone Pine,Inyo,1,93545,39,32,21.9,up
-Ranchita,San Diego,1,92066,39,40,-2.5,down
-Smith River,Del Norte,1,95567,39,38,2.6,up
-Villa Park,Orange,1,92861,39,31,25.8,up
-Bolinas,Marin,1,94924,38,35,8.6,up
-Seal Beach,Orange,1,90740,38,35,8.6,up
-Bethel Island,Contra Costa,1,94511,37,40,-7.5,down
-Dinuba,Tulare,1,93618,37,30,23.3,up
-Jacumba,San Diego,1,91934,37,37,0.0,flat
-Klamath River,Siskiyou,1,96050,37,32,15.6,up
-Los Molinos,Tehama,1,96055,37,40,-7.5,down
-Yermo,San Bernardino,1,92398,37,28,32.1,up
-Grover Beach,San Luis Obispo,1,93433,36,33,9.1,up
-Midway City,Orange,1,92655,36,31,16.1,up
-Caspar,Mendocino,1,95420,35,31,12.9,up
-Paynes Creek,Tehama,1,96075,35,39,-10.3,down
-Suisun City,Solano,1,94585,35,36,-2.8,down
-Woodland,Yolo,2,"95776,95695",35,39,-10.3,down
-Carmichael,Sacramento,1,95608,34,40,-15.0,down
-Davis,Yolo,2,"95618,95616",34,32,6.2,up
-Petrolia,Humboldt,1,95558,34,34,0.0,flat
-Wheatland,Yuba,1,95692,34,32,6.2,up
-Klamath,Del Norte,1,95548,33,28,17.9,up
-Milford,Lassen,1,96121,33,31,6.5,up
-Glennville,Kern,1,93226,32,30,6.7,up
-Rackerby,Yuba,1,95972,32,32,0.0,flat
-Rio Linda,Sacramento,1,95673,32,31,3.2,up
-Soledad,Monterey,1,93960,32,29,10.3,up
-Callahan,Siskiyou,1,96014,31,29,6.9,up
-Campbell,Santa Clara,1,95008,31,35,-11.4,down
-Cedarville,Modoc,1,96104,31,25,24.0,up
-Cotati,Sonoma,1,94931,31,29,6.9,up
-Edwards,Kern,1,93523,31,28,10.7,up
-Lindsay,Tulare,1,93247,31,23,34.8,up
-Mount Hamilton,Santa Clara,1,95140,31,32,-3.1,down
-Orangevale,Sacramento,1,95662,31,28,10.7,up
-Wilton,Sacramento,1,95693,31,27,14.8,up
-Coronado,San Diego,1,92118,30,30,0.0,flat
-Doyle,Lassen,1,96109,30,26,15.4,up
-Newark,Alameda,1,94560,30,26,15.4,up
-North Highlands,Sacramento,1,95660,30,27,11.1,up
-Oro Grande,San Bernardino,1,92368,30,25,20.0,up
-Stanford,Santa Clara,1,94305,30,23,30.4,up
-Stonyford,Colusa,1,95979,30,28,7.1,up
-Floriston,Nevada,1,96111,29,32,-9.4,down
-Los Alamitos,Orange,1,90720,29,24,20.8,up
-Niland,Imperial,1,92257,29,32,-9.4,down
-Big Oak Flat,Tuolumne,1,95305,28,26,7.7,up
-Elk,Mendocino,1,95432,28,29,-3.4,down
-Galt,Sacramento,1,95632,28,26,7.7,up
-Gustine,Merced,1,95322,28,23,21.7,up
-Hat Creek,Shasta,1,96040,28,26,7.7,up
-Maricopa,Kern,1,93252,28,27,3.7,up
-Orosi,Tulare,1,93647,28,30,-6.7,down
-Seiad Valley,Siskiyou,1,96086,28,30,-6.7,down
-Wallace,Calaveras,1,95254,28,23,21.7,up
-Capitola,Santa Cruz,1,95010,27,27,0.0,flat
-Davenport,Santa Cruz,1,95017,27,27,0.0,flat
-Discovery Bay,Contra Costa,1,94505,27,28,-3.6,down
-Los Banos,Merced,1,93635,27,25,8.0,up
-Onyx,Kern,1,93255,27,23,17.4,up
-Dillon Beach,Marin,1,94929,26,21,23.8,up
-Guadalupe,Santa Barbara,1,93434,26,20,30.0,up
-Marshall,Marin,1,94940,26,24,8.3,up
-Mc Farland,Kern,1,93250,26,24,8.3,up
-Rodeo,Contra Costa,1,94572,26,22,18.2,up
-Atwater,Merced,1,95301,25,26,-3.8,down
-Macdoel,Siskiyou,1,96058,25,20,25.0,up
-New Cuyama,Santa Barbara,1,93254,25,27,-7.4,down
-Yountville,Napa,1,94599,25,26,-3.8,down
-Chowchilla,Madera,1,93610,24,23,4.3,up
-Comptche,Mendocino,1,95427,24,22,9.1,up
-Drytown,Amador,1,95699,24,26,-7.7,down
-Dunlap,Fresno,1,93621,24,24,0.0,flat
-Holtville,Imperial,1,92250,24,20,20.0,up
-Kerman,Fresno,1,93630,24,26,-7.7,down
-La Palma,Orange,1,90623,24,25,-4.0,down
-Livingston,Merced,1,95334,24,24,0.0,flat
-Loma Mar,San Mateo,1,94021,24,24,0.0,flat
-Moss Beach,San Mateo,1,94038,24,26,-7.7,down
-Snelling,Merced,1,95369,24,23,4.3,up
-Strathmore,Tulare,1,93267,24,22,9.1,up
-Witter Springs,Lake,1,95493,24,22,9.1,up
-Korbel,Humboldt,1,95550,23,22,4.5,up
-Beckwourth,Plumas,1,96129,22,18,22.2,up
-Corcoran,Kings,1,93212,22,21,4.8,up
-Dorris,Siskiyou,1,96023,22,26,-15.4,down
-Herlong,Lassen,1,96113,22,19,15.8,up
-Independence,Inyo,1,93526,22,19,15.8,up
-Loleta,Humboldt,1,95551,22,18,22.2,up
-Olivehurst,Yuba,1,95961,22,23,-4.3,down
-Rio Nido,Sonoma,1,95471,22,25,-12.0,down
-Salida,Stanislaus,1,95368,22,23,-4.3,down
-San Geronimo,Marin,1,94963,22,22,0.0,flat
-San Simeon,San Luis Obispo,1,93452,22,20,10.0,up
-Westport,Mendocino,1,95488,22,21,4.8,up
-Big Bar,Trinity,1,96010,21,20,5.0,up
-El Segundo,Los Angeles,1,90245,21,23,-8.7,down
-Oceano,San Luis Obispo,1,93445,21,22,-4.5,down
-Sheridan,Placer,1,95681,21,18,16.7,up
-Twain,Plumas,1,95984,21,21,0.0,flat
-Adin,Modoc,1,96006,20,16,25.0,up
-Big Pine,Inyo,1,93513,20,23,-13.0,down
-Dos Rios,Mendocino,1,95429,20,19,5.3,up
-Guinda,Yolo,1,95637,20,19,5.3,up
-Navarro,Mendocino,1,95463,20,18,11.1,up
-Riverbank,Stanislaus,1,95367,20,18,11.1,up
-Gerber,Tehama,1,96035,19,17,11.8,up
-Orange Cove,Fresno,1,93646,19,17,11.8,up
-Trona,San Bernardino,1,93562,19,19,0.0,flat
-Vidal,San Bernardino,1,92280,19,22,-13.6,down
-Chualar,Monterey,1,93925,18,19,-5.3,down
-Colusa,Colusa,1,95932,18,16,12.5,up
-Crescent Mills,Plumas,1,95934,18,18,0.0,flat
-Deer Park,Napa,1,94576,18,20,-10.0,down
-Escalon,San Joaquin,1,95320,18,17,5.9,up
-Hydesville,Humboldt,1,95547,18,14,28.6,up
-San Gregorio,San Mateo,1,94074,18,18,0.0,flat
-Terra Bella,Tulare,1,93270,18,19,-5.3,down
-Avenal,Kings,1,93204,17,16,6.2,up
-Farmersville,Tulare,1,93223,17,19,-10.5,down
-Herald,Sacramento,1,95638,17,17,0.0,flat
-North Palm Springs,Riverside,1,92258,17,17,0.0,flat
-Piercy,Mendocino,1,95587,17,17,0.0,flat
-Pixley,Tulare,1,93256,17,14,21.4,up
-Rio Vista,Solano,1,94571,17,11,54.5,up
-Acampo,San Joaquin,1,95220,16,15,6.7,up
-Heber,Imperial,1,92249,16,13,23.1,up
-Hinkley,San Bernardino,1,92347,16,15,6.7,up
-Lake City,Modoc,1,96115,16,13,23.1,up
-Lathrop,San Joaquin,1,95330,16,12,33.3,up
-Lemon Cove,Tulare,1,93244,16,11,45.5,up
-Playa Vista,Los Angeles,1,90094,16,14,14.3,up
-Port Costa,Contra Costa,1,94569,16,13,23.1,up
-Buttonwillow,Kern,1,93206,15,14,7.1,up
-Delhi,Merced,1,95315,15,17,-11.8,down
-Earlimart,Tulare,1,93219,15,10,50.0,up
-Gridley,Butte,1,95948,15,12,25.0,up
-Orick,Humboldt,1,95555,15,14,7.1,up
-Winton,Merced,1,95388,15,15,0.0,flat
-Canby,Modoc,1,96015,14,17,-17.6,down
-Desert Center,Riverside,1,92239,14,13,7.7,up
-Grenada,Siskiyou,1,96038,14,18,-22.2,down
-Isleton,Sacramento,1,95641,14,13,7.7,up
-Kingsburg,Fresno,1,93631,14,13,7.7,up
-Tres Pinos,San Benito,1,95075,14,15,-6.7,down
-Bodega,Sonoma,1,94922,13,19,-31.6,down
-Calipatria,Imperial,1,92233,13,12,8.3,up
-Campo Seco,Calaveras,1,95226,13,16,-18.8,down
-Davis Creek,Modoc,1,96108,13,16,-18.8,down
-Freedom,Santa Cruz,1,95019,13,14,-7.1,down
-Leggett,Mendocino,1,95585,13,17,-23.5,down
-Lemoore,Kings,1,93245,13,14,-7.1,down
-Lockwood,Monterey,1,93932,13,12,8.3,up
-Platina,Shasta,1,96076,13,10,30.0,up
-Tulelake,Siskiyou,1,96134,13,11,18.2,up
-Weimar,Placer,1,95736,13,15,-13.3,down
-Annapolis,Sonoma,1,95412,12,15,-20.0,down
-Denair,Stanislaus,1,95316,12,10,20.0,up
-Fowler,Fresno,1,93625,12,13,-7.7,down
-Litchfield,Lassen,1,96117,12,13,-7.7,down
-Live Oak,Sutter,1,95953,12,13,-7.7,down
-Newman,Stanislaus,1,95360,12,10,20.0,up
-Redcrest,Humboldt,1,95569,12,10,20.0,up
-Seeley,Imperial,1,92273,12,11,9.1,up
-Alviso,Santa Clara,1,95002,11,13,-15.4,down
-Antelope,Sacramento,1,95843,11,12,-8.3,down
-Bieber,Lassen,1,96009,11,8,37.5,up
-Byron,Contra Costa,1,94514,11,7,57.1,up
-Caruthers,Fresno,1,93609,11,10,10.0,up
-Durham,Butte,1,95938,11,8,37.5,up
-Hyampom,Trinity,1,96046,11,11,0.0,flat
-Valyermo,Los Angeles,1,93563,11,11,0.0,flat
-Woody,Kern,1,93287,11,11,0.0,flat
-Zenia,Trinity,1,95595,11,12,-8.3,down
-Alderpoint,Humboldt,1,95511,10,10,0.0,flat
-Arbuckle,Colusa,1,95912,10,7,42.9,up
-Blocksburg,Humboldt,1,95514,10,13,-23.1,down
-Capay,Yolo,1,95607,10,10,0.0,flat
-Dos Palos,Merced,1,93620,10,11,-9.1,down
-Elk Creek,Glenn,1,95939,10,12,-16.7,down
-Gonzales,Monterey,1,93926,10,10,0.0,flat
-Goodyears Bar,Sierra,1,95944,10,12,-16.7,down
-Linden,San Joaquin,1,95236,10,11,-9.1,down
-Lockeford,San Joaquin,1,95237,10,10,0.0,flat
-Lookout,Modoc,1,96054,10,9,11.1,up
-Parlier,Fresno,1,93648,10,11,-9.1,down
-Scott Bar,Siskiyou,1,96085,10,10,0.0,flat
-Topaz,Mono,1,96133,10,10,0.0,flat
-Alleghany,Sierra,1,95910,9,10,-10.0,down
-Alpaugh,Tulare,1,93201,9,7,28.6,up
-Branscomb,Mendocino,1,95417,9,9,0.0,flat
-Cutler,Tulare,1,93615,9,11,-18.2,down
-Daggett,San Bernardino,1,92327,9,9,0.0,flat
-Dixon,Solano,1,95620,9,14,-35.7,down
-Elverta,Sacramento,1,95626,9,13,-30.8,down
-Esparto,Yolo,1,95627,9,8,12.5,up
-Fort Bidwell,Modoc,1,96112,9,10,-10.0,down
-Gazelle,Siskiyou,1,96034,9,7,28.6,up
-Hilmar,Merced,1,95324,9,10,-10.0,down
-Hughson,Stanislaus,1,95326,9,10,-10.0,down
-Rumsey,Yolo,1,95679,9,9,0.0,flat
-Shandon,San Luis Obispo,1,93461,9,7,28.6,up
-Sunset Beach,Orange,1,90742,9,9,0.0,flat
-Willows,Glenn,1,95988,9,7,28.6,up
-Farmington,San Joaquin,1,95230,8,12,-33.3,down
-Sultana,Tulare,1,93666,8,7,14.3,up
-Biggs,Butte,1,95917,7,5,40.0,up
-Brooks,Yolo,1,95606,7,5,40.0,up
-French Camp,San Joaquin,1,95231,7,8,-12.5,down
-Ivanhoe,Tulare,1,93235,7,7,0.0,flat
-Keyes,Stanislaus,1,95328,7,8,-12.5,down
-Likely,Modoc,1,96116,7,8,-12.5,down
-Olancha,Inyo,1,93549,7,5,40.0,up
-Palo Verde,Imperial,1,92266,7,6,16.7,up
-Standish,Lassen,1,96128,7,8,-12.5,down
-Sutter,Sutter,1,95982,7,9,-22.2,down
-Tecate,San Diego,1,91980,7,6,16.7,up
-Winterhaven,Imperial,1,92283,7,5,40.0,up
-Bryn Mawr,San Bernardino,1,92318,6,6,0.0,flat
-Clements,San Joaquin,1,95227,6,8,-25.0,down
-Eagleville,Modoc,1,96110,6,7,-14.3,down
-Forks Of Salmon,Siskiyou,1,96031,6,7,-14.3,down
-Graton,Sonoma,1,95444,6,3,100.0,up
-Johannesburg,Kern,1,93528,6,6,0.0,flat
-Le Grand,Merced,1,95333,6,9,-33.3,down
-Ocotillo,Imperial,1,92259,6,3,100.0,up
-Princeton,Colusa,1,95970,6,7,-14.3,down
-Ripon,San Joaquin,1,95366,6,7,-14.3,down
-Riverdale,Fresno,1,93656,6,6,0.0,flat
-Samoa,Humboldt,1,95564,6,6,0.0,flat
-San Ardo,Monterey,1,93450,6,8,-25.0,down
-Sequoia National Park,Tulare,1,93262,6,6,0.0,flat
-Waterford,Stanislaus,1,95386,6,12,-50.0,down
-Westmorland,Imperial,1,92281,6,5,20.0,up
-Williams,Colusa,1,95987,6,7,-14.3,down
-Armona,Kings,1,93202,5,5,0.0,flat
-Crows Landing,Stanislaus,1,95313,5,4,25.0,up
-Ducor,Tulare,1,93218,5,6,-16.7,down
-Fulton,Sonoma,1,95439,5,5,0.0,flat
-Lost Hills,Kern,1,93249,5,6,-16.7,down
-Moss Landing,Monterey,1,95039,5,5,0.0,flat
-San Joaquin,Fresno,1,93660,5,6,-16.7,down
-Stratford,Kings,1,93266,5,4,25.0,up
-Tranquillity,Fresno,1,93668,5,4,25.0,up
-Walnut Grove,Sacramento,1,95690,5,7,-28.6,down
-Baker,San Bernardino,1,92309,4,5,-20.0,down
-Benton,Mono,1,93512,4,4,0.0,flat
-Clarksburg,Yolo,1,95612,4,2,100.0,up
-Empire,Stanislaus,1,95319,4,4,0.0,flat
-Kettleman City,Kings,1,93239,4,4,0.0,flat
-Salton City,Imperial,1,92275,4,4,0.0,flat
-Somes Bar,Siskiyou,1,95568,4,5,-20.0,down
-Stevinson,Merced,1,95374,4,2,100.0,up
-Woodbridge,San Joaquin,1,95258,4,4,0.0,flat
-Dunnigan,Yolo,1,95937,3,2,50.0,up
-El Nido,Merced,1,95317,3,3,0.0,flat
-Hamilton City,Glenn,1,95951,3,3,0.0,flat
-Hickman,Stanislaus,1,95323,3,2,50.0,up
-Laton,Fresno,1,93242,3,4,-25.0,down
-Mather,Sacramento,1,95655,3,3,0.0,flat
-Rio Oso,Sutter,1,95674,3,5,-40.0,down
-San Lucas,Monterey,1,93954,3,4,-25.0,down
-Tipton,Tulare,1,93272,3,3,0.0,flat
-Tomales,Marin,1,94971,3,2,50.0,up
-Cantua Creek,Fresno,1,93608,2,2,0.0,flat
-Casmalia,Santa Barbara,1,93429,2,2,0.0,flat
-Coyote,Santa Clara,1,95013,2,3,-33.3,down
-Del Rey,Fresno,1,93616,2,2,0.0,flat
-Fellows,Kern,1,93224,2,2,0.0,flat
-Harmony,San Luis Obispo,1,93435,2,2,0.0,flat
-Meridian,Sutter,1,95957,2,1,100.0,up
-Planada,Merced,1,95365,2,4,-50.0,down
-Pleasant Grove,Sutter,1,95668,2,2,0.0,flat
-Randsburg,Kern,1,93554,2,1,100.0,up
-Spreckels,Monterey,1,93962,2,2,0.0,flat
-Surfside,Orange,1,90743,2,4,-50.0,down
-Tecopa,Inyo,1,92389,2,1,100.0,up
-Thornton,San Joaquin,1,95686,2,2,0.0,flat
-Tupman,Kern,1,93276,2,3,-33.3,down
-Victor,San Joaquin,1,95253,2,2,0.0,flat
-Wendel,Lassen,1,96136,2,2,0.0,flat
-Ballico,Merced,1,95303,1,1,0.0,flat
-Belden,Plumas,1,95915,1,1,0.0,flat
-Biola,Fresno,1,93606,1,1,0.0,flat
-Courtland,Sacramento,1,95615,1,,,new
-Five Points,Fresno,1,93624,1,1,0.0,flat
-Fort Irwin,San Bernardino,1,92310,1,1,0.0,flat
-Huron,Fresno,1,93234,1,1,0.0,flat
-Knights Landing,Sutter,1,95645,1,1,0.0,flat
-Knightsen,Contra Costa,1,94548,1,,,new
-Ludlow,San Bernardino,1,92338,1,1,0.0,flat
-Madeline,Lassen,1,96119,1,1,0.0,flat
-Madison,Yolo,1,95653,1,,,new
-March Air Reserve Base,Riverside,1,92518,1,1,0.0,flat
-Nipton,San Bernardino,1,92364,1,1,0.0,flat
-Red Mountain,San Bernardino,1,93558,1,1,0.0,flat
-Shoshone,Inyo,1,92384,1,2,-50.0,down
-Termo,Lassen,1,96132,1,1,0.0,flat
-Traver,Tulare,1,93673,1,1,0.0,flat
-Valley Ford,Sonoma,1,94972,1,1,0.0,flat
-Vernalis,Stanislaus,1,95385,1,1,0.0,flat
-Zamora,Yolo,1,95698,1,1,0.0,flat
+city,county,zip_count,zips,policies,prior_policies,change_pct,direction,yoy_change_pct,yoy_direction
+Los Angeles,Los Angeles,60,"90011,90046,90044,90049,90077,90003,90001,90068,90037,90063,90002,90022,90023,90047,90042,90018,90065,90062,90026,90031,90059,90043,90019,90032,90033,90016,90006,90061,90027,90007,90039,90004,90041,90029,90008,90040,90036,90024,90048,90038,90035,90005,90034,90066,90012,90015,90025,90045,90064,90057,90020,90028,90058,90056,90017,90021,90067,90013,90014,90089",42444,42054,0.9,up,24.6,up
+San Diego,San Diego,32,"92127,92131,92129,92130,92128,92126,92119,92124,92105,92154,92120,92115,92117,92113,92116,92114,92103,92102,92111,92122,92104,92121,92123,92110,92108,92109,92107,92139,92101,92106,92145,92140",14224,13087,8.7,up,92.5,up
+Grass Valley,Nevada,2,"95949,95945",9189,9125,0.7,up,20.6,up
+Placerville,El Dorado,1,95667,7398,7405,-0.1,flat,15.8,up
+Corona,Riverside,5,"92883,92882,92880,92881,92879",6887,6091,13.1,up,65.0,up
+Lake Arrowhead,San Bernardino,1,92352,6831,6696,2.0,up,6.4,up
+Riverside,Riverside,8,"92503,92509,92507,92506,92508,92504,92505,92501",6813,6054,12.5,up,95.9,up
+Truckee,Nevada,1,96161,6316,6079,3.9,up,14.0,up
+Escondido,San Diego,4,"92026,92027,92029,92025",5867,5472,7.2,up,52.5,up
+Big Bear Lake,San Bernardino,1,92315,5718,5571,2.6,up,7.7,up
+Oakland,Alameda,14,"94611,94605,94619,94602,94601,94618,94606,94621,94603,94610,94609,94607,94612,94613",5695,5205,9.4,up,60.9,up
+Big Bear City,San Bernardino,1,92314,5488,5300,3.5,up,8.8,up
+Sonora,Tuolumne,1,95370,5103,5031,1.4,up,10.0,up
+South Lake Tahoe,El Dorado,1,96150,5072,4955,2.4,up,13.0,up
+Auburn,Placer,2,"95602,95603",5068,4991,1.5,up,23.0,up
+Murrieta,Riverside,2,"92562,92563",4742,4151,14.2,up,73.3,up
+Arnold,Calaveras,1,95223,4735,4674,1.3,up,8.0,up
+Nevada City,Nevada,1,95959,4711,4646,1.4,up,16.5,up
+San Bernardino,San Bernardino,7,"92407,92404,92410,92405,92411,92408,92401",4596,4226,8.8,up,49.3,up
+Santa Barbara,Santa Barbara,7,"93108,93105,93103,93111,93110,93101,93109",4590,4357,5.3,up,40.0,up
+Lake Elsinore,Riverside,2,"92530,92532",4336,3799,14.1,up,54.2,up
+Crestline,San Bernardino,1,92325,4280,4257,0.5,up,5.3,up
+Moreno Valley,Riverside,4,"92555,92557,92553,92551",4236,3700,14.5,up,85.9,up
+Hemet,Riverside,3,"92544,92545,92543",4220,3810,10.8,up,85.2,up
+Perris,Riverside,2,"92570,92571",4031,3640,10.7,up,53.6,up
+El Cajon,San Diego,3,"92019,92021,92020",3816,3503,8.9,up,58.1,up
+Fallbrook,San Diego,1,92028,3793,3519,7.8,up,37.5,up
+Ramona,San Diego,1,92065,3768,3480,8.3,up,28.8,up
+Oroville,Butte,2,"95966,95965",3671,3604,1.9,up,18.0,up
+Glendale,Los Angeles,9,"91208,91206,91202,91207,91201,91205,91203,91204,91210",3536,3361,5.2,up,41.8,up
+Temecula,Riverside,3,"92592,92591,92590",3455,3178,8.7,up,69.6,up
+Trabuco Canyon,Orange,1,92679,3200,2851,12.2,up,30.4,up
+Simi Valley,Ventura,2,"93065,93063",3166,2784,13.7,up,66.6,up
+Yucaipa,San Bernardino,1,92399,3122,2732,14.3,up,46.8,up
+Canyon Country,Los Angeles,2,"91387,91351",3109,2833,9.7,up,46.0,up
+Santa Clarita,Los Angeles,2,"91390,91350",3032,2791,8.6,up,49.0,up
+Los Gatos,Santa Clara,3,"95033,95030,95032",3003,2926,2.6,up,63.0,up
+Alpine,San Diego,1,91901,3002,2873,4.5,up,18.2,up
+Beaumont,Riverside,1,92223,2944,2443,20.5,up,92.5,up
+Chino Hills,San Bernardino,1,91709,2924,2627,11.3,up,55.3,up
+Valley Center,San Diego,1,92082,2852,2755,3.5,up,24.8,up
+Running Springs,San Bernardino,1,92382,2801,2756,1.6,up,7.7,up
+Idyllwild,Riverside,1,92549,2775,2756,0.7,up,8.2,up
+Calabasas,Los Angeles,1,91302,2757,2642,4.4,up,37.5,up
+Beverly Hills,Los Angeles,3,"90210,90211,90212",2755,2725,1.1,up,18.0,up
+Redding,Shasta,3,"96003,96001,96002",2754,2518,9.4,up,39.1,up
+Bakersfield,Kern,11,"93307,93306,93308,93304,93305,93309,93313,93312,93301,93311,93314",2716,2654,2.3,up,55.9,up
+Pollock Pines,El Dorado,1,95726,2691,2701,-0.4,flat,9.9,up
+Orinda,Contra Costa,1,94563,2674,2617,2.2,up,119.7,up
+Palmdale,Los Angeles,4,"93551,93550,93552,93591",2632,2438,8.0,up,56.5,up
+San Marcos,San Diego,2,"92078,92069",2593,2320,11.8,up,87.7,up
+Shingle Springs,El Dorado,1,95682,2577,2525,2.1,up,20.2,up
+Sylmar,Los Angeles,1,91342,2500,2267,10.3,up,34.9,up
+Compton,Los Angeles,3,"90221,90220,90222",2497,2445,2.1,up,29.0,up
+Malibu,Los Angeles,1,90265,2492,2528,-1.4,down,6.8,up
+Hesperia,San Bernardino,2,"92345,92344",2456,2213,11.0,up,56.6,up
+Santa Rosa,Sonoma,6,"95404,95409,95403,95405,95407,95401",2400,2413,-0.5,down,67.5,up
+Thousand Oaks,Ventura,2,"91362,91360",2400,2283,5.1,up,84.1,up
+Long Beach,Los Angeles,11,"90805,90813,90806,90810,90802,90804,90803,90807,90814,90808,90815",2367,2317,2.2,up,44.0,up
+Fontana,San Bernardino,3,"92336,92335,92337",2320,2131,8.9,up,74.8,up
+Castaic,Los Angeles,1,91384,2225,2128,4.6,up,33.7,up
+Pioneer,Amador,1,95666,2216,2207,0.4,flat,8.1,up
+Pasadena,Los Angeles,6,"91107,91103,91104,91105,91106,91101",2183,2144,1.8,up,46.2,up
+Berkeley,Alameda,9,"94708,94705,94707,94704,94703,94709,94702,94710,94720",2178,1970,10.6,up,75.6,up
+Twain Harte,Tuolumne,1,95383,2145,2123,1.0,up,6.5,up
+Mariposa,Mariposa,1,95338,2139,2126,0.6,up,10.6,up
+Groveland,Tuolumne,1,95321,2117,2130,-0.6,down,5.4,up
+Tehachapi,Kern,1,93561,2108,2018,4.5,up,26.6,up
+Magalia,Butte,1,95954,2105,2097,0.4,flat,8.1,up
+Santa Cruz,Santa Cruz,4,"95060,95065,95062,95064",2056,2038,0.9,up,74.0,up
+San Jose,Santa Clara,27,"95120,95127,95111,95148,95112,95135,95122,95123,95138,95116,95132,95136,95121,95124,95125,95126,95110,95129,95118,95128,95134,95131,95119,95133,95117,95139,95130",2053,1880,9.2,up,78.2,up
+Paradise,Butte,1,95969,2028,1967,3.1,up,14.7,up
+San Francisco,San Francisco,24,"94112,94110,94122,94134,94114,94117,94121,94116,94131,94118,94124,94127,94123,94115,94133,94132,94109,94107,94103,94102,94105,94158,94108,94111",2016,1861,8.3,up,72.5,up
+Irvine,Orange,9,"92618,92603,92620,92602,92612,92604,92614,92606,92617",2013,1812,11.1,up,119.9,up
+Colfax,Placer,1,95713,2006,1984,1.1,up,15.6,up
+Wildomar,Riverside,1,92595,2006,1771,13.3,up,46.1,up
+Woodland Hills,Los Angeles,2,"91364,91367",1975,1906,3.6,up,52.4,up
+Topanga,Los Angeles,1,90290,1972,1966,0.3,flat,2.7,up
+Sugarloaf,San Bernardino,1,92386,1950,1900,2.6,up,8.2,up
+Oceanside,San Diego,4,"92057,92056,92058,92054",1922,1763,9.0,up,110.4,up
+Victorville,San Bernardino,3,"92392,92395,92394",1919,1689,13.6,up,91.7,up
+Chula Vista,San Diego,5,"91914,91913,91915,91910,91911",1878,1682,11.7,up,128.8,up
+Lafayette,Contra Costa,1,94549,1869,1773,5.4,up,91.3,up
+Lancaster,Los Angeles,3,"93535,93536,93534",1849,1659,11.5,up,101.1,up
+Anaheim,Orange,7,"92808,92807,92804,92805,92801,92806,92802",1818,1642,10.7,up,81.4,up
+Whittier,Los Angeles,6,"90601,90605,90602,90606,90604,90603",1816,1699,6.9,up,50.1,up
+Diamond Bar,Los Angeles,1,91765,1808,1655,9.2,up,68.2,up
+Danville,Contra Costa,2,"94506,94526",1797,1745,3.0,up,98.3,up
+Encino,Los Angeles,2,"91436,91316",1792,1750,2.4,up,52.2,up
+Penn Valley,Nevada,1,95946,1748,1730,1.0,up,24.6,up
+Foresthill,Placer,1,95631,1742,1715,1.6,up,10.1,up
+Coarsegold,Madera,1,93614,1735,1701,2.0,up,20.5,up
+Lakeside,San Diego,1,92040,1732,1564,10.7,up,68.7,up
+Wrightwood,San Bernardino,1,92397,1726,1682,2.6,up,7.0,up
+Sherman Oaks,Los Angeles,2,"91423,91403",1704,1696,0.5,flat,34.6,up
+Agoura Hills,Los Angeles,1,91301,1702,1626,4.7,up,41.3,up
+Ojai,Ventura,1,93023,1684,1603,5.1,up,24.0,up
+Redlands,San Bernardino,2,"92373,92374",1681,1515,11.0,up,50.1,up
+El Dorado Hills,El Dorado,1,95762,1668,1621,2.9,up,77.7,up
+Carlsbad,San Diego,4,"92009,92011,92010,92008",1663,1537,8.2,up,116.5,up
+Yorba Linda,Orange,2,"92887,92886",1662,1521,9.3,up,59.1,up
+Pomona,Los Angeles,3,"91766,91767,91768",1656,1575,5.1,up,63.2,up
+Tahoe City,Placer,1,96145,1654,1572,5.2,up,20.6,up
+Oakhurst,Madera,1,93644,1650,1589,3.8,up,17.7,up
+Jamul,San Diego,1,91935,1626,1584,2.7,up,19.1,up
+San Clemente,Orange,2,"92673,92672",1625,1402,15.9,up,86.4,up
+Westlake Village,Ventura,1,91361,1585,1474,7.5,up,45.8,up
+Mammoth Lakes,Mono,1,93546,1583,1372,15.4,up,53.8,up
+Poway,San Diego,1,92064,1569,1434,9.4,up,71.7,up
+Laguna Beach,Orange,1,92651,1568,1434,9.3,up,48.0,up
+South Gate,Los Angeles,1,90280,1562,1531,2.0,up,37.2,up
+Banning,Riverside,1,92220,1552,1340,15.8,up,78.0,up
+Bell Gardens,Los Angeles,1,90201,1548,1500,3.2,up,44.5,up
+Boulder Creek,Santa Cruz,1,95006,1542,1492,3.4,up,29.4,up
+Shaver Lake,Fresno,1,93664,1534,1507,1.8,up,11.5,up
+Menifee,Riverside,1,92584,1522,1325,14.9,up,109.3,up
+Scotts Valley,Santa Cruz,1,95066,1484,1454,2.1,up,55.2,up
+Vista,San Diego,3,"92084,92081,92083",1483,1439,3.1,up,58.5,up
+Kelseyville,Lake,1,95451,1448,1385,4.5,up,11.0,up
+Rancho Cucamonga,San Bernardino,4,"91739,91737,91701,91730",1445,1334,8.3,up,72.4,up
+Tujunga,Los Angeles,1,91042,1442,1322,9.1,up,30.9,up
+Inglewood,Los Angeles,5,"90304,90303,90301,90302,90305",1426,1363,4.6,up,26.0,up
+Felton,Santa Cruz,1,95018,1421,1417,0.3,flat,50.1,up
+Huntington Park,Los Angeles,1,90255,1410,1372,2.8,up,36.4,up
+Pacific Palisades,Los Angeles,1,90272,1391,1557,-10.7,down,8.9,up
+Sun City,Riverside,2,"92585,92586",1352,1178,14.8,up,143.4,up
+Phelan,San Bernardino,1,92371,1351,1243,8.7,up,39.3,up
+Rancho Santa Margarita,Orange,1,92688,1351,1093,23.6,up,78.0,up
+Meadow Vista,Placer,1,95722,1334,1347,-1.0,down,9.2,up
+Carmel,Monterey,1,93923,1323,1259,5.1,up,23.9,up
+Murphys,Calaveras,1,95247,1308,1315,-0.5,down,10.0,up
+Burbank,Los Angeles,5,"91504,91501,91505,91506,91502",1301,1182,10.1,up,66.7,up
+Porter Ranch,Los Angeles,1,91326,1301,1098,18.5,up,82.4,up
+Apple Valley,San Bernardino,2,"92308,92307",1295,1137,13.9,up,82.5,up
+Ventura,Ventura,3,"93001,93003,93004",1279,1184,8.0,up,53.6,up
+Pacoima,Los Angeles,1,91331,1271,1218,4.4,up,24.3,up
+Salinas,Monterey,5,"93907,93908,93905,93906,93901",1270,1210,5.0,up,26.0,up
+Winchester,Riverside,1,92596,1262,996,26.7,up,196.4,up
+Aptos,Santa Cruz,1,95003,1248,1206,3.5,up,95.1,up
+La Puente,Los Angeles,2,"91744,91746",1237,1225,1.0,up,32.3,up
+Santee,San Diego,1,92071,1237,1092,13.3,up,84.8,up
+Tarzana,Los Angeles,1,91356,1227,1223,0.3,flat,52.5,up
+Ladera Ranch,Orange,1,92694,1225,1023,19.7,up,96.0,up
+Ukiah,Mendocino,1,95482,1225,1144,7.1,up,38.8,up
+Newbury Park,Ventura,1,91320,1217,1092,11.4,up,67.2,up
+Newhall,Los Angeles,1,91321,1208,1096,10.2,up,37.5,up
+Valencia,Los Angeles,2,"91354,91355",1206,1074,12.3,up,119.6,up
+Highland,San Bernardino,1,92346,1203,1070,12.4,up,69.8,up
+Quail Valley,Riverside,1,92587,1180,1058,11.5,up,81.2,up
+La Canada Flintridge,Los Angeles,1,91011,1178,1104,6.7,up,36.8,up
+Chatsworth,Los Angeles,1,91311,1138,1064,7.0,up,56.7,up
+Pine Grove,Amador,1,95665,1138,1125,1.2,up,8.1,up
+La Crescenta,Los Angeles,1,91214,1136,1034,9.9,up,51.2,up
+Canoga Park,Los Angeles,2,"91304,91303",1100,1024,7.4,up,46.3,up
+Julian,San Diego,1,92036,1078,1067,1.0,up,10.5,up
+Westwood,Plumas,1,96137,1074,1055,1.8,up,13.9,up
+Colton,San Bernardino,1,92324,1069,991,7.9,up,47.9,up
+North Hollywood,Los Angeles,4,"91605,91606,91601,91602",1067,1059,0.8,up,42.3,up
+Santa Ana,Orange,6,"92705,92704,92703,92707,92701,92706",1062,1012,4.9,up,60.9,up
+Camino,El Dorado,1,95709,1061,1065,-0.4,flat,13.9,up
+Napa,Napa,2,"94558,94559",1061,1014,4.6,up,32.5,up
+Guerneville,Sonoma,1,95446,1060,1009,5.1,up,14.5,up
+Lynwood,Los Angeles,1,90262,1060,1012,4.7,up,31.6,up
+Spring Valley,San Diego,2,"91977,91978",1051,981,7.1,up,75.8,up
+Laguna Niguel,Orange,1,92677,1049,885,18.5,up,101.1,up
+Calimesa,Riverside,1,92320,1045,907,15.2,up,58.3,up
+Hacienda Heights,Los Angeles,1,91745,1042,948,9.9,up,58.3,up
+Sunland,Los Angeles,1,91040,1040,971,7.1,up,37.9,up
+Willits,Mendocino,1,95490,1024,981,4.4,up,15.0,up
+San Jacinto,Riverside,2,"92583,92582",1022,926,10.4,up,87.4,up
+Studio City,Los Angeles,1,91604,1022,1013,0.9,up,30.4,up
+Ontario,San Bernardino,3,"91761,91762,91764",1009,942,7.1,up,74.4,up
+Rancho Santa Fe,San Diego,2,"92067,92091",1003,1016,-1.3,down,92.4,up
+Watsonville,Santa Cruz,1,95076,1002,938,6.8,up,70.9,up
+Twin Peaks,San Bernardino,1,92391,997,985,1.2,up,5.7,up
+Altadena,Los Angeles,1,91001,992,1001,-0.9,down,4.5,up
+Ben Lomond,Santa Cruz,1,95005,991,983,0.8,up,45.2,up
+Pine Mountain Club,Kern,1,93222,985,970,1.5,up,16.2,up
+Stevenson Ranch,Los Angeles,1,91381,973,856,13.7,up,55.4,up
+Camarillo,Ventura,2,"93012,93010",945,841,12.4,up,93.3,up
+Acton,Los Angeles,1,93510,943,913,3.3,up,20.0,up
+Sun Valley,Los Angeles,1,91352,940,877,7.2,up,29.2,up
+Mill Valley,Marin,1,94941,935,840,11.3,up,48.7,up
+Rialto,San Bernardino,2,"92376,92377",933,861,8.4,up,71.9,up
+Rowland Heights,Los Angeles,1,91748,933,807,15.6,up,92.6,up
+Walnut,Los Angeles,1,91789,924,814,13.5,up,102.0,up
+Fresno,Fresno,19,"93702,93706,93727,93722,93728,93725,93703,93720,93705,93650,93704,93726,93711,93701,93730,93723,93710,93721,93737",923,913,1.1,up,43.1,up
+Glendora,Los Angeles,2,"91741,91740",915,814,12.4,up,53.6,up
+Long Barn,Tuolumne,1,95335,911,892,2.1,up,3.5,up
+Shingletown,Shasta,1,96088,905,880,2.8,up,7.7,up
+Copperopolis,Calaveras,1,95228,902,901,0.1,flat,18.7,up
+Clearlake,Lake,1,95422,897,844,6.3,up,24.5,up
+Olympic Valley,Placer,1,96146,897,874,2.6,up,18.9,up
+West Covina,Los Angeles,3,"91791,91790,91792",897,791,13.4,up,63.1,up
+Frazier Park,Kern,1,93225,895,882,1.5,up,26.2,up
+Van Nuys,Los Angeles,4,"91406,91405,91401,91411",880,846,4.0,up,40.3,up
+Moorpark,Ventura,1,93021,878,789,11.3,up,56.9,up
+Garden Valley,El Dorado,1,95633,875,882,-0.8,down,18.4,up
+Carmel Valley,Monterey,1,93924,873,852,2.5,up,19.8,up
+Sacramento,Sacramento,28,"95828,95823,95822,95820,95838,95829,95815,95818,95824,95833,95816,95817,95827,95835,95821,95826,95864,95842,95832,95834,95841,95811,95825,95831,95819,95814,95837,95830",862,876,-1.6,down,56.4,up
+Mount Shasta,Siskiyou,1,96067,854,803,6.4,up,43.1,up
+Alamo,Contra Costa,1,94507,845,827,2.2,up,99.3,up
+Paso Robles,San Luis Obispo,1,93446,834,758,10.0,up,47.8,up
+Tahoma,El Dorado,1,96142,833,803,3.7,up,17.1,up
+Atascadero,San Luis Obispo,1,93422,826,806,2.5,up,53.5,up
+Palm Springs,Riverside,2,"92264,92262",824,714,15.4,up,193.8,up
+Georgetown,El Dorado,1,95634,817,814,0.4,flat,18.8,up
+Jamestown,Tuolumne,1,95327,817,786,3.9,up,17.1,up
+Castro Valley,Alameda,2,"94552,94546",816,713,14.4,up,73.5,up
+Anderson,Shasta,1,96007,814,758,7.4,up,21.7,up
+Carnelian Bay,Placer,1,96140,813,781,4.1,up,18.3,up
+La Verne,Los Angeles,1,91750,813,745,9.1,up,55.2,up
+Oak Park,Ventura,1,91377,810,729,11.1,up,70.7,up
+Yucca Valley,San Bernardino,1,92284,793,678,17.0,up,75.2,up
+Wofford Heights,Kern,1,93285,792,792,0.0,flat,5.6,up
+San Luis Obispo,San Luis Obispo,2,"93401,93405",791,759,4.2,up,74.9,up
+Cottonwood,Tehama,1,96022,788,734,7.4,up,21.1,up
+El Dorado,El Dorado,1,95623,785,755,4.0,up,25.0,up
+Granada Hills,Los Angeles,1,91344,784,772,1.6,up,48.7,up
+Stockton,San Joaquin,11,"95205,95206,95215,95204,95203,95207,95210,95209,95212,95202,95219",783,774,1.2,up,44.1,up
+Cool,El Dorado,1,95614,779,758,2.8,up,21.7,up
+Arcadia,Los Angeles,2,"91006,91007",776,749,3.6,up,73.8,up
+Tuolumne,Tuolumne,1,95379,775,773,0.3,flat,4.7,up
+Mi Wuk Village,Tuolumne,1,95346,774,771,0.4,flat,9.1,up
+Somerset,El Dorado,1,95684,774,770,0.5,up,4.5,up
+Lake Isabella,Kern,1,93240,764,734,4.1,up,18.2,up
+West Hills,Los Angeles,1,91307,764,766,-0.3,flat,40.3,up
+Monrovia,Los Angeles,1,91016,749,674,11.1,up,37.8,up
+El Monte,Los Angeles,2,"91732,91731",748,749,-0.1,flat,37.2,up
+Anza,Riverside,1,92539,746,763,-2.2,down,21.1,up
+Valley Springs,Calaveras,1,95252,746,759,-1.7,down,22.4,up
+Azusa,Los Angeles,1,91702,745,647,15.1,up,54.8,up
+Soquel,Santa Cruz,1,95073,739,725,1.9,up,89.3,up
+Springville,Tulare,1,93265,738,727,1.5,up,22.8,up
+Adelanto,San Bernardino,1,92301,736,636,15.7,up,80.2,up
+San Dimas,Los Angeles,1,91773,735,656,12.0,up,57.7,up
+San Juan Capistrano,Orange,1,92675,731,621,17.7,up,107.7,up
+Loomis,Placer,1,95650,725,695,4.3,up,38.7,up
+Saratoga,Santa Clara,1,95070,719,691,4.1,up,69.8,up
+Granite Bay,Placer,1,95746,709,692,2.5,up,46.0,up
+Sonoma,Sonoma,1,95476,704,655,7.5,up,49.9,up
+Baldwin Park,Los Angeles,1,91706,693,668,3.7,up,29.7,up
+Rescue,El Dorado,1,95672,693,686,1.0,up,18.7,up
+Fawnskin,San Bernardino,1,92333,692,666,3.9,up,4.9,up
+Novato,Marin,3,"94947,94945,94949",689,615,12.0,up,83.6,up
+Green Valley Lake,San Bernardino,1,92341,683,675,1.2,up,4.0,up
+Rosemead,Los Angeles,1,91770,680,633,7.4,up,78.8,up
+North Fork,Madera,1,93643,669,688,-2.8,down,13.0,up
+Downey,Los Angeles,3,"90242,90241,90240",668,644,3.7,up,51.9,up
+Eureka,Humboldt,2,"95503,95501",665,503,32.2,up,107.9,up
+La Habra,Orange,1,90631,657,636,3.3,up,46.5,up
+Angels Camp,Calaveras,1,95222,656,628,4.5,up,16.5,up
+Los Altos,Santa Clara,2,"94022,94024",653,621,5.2,up,56.0,up
+Homewood,Placer,1,96141,648,631,2.7,up,27.7,up
+Desert Hot Springs,Riverside,2,"92240,92241",647,589,9.8,up,88.8,up
+Jackson,Amador,1,95642,641,638,0.5,flat,18.1,up
+Kings Beach,Placer,1,96143,641,607,5.6,up,10.6,up
+Mission Viejo,Orange,2,"92692,92691",638,566,12.7,up,155.0,up
+Redwood City,San Mateo,4,"94062,94061,94063,94065",637,611,4.3,up,45.8,up
+Newcastle,Placer,1,95658,636,646,-1.5,down,37.7,up
+Susanville,Lassen,1,96130,635,616,3.1,up,38.7,up
+Three Rivers,Tulare,1,93271,635,632,0.5,flat,10.1,up
+Clovis,Fresno,3,"93619,93612,93611",634,560,13.2,up,69.7,up
+Encinitas,San Diego,1,92024,633,595,6.4,up,83.6,up
+Moraga,Contra Costa,1,94556,632,582,8.6,up,104.9,up
+Hayward,Alameda,4,"94542,94541,94544,94545",625,593,5.4,up,76.5,up
+Healdsburg,Sonoma,1,95448,623,622,0.2,flat,13.3,up
+Diamond Springs,El Dorado,1,95619,622,612,1.6,up,20.2,up
+Morgan Hill,Santa Clara,1,95037,621,596,4.2,up,50.9,up
+Brea,Orange,2,"92821,92823",616,563,9.4,up,72.2,up
+Reseda,Los Angeles,1,91335,615,588,4.6,up,33.3,up
+Alhambra,Los Angeles,2,"91801,91803",612,576,6.2,up,60.4,up
+Silverado,Orange,1,92676,611,594,2.9,up,7.4,up
+Sutter Creek,Amador,1,95685,611,603,1.3,up,12.5,up
+Portola,Plumas,1,96122,605,593,2.0,up,16.0,up
+Quincy,Plumas,1,95971,600,584,2.7,up,10.4,up
+Blairsden Graeagle,Plumas,1,96103,593,569,4.2,up,7.4,up
+Walnut Creek,Contra Costa,4,"94595,94597,94596,94598",592,536,10.4,up,82.9,up
+Saint Helena,Napa,1,94574,591,573,3.1,up,18.6,up
+Martinez,Contra Costa,1,94553,589,543,8.5,up,86.0,up
+Lake Hughes,Los Angeles,1,93532,588,576,2.1,up,12.7,up
+Auberry,Fresno,1,93602,587,575,2.1,up,10.8,up
+Bass Lake,Madera,1,93604,585,575,1.7,up,17.3,up
+Orange,Orange,5,"92869,92867,92868,92866,92865",585,536,9.1,up,106.9,up
+Aguanga,Riverside,1,92536,580,577,0.5,up,15.4,up
+Aliso Viejo,Orange,1,92656,580,521,11.3,up,133.6,up
+Newport Coast,Orange,1,92657,578,506,14.2,up,93.9,up
+Nuevo,Riverside,1,92567,577,519,11.2,up,71.3,up
+Santa Paula,Ventura,1,93060,577,548,5.3,up,40.2,up
+Norwalk,Los Angeles,1,90650,576,561,2.7,up,26.1,up
+Duarte,Los Angeles,2,"91010,91008",571,510,12.0,up,33.2,up
+Calistoga,Napa,1,94515,565,546,3.5,up,31.6,up
+Carson,Los Angeles,2,"90746,90745",564,561,0.5,up,40.6,up
+San Rafael,Marin,2,"94901,94903",559,485,15.3,up,72.0,up
+Pinon Hills,San Bernardino,1,92372,555,513,8.2,up,28.9,up
+Chico,Butte,3,"95928,95973,95926",553,550,0.5,up,21.7,up
+Pico Rivera,Los Angeles,1,90660,549,528,4.0,up,31.3,up
+Covina,Los Angeles,3,"91724,91722,91723",547,532,2.8,up,57.4,up
+Loma Linda,San Bernardino,1,92354,541,448,20.8,up,101.8,up
+Sierra Madre,Los Angeles,1,91024,541,488,10.9,up,23.9,up
+Upland,San Bernardino,2,"91784,91786",540,509,6.1,up,65.8,up
+Homeland,Riverside,1,92548,536,487,10.1,up,48.5,up
+West Hollywood,Los Angeles,1,90069,536,537,-0.2,flat,57.5,up
+Pleasanton,Alameda,2,"94566,94588",533,525,1.5,up,64.6,up
+Soda Springs,Nevada,1,95728,533,509,4.7,up,15.9,up
+Lakeport,Lake,1,95453,524,489,7.2,up,37.0,up
+Chino,San Bernardino,2,"91710,91708",523,465,12.5,up,117.3,up
+El Sobrante,Contra Costa,1,94803,521,482,8.1,up,94.4,up
+Arroyo Grande,San Luis Obispo,1,93420,520,484,7.4,up,55.1,up
+Campo,San Diego,1,91906,520,497,4.6,up,20.3,up
+Fairfield,Solano,2,"94534,94533",517,489,5.7,up,82.5,up
+Middletown,Lake,1,95461,515,498,3.4,up,11.4,up
+San Ramon,Contra Costa,2,"94583,94582",514,485,6.0,up,113.7,up
+Tahoe Vista,Placer,1,96148,514,485,6.0,up,14.7,up
+Richmond,Contra Costa,3,"94804,94805,94801",511,448,14.1,up,54.5,up
+San Fernando,Los Angeles,1,91340,506,483,4.8,up,24.2,up
+Pine Valley,San Diego,1,91962,504,486,3.7,up,19.4,up
+Cedarpines Park,San Bernardino,1,92322,498,502,-0.8,down,7.5,up
+Lower Lake,Lake,1,95457,491,486,1.0,up,8.5,up
+Fort Bragg,Mendocino,1,95437,490,430,14.0,up,41.0,up
+Crescent City,Del Norte,1,95531,489,379,29.0,up,75.5,up
+Forest Falls,San Bernardino,1,92339,489,490,-0.2,flat,10.1,up
+Montebello,Los Angeles,1,90640,485,461,5.2,up,44.5,up
+Torrance,Los Angeles,5,"90501,90502,90505,90503,90504",484,453,6.8,up,61.8,up
+Sausalito,Marin,1,94965,481,444,8.3,up,34.1,up
+Santa Maria,Santa Barbara,3,"93455,93454,93458",478,471,1.5,up,81.2,up
+Foothill Ranch,Orange,1,92610,477,409,16.6,up,79.4,up
+Yreka,Siskiyou,1,96097,477,460,3.7,up,51.3,up
+Gardena,Los Angeles,3,"90247,90249,90248",475,462,2.8,up,37.1,up
+Red Bluff,Tehama,1,96080,474,438,8.2,up,17.7,up
+Bellflower,Los Angeles,1,90706,473,454,4.2,up,76.0,up
+Forest Ranch,Butte,1,95942,468,489,-4.3,down,7.7,up
+Bonsall,San Diego,1,92003,465,446,4.3,up,64.0,up
+Mentone,San Bernardino,1,92359,460,420,9.5,up,32.5,up
+Shasta Lake,Shasta,2,"96019,96089",460,427,7.7,up,30.2,up
+South El Monte,Los Angeles,1,91733,457,439,4.1,up,60.2,up
+Hidden Valley Lake,Lake,1,95467,453,406,11.6,up,42.0,up
+Paramount,Los Angeles,1,90723,453,444,2.0,up,35.8,up
+Porterville,Tulare,1,93257,453,416,8.9,up,101.0,up
+Norco,Riverside,1,92860,452,387,16.8,up,98.5,up
+Weed,Siskiyou,1,96094,447,429,4.2,up,37.9,up
+Ione,Amador,1,95640,444,416,6.7,up,54.6,up
+Santa Monica,Los Angeles,5,"90402,90405,90404,90403,90401",443,438,1.1,up,92.1,up
+Westminster,Orange,1,92683,443,427,3.7,up,138.5,up
+Monterey,Monterey,1,93940,435,410,6.1,up,35.3,up
+West Point,Calaveras,1,95255,433,427,1.4,up,3.1,up
+Mountain Center,Riverside,1,92561,432,420,2.9,up,18.6,up
+San Gabriel,Los Angeles,2,"91776,91775",432,418,3.3,up,69.2,up
+Claremont,Los Angeles,1,91711,431,378,14.0,up,62.9,up
+Hawthorne,Los Angeles,1,90250,431,428,0.7,up,32.9,up
+San Andreas,Calaveras,1,95249,429,426,0.7,up,16.1,up
+Sebastopol,Sonoma,1,95472,428,406,5.4,up,28.1,up
+Lake Forest,Orange,1,92630,426,412,3.4,up,79.1,up
+Maywood,Los Angeles,1,90270,426,429,-0.7,down,29.2,up
+Cobb,Lake,1,95426,423,414,2.2,up,11.0,up
+Descanso,San Diego,1,91916,423,422,0.2,flat,9.6,up
+Yokuts,Fresno,1,93675,419,405,3.5,up,18.1,up
+Joshua Tree,San Bernardino,1,92252,416,339,22.7,up,83.2,up
+San Pedro,Los Angeles,2,"90731,90732",416,414,0.5,flat,37.5,up
+El Cerrito,Contra Costa,1,94530,413,372,11.0,up,79.7,up
+Soulsbyville,Tuolumne,1,95372,413,408,1.2,up,12.1,up
+Mira Loma,Riverside,1,91752,411,379,8.4,up,90.5,up
+Bodfish,Kern,1,93205,409,391,4.6,up,12.0,up
+La Jolla,San Diego,1,92037,409,393,4.1,up,87.1,up
+Wilmington,Los Angeles,1,90744,409,386,6.0,up,12.9,up
+Oxnard,Ventura,4,"93033,93035,93036,93030",408,394,3.6,up,84.1,up
+Northridge,Los Angeles,2,"91325,91324",407,386,5.4,up,59.5,up
+Rough And Ready,Nevada,1,95975,407,415,-1.9,down,15.9,up
+Gilroy,Santa Clara,1,95020,404,370,9.2,up,67.4,up
+Goleta,Santa Barbara,1,93117,404,388,4.1,up,37.6,up
+Pacifica,San Mateo,1,94044,403,356,13.2,up,67.9,up
+La Grange,Tuolumne,1,95329,402,394,2.0,up,26.3,up
+Rancho Palos Verdes,Los Angeles,1,90275,402,364,10.4,up,131.8,up
+Bloomington,San Bernardino,1,92316,400,371,7.8,up,59.2,up
+Cloverdale,Sonoma,1,95425,400,357,12.0,up,38.9,up
+Columbia,Tuolumne,1,95310,397,389,2.1,up,7.2,up
+Bradley,Monterey,1,93426,392,382,2.6,up,9.8,up
+Volcano,Amador,1,95689,391,390,0.3,flat,6.0,up
+Burlingame,San Mateo,1,94010,390,347,12.4,up,82.6,up
+Clearlake Oaks,Lake,1,95423,389,373,4.3,up,21.1,up
+Coulterville,Mariposa,1,95311,388,394,-1.5,down,4.8,up
+Panorama City,Los Angeles,1,91402,387,378,2.4,up,29.5,up
+Applegate,Placer,1,95703,383,384,-0.3,flat,13.3,up
+Mokelumne Hill,Calaveras,1,95245,383,389,-1.5,down,6.9,up
+Garden Grove,Orange,5,"92843,92841,92840,92844,92845",382,366,4.4,up,125.9,up
+Warner Springs,San Diego,1,92086,381,382,-0.3,flat,8.8,up
+Lompoc,Santa Barbara,1,93436,376,366,2.7,up,38.1,up
+Glen Ellen,Sonoma,1,95442,373,357,4.5,up,56.6,up
+Chester,Plumas,1,96020,369,359,2.8,up,25.1,up
+Monterey Park,Los Angeles,2,"91754,91755",369,396,-6.8,down,77.6,up
+Forestville,Sonoma,1,95436,363,351,3.4,up,30.0,up
+Palm Desert,Riverside,2,"92260,92211",363,323,12.4,up,112.5,up
+North Hills,Los Angeles,1,91343,360,348,3.4,up,41.5,up
+Vallejo,Solano,4,"94591,94590,94589,94592",360,313,15.0,up,82.0,up
+Dunsmuir,Siskiyou,1,96025,358,353,1.4,up,21.3,up
+Gualala,Mendocino,1,95445,358,342,4.7,up,13.2,up
+Portola Valley,San Mateo,1,94028,354,325,8.9,up,47.1,up
+Cambria,San Luis Obispo,1,93428,351,326,7.7,up,36.4,up
+Antioch,Contra Costa,2,"94509,94531",350,315,11.1,up,136.8,up
+Carpinteria,Santa Barbara,1,93013,349,328,6.4,up,43.9,up
+Mountain Ranch,Calaveras,1,95246,344,339,1.5,up,8.3,up
+Fillmore,Ventura,1,93015,341,302,12.9,up,54.9,up
+Ahwahnee,Madera,1,93601,339,327,3.7,up,6.2,up
+Petaluma,Sonoma,2,"94952,94954",339,324,4.6,up,71.4,up
+Avalon,Los Angeles,1,90704,338,315,7.3,up,19.8,up
+Oak View,Ventura,1,93022,337,327,3.1,up,50.7,up
+Plymouth,Amador,1,95669,337,328,2.7,up,16.3,up
+Livermore,Alameda,2,"94551,94550",336,320,5.0,up,80.8,up
+Fullerton,Orange,4,"92833,92831,92835,92832",335,331,1.2,up,87.0,up
+Ridgecrest,Kern,1,93555,330,282,17.0,up,112.0,up
+Twentynine Palms,San Bernardino,1,92277,329,291,13.1,up,81.9,up
+Angwin,Napa,1,94508,327,324,0.9,up,16.5,up
+Winnetka,Los Angeles,1,91306,327,307,6.5,up,46.9,up
+Yosemite National Park,Mariposa,1,95389,319,307,3.9,up,7.7,up
+Madera,Madera,3,"93638,93636,93637",317,298,6.4,up,48.3,up
+Littlerock,Los Angeles,1,93543,316,281,12.5,up,55.2,up
+The Sea Ranch,Sonoma,1,95497,316,262,20.6,up,33.0,up
+Folsom,Sacramento,1,95630,313,296,5.7,up,107.0,up
+La Mesa,San Diego,2,"91941,91942",310,303,2.3,up,129.5,up
+Cathedral City,Riverside,1,92234,307,303,1.3,up,121.2,up
+Pilot Hill,El Dorado,1,95664,307,311,-1.3,down,9.1,up
+San Leandro,Alameda,3,"94577,94578,94579",307,294,4.4,up,104.2,up
+South Pasadena,Los Angeles,1,91030,306,311,-1.6,down,54.0,up
+Huntington Beach,Orange,4,"92646,92648,92647,92649",305,309,-1.3,down,95.6,up
+Kernville,Kern,1,93238,304,277,9.7,up,26.5,up
+Modesto,Stanislaus,7,"95351,95350,95355,95358,95354,95356,95357",304,318,-4.4,down,78.7,up
+Pittsburg,Contra Costa,1,94565,304,267,13.9,up,113.6,up
+Grand Terrace,San Bernardino,1,92313,303,276,9.8,up,100.0,up
+Greenwood,El Dorado,1,95635,300,309,-2.9,down,13.6,up
+Fairfax,Marin,1,94930,298,281,6.0,up,57.0,up
+Tollhouse,Fresno,1,93667,296,290,2.1,up,9.8,up
+Angelus Oaks,San Bernardino,1,92305,295,292,1.0,up,5.8,up
+Mckinleyville,Humboldt,1,95519,295,257,14.8,up,58.6,up
+Inverness,Marin,1,94937,293,305,-3.9,down,13.0,up
+Janesville,Lassen,1,96114,290,279,3.9,up,24.0,up
+Pauma Valley,San Diego,1,92061,290,282,2.8,up,23.1,up
+Lincoln,Placer,1,95648,289,267,8.2,up,65.8,up
+Redwood Valley,Mendocino,1,95470,289,272,6.2,up,24.8,up
+Alta,Placer,1,95701,287,293,-2.0,down,9.7,up
+Fremont,Alameda,4,"94536,94539,94538,94555",287,288,-0.3,flat,76.7,up
+Dublin,Alameda,1,94568,283,254,11.4,up,156.6,up
+Lakehead,Shasta,1,96051,281,272,3.3,up,9.2,up
+Smartsville,Nevada,1,95977,281,280,0.4,flat,8.1,up
+June Lake,Mono,1,93529,280,272,2.9,up,17.2,up
+Arcata,Humboldt,1,95521,279,244,14.3,up,80.7,up
+Lucerne,Lake,1,95458,279,261,6.9,up,25.5,up
+Palos Verdes Peninsula,Los Angeles,1,90274,276,253,9.1,up,90.2,up
+Vacaville,Solano,2,"95688,95687",276,262,5.3,up,84.5,up
+Clayton,Contra Costa,1,94517,275,256,7.4,up,62.0,up
+Indio,Riverside,2,"92201,92203",275,280,-1.8,down,120.5,up
+Corning,Tehama,1,96021,274,279,-1.8,down,18.2,up
+Burney,Shasta,1,96013,272,273,-0.4,flat,14.7,up
+Marysville,Yuba,1,95901,271,255,6.3,up,28.1,up
+Cedar Glen,San Bernardino,1,92321,270,277,-2.5,down,6.5,up
+Pismo Beach,San Luis Obispo,1,93449,267,243,9.9,up,96.0,up
+Barstow,San Bernardino,1,92311,261,238,9.7,up,81.7,up
+Oregon House,Yuba,1,95962,261,264,-1.1,down,8.6,up
+Brownsville,Yuba,1,95919,257,257,0.0,flat,-0.4,flat
+Cazadero,Sonoma,1,95421,257,255,0.8,up,5.4,up
+Daly City,San Mateo,2,"94014,94015",255,218,17.0,up,92.9,up
+Monte Rio,Sonoma,1,95462,254,251,1.2,up,17.8,up
+Trinity Center,Trinity,1,96091,250,248,0.8,up,13.8,up
+Blythe,Riverside,1,92225,249,221,12.7,up,104.6,up
+Hollister,San Benito,1,95023,247,212,16.5,up,114.1,up
+Weaverville,Trinity,1,96093,246,214,15.0,up,34.6,up
+Newport Beach,Orange,4,"92660,92663,92661,92662",245,217,12.9,up,79.3,up
+Weldon,Kern,1,93283,244,242,0.8,up,8.0,up
+San Anselmo,Marin,1,94960,243,200,21.5,up,57.5,up
+La Quinta,Riverside,1,92253,242,207,16.9,up,200.0,up
+Morongo Valley,San Bernardino,1,92256,242,212,14.2,up,53.6,up
+Willow Creek,Humboldt,1,95573,240,242,-0.8,down,11.0,up
+Posey,Tulare,1,93260,233,231,0.9,up,5.5,up
+Fiddletown,Amador,1,95629,230,233,-1.3,down,11.5,up
+Del Mar,San Diego,1,92014,228,226,0.9,up,85.2,up
+Temple City,Los Angeles,1,91780,226,207,9.2,up,45.8,up
+Boulevard,San Diego,1,91905,224,222,0.9,up,10.4,up
+Browns Valley,Yuba,1,95918,224,213,5.2,up,25.3,up
+Concord,Contra Costa,4,"94521,94520,94518,94519",224,212,5.7,up,76.7,up
+San Mateo,San Mateo,4,"94402,94403,94401,94404",224,211,6.2,up,68.8,up
+Cupertino,Santa Clara,1,95014,223,213,4.7,up,79.0,up
+Bishop,Inyo,1,93514,222,209,6.2,up,60.8,up
+Lytle Creek,San Bernardino,1,92358,220,226,-2.7,down,6.1,up
+Garberville,Humboldt,1,95542,219,217,0.9,up,-0.9,down
+El Centro,Imperial,1,92243,218,199,9.5,up,56.7,up
+Friant,Fresno,1,93626,214,218,-1.8,down,36.2,up
+Alameda,Alameda,2,"94501,94502",213,204,4.4,up,83.8,up
+San Pablo,Contra Costa,1,94806,212,168,26.2,up,60.0,up
+Caliente,Kern,1,93518,210,206,1.9,up,-2.8,down
+Fortuna,Humboldt,1,95540,210,163,28.8,up,89.5,up
+Tustin,Orange,2,"92782,92780",210,203,3.4,up,88.0,up
+Lakewood,Los Angeles,3,"90715,90712,90713",207,213,-2.8,down,36.5,up
+Rosamond,Kern,1,93560,207,176,17.6,up,81.4,up
+King City,Monterey,1,93930,206,199,3.5,up,54.3,up
+Lewiston,Trinity,1,96052,206,206,0.0,flat,6.7,up
+Nice,Lake,1,95464,206,194,6.2,up,22.0,up
+Calexico,Imperial,1,92231,205,186,10.2,up,47.6,up
+Markleeville,Alpine,1,96120,205,202,1.5,up,12.8,up
+Lawndale,Los Angeles,1,90260,203,203,0.0,flat,45.0,up
+Bonita,San Diego,1,91902,198,188,5.3,up,176.5,up
+Rancho Mirage,Riverside,1,92270,198,179,10.6,up,126.6,up
+Santa Ynez,Santa Barbara,1,93460,198,197,0.5,up,25.5,up
+Fort Jones,Siskiyou,1,96032,197,168,17.3,up,30.2,up
+Visalia,Tulare,3,"93291,93277,93292",197,193,2.1,up,38.8,up
+Santa Margarita,San Luis Obispo,1,93453,195,193,1.0,up,18.4,up
+Mission Hills,Los Angeles,1,91345,194,181,7.2,up,30.2,up
+Mccloud,Siskiyou,1,96057,193,189,2.1,up,21.2,up
+Pebble Beach,Monterey,1,93953,192,162,18.5,up,38.5,up
+California City,Kern,1,93505,191,160,19.4,up,77.8,up
+Templeton,San Luis Obispo,1,93465,191,180,6.1,up,62.2,up
+Lucerne Valley,San Bernardino,1,92356,189,171,10.5,up,56.9,up
+Rimforest,San Bernardino,1,92378,189,178,6.2,up,-1.1,down
+San Bruno,San Mateo,1,94066,189,160,18.1,up,116.2,up
+Emeryville,Alameda,1,94608,188,162,16.0,up,76.1,up
+Half Moon Bay,San Mateo,1,94019,188,178,5.6,up,52.1,up
+Landers,San Bernardino,1,92285,188,147,27.9,up,79.3,up
+La Mirada,Los Angeles,1,90638,186,170,9.4,up,56.0,up
+Lebec,Kern,1,93243,182,182,0.0,flat,16.7,up
+Buena Park,Orange,2,"90621,90620",181,177,2.3,up,70.2,up
+Venice,Los Angeles,1,90291,181,189,-4.2,down,34.0,up
+Greenbrae,Marin,1,94904,179,152,17.8,up,76.7,up
+Prather,Fresno,1,93651,178,174,2.3,up,16.8,up
+Mendocino,Mendocino,1,95460,177,158,12.0,up,33.9,up
+Palo Alto,Santa Clara,4,"94303,94301,94306,94304",176,165,6.7,up,83.3,up
+Redondo Beach,Los Angeles,2,"90278,90277",176,182,-3.3,down,83.8,up
+Brentwood,Contra Costa,1,94513,175,176,-0.6,down,120.0,up
+Upper Lake,Lake,1,95485,174,177,-1.7,down,22.1,up
+Pinecrest,Alpine,1,95364,173,168,3.0,up,10.5,up
+Dobbins,Yuba,1,95935,172,172,0.0,flat,4.2,up
+Laguna Woods,Orange,1,92637,171,129,32.6,up,148.1,up
+Taft,Kern,1,93268,171,150,14.0,up,85.2,up
+Culver City,Los Angeles,2,"90230,90232",170,164,3.7,up,47.7,up
+Whitethorn,Humboldt,1,95589,170,161,5.6,up,16.7,up
+Arvin,Kern,1,93203,169,151,11.9,up,122.1,up
+Elk Grove,Sacramento,3,"95624,95758,95757",169,171,-1.2,down,155.2,up
+San Carlos,San Mateo,1,94070,168,156,7.7,up,79.3,up
+Alturas,Modoc,1,96101,166,146,13.7,up,57.0,up
+Vallecito,Calaveras,1,95251,166,163,1.8,up,8.7,up
+California Hot Springs,Tulare,1,93207,165,174,-5.2,down,0.6,up
+Pleasant Hill,Contra Costa,1,94523,164,153,7.2,up,73.9,up
+Sierra City,Sierra,1,96125,164,170,-3.5,down,13.3,up
+Cabazon,Riverside,1,92230,163,136,19.9,up,32.0,up
+Avila Beach,San Luis Obispo,1,93424,162,145,11.7,up,42.2,up
+Wilseyville,Calaveras,1,95257,161,156,3.2,up,-0.6,down
+Los Osos,San Luis Obispo,1,93402,159,150,6.0,up,74.4,up
+Trinidad,Humboldt,1,95570,159,139,14.4,up,51.1,up
+Nipomo,San Luis Obispo,1,93444,158,142,11.3,up,97.2,up
+Montague,Siskiyou,1,96064,157,156,0.6,up,33.3,up
+Skyforest,San Bernardino,1,92385,157,149,5.4,up,27.4,up
+Brookdale,Santa Cruz,1,95007,156,148,5.4,up,35.8,up
+Kyburz,El Dorado,1,95720,156,156,0.0,flat,6.8,up
+Laguna Hills,Orange,1,92653,156,132,18.2,up,65.0,up
+Salyer,Trinity,1,95563,156,161,-3.1,down,5.9,up
+Kenwood,Sonoma,1,95452,155,155,0.0,flat,103.9,up
+Pinole,Contra Costa,1,94564,155,139,11.5,up,98.6,up
+Potter Valley,Mendocino,1,95469,154,156,-1.3,down,0.6,up
+Midpines,Mariposa,1,95345,152,156,-2.6,down,4.0,up
+Mount Baldy,San Bernardino,1,91759,150,154,-2.6,down,11.6,up
+Corte Madera,Marin,1,94925,149,136,9.6,up,60.0,up
+Lakeshore,Fresno,1,93634,149,149,0.0,flat,13.7,up
+Laytonville,Mendocino,1,95454,149,148,0.7,up,3.5,up
+Bella Vista,Shasta,1,96008,148,140,5.7,up,5.3,up
+Harbor City,Los Angeles,1,90710,147,148,-0.7,down,51.0,up
+Little River,Mendocino,1,95456,147,142,3.5,up,9.2,up
+Aromas,Monterey,1,95004,146,139,5.0,up,36.3,up
+Geyserville,Sonoma,1,95441,146,142,2.8,up,13.6,up
+Grizzly Flats,El Dorado,1,95636,145,150,-3.3,down,11.9,up
+Pope Valley,Napa,1,94567,145,149,-2.7,down,4.9,up
+Solvang,Santa Barbara,1,93463,145,141,2.8,up,45.4,up
+Palo Cedro,Shasta,1,96073,143,133,7.5,up,22.0,up
+Thousand Palms,Riverside,1,92276,143,143,0.0,flat,217.8,up
+Dana Point,Orange,1,92629,142,129,10.1,up,152.9,up
+Hume,Fresno,1,93628,142,134,6.0,up,20.7,up
+Somis,Ventura,1,93066,142,132,7.6,up,25.7,up
+Blue Jay,San Bernardino,1,92317,141,144,-2.1,down,5.9,up
+Cerritos,Los Angeles,1,90703,141,153,-7.8,down,59.4,up
+Penryn,Placer,1,95663,140,135,3.7,up,57.0,up
+Tracy,San Joaquin,4,"95377,95376,95304,95391",140,135,3.7,up,101.5,up
+Clio,Plumas,1,96106,139,129,7.8,up,16.2,up
+Douglas City,Trinity,1,96024,139,147,-5.4,down,3.5,up
+Big Sur,Monterey,1,93920,138,139,-0.7,down,15.8,up
+Santa Ysabel,San Diego,1,92070,137,136,0.7,up,8.8,up
+Etna,Siskiyou,1,96027,134,123,8.9,up,-9.6,down
+National City,San Diego,1,91950,134,127,5.5,up,95.4,up
+Palomar Mountain,San Diego,1,92060,133,132,0.8,up,3.9,up
+Menlo Park,San Mateo,1,94025,132,120,10.0,up,166.7,up
+Sanger,Fresno,1,93657,131,114,14.9,up,56.2,up
+Belmont,San Mateo,1,94002,130,106,22.6,up,92.7,up
+Lotus,El Dorado,1,95651,130,128,1.6,up,13.3,up
+Solana Beach,San Diego,1,92075,129,124,4.0,up,79.7,up
+South San Francisco,San Mateo,1,94080,129,110,17.3,up,168.3,up
+Twin Bridges,El Dorado,1,95735,128,132,-3.0,down,16.8,up
+Montclair,San Bernardino,1,91763,127,120,5.8,up,26.3,up
+Roseville,Placer,3,"95747,95678,95661",127,115,10.4,up,134.7,up
+Catheys Valley,Mariposa,1,95306,126,124,1.6,up,6.9,up
+Hayfork,Trinity,1,96041,126,124,1.6,up,7.8,up
+Strawberry Valley,Yuba,1,95981,126,129,-2.3,down,4.0,up
+Larkspur,Marin,1,94939,125,115,8.7,up,33.7,up
+Montrose,Los Angeles,1,91020,125,102,22.5,up,54.5,up
+San Marino,Los Angeles,1,91108,125,139,-10.1,down,43.3,up
+Whitewater,Riverside,1,92282,125,112,11.6,up,49.3,up
+La Honda,San Mateo,1,94020,124,121,2.5,up,19.8,up
+Rocklin,Placer,2,"95677,95765",124,121,2.5,up,112.3,up
+Benicia,Solano,1,94510,123,111,10.8,up,126.5,up
+Berry Creek,Butte,1,95916,123,127,-3.1,down,15.5,up
+Belvedere Tiburon,Marin,1,94920,120,98,22.4,up,96.0,up
+Hercules,Contra Costa,1,94547,120,101,18.8,up,94.2,up
+North San Juan,Nevada,1,95960,120,114,5.3,up,8.6,up
+Wishon,Madera,1,93669,120,120,0.0,flat,10.1,up
+Diablo,Contra Costa,1,94528,119,116,2.6,up,123.1,up
+Redway,Humboldt,1,95560,119,123,-3.3,down,9.8,up
+Merced,Merced,3,"95348,95340,95341",118,107,10.3,up,64.6,up
+Bridgeport,Mono,1,93517,117,118,-0.8,down,28.3,up
+Windsor,Sonoma,1,95492,117,126,-7.1,down,77.5,up
+Dutch Flat,Placer,1,95714,116,112,3.6,up,12.0,up
+Fountain Valley,Orange,1,92708,115,121,-5.0,down,89.1,up
+Mojave,Kern,1,93501,115,90,27.8,up,69.8,up
+Pescadero,San Mateo,1,94060,114,108,5.6,up,11.3,up
+Sunnyvale,Santa Clara,4,"94089,94087,94086,94085",114,109,4.6,up,137.0,up
+Bodega Bay,Sonoma,1,94923,113,93,21.5,up,93.8,up
+Keene,Kern,1,93531,113,112,0.9,up,4.7,up
+Millbrae,San Mateo,1,94030,112,93,20.4,up,66.1,up
+Raymond,Madera,1,93653,112,109,2.8,up,10.1,up
+Whitmore,Shasta,1,96096,112,109,2.8,up,13.5,up
+Crockett,Contra Costa,1,94525,111,99,12.1,up,106.2,up
+Placentia,Orange,1,92870,111,111,0.0,flat,131.2,up
+Morro Bay,San Luis Obispo,1,93442,110,101,8.9,up,110.4,up
+Needles,San Bernardino,1,92363,110,102,7.8,up,131.8,up
+Milpitas,Santa Clara,1,95035,109,110,-0.9,down,124.5,up
+Myers Flat,Humboldt,1,95554,109,119,-8.4,down,-4.0,down
+Valley Village,Los Angeles,1,91607,108,107,0.9,up,84.5,up
+Costa Mesa,Orange,2,"92627,92626",106,110,-3.6,down,134.0,up
+Gasquet,Del Norte,1,95543,106,106,0.0,flat,16.5,up
+Igo,Shasta,1,96047,106,102,3.9,up,17.2,up
+Occidental,Sonoma,1,95465,105,99,6.1,up,8.8,up
+Oak Run,Shasta,1,96069,104,103,1.0,up,14.4,up
+Thermal,Riverside,1,92274,104,99,5.1,up,90.4,up
+Union City,Alameda,1,94587,104,103,1.0,up,94.3,up
+Greenville,Plumas,1,95947,102,97,5.2,up,4.3,up
+Rancho Cordova,Sacramento,2,"95670,95742",102,101,1.0,up,129.5,up
+Rio Dell,Humboldt,1,95562,100,70,42.9,up,94.4,up
+Camptonville,Yuba,1,95922,99,98,1.0,up,0.0,flat
+Mill Creek,Tehama,1,96061,99,96,3.1,up,5.5,up
+Brawley,Imperial,1,92227,98,95,3.2,up,17.3,up
+Lemon Grove,San Diego,1,91945,98,92,6.5,up,130.0,up
+Montgomery Creek,Shasta,1,96065,98,106,-7.5,down,11.6,up
+Borrego Springs,San Diego,1,92004,97,94,3.2,up,100.0,up
+Loyalton,Sierra,1,96118,97,87,11.5,up,29.9,up
+Indian Wells,Riverside,1,92210,96,76,26.3,up,123.5,up
+Mount Hermon,Santa Cruz,1,95041,95,93,2.2,up,27.4,up
+San Miguel,San Luis Obispo,1,93451,95,85,11.8,up,25.0,up
+Clipper Mills,Butte,1,95930,94,94,0.0,flat,-5.1,down
+Downieville,Sierra,1,95936,94,97,-3.1,down,10.2,up
+Fish Camp,Mariposa,1,93623,94,93,1.1,up,27.4,up
+Jenner,Sonoma,1,95450,94,93,1.1,up,-3.1,down
+Piru,Ventura,1,93040,94,73,28.8,up,114.7,up
+San Juan Bautista,San Benito,1,95045,94,90,4.4,up,69.8,up
+Pioneertown,San Bernardino,1,92268,93,83,12.0,up,40.7,up
+Artesia,Los Angeles,1,90701,92,89,3.4,up,17.1,up
+Hawaiian Gardens,Los Angeles,1,90716,92,92,0.0,flat,19.5,up
+Lomita,Los Angeles,1,90717,92,92,0.0,flat,46.0,up
+Stanton,Orange,1,90680,92,89,3.4,up,178.1,up
+Oakley,Contra Costa,1,94561,91,87,4.6,up,81.2,up
+Sunol,Alameda,1,94586,91,93,-2.2,down,25.7,up
+Manhattan Beach,Los Angeles,1,90266,90,93,-3.2,down,82.4,up
+Philo,Mendocino,1,95466,90,90,0.0,flat,11.1,up
+Cypress,Orange,1,90630,89,95,-6.3,down,126.2,up
+Earp,San Bernardino,1,92242,89,93,-4.3,down,158.3,up
+Hanford,Kings,1,93230,89,109,-18.3,down,67.7,up
+Boonville,Mendocino,1,95415,88,85,3.5,up,11.8,up
+Tulare,Tulare,1,93274,88,86,2.3,up,26.5,up
+Fall River Mills,Shasta,1,96028,87,87,0.0,flat,14.5,up
+Pearblossom,Los Angeles,1,93553,87,88,-1.1,down,23.9,up
+Yuba City,Sutter,2,"95991,95993",87,79,10.1,up,163.3,up
+Dulzura,San Diego,1,91917,86,80,7.5,up,5.3,up
+Inyokern,Kern,1,93527,86,84,2.4,up,68.0,up
+Potrero,San Diego,1,91963,85,82,3.7,up,6.5,up
+Bangor,Butte,1,95914,84,87,-3.4,down,20.8,up
+Guatay,San Diego,1,91931,84,79,6.3,up,9.7,up
+Manteca,San Joaquin,2,"95336,95337",84,83,1.2,up,50.9,up
+San Martin,Santa Clara,1,95046,84,71,18.3,up,65.1,up
+Calpine,Sierra,1,96124,83,81,2.5,up,-3.6,down
+Kings Canyon National Pk,Fresno,1,93633,83,82,1.2,up,6.5,up
+Albion,Mendocino,1,95410,82,77,6.5,up,8.5,up
+Citrus Heights,Sacramento,2,"95610,95621",82,88,-6.8,down,214.3,up
+Buellton,Santa Barbara,1,93427,81,83,-2.4,down,25.8,up
+Creston,San Luis Obispo,1,93432,81,85,-4.7,down,18.1,up
+Manton,Tehama,1,96059,81,75,8.0,up,-2.6,down
+Summerland,Santa Barbara,1,93067,81,81,0.0,flat,68.8,up
+Delano,Kern,1,93215,80,75,6.7,up,47.1,up
+Lodi,San Joaquin,2,"95240,95242",80,77,3.9,up,185.2,up
+Pala,San Diego,1,92059,80,88,-9.1,down,4.8,up
+Happy Camp,Siskiyou,1,96039,79,81,-2.5,down,3.8,up
+Marina Del Rey,Los Angeles,1,90292,79,80,-1.2,down,175.9,up
+Llano,Los Angeles,1,93544,78,68,14.7,up,23.6,up
+Meadow Valley,Plumas,1,95956,78,74,5.4,up,1.4,up
+Shasta,Shasta,1,96087,78,75,4.0,up,38.9,up
+Oakdale,Stanislaus,1,95361,77,68,13.2,up,51.1,up
+Penngrove,Sonoma,1,94951,77,73,5.5,up,35.2,up
+Forbestown,Butte,1,95941,76,80,-5.0,down,8.1,up
+Greenfield,Monterey,1,93927,76,76,0.0,flat,5.6,up
+Helendale,San Bernardino,1,92342,76,67,13.4,up,52.3,up
+Hopland,Mendocino,1,95449,76,71,7.0,up,10.9,up
+Hornbrook,Siskiyou,1,96044,76,72,5.6,up,56.5,up
+Albany,Alameda,1,94706,75,76,-1.3,down,65.2,up
+San Ysidro,San Diego,1,92173,75,68,10.3,up,172.0,up
+Marina,Monterey,1,93933,74,71,4.2,up,42.0,up
+Emigrant Gap,Placer,1,95715,73,74,-1.4,down,1.4,up
+Mineral,Plumas,1,96063,73,77,-5.2,down,1.3,up
+Atherton,San Mateo,1,94027,72,61,18.0,up,56.4,up
+Norden,Placer,1,95724,71,69,2.9,up,21.1,up
+Old Station,Shasta,1,96071,71,74,-4.1,down,12.1,up
+Sloughhouse,Sacramento,1,95683,70,59,18.6,up,84.4,up
+Woodlake,Tulare,1,93286,70,54,29.6,up,107.7,up
+Blue Lake,Humboldt,1,95525,69,53,30.2,up,29.3,up
+Coachella,Riverside,1,92236,69,58,19.0,up,75.8,up
+Newberry Springs,San Bernardino,1,92365,69,67,3.0,up,91.4,up
+Santa Clara,Santa Clara,3,"95050,95051,95054",69,68,1.5,up,106.1,up
+Canyon Dam,Plumas,1,95923,68,67,1.5,up,1.5,up
+Cardiff By The Sea,San Diego,1,92007,68,68,0.0,flat,142.9,up
+Cassel,Shasta,1,96016,68,61,11.5,up,-3.2,down
+Corona Del Mar,Orange,1,92625,66,65,1.5,up,116.7,up
+Junction City,Trinity,1,96048,66,63,4.8,up,8.6,up
+Mendota,Fresno,1,93640,66,70,-5.7,down,0.0,flat
+Carlotta,Humboldt,1,95528,65,51,27.5,up,13.3,up
+Los Olivos,Santa Barbara,1,93441,65,60,8.3,up,25.0,up
+Rohnert Park,Sonoma,1,94928,65,73,-11.0,down,92.1,up
+Santa Fe Springs,Los Angeles,1,90670,65,66,-1.5,down,40.4,up
+Woodacre,Marin,1,94973,65,63,3.2,up,21.2,up
+Burnt Ranch,Trinity,1,95527,64,68,-5.9,down,0.0,flat
+Ceres,Stanislaus,1,95307,64,67,-4.5,down,109.4,up
+Millville,Shasta,1,96062,64,68,-5.9,down,30.8,up
+Point Reyes Station,Marin,1,94956,64,70,-8.6,down,37.3,up
+Castroville,Monterey,1,95012,63,59,6.8,up,110.7,up
+Coalinga,Fresno,1,93210,63,56,12.5,up,100.0,up
+Lamont,Kern,1,93241,63,57,10.5,up,137.5,up
+Cayucos,San Luis Obispo,1,93430,62,54,14.8,up,50.0,up
+Stinson Beach,Marin,1,94970,62,56,10.7,up,80.6,up
+Exeter,Tulare,1,93221,61,52,17.3,up,67.7,up
+Parker Dam,San Bernardino,1,92267,61,50,22.0,up,127.3,up
+Manchester,Mendocino,1,95459,60,58,3.4,up,7.4,up
+Miramonte,Fresno,1,93641,60,58,3.4,up,3.6,up
+Patterson,Stanislaus,1,95363,60,65,-7.7,down,66.7,up
+Turlock,Stanislaus,2,"95380,95382",60,65,-7.7,down,103.1,up
+Bayside,Humboldt,1,95524,59,50,18.0,up,31.6,up
+El Portal,Mariposa,1,95318,59,59,0.0,flat,3.5,up
+Lee Vining,Mono,1,93541,59,59,0.0,flat,51.3,up
+Mad River,Trinity,1,95552,59,58,1.7,up,5.5,up
+Port Hueneme,Ventura,1,93041,59,54,9.3,up,125.0,up
+American Canyon,Napa,1,94503,58,56,3.6,up,93.1,up
+Forest Knolls,Marin,1,94933,58,54,7.4,up,10.2,up
+Glencoe,Calaveras,1,95232,57,56,1.8,up,9.8,up
+Hermosa Beach,Los Angeles,1,90254,57,57,0.0,flat,90.0,up
+Winters,Yolo,1,95694,57,51,11.8,up,10.9,up
+Amador City,Amador,1,95601,56,51,9.8,up,27.5,up
+Shafter,Kern,1,93263,56,50,12.0,up,150.0,up
+Echo Lake,El Dorado,1,95721,55,55,0.0,flat,-3.5,down
+Mountain View,Santa Clara,3,"94040,94043,94041",55,48,14.6,up,100.0,up
+Paicines,San Benito,1,95043,55,58,-5.2,down,11.5,up
+Bridgeville,Trinity,1,95526,54,50,8.0,up,-5.7,down
+Chilcoot,Plumas,1,96105,54,52,3.8,up,33.3,up
+Mcarthur,Lassen,1,96056,54,52,3.8,up,2.0,up
+Imperial Beach,San Diego,1,91932,53,56,-5.4,down,93.1,up
+Badger,Tulare,1,93603,52,53,-1.9,down,-7.0,down
+Lagunitas,Marin,1,94938,52,49,6.1,up,14.0,up
+Selma,Fresno,1,93662,52,49,6.1,up,75.0,up
+West Sacramento,Yolo,2,"95691,95605",52,51,2.0,up,24.4,up
+Yorkville,Mendocino,1,95494,52,53,-1.9,down,17.8,up
+Brisbane,San Mateo,1,94005,51,44,15.9,up,76.0,up
+O Neals,Madera,1,93645,51,53,-3.8,down,20.5,up
+Capistrano Beach,Orange,1,92624,50,42,19.0,up,200.0,up
+Kneeland,Humboldt,1,95549,50,53,-5.7,down,8.2,up
+Mecca,Riverside,1,92254,50,44,13.6,up,175.0,up
+Point Arena,Mendocino,1,95468,50,48,4.2,up,14.3,up
+Imperial,Imperial,1,92251,49,41,19.5,up,41.4,up
+Pacific Grove,Monterey,1,93950,49,46,6.5,up,187.5,up
+Sierraville,Sierra,1,96126,49,50,-2.0,down,22.0,up
+Glenhaven,Lake,1,95443,48,43,11.6,up,19.4,up
+Los Alamos,Santa Barbara,1,93440,48,47,2.1,up,14.6,up
+Gold Run,Placer,1,95717,47,47,0.0,flat,0.0,flat
+Palermo,Butte,1,95968,47,47,0.0,flat,74.1,up
+Wasco,Kern,1,93280,47,41,14.6,up,86.4,up
+Ross,Marin,1,94957,46,43,7.0,up,48.3,up
+Challenge,Yuba,1,95925,45,48,-6.2,down,4.3,up
+Covelo,Mendocino,1,95428,45,45,0.0,flat,0.0,flat
+El Granada,San Mateo,1,94018,45,31,45.2,up,121.4,up
+Nicasio,Marin,1,94946,45,41,9.8,up,7.9,up
+Orland,Glenn,1,95963,45,33,36.4,up,37.5,up
+Orleans,Humboldt,1,95556,45,43,4.7,up,16.2,up
+Reedley,Fresno,1,93654,45,43,4.7,up,34.4,up
+Camp Meeker,Sonoma,1,95419,44,41,7.3,up,17.1,up
+Coleville,Mono,1,96107,43,41,4.9,up,32.3,up
+Playa Del Rey,Los Angeles,1,90293,43,44,-2.3,down,63.0,up
+Scotia,Humboldt,1,95565,43,31,38.7,up,47.6,up
+Castella,Shasta,1,96017,42,39,7.7,up,0.0,flat
+French Gulch,Shasta,1,96033,42,43,-2.3,down,7.5,up
+Montara,San Mateo,1,94037,42,42,0.0,flat,100.0,up
+San Lorenzo,Alameda,1,94580,42,38,10.5,up,153.3,up
+Seaside,Monterey,1,93955,41,44,-6.8,down,100.0,up
+Signal Hill,Los Angeles,1,90755,41,40,2.5,up,29.0,up
+Boron,Kern,1,93516,40,32,25.0,up,52.4,up
+Burson,Calaveras,1,95225,40,43,-7.0,down,2.4,up
+Camp Nelson,Tulare,1,93208,40,43,-7.0,down,-20.4,down
+Ferndale,Humboldt,1,95536,40,32,25.0,up,28.0,up
+Taylorsville,Plumas,1,95983,40,39,2.6,up,0.0,flat
+Fair Oaks,Sacramento,1,95628,39,42,-7.1,down,55.6,up
+Firebaugh,Fresno,1,93622,39,39,0.0,flat,-7.1,down
+Hoopa,Humboldt,1,95546,39,36,8.3,up,38.5,up
+Lone Pine,Inyo,1,93545,39,32,21.9,up,33.3,up
+Ranchita,San Diego,1,92066,39,40,-2.5,down,33.3,up
+Smith River,Del Norte,1,95567,39,38,2.6,up,153.3,up
+Villa Park,Orange,1,92861,39,31,25.8,up,158.3,up
+Bolinas,Marin,1,94924,38,35,8.6,up,66.7,up
+Seal Beach,Orange,1,90740,38,35,8.6,up,150.0,up
+Bethel Island,Contra Costa,1,94511,37,40,-7.5,down,8.1,up
+Dinuba,Tulare,1,93618,37,30,23.3,up,130.8,up
+Jacumba,San Diego,1,91934,37,37,0.0,flat,19.4,up
+Klamath River,Siskiyou,1,96050,37,32,15.6,up,10.3,up
+Los Molinos,Tehama,1,96055,37,40,-7.5,down,48.1,up
+Yermo,San Bernardino,1,92398,37,28,32.1,up,115.4,up
+Grover Beach,San Luis Obispo,1,93433,36,33,9.1,up,175.0,up
+Midway City,Orange,1,92655,36,31,16.1,up,158.3,up
+Caspar,Mendocino,1,95420,35,31,12.9,up,24.0,up
+Paynes Creek,Tehama,1,96075,35,39,-10.3,down,5.4,up
+Suisun City,Solano,1,94585,35,36,-2.8,down,44.0,up
+Woodland,Yolo,2,"95776,95695",35,39,-10.3,down,56.0,up
+Carmichael,Sacramento,1,95608,34,40,-15.0,down,90.5,up
+Davis,Yolo,2,"95618,95616",34,32,6.2,up,220.0,up
+Petrolia,Humboldt,1,95558,34,34,0.0,flat,-5.6,down
+Wheatland,Yuba,1,95692,34,32,6.2,up,52.4,up
+Klamath,Del Norte,1,95548,33,28,17.9,up,33.3,up
+Milford,Lassen,1,96121,33,31,6.5,up,40.9,up
+Glennville,Kern,1,93226,32,30,6.7,up,3.4,up
+Rackerby,Yuba,1,95972,32,32,0.0,flat,-5.9,down
+Rio Linda,Sacramento,1,95673,32,31,3.2,up,40.9,up
+Soledad,Monterey,1,93960,32,29,10.3,up,26.1,up
+Callahan,Siskiyou,1,96014,31,29,6.9,up,7.4,up
+Campbell,Santa Clara,1,95008,31,35,-11.4,down,118.8,up
+Cedarville,Modoc,1,96104,31,25,24.0,up,66.7,up
+Cotati,Sonoma,1,94931,31,29,6.9,up,93.3,up
+Edwards,Kern,1,93523,31,28,10.7,up,100.0,up
+Lindsay,Tulare,1,93247,31,23,34.8,up,91.7,up
+Mount Hamilton,Santa Clara,1,95140,31,32,-3.1,down,18.5,up
+Orangevale,Sacramento,1,95662,31,28,10.7,up,33.3,up
+Wilton,Sacramento,1,95693,31,27,14.8,up,12.5,up
+Coronado,San Diego,1,92118,30,30,0.0,flat,76.5,up
+Doyle,Lassen,1,96109,30,26,15.4,up,13.0,up
+Newark,Alameda,1,94560,30,26,15.4,up,85.7,up
+North Highlands,Sacramento,1,95660,30,27,11.1,up,68.8,up
+Oro Grande,San Bernardino,1,92368,30,25,20.0,up,92.3,up
+Stanford,Santa Clara,1,94305,30,23,30.4,up,228.6,up
+Stonyford,Colusa,1,95979,30,28,7.1,up,-3.4,down
+Floriston,Nevada,1,96111,29,32,-9.4,down,28.0,up
+Los Alamitos,Orange,1,90720,29,24,20.8,up,50.0,up
+Niland,Imperial,1,92257,29,32,-9.4,down,128.6,up
+Big Oak Flat,Tuolumne,1,95305,28,26,7.7,up,0.0,flat
+Elk,Mendocino,1,95432,28,29,-3.4,down,26.1,up
+Galt,Sacramento,1,95632,28,26,7.7,up,73.3,up
+Gustine,Merced,1,95322,28,23,21.7,up,43.8,up
+Hat Creek,Shasta,1,96040,28,26,7.7,up,-3.7,down
+Maricopa,Kern,1,93252,28,27,3.7,up,17.4,up
+Orosi,Tulare,1,93647,28,30,-6.7,down,20.0,up
+Seiad Valley,Siskiyou,1,96086,28,30,-6.7,down,15.4,up
+Wallace,Calaveras,1,95254,28,23,21.7,up,0.0,flat
+Capitola,Santa Cruz,1,95010,27,27,0.0,flat,125.0,up
+Davenport,Santa Cruz,1,95017,27,27,0.0,flat,22.7,up
+Discovery Bay,Contra Costa,1,94505,27,28,-3.6,down,33.3,up
+Los Banos,Merced,1,93635,27,25,8.0,up,56.2,up
+Onyx,Kern,1,93255,27,23,17.4,up,53.3,up
+Dillon Beach,Marin,1,94929,26,21,23.8,up,40.0,up
+Guadalupe,Santa Barbara,1,93434,26,20,30.0,up,100.0,up
+Marshall,Marin,1,94940,26,24,8.3,up,33.3,up
+Mc Farland,Kern,1,93250,26,24,8.3,up,9.1,up
+Rodeo,Contra Costa,1,94572,26,22,18.2,up,46.7,up
+Atwater,Merced,1,95301,25,26,-3.8,down,116.7,up
+Macdoel,Siskiyou,1,96058,25,20,25.0,up,25.0,up
+New Cuyama,Santa Barbara,1,93254,25,27,-7.4,down,68.8,up
+Yountville,Napa,1,94599,25,26,-3.8,down,18.2,up
+Chowchilla,Madera,1,93610,24,23,4.3,up,35.3,up
+Comptche,Mendocino,1,95427,24,22,9.1,up,29.4,up
+Drytown,Amador,1,95699,24,26,-7.7,down,36.8,up
+Dunlap,Fresno,1,93621,24,24,0.0,flat,9.1,up
+Holtville,Imperial,1,92250,24,20,20.0,up,42.9,up
+Kerman,Fresno,1,93630,24,26,-7.7,down,30.0,up
+La Palma,Orange,1,90623,24,25,-4.0,down,150.0,up
+Livingston,Merced,1,95334,24,24,0.0,flat,140.0,up
+Loma Mar,San Mateo,1,94021,24,24,0.0,flat,-11.1,down
+Moss Beach,San Mateo,1,94038,24,26,-7.7,down,100.0,up
+Snelling,Merced,1,95369,24,23,4.3,up,21.1,up
+Strathmore,Tulare,1,93267,24,22,9.1,up,69.2,up
+Witter Springs,Lake,1,95493,24,22,9.1,up,4.8,up
+Korbel,Humboldt,1,95550,23,22,4.5,up,-18.5,down
+Beckwourth,Plumas,1,96129,22,18,22.2,up,28.6,up
+Corcoran,Kings,1,93212,22,21,4.8,up,5.0,up
+Dorris,Siskiyou,1,96023,22,26,-15.4,down,62.5,up
+Herlong,Lassen,1,96113,22,19,15.8,up,35.7,up
+Independence,Inyo,1,93526,22,19,15.8,up,216.7,up
+Loleta,Humboldt,1,95551,22,18,22.2,up,50.0,up
+Olivehurst,Yuba,1,95961,22,23,-4.3,down,35.3,up
+Rio Nido,Sonoma,1,95471,22,25,-12.0,down,-28.6,down
+Salida,Stanislaus,1,95368,22,23,-4.3,down,155.6,up
+San Geronimo,Marin,1,94963,22,22,0.0,flat,22.2,up
+San Simeon,San Luis Obispo,1,93452,22,20,10.0,up,66.7,up
+Westport,Mendocino,1,95488,22,21,4.8,up,-4.5,down
+Big Bar,Trinity,1,96010,21,20,5.0,up,0.0,flat
+El Segundo,Los Angeles,1,90245,21,23,-8.7,down,109.1,up
+Oceano,San Luis Obispo,1,93445,21,22,-4.5,down,175.0,up
+Sheridan,Placer,1,95681,21,18,16.7,up,12.5,up
+Twain,Plumas,1,95984,21,21,0.0,flat,10.5,up
+Adin,Modoc,1,96006,20,16,25.0,up,220.0,up
+Big Pine,Inyo,1,93513,20,23,-13.0,down,35.3,up
+Dos Rios,Mendocino,1,95429,20,19,5.3,up,-9.5,down
+Guinda,Yolo,1,95637,20,19,5.3,up,26.7,up
+Navarro,Mendocino,1,95463,20,18,11.1,up,-10.0,down
+Riverbank,Stanislaus,1,95367,20,18,11.1,up,50.0,up
+Gerber,Tehama,1,96035,19,17,11.8,up,30.8,up
+Orange Cove,Fresno,1,93646,19,17,11.8,up,21.4,up
+Trona,San Bernardino,1,93562,19,19,0.0,flat,90.0,up
+Vidal,San Bernardino,1,92280,19,22,-13.6,down,340.0,up
+Chualar,Monterey,1,93925,18,19,-5.3,down,5.6,up
+Colusa,Colusa,1,95932,18,16,12.5,up,60.0,up
+Crescent Mills,Plumas,1,95934,18,18,0.0,flat,50.0,up
+Deer Park,Napa,1,94576,18,20,-10.0,down,11.1,up
+Escalon,San Joaquin,1,95320,18,17,5.9,up,70.0,up
+Hydesville,Humboldt,1,95547,18,14,28.6,up,55.6,up
+San Gregorio,San Mateo,1,94074,18,18,0.0,flat,-18.2,down
+Terra Bella,Tulare,1,93270,18,19,-5.3,down,58.3,up
+Avenal,Kings,1,93204,17,16,6.2,up,166.7,up
+Farmersville,Tulare,1,93223,17,19,-10.5,down,18.8,up
+Herald,Sacramento,1,95638,17,17,0.0,flat,142.9,up
+North Palm Springs,Riverside,1,92258,17,17,0.0,flat,112.5,up
+Piercy,Mendocino,1,95587,17,17,0.0,flat,13.3,up
+Pixley,Tulare,1,93256,17,14,21.4,up,55.6,up
+Rio Vista,Solano,1,94571,17,11,54.5,up,10.0,up
+Acampo,San Joaquin,1,95220,16,15,6.7,up,66.7,up
+Heber,Imperial,1,92249,16,13,23.1,up,44.4,up
+Hinkley,San Bernardino,1,92347,16,15,6.7,up,15.4,up
+Lake City,Modoc,1,96115,16,13,23.1,up,8.3,up
+Lathrop,San Joaquin,1,95330,16,12,33.3,up,33.3,up
+Lemon Cove,Tulare,1,93244,16,11,45.5,up,37.5,up
+Playa Vista,Los Angeles,1,90094,16,14,14.3,up,133.3,up
+Port Costa,Contra Costa,1,94569,16,13,23.1,up,18.2,up
+Buttonwillow,Kern,1,93206,15,14,7.1,up,7.7,up
+Delhi,Merced,1,95315,15,17,-11.8,down,30.8,up
+Earlimart,Tulare,1,93219,15,10,50.0,up,42.9,up
+Gridley,Butte,1,95948,15,12,25.0,up,33.3,up
+Orick,Humboldt,1,95555,15,14,7.1,up,7.7,up
+Winton,Merced,1,95388,15,15,0.0,flat,87.5,up
+Canby,Modoc,1,96015,14,17,-17.6,down,13.3,up
+Desert Center,Riverside,1,92239,14,13,7.7,up,116.7,up
+Grenada,Siskiyou,1,96038,14,18,-22.2,down,20.0,up
+Isleton,Sacramento,1,95641,14,13,7.7,up,62.5,up
+Kingsburg,Fresno,1,93631,14,13,7.7,up,116.7,up
+Tres Pinos,San Benito,1,95075,14,15,-6.7,down,50.0,up
+Bodega,Sonoma,1,94922,13,19,-31.6,down,26.7,up
+Calipatria,Imperial,1,92233,13,12,8.3,up,100.0,up
+Campo Seco,Calaveras,1,95226,13,16,-18.8,down,0.0,flat
+Davis Creek,Modoc,1,96108,13,16,-18.8,down,60.0,up
+Freedom,Santa Cruz,1,95019,13,14,-7.1,down,180.0,up
+Leggett,Mendocino,1,95585,13,17,-23.5,down,-15.0,down
+Lemoore,Kings,1,93245,13,14,-7.1,down,0.0,flat
+Lockwood,Monterey,1,93932,13,12,8.3,up,0.0,flat
+Platina,Shasta,1,96076,13,10,30.0,up,-16.7,down
+Tulelake,Siskiyou,1,96134,13,11,18.2,up,83.3,up
+Weimar,Placer,1,95736,13,15,-13.3,down,-11.8,down
+Annapolis,Sonoma,1,95412,12,15,-20.0,down,-6.2,down
+Denair,Stanislaus,1,95316,12,10,20.0,up,100.0,up
+Fowler,Fresno,1,93625,12,13,-7.7,down,116.7,up
+Litchfield,Lassen,1,96117,12,13,-7.7,down,160.0,up
+Live Oak,Sutter,1,95953,12,13,-7.7,down,85.7,up
+Newman,Stanislaus,1,95360,12,10,20.0,up,25.0,up
+Redcrest,Humboldt,1,95569,12,10,20.0,up,-37.5,down
+Seeley,Imperial,1,92273,12,11,9.1,up,0.0,flat
+Alviso,Santa Clara,1,95002,11,13,-15.4,down,225.0,up
+Antelope,Sacramento,1,95843,11,12,-8.3,down,50.0,up
+Bieber,Lassen,1,96009,11,8,37.5,up,33.3,up
+Byron,Contra Costa,1,94514,11,7,57.1,up,16.7,up
+Caruthers,Fresno,1,93609,11,10,10.0,up,11.1,up
+Durham,Butte,1,95938,11,8,37.5,up,100.0,up
+Hyampom,Trinity,1,96046,11,11,0.0,flat,0.0,flat
+Valyermo,Los Angeles,1,93563,11,11,0.0,flat,10.0,up
+Woody,Kern,1,93287,11,11,0.0,flat,22.2,up
+Zenia,Trinity,1,95595,11,12,-8.3,down,-14.3,down
+Alderpoint,Humboldt,1,95511,10,10,0.0,flat,-9.1,down
+Arbuckle,Colusa,1,95912,10,7,42.9,up,250.0,up
+Blocksburg,Humboldt,1,95514,10,13,-23.1,down,-7.1,down
+Capay,Yolo,1,95607,10,10,0.0,flat,100.0,up
+Dos Palos,Merced,1,93620,10,11,-9.1,down,57.1,up
+Elk Creek,Glenn,1,95939,10,12,-16.7,down,-7.7,down
+Gonzales,Monterey,1,93926,10,10,0.0,flat,66.7,up
+Goodyears Bar,Sierra,1,95944,10,12,-16.7,down,9.1,up
+Linden,San Joaquin,1,95236,10,11,-9.1,down,175.0,up
+Lockeford,San Joaquin,1,95237,10,10,0.0,flat,233.3,up
+Lookout,Modoc,1,96054,10,9,11.1,up,12.5,up
+Parlier,Fresno,1,93648,10,11,-9.1,down,266.7,up
+Scott Bar,Siskiyou,1,96085,10,10,0.0,flat,0.0,flat
+Topaz,Mono,1,96133,10,10,0.0,flat,100.0,up
+Alleghany,Sierra,1,95910,9,10,-10.0,down,-9.1,down
+Alpaugh,Tulare,1,93201,9,7,28.6,up,-12.5,down
+Branscomb,Mendocino,1,95417,9,9,0.0,flat,0.0,flat
+Cutler,Tulare,1,93615,9,11,-18.2,down,83.3,up
+Daggett,San Bernardino,1,92327,9,9,0.0,flat,200.0,up
+Dixon,Solano,1,95620,9,14,-35.7,down,27.3,up
+Elverta,Sacramento,1,95626,9,13,-30.8,down,30.0,up
+Esparto,Yolo,1,95627,9,8,12.5,up,14.3,up
+Fort Bidwell,Modoc,1,96112,9,10,-10.0,down,42.9,up
+Gazelle,Siskiyou,1,96034,9,7,28.6,up,16.7,up
+Hilmar,Merced,1,95324,9,10,-10.0,down,400.0,up
+Hughson,Stanislaus,1,95326,9,10,-10.0,down,11.1,up
+Rumsey,Yolo,1,95679,9,9,0.0,flat,-10.0,down
+Shandon,San Luis Obispo,1,93461,9,7,28.6,up,133.3,up
+Sunset Beach,Orange,1,90742,9,9,0.0,flat,80.0,up
+Willows,Glenn,1,95988,9,7,28.6,up,16.7,up
+Farmington,San Joaquin,1,95230,8,12,-33.3,down,20.0,up
+Sultana,Tulare,1,93666,8,7,14.3,up,,new
+Biggs,Butte,1,95917,7,5,40.0,up,25.0,up
+Brooks,Yolo,1,95606,7,5,40.0,up,25.0,up
+French Camp,San Joaquin,1,95231,7,8,-12.5,down,14.3,up
+Ivanhoe,Tulare,1,93235,7,7,0.0,flat,75.0,up
+Keyes,Stanislaus,1,95328,7,8,-12.5,down,60.0,up
+Likely,Modoc,1,96116,7,8,-12.5,down,14.3,up
+Olancha,Inyo,1,93549,7,5,40.0,up,66.7,up
+Palo Verde,Imperial,1,92266,7,6,16.7,up,200.0,up
+Standish,Lassen,1,96128,7,8,-12.5,down,60.0,up
+Sutter,Sutter,1,95982,7,9,-22.2,down,350.0,up
+Tecate,San Diego,1,91980,7,6,16.7,up,50.0,up
+Winterhaven,Imperial,1,92283,7,5,40.0,up,150.0,up
+Bryn Mawr,San Bernardino,1,92318,6,6,0.0,flat,50.0,up
+Clements,San Joaquin,1,95227,6,8,-25.0,down,60.0,up
+Eagleville,Modoc,1,96110,6,7,-14.3,down,75.0,up
+Forks Of Salmon,Siskiyou,1,96031,6,7,-14.3,down,16.7,up
+Graton,Sonoma,1,95444,6,3,100.0,up,0.0,flat
+Johannesburg,Kern,1,93528,6,6,0.0,flat,20.0,up
+Le Grand,Merced,1,95333,6,9,-33.3,down,80.0,up
+Ocotillo,Imperial,1,92259,6,3,100.0,up,200.0,up
+Princeton,Colusa,1,95970,6,7,-14.3,down,133.3,up
+Ripon,San Joaquin,1,95366,6,7,-14.3,down,250.0,up
+Riverdale,Fresno,1,93656,6,6,0.0,flat,50.0,up
+Samoa,Humboldt,1,95564,6,6,0.0,flat,50.0,up
+San Ardo,Monterey,1,93450,6,8,-25.0,down,14.3,up
+Sequoia National Park,Tulare,1,93262,6,6,0.0,flat,-14.3,down
+Waterford,Stanislaus,1,95386,6,12,-50.0,down,100.0,up
+Westmorland,Imperial,1,92281,6,5,20.0,up,0.0,flat
+Williams,Colusa,1,95987,6,7,-14.3,down,133.3,up
+Armona,Kings,1,93202,5,5,0.0,flat,66.7,up
+Crows Landing,Stanislaus,1,95313,5,4,25.0,up,300.0,up
+Ducor,Tulare,1,93218,5,6,-16.7,down,100.0,up
+Fulton,Sonoma,1,95439,5,5,0.0,flat,400.0,up
+Lost Hills,Kern,1,93249,5,6,-16.7,down,0.0,flat
+Moss Landing,Monterey,1,95039,5,5,0.0,flat,25.0,up
+San Joaquin,Fresno,1,93660,5,6,-16.7,down,-14.3,down
+Stratford,Kings,1,93266,5,4,25.0,up,,new
+Tranquillity,Fresno,1,93668,5,4,25.0,up,33.3,up
+Walnut Grove,Sacramento,1,95690,5,7,-28.6,down,16.7,up
+Baker,San Bernardino,1,92309,4,5,-20.0,down,66.7,up
+Benton,Mono,1,93512,4,4,0.0,flat,33.3,up
+Clarksburg,Yolo,1,95612,4,2,100.0,up,100.0,up
+Empire,Stanislaus,1,95319,4,4,0.0,flat,100.0,up
+Kettleman City,Kings,1,93239,4,4,0.0,flat,100.0,up
+Salton City,Imperial,1,92275,4,4,0.0,flat,33.3,up
+Somes Bar,Siskiyou,1,95568,4,5,-20.0,down,-16.7,down
+Stevinson,Merced,1,95374,4,2,100.0,up,-50.0,down
+Woodbridge,San Joaquin,1,95258,4,4,0.0,flat,33.3,up
+Dunnigan,Yolo,1,95937,3,2,50.0,up,100.0,up
+El Nido,Merced,1,95317,3,3,0.0,flat,-57.1,down
+Hamilton City,Glenn,1,95951,3,3,0.0,flat,-25.0,down
+Hickman,Stanislaus,1,95323,3,2,50.0,up,0.0,flat
+Laton,Fresno,1,93242,3,4,-25.0,down,100.0,up
+Mather,Sacramento,1,95655,3,3,0.0,flat,200.0,up
+Rio Oso,Sutter,1,95674,3,5,-40.0,down,66.7,up
+San Lucas,Monterey,1,93954,3,4,-25.0,down,33.3,up
+Tipton,Tulare,1,93272,3,3,0.0,flat,0.0,flat
+Tomales,Marin,1,94971,3,2,50.0,up,-33.3,down
+Cantua Creek,Fresno,1,93608,2,2,0.0,flat,100.0,up
+Casmalia,Santa Barbara,1,93429,2,2,0.0,flat,-33.3,down
+Coyote,Santa Clara,1,95013,2,3,-33.3,down,50.0,up
+Del Rey,Fresno,1,93616,2,2,0.0,flat,-33.3,down
+Fellows,Kern,1,93224,2,2,0.0,flat,0.0,flat
+Harmony,San Luis Obispo,1,93435,2,2,0.0,flat,100.0,up
+Meridian,Sutter,1,95957,2,1,100.0,up,0.0,flat
+Planada,Merced,1,95365,2,4,-50.0,down,0.0,flat
+Pleasant Grove,Sutter,1,95668,2,2,0.0,flat,-50.0,down
+Randsburg,Kern,1,93554,2,1,100.0,up,,new
+Spreckels,Monterey,1,93962,2,2,0.0,flat,0.0,flat
+Surfside,Orange,1,90743,2,4,-50.0,down,0.0,flat
+Tecopa,Inyo,1,92389,2,1,100.0,up,0.0,flat
+Thornton,San Joaquin,1,95686,2,2,0.0,flat,,new
+Tupman,Kern,1,93276,2,3,-33.3,down,0.0,flat
+Victor,San Joaquin,1,95253,2,2,0.0,flat,,new
+Wendel,Lassen,1,96136,2,2,0.0,flat,100.0,up
+Ballico,Merced,1,95303,1,1,0.0,flat,0.0,flat
+Belden,Plumas,1,95915,1,1,0.0,flat,-50.0,down
+Biola,Fresno,1,93606,1,1,0.0,flat,0.0,flat
+Courtland,Sacramento,1,95615,1,,,new,,new
+Five Points,Fresno,1,93624,1,1,0.0,flat,-50.0,down
+Fort Irwin,San Bernardino,1,92310,1,1,0.0,flat,,new
+Huron,Fresno,1,93234,1,1,0.0,flat,0.0,flat
+Knights Landing,Sutter,1,95645,1,1,0.0,flat,0.0,flat
+Knightsen,Contra Costa,1,94548,1,,,new,,new
+Ludlow,San Bernardino,1,92338,1,1,0.0,flat,0.0,flat
+Madeline,Lassen,1,96119,1,1,0.0,flat,0.0,flat
+Madison,Yolo,1,95653,1,,,new,,new
+March Air Reserve Base,Riverside,1,92518,1,1,0.0,flat,0.0,flat
+Nipton,San Bernardino,1,92364,1,1,0.0,flat,0.0,flat
+Red Mountain,San Bernardino,1,93558,1,1,0.0,flat,0.0,flat
+Shoshone,Inyo,1,92384,1,2,-50.0,down,,new
+Termo,Lassen,1,96132,1,1,0.0,flat,-50.0,down
+Traver,Tulare,1,93673,1,1,0.0,flat,,new
+Valley Ford,Sonoma,1,94972,1,1,0.0,flat,,new
+Vernalis,Stanislaus,1,95385,1,1,0.0,flat,-50.0,down
+Zamora,Yolo,1,95698,1,1,0.0,flat,0.0,flat

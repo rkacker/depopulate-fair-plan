@@ -257,6 +257,10 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
     write_csv(processed_dir / "fair" / "county_pif_history.csv", county_pif_rows, PIF_FIELDNAMES)
     pif_rows = zip_pif_rows + county_pif_rows
 
+    # --- fair/ city_pif_history: rollup of zip_pif_history by GeoNames city ---
+    city_pif_rows = _build_city_pif_from_zip_rollup(zip_pif_rows, zip_to_city)
+    write_csv(processed_dir / "fair" / "city_pif_history.csv", city_pif_rows, PIF_FIELDNAMES)
+
     # --- cdi/ base tables (deduplicate: State rows repeat across PDF pages) ---
     cdi_deduped: dict[tuple, dict] = {}
     for r in cdi_county_rows:
@@ -472,26 +476,35 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         for r in county_quarterly
         if r["coverage_end"] == prior_ce
     }
+    yoy_by_county = _latest_fy_changes(
+        read_csv(processed_dir / "fair" / "county_pif_history.csv"),
+        "geography_name",
+    )
     county_rows = []
     for r in county_rankings:
         county = r["county"]
         policies = int(r["policy_count"])
         prior_policies = prior_by_county.get(county)
         change_pct, direction = _classify_change(policies, prior_policies)
+        yoy_latest, yoy_prior = yoy_by_county.get(county, (0, None))
+        yoy_change_pct, yoy_direction = _classify_change(yoy_latest, yoy_prior)
         county_rows.append({
             "county": county,
             "policies": policies,
             "prior_policies": prior_policies if prior_policies is not None else "",
             "change_pct": change_pct,
             "direction": direction,
+            "yoy_change_pct": yoy_change_pct,
+            "yoy_direction": yoy_direction,
         })
     write_csv(
         exports_dir / "california_county_data.csv",
         county_rows,
-        ["county", "policies", "prior_policies", "change_pct", "direction"],
+        ["county", "policies", "prior_policies", "change_pct", "direction",
+         "yoy_change_pct", "yoy_direction"],
     )
 
-    # --- california_zip_data.csv (with per-ZIP quarterly velocity) ---
+    # --- california_zip_data.csv (with per-ZIP quarterly + yearly velocity) ---
     zip_quarterly = read_csv(processed_dir / "fair" / "zip_quarterly.csv")
     zip_coverage_ends = sorted({r["coverage_end"] for r in zip_quarterly})
     zip_latest_ce = zip_coverage_ends[-1] if zip_coverage_ends else ""
@@ -501,6 +514,10 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         for r in zip_quarterly
         if r["coverage_end"] == zip_prior_ce
     }
+    yoy_by_zip = _latest_fy_changes(
+        read_csv(processed_dir / "fair" / "zip_pif_history.csv"),
+        "geography_id",
+    )
     zip_rows: list[dict[str, object]] = []
     for r in zip_quarterly:
         if r["coverage_end"] != zip_latest_ce:
@@ -508,6 +525,8 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         policies = int(r["policy_count"])
         prior_policies = prior_by_zip.get(r["zip"])
         change_pct, direction = _classify_change(policies, prior_policies)
+        yoy_latest, yoy_prior = yoy_by_zip.get(r["zip"], (0, None))
+        yoy_change_pct, yoy_direction = _classify_change(yoy_latest, yoy_prior)
         zip_rows.append({
             "zip": r["zip"],
             "city": r.get("city", ""),
@@ -517,15 +536,18 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
             "prior_policies": prior_policies if prior_policies is not None else "",
             "change_pct": change_pct,
             "direction": direction,
+            "yoy_change_pct": yoy_change_pct,
+            "yoy_direction": yoy_direction,
         })
     zip_rows.sort(key=lambda r: int(r["policies"]), reverse=True)
     write_csv(
         exports_dir / "california_zip_data.csv",
         zip_rows,
-        ["zip", "city", "county", "region", "policies", "prior_policies", "change_pct", "direction"],
+        ["zip", "city", "county", "region", "policies", "prior_policies",
+         "change_pct", "direction", "yoy_change_pct", "yoy_direction"],
     )
 
-    # --- california_city_data.csv (with per-city quarterly velocity) ---
+    # --- california_city_data.csv (with per-city quarterly + yearly velocity) ---
     city_quarterly = read_csv(processed_dir / "fair" / "city_quarterly.csv")
     city_coverage_ends = sorted({r["coverage_end"] for r in city_quarterly})
     city_latest_ce = city_coverage_ends[-1] if city_coverage_ends else ""
@@ -535,6 +557,10 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         for r in city_quarterly
         if r["coverage_end"] == city_prior_ce
     }
+    yoy_by_city = _latest_fy_changes(
+        read_csv(processed_dir / "fair" / "city_pif_history.csv"),
+        "geography_name",
+    )
     city_rows: list[dict[str, object]] = []
     for r in city_quarterly:
         if r["coverage_end"] != city_latest_ce:
@@ -542,6 +568,8 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
         policies = int(r["policy_count"])
         prior_policies = prior_by_city.get(r["city"])
         change_pct, direction = _classify_change(policies, prior_policies)
+        yoy_latest, yoy_prior = yoy_by_city.get(r["city"], (0, None))
+        yoy_change_pct, yoy_direction = _classify_change(yoy_latest, yoy_prior)
         city_rows.append({
             "city": r["city"],
             "county": r["county"],
@@ -551,12 +579,15 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
             "prior_policies": prior_policies if prior_policies is not None else "",
             "change_pct": change_pct,
             "direction": direction,
+            "yoy_change_pct": yoy_change_pct,
+            "yoy_direction": yoy_direction,
         })
     city_rows.sort(key=lambda r: int(r["policies"]), reverse=True)
     write_csv(
         exports_dir / "california_city_data.csv",
         city_rows,
-        ["city", "county", "zip_count", "zips", "policies", "prior_policies", "change_pct", "direction"],
+        ["city", "county", "zip_count", "zips", "policies", "prior_policies",
+         "change_pct", "direction", "yoy_change_pct", "yoy_direction"],
     )
 
     # --- quarterly_totals.json (statewide totals by coverage_end × metric) ---
@@ -832,6 +863,64 @@ def _build_cdi_county_wide(
     )
 
 
+def _build_city_pif_from_zip_rollup(
+    zip_pif_rows: list[dict[str, object]],
+    zip_to_city: dict[str, str],
+) -> list[dict[str, object]]:
+    """Roll up ZIP-level fiscal-year PIF history into per-city totals.
+
+    Skips ZIPs without a city mapping (~0.1%). No state-total row — that
+    lives in county_pif_history.csv.
+    """
+    if not zip_pif_rows:
+        return []
+    by_city_fy: dict[tuple[str, int], dict[str, object]] = {}
+    for r in zip_pif_rows:
+        if r["metric"] != "policy_count" or r["geography_id"] == "Total":
+            continue
+        city = zip_to_city.get(str(r["geography_id"]))
+        if not city:
+            continue
+        fy = int(r["fiscal_year"])
+        entry = by_city_fy.get((city, fy))
+        if entry is None:
+            entry = {
+                "coverage_end": r["coverage_end"],
+                "fiscal_year": fy,
+                "period_end": r["period_end"],
+                "geography_level": "city",
+                "geography_id": city,
+                "geography_name": city,
+                "metric": "policy_count",
+                "value": 0,
+                "yoy_growth_pct": "",
+                "source_id": r["source_id"],
+            }
+            by_city_fy[(city, fy)] = entry
+        entry["value"] = int(entry["value"]) + int(r["value"])
+
+    cities = sorted({c for (c, _fy) in by_city_fy})
+    years = sorted({fy for (_c, fy) in by_city_fy})
+    prior: dict[tuple[str, int], int] = {}
+    for fy in years:
+        for city in cities:
+            entry = by_city_fy.get((city, fy))
+            if entry is None:
+                continue
+            prior_val = prior.get((city, fy - 1))
+            if prior_val is not None and prior_val > 0:
+                growth = (int(entry["value"]) - prior_val) / prior_val * 100
+                entry["yoy_growth_pct"] = f"{growth:.1f}"
+            prior[(city, fy)] = int(entry["value"])
+
+    return [
+        by_city_fy[(c, fy)]
+        for fy in years
+        for c in cities
+        if (c, fy) in by_city_fy
+    ]
+
+
 def _build_county_pif_from_zip_rollup(
     zip_pif_rows: list[dict[str, object]],
     zip_to_county: dict[str, str],
@@ -904,6 +993,28 @@ def _build_county_pif_from_zip_rollup(
         if fy in state_by_fy:
             rows.append(state_by_fy[fy])
     return rows
+
+
+def _latest_fy_changes(
+    pif_rows: list[dict[str, object]],
+    key_field: str,
+) -> dict[str, tuple[int, int | None]]:
+    """For each geography, return (latest_fy_value, prior_fy_value).
+
+    Used to compute year-over-year change off the fiscal-year PIF history.
+    Skips the "Total" sentinel rows.
+    """
+    geo_rows = [r for r in pif_rows if r[key_field] != "Total"]
+    if not geo_rows:
+        return {}
+    fys = sorted({int(r["fiscal_year"]) for r in geo_rows})
+    if not fys:
+        return {}
+    latest = fys[-1]
+    prior = fys[-2] if len(fys) >= 2 else None
+    latest_map = {r[key_field]: int(r["value"]) for r in geo_rows if int(r["fiscal_year"]) == latest}
+    prior_map = {r[key_field]: int(r["value"]) for r in geo_rows if int(r["fiscal_year"]) == prior} if prior else {}
+    return {name: (val, prior_map.get(name)) for name, val in latest_map.items()}
 
 
 def _classify_change(policies: int, prior: int | None) -> tuple[str, str]:

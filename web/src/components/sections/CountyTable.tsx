@@ -6,7 +6,7 @@ import { VelocityIndicator } from "@/components/VelocityIndicator";
 import { titleCaseCounty } from "@/lib/data";
 import type { CountyData, SiteStats } from "@/types";
 
-type SortField = "county" | "policies" | "changePct";
+type SortField = "county" | "policies" | "changePct" | "yoyChangePct";
 type SortOrder = "asc" | "desc";
 
 interface CountyTableProps {
@@ -29,9 +29,9 @@ export function CountyTable({ countyData, stats, loading }: CountyTableProps) {
           ? a.county.localeCompare(b.county)
           : b.county.localeCompare(a.county);
       }
-      if (sortField === "changePct") {
-        const av = a.changePct ?? Number.NEGATIVE_INFINITY;
-        const bv = b.changePct ?? Number.NEGATIVE_INFINITY;
+      if (sortField === "changePct" || sortField === "yoyChangePct") {
+        const av = a[sortField] ?? Number.NEGATIVE_INFINITY;
+        const bv = b[sortField] ?? Number.NEGATIVE_INFINITY;
         return sortOrder === "asc" ? av - bv : bv - av;
       }
       return sortOrder === "asc"
@@ -112,9 +112,13 @@ export function CountyTable({ countyData, stats, loading }: CountyTableProps) {
                       </button>
                     </th>
                     <th className="px-4 py-3 text-right">
-                      <span className="font-semibold text-charcoal">
-                        % of State Total
-                      </span>
+                      <button
+                        onClick={() => handleSort("yoyChangePct")}
+                        className="ml-auto flex items-center gap-2 font-semibold text-charcoal transition-colors hover:text-patriot-red"
+                      >
+                        Last Year
+                        {sortIcon("yoyChangePct")}
+                      </button>
                     </th>
                   </tr>
                 </thead>
@@ -138,11 +142,11 @@ export function CountyTable({ countyData, stats, loading }: CountyTableProps) {
                           changePct={row.changePct}
                         />
                       </td>
-                      <td className="px-4 py-3 text-right text-gray-600">
-                        {total > 0
-                          ? ((row.policies / total) * 100).toFixed(1)
-                          : "0.0"}
-                        %
+                      <td className="px-4 py-3 text-right">
+                        <VelocityIndicator
+                          direction={row.yoyDirection}
+                          changePct={row.yoyChangePct}
+                        />
                       </td>
                     </tr>
                   ))}
