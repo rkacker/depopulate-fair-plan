@@ -1,104 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Header } from "@/components/sections/Header";
-import { Hero } from "@/components/sections/Hero";
-import { CrisisStats } from "@/components/sections/CrisisStats";
-import { CrisisMap } from "@/components/sections/CrisisMap";
-import { CountyTable } from "@/components/sections/CountyTable";
-import { CityMap } from "@/components/sections/CityMap";
-import { CityTable } from "@/components/sections/CityTable";
-import { ZipMap } from "@/components/sections/ZipMap";
-import { ZipTable } from "@/components/sections/ZipTable";
-import { DataPage } from "@/components/sections/DataPage";
-import { Solutions } from "@/components/sections/Solutions";
-import { Signup } from "@/components/sections/Signup";
 import { Footer } from "@/components/sections/Footer";
-import {
-  loadCityData,
-  loadCountyData,
-  loadSiteStats,
-  loadZipData,
-} from "@/lib/data";
-import type { CityData, CountyData, SiteStats, ZipData } from "@/types";
+import { DataPage } from "@/components/sections/DataPage";
+import { Home } from "@/components/Home";
+import { NotFound } from "@/components/NotFound";
 
-type View = "county" | "city" | "zip";
-type Page = "home" | "data";
-
-export default function App() {
-  const [page] = useState<Page>(() => {
-    if (typeof window === "undefined") return "home";
-    return new URLSearchParams(window.location.search).get("page") === "data"
-      ? "data"
-      : "home";
-  });
-  const [view] = useState<View>(() => {
-    if (typeof window === "undefined") return "county";
-    const v = new URLSearchParams(window.location.search).get("view");
-    return v === "city" || v === "zip" ? v : "county";
-  });
-  const [stats, setStats] = useState<SiteStats | null>(null);
-  const [countyData, setCountyData] = useState<CountyData | null>(null);
-  const [cityData, setCityData] = useState<CityData | null>(null);
-  const [zipData, setZipData] = useState<ZipData | null>(null);
-  const [loading, setLoading] = useState(true);
-
+// Redirect legacy URLs (pre-router) to the canonical paths.
+// Currently only ?page=data → /data; ?view=city / ?view=zip stay as query
+// strings on / since those views are still experimental.
+function useLegacyRedirect() {
+  const location = useLocation();
+  const navigate = useNavigate();
   useEffect(() => {
-    if (page === "data") {
-      setLoading(false);
-      return;
+    if (location.pathname !== "/") return;
+    const params = new URLSearchParams(location.search);
+    if (params.get("page") === "data") {
+      params.delete("page");
+      const q = params.toString();
+      navigate(`/data${q ? `?${q}` : ""}`, { replace: true });
     }
-    let cancelled = false;
-    const dataLoader =
-      view === "city" ? loadCityData()
-      : view === "zip" ? loadZipData()
-      : loadCountyData();
-    Promise.all([loadSiteStats().catch(() => null), dataLoader])
-      .then(([s, d]) => {
-        if (cancelled) return;
-        setStats(s);
-        if (view === "city") setCityData(d as CityData);
-        else if (view === "zip") setZipData(d as ZipData);
-        else setCountyData(d as CountyData);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [page, view]);
+  }, [location, navigate]);
+}
 
+function AppShell() {
+  useLegacyRedirect();
   return (
     <div className="min-h-screen bg-coastal-beige">
       <Header />
       <main>
-        {page === "data" ? (
-          <DataPage />
-        ) : (
-          <>
-            <Hero stats={stats} />
-            <CrisisStats stats={stats} />
-            {view === "city" ? (
-              <>
-                <CityMap cityData={cityData} stats={stats} loading={loading} />
-                <CityTable cityData={cityData} stats={stats} loading={loading} />
-              </>
-            ) : view === "zip" ? (
-              <>
-                <ZipMap zipData={zipData} stats={stats} loading={loading} />
-                <ZipTable zipData={zipData} stats={stats} loading={loading} />
-              </>
-            ) : (
-              <>
-                <CrisisMap countyData={countyData} stats={stats} loading={loading} />
-                <CountyTable countyData={countyData} stats={stats} loading={loading} />
-              </>
-            )}
-            <Solutions />
-            <Signup />
-          </>
-        )}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/data" element={<DataPage />} />
+          {/* Old query-string URL → canonical path */}
+          <Route path="/?page=data" element={<Navigate to="/data" replace />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
       <Footer />
     </div>
   );
 }
+
+export default AppShell;

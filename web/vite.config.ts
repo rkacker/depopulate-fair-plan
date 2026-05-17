@@ -3,12 +3,13 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "node:path";
 
-// Relative base — same dist/ serves correctly at any URL prefix:
-// custom domain apex (depopulatefairplan.com), github.io subpath
-// (<user>.github.io/<repo>/), even file://. Keep all asset/data
-// references in code as relative paths (no leading slash).
+// Absolute base — required for client-side routing (BrowserRouter), so a
+// hard refresh at /data resolves /assets/* correctly. Trade-off: dist/
+// only works at the apex of a domain (depopulatefairplan.com) — no longer
+// works under github.io/<repo>/ subpaths or file://. We deploy to a
+// custom apex domain, so this is fine.
 export default defineConfig({
-  base: "./",
+  base: "/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {

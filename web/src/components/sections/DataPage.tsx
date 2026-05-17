@@ -1,4 +1,5 @@
-import { useState, type ReactNode } from "react";
+import { type ReactNode } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Info } from "lucide-react";
 import { FairShareTab } from "@/components/sections/FairShareTab";
 
@@ -39,9 +40,24 @@ const TABS: TabDef[] = [
 
 const GITHUB_URL = "https://github.com/rkacker/depopulate-fair-plan";
 
+const TAB_IDS = TABS.map((t) => t.id);
+
 export function DataPage() {
-  const [active, setActive] = useState<TabId>(TABS[0].id);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const requested = searchParams.get("tab");
+  const active: TabId = (TAB_IDS as string[]).includes(requested ?? "")
+    ? (requested as TabId)
+    : TABS[0].id;
   const current = TABS.find((t) => t.id === active) ?? TABS[0];
+
+  function selectTab(id: TabId) {
+    if (id === TABS[0].id) {
+      // Default tab — strip the query param for a clean /data URL.
+      setSearchParams({}, { replace: true });
+    } else {
+      setSearchParams({ tab: id }, { replace: false });
+    }
+  }
 
   return (
     <section className="bg-gray-50 py-12">
@@ -88,7 +104,7 @@ export function DataPage() {
                 key={tab.id}
                 role="tab"
                 aria-selected={isActive}
-                onClick={() => setActive(tab.id)}
+                onClick={() => selectTab(tab.id)}
                 className={`-mb-px border-b-2 px-4 py-2 text-sm font-semibold transition-colors ${
                   isActive
                     ? "border-patriot-red text-patriot-red"
