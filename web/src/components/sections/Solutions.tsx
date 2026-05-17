@@ -1,3 +1,9 @@
+// TODO(future): rebuild this section with sharper content. The three
+// pillars below are placeholder messaging that should be replaced with
+// more specific, data-grounded framing tied to the metrics this site
+// already surfaces. Until that's ready, Home.tsx intentionally does NOT
+// render this component. File kept in-tree as scaffolding so a future
+// rebuild can reuse the structure.
 import { Building2, FileText, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";

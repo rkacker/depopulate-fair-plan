@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export function Footer() {
   return (
     <footer className="bg-charcoal py-12 text-white">
@@ -16,23 +14,6 @@ export function Footer() {
         >
           info@depopulatefairplan.com
         </a>
-        <nav className="mt-6 flex items-center justify-center gap-4 text-xs text-gray-400">
-          <Link
-            to="/data"
-            className="transition-colors hover:text-golden-yellow"
-          >
-            Data &amp; Downloads
-          </Link>
-          <span aria-hidden="true">·</span>
-          <a
-            href="https://github.com/rkacker/depopulate-fair-plan"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-golden-yellow"
-          >
-            GitHub
-          </a>
-        </nav>
         <p className="mt-6 text-xs text-gray-500">
           © {new Date().getFullYear()} Depopulate the FAIR Plan. All rights
           reserved.
