@@ -71,7 +71,7 @@ export function CountyTable({ countyData, stats, loading }: CountyTableProps) {
             </h2>
             <p className="text-sm text-gray-600">
               {stats?.table.description ??
-                "FAIR Plan policies by county as of September 30, 2025"}
+                "FAIR Plan policies by county as of March 31, 2026"}
             </p>
           </div>
 
@@ -167,7 +167,7 @@ export function CountyTable({ countyData, stats, loading }: CountyTableProps) {
               <div className="mt-4 text-center text-sm text-gray-600">
                 <p>
                   {stats?.table.data_source ??
-                    "Data source: California FAIR Plan through September 30, 2025"}
+                    "Data source: California FAIR Plan through March 31, 2026"}
                 </p>
                 <p className="mt-1">
                   Total policies statewide:{" "}

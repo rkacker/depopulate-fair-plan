@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && cp dist/index.html dist/404.html",
+    "build": "tsc -b && vite build && cp dist/index.html dist/404.html && cp dist/index.html dist/data/index.html",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "sync-data": "./scripts/sync-data.sh"

@@ -154,7 +154,7 @@ export function CrisisMap({ countyData, stats, loading }: CrisisMapProps) {
                   </p>
                   <p className="text-xs text-gray-700">
                     {stats?.map.data_source ??
-                      "California FAIR Plan data through September 30, 2025"}
+                      "California FAIR Plan data through March 31, 2026"}
                   </p>
                 </div>
               </div>
