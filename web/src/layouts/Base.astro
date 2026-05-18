@@ -3,7 +3,6 @@ import "@fontsource-variable/geist";
 import "@/index.css";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
-import { ScrollManager } from "@/components/ScrollManager";
 
 const pathname = Astro.url.pathname;
 
@@ -55,14 +54,34 @@ const ogDescription =
     <meta name="twitter:image" content={ogImage} />
 
     <title>{title}</title>
+    <slot name="head-extra" />
   </head>
   <body class="min-h-screen bg-coastal-beige">
-    <ScrollManager client:load />
     <Header pathname={pathname} client:load />
     <main>
       <slot />
     </main>
-    <Footer client:load />
+    <Footer />
+    <script is:inline>
+      // Hash-scroll-with-retry: client islands hydrate after the browser's
+      // built-in hash scroll, so a fresh load of /#mission lands at the top
+      // unless we retry until the island mounts the target.
+      (function () {
+        var hash = window.location.hash;
+        if (!hash) return;
+        var id = hash.slice(1);
+        function tryScroll() {
+          var el = document.getElementById(id);
+          if (!el) return false;
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          return true;
+        }
+        if (tryScroll()) return;
+        setTimeout(tryScroll, 100);
+        setTimeout(tryScroll, 400);
+        setTimeout(tryScroll, 1000);
+      })();
+    </script>
     <script
       defer
       src="https://static.cloudflareinsights.com/beacon.min.js"

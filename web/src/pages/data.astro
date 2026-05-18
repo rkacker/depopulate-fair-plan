@@ -1,6 +1,6 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { DataPageIsland } from "@/components/islands/DataPageIsland";
+import { DataPage } from "@/components/sections/DataPage";
 
 const title = "Data & Downloads — Depopulate the FAIR Plan";
 const description =
@@ -8,5 +8,5 @@ const description =
 ---
 
 <Base title={title} description={description}>
-  <DataPageIsland client:only="react" />
+  <DataPage client:only="react" />
 </Base>

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
 
@@ -10,20 +9,7 @@ const HOME_SECTIONS: Array<{ id: string; label: string }> = [
 
 const GITHUB_URL = "https://github.com/rkacker/depopulate-fair-plan";
 
-interface HeaderProps {
-  pathname?: string;
-}
-
-export function Header({ pathname: initialPathname }: HeaderProps = {}) {
-  const [pathname, setPathname] = useState<string>(
-    initialPathname ??
-      (typeof window !== "undefined" ? window.location.pathname : "/"),
-  );
-  useEffect(() => {
-    const onChange = () => setPathname(window.location.pathname);
-    window.addEventListener("popstate", onChange);
-    return () => window.removeEventListener("popstate", onChange);
-  }, []);
+export function Header({ pathname }: { pathname: string }) {
   const onHome = pathname === "/";
 
   return (
