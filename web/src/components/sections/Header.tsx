@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
 
@@ -13,8 +12,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b-2 border-patriot-red bg-white shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link
-          to="/"
+        <a
+          href="/"
           className="flex items-center gap-3 transition-opacity hover:opacity-80"
           aria-label="Home"
         >
@@ -24,7 +23,7 @@ export function Header() {
           <h1 className="text-lg font-bold text-charcoal sm:text-xl">
             Depopulate the FAIR Plan
           </h1>
-        </Link>
+        </a>
         <nav className="hidden items-center gap-6 md:flex">
           {NAV_ITEMS.map((item) => (
             <button

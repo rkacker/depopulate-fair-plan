@@ -1,0 +1,68 @@
+---
+import "@fontsource-variable/geist";
+import "@/index.css";
+import { Header } from "@/components/sections/Header";
+import { Footer } from "@/components/sections/Footer";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+}
+
+const {
+  title = "Depopulate the FAIR Plan",
+  description = "California's insurer of last resort has grown 2.8x since 2021. Track the FAIR Plan crisis by county with data sourced directly from CFP and CDI.",
+  canonical = new URL(Astro.url.pathname, Astro.site).toString(),
+  ogImage = new URL("/og-image.png", Astro.site).toString(),
+  ogType = "website",
+} = Astro.props;
+
+const ogDescription =
+  "California's insurer of last resort has grown 2.8x since 2021. Track the crisis by county.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Depopulate the FAIR Plan — California insurance crisis tracker"
+    />
+    <meta property="og:site_name" content="Depopulate the FAIR Plan" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-coastal-beige">
+    <Header client:load />
+    <main>
+      <slot />
+    </main>
+    <Footer client:load />
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "659f0dd51a114f038f55d8c5de847632"}'
+    ></script>
+  </body>
+</html>

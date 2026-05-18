@@ -1,0 +1,19 @@
+---
+import Base from "@/layouts/Base.astro";
+import { Home } from "@/components/Home";
+---
+
+<Base>
+  <Home client:only="react" />
+  <script is:inline>
+    // Legacy redirect: pre-router URLs used ?page=data
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get("page") === "data") {
+        params.delete("page");
+        var q = params.toString();
+        window.location.replace("/data" + (q ? "?" + q : ""));
+      }
+    })();
+  </script>
+</Base>

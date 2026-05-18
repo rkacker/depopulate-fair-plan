@@ -1,0 +1,12 @@
+---
+import Base from "@/layouts/Base.astro";
+import { DataPageIsland } from "@/components/islands/DataPageIsland";
+
+const title = "Data & Downloads — Depopulate the FAIR Plan";
+const description =
+  "Quarterly FAIR Plan and CDI data for California — county, city, and ZIP-level. CSV and JSON downloads sourced directly from CFP and CDI.";
+---
+
+<Base title={title} description={description}>
+  <DataPageIsland client:only="react" />
+</Base>

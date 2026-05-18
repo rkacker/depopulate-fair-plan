@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 
 export function NotFound() {
@@ -17,18 +16,18 @@ export function NotFound() {
             downloads.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link
-              to="/"
+            <a
+              href="/"
               className="rounded-md bg-patriot-red px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-red-700"
             >
               Back to home
-            </Link>
-            <Link
-              to="/data"
+            </a>
+            <a
+              href="/data"
               className="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-charcoal shadow-sm transition-colors hover:border-patriot-red hover:text-patriot-red"
             >
               Data &amp; Downloads
-            </Link>
+            </a>
           </div>
         </Card>
       </div>

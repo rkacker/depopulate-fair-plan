@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-
 export function Footer() {
   return (
     <footer className="bg-charcoal py-12 text-white">
@@ -17,12 +15,12 @@ export function Footer() {
           info@depopulatefairplan.com
         </a>
         <nav className="mt-6 flex items-center justify-center gap-4 text-xs text-gray-400">
-          <Link
-            to="/data"
+          <a
+            href="/data"
             className="transition-colors hover:text-golden-yellow"
           >
             Data &amp; Downloads
-          </Link>
+          </a>
           <span aria-hidden="true">·</span>
           <a
             href="https://github.com/rkacker/depopulate-fair-plan"
