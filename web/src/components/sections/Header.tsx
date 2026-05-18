@@ -1,9 +1,6 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
 
-// In-page section anchors on the home route. From /data these become links
-// back to "/#<id>" — Home.tsx handles the hash and scrolls on mount.
 const HOME_SECTIONS: Array<{ id: string; label: string }> = [
   { id: "mission", label: "Mission" },
   { id: "crisis", label: "Crisis" },
@@ -12,16 +9,14 @@ const HOME_SECTIONS: Array<{ id: string; label: string }> = [
 
 const GITHUB_URL = "https://github.com/rkacker/depopulate-fair-plan";
 
-export function Header() {
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
+export function Header({ pathname }: { pathname: string }) {
   const onHome = pathname === "/";
 
   return (
     <header className="sticky top-0 z-50 border-b-2 border-patriot-red bg-white shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <Link
-          to="/"
+        <a
+          href="/"
           className="flex items-center gap-3 transition-opacity hover:opacity-80"
           aria-label="Home"
         >
@@ -31,7 +26,7 @@ export function Header() {
           <h1 className="text-lg font-bold text-charcoal sm:text-xl">
             Depopulate the FAIR Plan
           </h1>
-        </Link>
+        </a>
         <nav className="hidden items-center gap-6 md:flex">
           {HOME_SECTIONS.map((item) =>
             onHome ? (
@@ -43,21 +38,21 @@ export function Header() {
                 {item.label}
               </button>
             ) : (
-              <Link
+              <a
                 key={item.id}
-                to={`/#${item.id}`}
+                href={`/#${item.id}`}
                 className="text-sm font-medium text-gray-600 transition-colors hover:text-patriot-red"
               >
                 {item.label}
-              </Link>
+              </a>
             ),
           )}
-          <Link
-            to="/data"
+          <a
+            href="/data"
             className="text-sm font-medium text-gray-600 transition-colors hover:text-patriot-red"
           >
             Data
-          </Link>
+          </a>
           <a
             href={GITHUB_URL}
             target="_blank"
@@ -70,7 +65,7 @@ export function Header() {
             size="sm"
             onClick={() => {
               if (onHome) scrollToSection("signup");
-              else navigate("/#signup");
+              else window.location.href = "/#signup";
             }}
           >
             Get Updates

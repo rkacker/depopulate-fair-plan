@@ -1,6 +1,33 @@
-import { type ReactNode } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect, useState, type ReactNode } from "react";
 import { Info } from "lucide-react";
+
+function useSearchParam(
+  name: string,
+): [string | null, (next: string | null, replace?: boolean) => void] {
+  const [value, setValue] = useState<string | null>(() =>
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search).get(name)
+      : null,
+  );
+  useEffect(() => {
+    const onChange = () =>
+      setValue(new URLSearchParams(window.location.search).get(name));
+    window.addEventListener("popstate", onChange);
+    return () => window.removeEventListener("popstate", onChange);
+  }, [name]);
+
+  function set(next: string | null, replace = false) {
+    const params = new URLSearchParams(window.location.search);
+    if (next === null) params.delete(name);
+    else params.set(name, next);
+    const search = params.toString();
+    const url = window.location.pathname + (search ? "?" + search : "");
+    if (replace) window.history.replaceState({}, "", url);
+    else window.history.pushState({}, "", url);
+    setValue(next);
+  }
+  return [value, set];
+}
 import { FairShareTab } from "@/components/sections/FairShareTab";
 import { StatewideHistoryTab } from "@/components/sections/StatewideHistoryTab";
 import { ZipHistoryTab } from "@/components/sections/ZipHistoryTab";
@@ -52,20 +79,16 @@ const GITHUB_URL = "https://github.com/rkacker/depopulate-fair-plan";
 const TAB_IDS = TABS.map((t) => t.id);
 
 export function DataPage() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const requested = searchParams.get("tab");
+  const [requested, setTab] = useSearchParam("tab");
   const active: TabId = (TAB_IDS as string[]).includes(requested ?? "")
     ? (requested as TabId)
     : TABS[0].id;
   const current = TABS.find((t) => t.id === active) ?? TABS[0];
 
   function selectTab(id: TabId) {
-    if (id === TABS[0].id) {
-      // Default tab — strip the query param for a clean /data URL.
-      setSearchParams({}, { replace: true });
-    } else {
-      setSearchParams({ tab: id }, { replace: false });
-    }
+    // Default tab — strip the query param for a clean /data URL.
+    if (id === TABS[0].id) setTab(null, true);
+    else setTab(id);
   }
 
   return (

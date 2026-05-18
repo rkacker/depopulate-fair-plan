@@ -1,0 +1,23 @@
+---
+import Base from "@/layouts/Base.astro";
+import { Home } from "@/components/Home";
+---
+
+<Base>
+  <Fragment slot="head-extra">
+    <script is:inline>
+      // Legacy redirect: pre-router URLs used ?page=data. Static hosting
+      // means this can't be server-side — Astro.url.searchParams is empty
+      // at build time. Inline in <head> so it fires before Home hydrates.
+      (function () {
+        if (!window.location.search) return;
+        var params = new URLSearchParams(window.location.search);
+        if (params.get("page") !== "data") return;
+        params.delete("page");
+        var q = params.toString();
+        window.location.replace("/data" + (q ? "?" + q : ""));
+      })();
+    </script>
+  </Fragment>
+  <Home client:only="react" />
+</Base>
