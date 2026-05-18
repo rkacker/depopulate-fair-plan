@@ -264,6 +264,123 @@ def test_california_city_data_export_schema_and_zips(tmp_path: Path) -> None:
     assert int(oakland["zip_count"]) > 1
 
 
+def test_non_ca_zips_excluded_from_history(tmp_path: Path) -> None:
+    """Mailing-address artifacts like 76132 (Fort Worth TX) appear in some
+    FAIR Plan 5-year history PDFs but should not enter our processed data."""
+    from fairplan.io_utils import read_csv
+
+    processed_dir = tmp_path / "processed"
+    normalize(FIXTURES, processed_dir, MANIFEST)
+    for name in ("zip_pif_history.csv", "zip_tiv_history.csv", "zip_wide.csv"):
+        rows = read_csv(processed_dir / "fair" / name)
+        non_ca = [
+            r for r in rows
+            if r.get("geography_id", r.get("zip", "")) not in ("Total", "")
+            and not (r.get("geography_id", r.get("zip", "")).startswith("9"))
+        ]
+        assert not non_ca, f"non-CA ZIPs leaked into {name}: {non_ca[:3]}"
+
+
+def test_zip_pif_history_spans_fy2019_through_fy2025(tmp_path: Path) -> None:
+    """With the FY2023+FY2024+FY2025 PIF files all ingested, the rolled-up
+    zip_pif_history should cover FY2019-FY2025 and statewide Totals must
+    match the published values."""
+    from fairplan.io_utils import read_csv
+
+    processed_dir = tmp_path / "processed"
+    normalize(FIXTURES, processed_dir, MANIFEST)
+    rows = read_csv(processed_dir / "fair" / "zip_pif_history.csv")
+    fys = sorted({int(r["fiscal_year"]) for r in rows})
+    assert fys == [2019, 2020, 2021, 2022, 2023, 2024, 2025]
+
+    totals = {
+        int(r["fiscal_year"]): int(r["value"])
+        for r in rows
+        if r["geography_id"] == "Total" and r["metric"] == "policy_count"
+    }
+    # Published statewide totals from FAIR Plan PIF history PDFs.
+    assert totals[2019] == 155243
+    assert totals[2023] == 320572
+    assert totals[2025] == 621234
+
+
+def test_zip_tiv_history_present_and_statewide_match(tmp_path: Path) -> None:
+    """FY2024 + FY2025 TIV files should give us exposure history FY2020-FY2025."""
+    from fairplan.io_utils import read_csv
+
+    processed_dir = tmp_path / "processed"
+    normalize(FIXTURES, processed_dir, MANIFEST)
+    rows = read_csv(processed_dir / "fair" / "zip_tiv_history.csv")
+    fys = sorted({int(r["fiscal_year"]) for r in rows})
+    assert fys == [2020, 2021, 2022, 2023, 2024, 2025]
+
+    totals = {
+        int(r["fiscal_year"]): int(r["value"])
+        for r in rows
+        if r["geography_id"] == "Total" and r["metric"] == "exposure"
+    }
+    # Sanity-check the statewide exposure at FY2025 ≈ $645B.
+    assert 640_000_000_000 < totals[2025] < 650_000_000_000
+
+
+def test_fair_statewide_history_export(tmp_path: Path) -> None:
+    """fair_statewide_history.csv should cover ~15 coverage_ends from 2019 to
+    the latest quarter, with granular data winning over snapshots for the
+    most recent quarters."""
+    from fairplan.io_utils import read_csv
+
+    processed_dir = tmp_path / "processed"
+    exports_dir = tmp_path / "exports"
+    normalize(FIXTURES, processed_dir, MANIFEST)
+    build_exports(processed_dir, exports_dir)
+
+    rows = read_csv(exports_dir / "fair_statewide_history.csv")
+    assert len(rows) >= 12, f"expected dense quarterly history; got {len(rows)} rows"
+
+    by_ce = {r["coverage_end"]: r for r in rows}
+    # The newest granular quarter wins over any snapshot source.
+    latest = by_ce.get("2026-03-31")
+    assert latest is not None
+    assert int(latest["policy_count"]) == 655204
+    assert latest["source"] == "quarterly"
+
+    # Snapshot-only quarter should be tagged correctly.
+    snap = by_ce.get("2024-12-31")
+    assert snap is not None and snap["source"] == "snapshot"
+    assert int(snap["policy_count"]) == 516313
+
+
+def test_california_zip_history_export_schema(tmp_path: Path) -> None:
+    """california_zip_history.csv exposes per-ZIP FY2020-FY2024 policy counts
+    with city + county joined in. Sorted by FY2024 desc."""
+    from fairplan.io_utils import read_csv
+
+    processed_dir = tmp_path / "processed"
+    exports_dir = tmp_path / "exports"
+    normalize(FIXTURES, processed_dir, MANIFEST)
+    build_exports(processed_dir, exports_dir)
+
+    path = exports_dir / "california_zip_history.csv"
+    assert path.exists()
+    rows = read_csv(path)
+    assert len(rows) >= 1500, f"expected ~1681 ZIPs, got {len(rows)}"
+
+    expected = {"zip", "city", "county", "fy_2021", "fy_2022", "fy_2023", "fy_2024", "fy_2025"}
+    assert expected.issubset(rows[0].keys())
+
+    # Sorted by FY2025 desc — first row must have the largest FY2025 value.
+    fy2025_values = [int(r["fy_2025"]) if r["fy_2025"] else 0 for r in rows]
+    assert fy2025_values == sorted(fy2025_values, reverse=True)
+
+    # Spot-check ZIP 90001 (Los Angeles): FY2024 = 1673, FY2025 jumped to 1976
+    # after the wildfire-driven uptick.
+    la = next((r for r in rows if r["zip"] == "90001"), None)
+    assert la is not None
+    assert la["city"] == "Los Angeles"
+    assert int(la["fy_2024"]) == 1673
+    assert int(la["fy_2025"]) == 1976
+
+
 def test_cdi_county_market_share_export_schema(tmp_path: Path) -> None:
     """cdi_county_market_share.csv exposes per-county FAIR-share metrics 2020-2023."""
     from fairplan.io_utils import read_csv

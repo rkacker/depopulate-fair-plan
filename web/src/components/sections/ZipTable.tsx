@@ -29,7 +29,8 @@ export function ZipTable({ zipData, stats, loading }: ZipTableProps) {
   const filtered = useMemo(() => {
     const rows = zipData?.rows ?? [];
     if (!trimmedQuery) return rows;
-    const q = trimmedQuery.toLowerCase();
+    // Strip a trailing " county" so "Sonoma County" matches "Sonoma".
+    const q = trimmedQuery.toLowerCase().replace(/\s+county$/, "");
     return rows.filter(
       (r) =>
         r.zip.startsWith(trimmedQuery) ||

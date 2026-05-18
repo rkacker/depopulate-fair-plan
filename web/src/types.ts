@@ -65,6 +65,14 @@ export interface ZipData {
   byZip: Map<string, ZipRow>;
 }
 
+export interface ZipHistoryRow {
+  zip: string;
+  city: string;
+  county: string;
+  fy: Record<2021 | 2022 | 2023 | 2024 | 2025, number | null>;
+  series: number[];
+}
+
 export interface CountyMarketShareRow {
   county: string;
   fairShareLatest: number;

@@ -3,6 +3,9 @@ import "@fontsource-variable/geist";
 import "@/index.css";
 import { Header } from "@/components/sections/Header";
 import { Footer } from "@/components/sections/Footer";
+import { ScrollManager } from "@/components/ScrollManager";
+
+const pathname = Astro.url.pathname;
 
 interface Props {
   title?: string;
@@ -54,7 +57,8 @@ const ogDescription =
     <title>{title}</title>
   </head>
   <body class="min-h-screen bg-coastal-beige">
-    <Header client:load />
+    <ScrollManager client:load />
+    <Header pathname={pathname} client:load />
     <main>
       <slot />
     </main>

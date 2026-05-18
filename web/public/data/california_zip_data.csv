@@ -1010,7 +1010,7 @@ zip,city,county,region,policies,prior_policies,change_pct,direction,yoy_change_p
 93427,Buellton,Santa Barbara,Southern CA,81,85,-4.7,down,25.8,up
 93432,Creston,San Luis Obispo,Southern CA,81,86,-5.8,down,18.1,up
 94578,San Leandro,Alameda,Northern CA,81,79,2.5,up,102.7,up
-96059,Manton,Tehama,Northern CA,81,80,1.2,up,-2.6,down
+96059,Manton,Tehama,Northern CA,81,80,1.2,up,,new
 92059,Pala,San Diego,Southern CA,80,84,-4.8,down,4.8,up
 92139,San Diego,San Diego,Southern CA,80,84,-4.8,down,97.6,up
 92211,Palm Desert,Riverside,Southern CA,80,78,2.6,up,74.4,up

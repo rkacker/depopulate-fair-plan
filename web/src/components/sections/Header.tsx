@@ -1,14 +1,31 @@
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
 
-const NAV_ITEMS: Array<{ id: string; label: string }> = [
+const HOME_SECTIONS: Array<{ id: string; label: string }> = [
   { id: "mission", label: "Mission" },
   { id: "crisis", label: "Crisis" },
-  { id: "heatmap", label: "Data" },
-  { id: "solutions", label: "Solutions" },
+  { id: "heatmap", label: "Map" },
 ];
 
-export function Header() {
+const GITHUB_URL = "https://github.com/rkacker/depopulate-fair-plan";
+
+interface HeaderProps {
+  pathname?: string;
+}
+
+export function Header({ pathname: initialPathname }: HeaderProps = {}) {
+  const [pathname, setPathname] = useState<string>(
+    initialPathname ??
+      (typeof window !== "undefined" ? window.location.pathname : "/"),
+  );
+  useEffect(() => {
+    const onChange = () => setPathname(window.location.pathname);
+    window.addEventListener("popstate", onChange);
+    return () => window.removeEventListener("popstate", onChange);
+  }, []);
+  const onHome = pathname === "/";
+
   return (
     <header className="sticky top-0 z-50 border-b-2 border-patriot-red bg-white shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
@@ -25,16 +42,46 @@ export function Header() {
           </h1>
         </a>
         <nav className="hidden items-center gap-6 md:flex">
-          {NAV_ITEMS.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className="text-sm font-medium text-gray-600 transition-colors hover:text-patriot-red"
-            >
-              {item.label}
-            </button>
-          ))}
-          <Button size="sm" onClick={() => scrollToSection("signup")}>
+          {HOME_SECTIONS.map((item) =>
+            onHome ? (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-sm font-medium text-gray-600 transition-colors hover:text-patriot-red"
+              >
+                {item.label}
+              </button>
+            ) : (
+              <a
+                key={item.id}
+                href={`/#${item.id}`}
+                className="text-sm font-medium text-gray-600 transition-colors hover:text-patriot-red"
+              >
+                {item.label}
+              </a>
+            ),
+          )}
+          <a
+            href="/data"
+            className="text-sm font-medium text-gray-600 transition-colors hover:text-patriot-red"
+          >
+            Data
+          </a>
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium text-gray-600 transition-colors hover:text-patriot-red"
+          >
+            GitHub
+          </a>
+          <Button
+            size="sm"
+            onClick={() => {
+              if (onHome) scrollToSection("signup");
+              else window.location.href = "/#signup";
+            }}
+          >
             Get Updates
           </Button>
         </nav>

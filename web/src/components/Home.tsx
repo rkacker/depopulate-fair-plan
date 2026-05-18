@@ -7,7 +7,9 @@ import { CityMap } from "@/components/sections/CityMap";
 import { CityTable } from "@/components/sections/CityTable";
 import { ZipMap } from "@/components/sections/ZipMap";
 import { ZipTable } from "@/components/sections/ZipTable";
-import { Solutions } from "@/components/sections/Solutions";
+// TODO(future): rebuild a Solutions section with sharper, data-grounded
+// content. The previous version (web/src/components/sections/Solutions.tsx)
+// is kept in-tree as scaffolding but is intentionally not rendered today.
 import { Signup } from "@/components/sections/Signup";
 import {
   loadCityData,
@@ -75,7 +77,6 @@ export function Home() {
           <CountyTable countyData={countyData} stats={stats} loading={loading} />
         </>
       )}
-      <Solutions />
       <Signup />
     </>
   );

@@ -67,6 +67,30 @@ coverage_end = "2025-09-30"
 file_name = "residential_policy_exposure_2025q4.pdf"
 
 [[sources]]
+id = "fair_residential_zip_pif_history_2023q4"
+family = "fair"
+dataset = "residential_zip_pif_history"
+format = "pdf"
+url = ""  # archival: file was on the FAIR Plan key-statistics page in late 2023 / early 2024; no longer linked. Captured from Wayback / user archive.
+published_date = "2024-01-01"
+coverage_end = "2023-09-30"
+file_name = "residential_zip_pif_history_2023q4.pdf"
+# Note: this PDF has 6 fiscal-year columns instead of the standard 5. The
+# LEFTMOST column is a partial-year snapshot (~12/31/2023, calendar Q4 2023);
+# the remaining 5 columns are the standard FY2019-FY2023 series. The parser
+# skips that extra column when geography_level is "zip" and column count is 6.
+
+[[sources]]
+id = "fair_residential_zip_pif_history_2024q4"
+family = "fair"
+dataset = "residential_zip_pif_history"
+format = "pdf"
+url = ""  # archival: replaced by the FY2025 5-year file. Captured from Wayback / user archive.
+published_date = "2024-11-12"
+coverage_end = "2024-09-30"
+file_name = "residential_zip_pif_history_2024q4.pdf"
+
+[[sources]]
 id = "fair_residential_zip_pif_history_2025q4"
 family = "fair"
 dataset = "residential_zip_pif_history"
@@ -75,6 +99,26 @@ url = "https://www.cfpnet.com/wp-content/uploads/2025/11/CFP-5-yr-PIF-Zip-FY25-D
 published_date = "2025-11-14"
 coverage_end = "2025-09-30"
 file_name = "residential_zip_pif_history_2025q4.pdf"
+
+[[sources]]
+id = "fair_residential_zip_tiv_history_2024q4"
+family = "fair"
+dataset = "residential_zip_tiv_history"
+format = "pdf"
+url = ""  # archival: replaced by the FY2025 5-year TIV file. Captured from user archive.
+published_date = "2024-11-12"
+coverage_end = "2024-09-30"
+file_name = "residential_zip_tiv_history_2024q4.pdf"
+
+[[sources]]
+id = "fair_residential_zip_tiv_history_2025q4"
+family = "fair"
+dataset = "residential_zip_tiv_history"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2025/11/CFP-5-yr-TIV-Zip-FY25-DWE-251114.pdf"
+published_date = "2025-11-14"
+coverage_end = "2025-09-30"
+file_name = "residential_zip_tiv_history_2025q4.pdf"
 
 [[sources]]
 id = "fair_residential_policy_count_2025_12"

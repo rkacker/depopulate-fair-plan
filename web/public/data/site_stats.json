@@ -5,9 +5,9 @@
   },
   "stats_cards": {
     "prior_year": {
-      "value": "236K",
-      "label": "Sep 30, 2021",
-      "detail": "Policies as of September 30, 2021"
+      "value": "155K",
+      "label": "Sep 30, 2019",
+      "detail": "Policies as of September 30, 2019"
     },
     "current_year": {
       "value": "655K",
@@ -15,9 +15,9 @@
       "detail": "Policies as of March 31, 2026"
     },
     "growth": {
-      "value": "2.8x",
+      "value": "4.2x",
       "label": "Growth Rate",
-      "detail": "Since FY 2021"
+      "detail": "Since FY 2019"
     }
   },
   "map": {
