@@ -17,8 +17,8 @@ export function CrisisStats({ stats }: { stats: SiteStats | null }) {
             Understanding the Crisis
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-gray-600">
-            California's FAIR Plan was designed as a last-resort safety net, not
-            a primary insurance solution.
+            California's FAIR Plan was designed as an insurer of last resort,
+            not a primary insurance solution.
           </p>
         </div>
 
