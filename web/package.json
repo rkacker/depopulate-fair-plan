@@ -27,12 +27,13 @@
     "topojson-client": "^3.1.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.9",
     "@types/papaparse": "^5.3.16",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.0",
     "@types/react-simple-maps": "^3.0.6",
     "@types/topojson-client": "^3.1.5",
     "tailwindcss": "^4.2.4",
-    "typescript": "^5.9.0"
+    "typescript": "^5.9.3"
   }
 }
