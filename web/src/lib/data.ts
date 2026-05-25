@@ -1,7 +1,5 @@
 import Papa from "papaparse";
 import type {
-  CityData,
-  CityRow,
   CountyData,
   CountyMarketShareRow,
   CountyRow,
@@ -88,21 +86,8 @@ export function colorForPolicies(policies: number | undefined): string {
   return "var(--color-tier-low)";
 }
 
-// City-scale palette: LA tops at ~42k, p99 city ~5k, median ~50.
-// Low band is a visible pale peach so Sacramento Valley / Inland Empire
-// cities still register; No Data is transparent so the gray county base
-// shows through cleanly for unmatched Census Places.
-export function colorForCityPolicies(policies: number | undefined): string {
-  if (policies === undefined || policies <= 0) return "transparent";
-  if (policies > 5000) return "#67000d";
-  if (policies > 1000) return "#cb181d";
-  if (policies > 100) return "#fb6a4a";
-  return "#fcbba1";
-}
-
-// ZIP-scale palette: max ~7,400 / p99 ~3,000 / p50 ~130. Same visual logic
-// as city: visible peach for the long tail, transparent No-Data so the
-// county base shows through.
+// ZIP-scale palette: max ~7,400 / p99 ~3,000 / p50 ~130. Visible peach for
+// the long tail, transparent No-Data so the county base shows through.
 export function colorForZipPolicies(policies: number | undefined): string {
   if (policies === undefined || policies <= 0) return "transparent";
   if (policies > 2500) return "#67000d";
@@ -162,65 +147,6 @@ export function loadZipData(): Promise<ZipData> {
           if (policies > max) max = policies;
         }
         resolve({ rows, total, max, byZip });
-      },
-      error: (err) => reject(err),
-    });
-  });
-}
-
-interface RawCityRow {
-  city?: string;
-  county?: string;
-  zip_count?: string;
-  zips?: string;
-  policies?: string;
-  prior_policies?: string;
-  change_pct?: string;
-  direction?: string;
-  yoy_change_pct?: string;
-  yoy_direction?: string;
-}
-
-export function loadCityData(): Promise<CityData> {
-  return new Promise((resolve, reject) => {
-    Papa.parse<RawCityRow>("/data/california_city_data.csv", {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      complete: (results) => {
-        const rows: CityRow[] = [];
-        const byCity = new Map<string, CityRow>();
-        let total = 0;
-        let max = 0;
-        for (const r of results.data) {
-          if (!r.city || !r.policies) continue;
-          const policies = parseInt(r.policies, 10);
-          if (Number.isNaN(policies)) continue;
-          const priorPolicies = r.prior_policies
-            ? parseInt(r.prior_policies, 10)
-            : NaN;
-          const changePct = r.change_pct ? parseFloat(r.change_pct) : NaN;
-          const direction = (r.direction as Direction) ?? "new";
-          const yoyChangePct = r.yoy_change_pct ? parseFloat(r.yoy_change_pct) : NaN;
-          const yoyDirection = (r.yoy_direction as Direction) ?? "new";
-          const row: CityRow = {
-            city: r.city,
-            county: r.county ?? "",
-            zipCount: r.zip_count ? parseInt(r.zip_count, 10) : 0,
-            zips: r.zips ? r.zips.split(",") : [],
-            policies,
-            priorPolicies: Number.isNaN(priorPolicies) ? null : priorPolicies,
-            changePct: Number.isNaN(changePct) ? null : changePct,
-            direction,
-            yoyChangePct: Number.isNaN(yoyChangePct) ? null : yoyChangePct,
-            yoyDirection,
-          };
-          rows.push(row);
-          byCity.set(r.city.toLowerCase(), row);
-          total += policies;
-          if (policies > max) max = policies;
-        }
-        resolve({ rows, total, max, byCity });
       },
       error: (err) => reject(err),
     });

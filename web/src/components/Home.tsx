@@ -3,8 +3,6 @@ import { Hero } from "@/components/sections/Hero";
 import { CrisisStats } from "@/components/sections/CrisisStats";
 import { CrisisMap } from "@/components/sections/CrisisMap";
 import { CountyTable } from "@/components/sections/CountyTable";
-import { CityMap } from "@/components/sections/CityMap";
-import { CityTable } from "@/components/sections/CityTable";
 import { ZipMap } from "@/components/sections/ZipMap";
 import { ZipTable } from "@/components/sections/ZipTable";
 // TODO(future): rebuild a Solutions section with sharper, data-grounded
@@ -12,42 +10,54 @@ import { ZipTable } from "@/components/sections/ZipTable";
 // is kept in-tree as scaffolding but is intentionally not rendered today.
 import { Signup } from "@/components/sections/Signup";
 import {
-  loadCityData,
   loadCountyData,
   loadSiteStats,
   loadZipData,
 } from "@/lib/data";
-import type { CityData, CountyData, SiteStats, ZipData } from "@/types";
+import type { CountyData, SiteStats, ZipData } from "@/types";
 
-type View = "county" | "city" | "zip";
+type View = "county" | "zip";
 
-export function Home() {
-  // ?view=city / ?view=zip remain query-string experiments — temporary
-  // alternate visualizations that will eventually fold into the main page.
-  const [view] = useState<View>(() => {
-    if (typeof window === "undefined") return "county";
+interface HomeProps {
+  initialStats?: SiteStats | null;
+  initialCountyData?: CountyData | null;
+}
+
+export function Home({ initialStats = null, initialCountyData = null }: HomeProps = {}) {
+  // ?view=zip is a query-string experiment — an alternate visualization that
+  // will eventually fold into the main page. SSR can't read URL params, so we
+  // default to "county" and adopt the requested view after hydration.
+  const [view, setView] = useState<View>("county");
+  useEffect(() => {
     const v = new URLSearchParams(window.location.search).get("view");
-    return v === "city" || v === "zip" ? v : "county";
-  });
-  const [stats, setStats] = useState<SiteStats | null>(null);
-  const [countyData, setCountyData] = useState<CountyData | null>(null);
-  const [cityData, setCityData] = useState<CityData | null>(null);
+    if (v === "zip") setView(v);
+  }, []);
+  const [stats, setStats] = useState<SiteStats | null>(initialStats);
+  const [countyData, setCountyData] = useState<CountyData | null>(initialCountyData);
   const [zipData, setZipData] = useState<ZipData | null>(null);
-  const [loading, setLoading] = useState(true);
+  // If county data was provided server-side and the default county view is
+  // active, skip the loading state entirely.
+  const [loading, setLoading] = useState(!(view === "county" && initialCountyData));
 
   useEffect(() => {
+    // Initial data covers the default county view — only fetch when the
+    // requested view isn't already populated.
+    const needsCounty = view === "county" && !countyData;
+    const needsZip = view === "zip" && !zipData;
+    const needsStats = !stats;
+    if (!needsCounty && !needsZip && !needsStats) return;
+
     let cancelled = false;
-    const dataLoader =
-      view === "city" ? loadCityData()
-      : view === "zip" ? loadZipData()
-      : loadCountyData();
-    Promise.all([loadSiteStats().catch(() => null), dataLoader])
+    const dataLoader = view === "zip" ? loadZipData() : loadCountyData();
+    Promise.all([
+      needsStats ? loadSiteStats().catch(() => null) : Promise.resolve(stats),
+      view === "county" && countyData ? Promise.resolve(countyData) : dataLoader,
+    ])
       .then(([s, d]) => {
         if (cancelled) return;
-        setStats(s);
-        if (view === "city") setCityData(d as CityData);
-        else if (view === "zip") setZipData(d as ZipData);
-        else setCountyData(d as CountyData);
+        if (needsStats) setStats(s);
+        if (view === "zip") setZipData(d as ZipData);
+        else if (needsCounty) setCountyData(d as CountyData);
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -61,12 +71,7 @@ export function Home() {
     <>
       <Hero stats={stats} />
       <CrisisStats stats={stats} />
-      {view === "city" ? (
-        <>
-          <CityMap cityData={cityData} stats={stats} loading={loading} />
-          <CityTable cityData={cityData} stats={stats} loading={loading} />
-        </>
-      ) : view === "zip" ? (
+      {view === "zip" ? (
         <>
           <ZipMap zipData={zipData} stats={stats} loading={loading} />
           <ZipTable zipData={zipData} stats={stats} loading={loading} />

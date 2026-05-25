@@ -1,12 +1,15 @@
 ---
 import Base from "@/layouts/Base.astro";
 import { DataPage } from "@/components/sections/DataPage";
+import { loadStatewideHistoryServer } from "@/lib/loadData.server";
 
 const title = "Data & Downloads — Depopulate the FAIR Plan";
 const description =
   "Quarterly FAIR Plan and CDI data for California — county, city, and ZIP-level. CSV and JSON downloads sourced directly from CFP and CDI.";
+
+const initialStatewideRows = loadStatewideHistoryServer();
 ---
 
 <Base title={title} description={description}>
-  <DataPage client:only="react" />
+  <DataPage initialStatewideRows={initialStatewideRows} client:load />
 </Base>

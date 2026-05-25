@@ -4,12 +4,11 @@ import { Info } from "lucide-react";
 function useSearchParam(
   name: string,
 ): [string | null, (next: string | null, replace?: boolean) => void] {
-  const [value, setValue] = useState<string | null>(() =>
-    typeof window !== "undefined"
-      ? new URLSearchParams(window.location.search).get(name)
-      : null,
-  );
+  // Starts null so SSR + first client render match; we adopt the real
+  // value on mount and on popstate.
+  const [value, setValue] = useState<string | null>(null);
   useEffect(() => {
+    setValue(new URLSearchParams(window.location.search).get(name));
     const onChange = () =>
       setValue(new URLSearchParams(window.location.search).get(name));
     window.addEventListener("popstate", onChange);
@@ -29,7 +28,10 @@ function useSearchParam(
   return [value, set];
 }
 import { FairShareTab } from "@/components/sections/FairShareTab";
-import { StatewideHistoryTab } from "@/components/sections/StatewideHistoryTab";
+import {
+  StatewideHistoryTab,
+  type HistoryRow as StatewideHistoryRow,
+} from "@/components/sections/StatewideHistoryTab";
 import { ZipHistoryTab } from "@/components/sections/ZipHistoryTab";
 
 // GitHub mark — official monochrome logo, inline so we don't depend on a
@@ -56,29 +58,33 @@ interface TabDef {
   render: () => ReactNode;
 }
 
-const TABS: TabDef[] = [
-  {
-    id: "statewide_history",
-    label: "FAIR Plan History (Quarterly)",
-    render: () => <StatewideHistoryTab />,
-  },
-  {
-    id: "zip_history",
-    label: "FAIR Plan History (by ZIP)",
-    render: () => <ZipHistoryTab />,
-  },
-  {
-    id: "fair_share",
-    label: "FAIR Share of Total Market",
-    render: () => <FairShareTab />,
-  },
-];
+interface DataPageProps {
+  initialStatewideRows?: StatewideHistoryRow[] | null;
+}
 
 const GITHUB_URL = "https://github.com/rkacker/depopulate-fair-plan";
 
-const TAB_IDS = TABS.map((t) => t.id);
+const TAB_ORDER: TabId[] = ["statewide_history", "zip_history", "fair_share"];
 
-export function DataPage() {
+export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
+  const TABS: TabDef[] = [
+    {
+      id: "statewide_history",
+      label: "FAIR Plan History (Quarterly)",
+      render: () => <StatewideHistoryTab initialRows={initialStatewideRows} />,
+    },
+    {
+      id: "zip_history",
+      label: "FAIR Plan History (by ZIP)",
+      render: () => <ZipHistoryTab />,
+    },
+    {
+      id: "fair_share",
+      label: "FAIR Share of Total Market",
+      render: () => <FairShareTab />,
+    },
+  ];
+  const TAB_IDS = TAB_ORDER;
   const [requested, setTab] = useSearchParam("tab");
   const active: TabId = (TAB_IDS as string[]).includes(requested ?? "")
     ? (requested as TabId)

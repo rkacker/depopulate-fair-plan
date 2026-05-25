@@ -12,7 +12,7 @@ interface RawHistoryRow {
   source?: string;
 }
 
-interface HistoryRow {
+export interface HistoryRow {
   coverage_end: string;
   policy_count: number | null;
   exposure: number | null;
@@ -108,11 +108,16 @@ function sourceBadges(source: string) {
   ));
 }
 
-export function StatewideHistoryTab() {
-  const [rows, setRows] = useState<HistoryRow[] | null>(null);
+interface Props {
+  initialRows?: HistoryRow[] | null;
+}
+
+export function StatewideHistoryTab({ initialRows = null }: Props = {}) {
+  const [rows, setRows] = useState<HistoryRow[] | null>(initialRows);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (rows) return;
     let cancelled = false;
     loadHistory()
       .then((r) => !cancelled && setRows(r))

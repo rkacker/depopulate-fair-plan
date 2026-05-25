@@ -82,22 +82,3 @@ export interface CountyMarketShareRow {
   years: number[];
 }
 
-export interface CityRow {
-  city: string;
-  county: string;
-  zipCount: number;
-  zips: string[];
-  policies: number;
-  priorPolicies: number | null;
-  changePct: number | null;
-  direction: Direction;
-  yoyChangePct: number | null;
-  yoyDirection: Direction;
-}
-
-export interface CityData {
-  rows: CityRow[];
-  total: number;
-  max: number;
-  byCity: Map<string, CityRow>;
-}

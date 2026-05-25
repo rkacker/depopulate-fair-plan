@@ -1,6 +1,13 @@
 ---
 import Base from "@/layouts/Base.astro";
 import { Home } from "@/components/Home";
+import {
+  loadCountyDataServer,
+  loadSiteStatsServer,
+} from "@/lib/loadData.server";
+
+const initialStats = loadSiteStatsServer();
+const initialCountyData = loadCountyDataServer();
 ---
 
 <Base>
@@ -19,5 +26,5 @@ import { Home } from "@/components/Home";
       })();
     </script>
   </Fragment>
-  <Home client:only="react" />
+  <Home initialStats={initialStats} initialCountyData={initialCountyData} client:load />
 </Base>
