@@ -113,7 +113,12 @@ interface Props {
 }
 
 export function StatewideHistoryTab({ initialRows = null }: Props = {}) {
-  const [rows, setRows] = useState<HistoryRow[] | null>(initialRows);
+  // Treat an empty initialRows ([]) as "no data" so the client fetch still
+  // runs as a fallback — [] is truthy and would otherwise skip the effect,
+  // leaving a permanently blank table with no loading or error state.
+  const [rows, setRows] = useState<HistoryRow[] | null>(
+    initialRows && initialRows.length ? initialRows : null,
+  );
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
