@@ -168,7 +168,7 @@ export function loadCountyMarketShareServer(): CountyMarketShareRow[] {
     .filter((f) => f.startsWith("fair_plan_share_"))
     .map((f) => parseInt(f.replace("fair_plan_share_", ""), 10))
     .filter((y) => !Number.isNaN(y))
-    .sort();
+    .sort((a, b) => a - b);
   const latest = years[years.length - 1];
   const rows: CountyMarketShareRow[] = [];
   for (const r of result.data) {
