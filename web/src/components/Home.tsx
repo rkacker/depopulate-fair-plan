@@ -46,6 +46,10 @@ export function Home({ initialStats = null, initialCountyData = null }: HomeProp
     const needsZip = view === "zip" && !zipData;
     const needsStats = !stats;
     if (!needsCounty && !needsZip && !needsStats) return;
+    // Show the skeleton while the active view's data is in flight — e.g. the
+    // ?view=zip swap, where county data is already present but zip isn't.
+    // (Stats-only refetches don't blank the already-rendered view.)
+    if (needsCounty || needsZip) setLoading(true);
 
     let cancelled = false;
     const dataLoader = view === "zip" ? loadZipData() : loadCountyData();
