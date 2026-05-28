@@ -32,7 +32,7 @@ def source_by_id(source_id: str):
 
 
 def test_fair_count_parser_extracts_known_zip_values() -> None:
-    source = source_by_id("fair_residential_policy_count_2025q4")
+    source = source_by_id("fair_residential_policy_count_2025_09")
     rows = parse_fair_category_pdf(FIXTURES / "fair" / source.file_name, source, "count")
     target = next(
         row
@@ -45,7 +45,7 @@ def test_fair_count_parser_extracts_known_zip_values() -> None:
 
 
 def test_fair_count_parser_handles_sb_mountains_region() -> None:
-    source = source_by_id("fair_residential_policy_count_2025q4")
+    source = source_by_id("fair_residential_policy_count_2025_09")
     rows = parse_fair_category_pdf(FIXTURES / "fair" / source.file_name, source, "count")
     sb_mountains_rows = [r for r in rows if r["region"] == "SB Mountains"]
     assert len(sb_mountains_rows) > 0

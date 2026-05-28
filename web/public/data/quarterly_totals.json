@@ -16,9 +16,9 @@
     {
       "coverage_end": "2025-09-30",
       "source_ids": {
-        "count": "fair_residential_policy_count_2025q4",
-        "exposure": "fair_residential_policy_exposure_2025q4",
-        "premium": "fair_residential_policy_premium_2025q4"
+        "count": "fair_residential_policy_count_2025_09",
+        "exposure": "fair_residential_policy_exposure_2025_09",
+        "premium": "fair_residential_policy_premium_2025_09"
       },
       "totals": {
         "count": 621234,
