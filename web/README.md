@@ -1,37 +1,44 @@
 # depopulatefairplan.com
 
 Static site for [depopulatefairplan.com](https://depopulatefairplan.com).
-Built once per data refresh, deployed to GitHub Pages.
+Built per data refresh, deployed to GitHub Pages.
 
 ## What this is
 
-A single-page information hub on the California FAIR Plan crisis, with
-two interactive views:
-
-- **Crisis Map** — California county choropleth of FAIR Plan policies in force.
-- **County Table** — sortable, top-10 / all-58 toggle, share of state total.
-
-Plus narrative sections (Mission, Crisis stats, Solutions, email signup).
+An information hub on the California FAIR Plan crisis. The home page (`/`) carries the
+narrative + the interactive county map and table; `/data` exposes the underlying datasets
+(statewide history, ZIP history, FAIR market share) as tables and downloads. A single-page
+consolidation of these is planned — see [`../docs/redesign-brief.md`](../docs/redesign-brief.md)
+and [`../BACKLOG.md`](../BACKLOG.md).
 
 ## Architecture
 
 The site is **decoupled from the pipeline**. It lives in `web/` of the
-[depopulate-fair-plan](https://github.com/rkacker/depopulate-fair-plan) repo,
-but imports nothing from outside `web/`. The contract is three files in
-`public/data/`:
+[depopulate-fair-plan](https://github.com/rkacker/depopulate-fair-plan) repo but imports
+nothing from outside `web/`. The contract is the files in `public/data/`.
 
-| File | Source | Notes |
+Astro pages hydrate React islands. County-level data and stats are **loaded at build time**
+(`src/lib/loadData.server.ts` reads the CSV/JSON via Vite `?raw` imports and bakes the parsed
+data into the HTML, so first paint has real data and no loading skeleton). Large datasets
+(ZIP-level, ~1,700 rows) **lazy-load on the client** via `src/lib/data.ts` on intent.
+
+| File in `public/data/` | Source | Notes |
 |---|---|---|
-| `site_stats.json` | pipeline `data/exports/site_stats.json` | Headline copy + every stat on the page |
-| `california_county_data.csv` | pipeline `data/exports/california_county_data.csv` | County → policies (58 rows) |
 | `california-counties.json` | committed once | CA county TopoJSON (static) |
+| `california-zips.json` | committed once | CA ZIP TopoJSON (static) |
+| `site_stats.json` | pipeline export | Headline copy + every stat on the page |
+| `quarterly_totals.json` | pipeline export | Statewide quarterly totals |
+| `california_county_data.csv` | pipeline export | County → policies + quarter/YoY deltas |
+| `california_zip_data.csv` | pipeline export | ZIP → policies + deltas |
+| `california_zip_history.csv` | pipeline export | ZIP FY history (FY21–FY25) |
+| `cdi_county_market_share.csv` | pipeline export | Total PIF vs FAIR PIF + share, 2020–2023 |
+| `fair_statewide_history.csv` | pipeline export | Statewide policy / exposure / premium trajectory |
 
-To extract this site to its own repo someday:
-`git filter-repo --subdirectory-filter web`.
+To extract this site to its own repo someday: `git filter-repo --subdirectory-filter web`.
 
 ## Stack
 
-Vite 8 · React 19 · TypeScript · Tailwind CSS v4 ·
+Astro 6 + React 19 islands · TypeScript · Tailwind CSS v4 ·
 `react-simple-maps` · PapaParse · `lucide-react` · Geist Variable.
 
 ## Local dev
@@ -39,10 +46,10 @@ Vite 8 · React 19 · TypeScript · Tailwind CSS v4 ·
 ```bash
 cd web
 npm install            # respects .npmrc legacy-peer-deps
-npm run dev            # http://localhost:5173
-npm run typecheck
+npm run dev            # http://localhost:4321
+npm run typecheck      # astro check (also type-checks .astro frontmatter)
 npm run build          # writes dist/
-npm run preview        # serves dist/ at http://localhost:4173
+npm run preview        # serves dist/
 ```
 
 ## Refreshing data
@@ -51,84 +58,73 @@ After regenerating pipeline outputs (`just build` at the repo root):
 
 ```bash
 cd web
-./scripts/sync-data.sh           # cp ../data/exports/* into public/data/
+./scripts/sync-data.sh           # cp ../data/exports/<contract files> into public/data/
 git add public/data
 git commit -m "Data refresh: <quarter>"
 git push
 ```
 
-The deploy workflow runs the sync script in CI as well, so as long as
-`data/exports/` is up to date when CI runs, the deploy will pick up
-fresh data automatically.
+The deploy workflow also runs `sync-data.sh` in CI (after re-running the pipeline), so a
+push to `main` picks up fresh data automatically.
 
 ## Deployment to GitHub Pages
 
-1. **Push to `main`.** The workflow at
-   `.github/workflows/deploy-web.yml` (in the repo root) is path-filtered
-   to `web/**` and `data/exports/**`; pushes that don't touch those paths
-   don't deploy.
-2. **Enable Pages** in the GitHub repo: *Settings → Pages → Source:
-   GitHub Actions*. (One-time setup. The workflow uses `actions/deploy-pages`.)
-3. **Custom domain handoff** (the only step left after this):
-   - `web/public/CNAME` already contains `depopulatefairplan.com`. It
-     ships into `dist/CNAME` on every build, which tells GitHub Pages
-     to serve the site under that hostname.
-   - Update DNS at the domain registrar:
-     - Apex (`depopulatefairplan.com`): four A records pointing to
-       GitHub Pages IPs (`185.199.108.153`, `.109.153`, `.110.153`,
-       `.111.153`) — see GitHub's docs for current values.
-     - Optional `www` subdomain: CNAME to `<github-user>.github.io`.
-   - In repo *Settings → Pages*, fill in the custom domain field with
-     `depopulatefairplan.com` and enable "Enforce HTTPS" once the cert
-     provisions (~10 min after DNS).
+Every push to `main` triggers the workflow at `.github/workflows/deploy-web.yml` (repo
+root), which runs the **full chain**: Python pipeline → `sync-data.sh` → `astro build` →
+upload `web/dist` → deploy to Pages. There is **no path filter** — any push to `main`
+rebuilds and redeploys.
 
-The site is built with `base: "./"` (relative URLs), so the same
-`dist/` artifact serves correctly at:
-- `https://depopulatefairplan.com/` (after DNS flip)
-- `https://rkacker.github.io/depopulate-fair-plan/` (always)
-- a local `file://` open of `dist/index.html`
+One-time setup:
 
-Both URLs keep working in parallel — the github.io URL is a useful
-soak/preview channel even while the custom domain is the production
-home.
+1. **Enable Pages:** *Settings → Pages → Source: GitHub Actions*.
+2. **Custom domain:** `public/CNAME` contains `depopulatefairplan.com` and ships into
+   `dist/CNAME` on every build. Point DNS at the registrar:
+   - Apex (`depopulatefairplan.com`): four A records to GitHub Pages IPs
+     (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153` — confirm current values in
+     GitHub's docs).
+   - Optional `www`: CNAME to `<github-user>.github.io`.
+3. In *Settings → Pages*, set the custom domain to `depopulatefairplan.com` and enable
+   "Enforce HTTPS" once the cert provisions (~10 min after DNS).
+
+`astro.config.mjs` sets `site: "https://depopulatefairplan.com"` with no `base`, so the
+build uses root-absolute asset paths and is served at the **custom domain root**. (It is not
+configured to serve under the `rkacker.github.io/depopulate-fair-plan/` project path; with
+the custom domain set, Pages serves/redirects to `depopulatefairplan.com`.)
 
 ## Source layout
 
 ```
 web/
 ├── public/
-│   ├── data/                # site_stats.json + 2 CSVs (the data contract)
-│   ├── assets/              # hero.webp + any future imagery
+│   ├── data/                # the data contract (see table above)
+│   ├── assets/              # hero imagery
 │   ├── CNAME                # depopulatefairplan.com
 │   └── favicon.svg
 ├── src/
-│   ├── App.tsx              # composes all sections, loads data once
-│   ├── main.tsx             # React 19 entry
-│   ├── index.css            # Tailwind v4 @theme tokens
-│   ├── types.ts             # SiteStats, CountyRow, CountyData
+│   ├── pages/               # index.astro (home), data.astro (data page)
+│   ├── layouts/             # Base.astro (shared shell, <head>, scripts)
+│   ├── components/
+│   │   ├── Home.tsx         # composes the home-page island
+│   │   ├── sections/        # Hero, CrisisStats, CrisisMap, CountyTable,
+│   │   │                    # ZipMap, ZipTable, DataPage + tab components
+│   │   └── ui/              # Button, Card primitives
 │   ├── lib/
-│   │   ├── data.ts          # CSV/JSON loaders, color tier scale
+│   │   ├── data.ts          # client-side CSV/JSON loaders, color tier scales
+│   │   ├── loadData.server.ts # build-time loaders (?raw imports, run in Astro frontmatter)
 │   │   └── utils.ts         # cn(), scrollToSection()
-│   └── components/
-│       ├── sections/        # Header, Hero, CrisisStats, CrisisMap,
-│       │                    # CountyTable, Solutions, Signup, Footer
-│       └── ui/              # Button, Card primitives
+│   └── types.ts             # SiteStats, CountyData/Row, ZipData/Row, history row types
 ├── scripts/sync-data.sh     # copies pipeline exports into public/data/
-├── vite.config.ts           # @tailwindcss/vite, base "/"
-├── tsconfig.json            # strict, bundler resolution, @/* paths
+├── astro.config.mjs         # @astrojs/react, site, @/* alias
+├── tsconfig.json
 ├── package.json
-└── .npmrc                   # legacy-peer-deps=true (react-simple-maps@3
-                             # doesn't yet declare React 19 in peer deps)
+└── .npmrc                   # legacy-peer-deps=true (react-simple-maps@3 peer-dep lag)
 ```
 
 ## Known issues
 
-- **`react-simple-maps@3` peer deps lag React 19** — they declare React
-  16/17/18 but work fine at runtime. We pin `legacy-peer-deps=true` in
-  `.npmrc` so npm tolerates this. Reassess once `react-simple-maps@4`
-  ships stable.
-- **`react-simple-maps@3` pulls a vulnerable `d3-color`** — `npm audit`
-  flags 5 high-severity ReDoS advisories in transitive d3 deps. The
-  attack surface is browser-only and bounded; no library upgrade fixes
-  it without a breaking downgrade. Re-audit after the next library
-  release.
+- **`react-simple-maps@3` peer deps lag React 19** — they declare React 16/17/18 but work
+  fine at runtime. We pin `legacy-peer-deps=true` in `.npmrc` so npm tolerates this.
+  Reassess once `react-simple-maps@4` ships stable.
+- **`react-simple-maps@3` pulls a vulnerable `d3-color`** — `npm audit` flags high-severity
+  ReDoS advisories in transitive d3 deps. The attack surface is browser-only and bounded; no
+  library upgrade fixes it without a breaking downgrade. Re-audit after the next release.

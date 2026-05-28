@@ -2,9 +2,18 @@
 
 Development context and conventions for accelerated work with Claude Code.
 
+## Start here
+
+- **What to work on next →** [`BACKLOG.md`](BACKLOG.md). Current focus is **redesign-first**
+  (see [`docs/redesign-brief.md`](docs/redesign-brief.md)). Read the **Now** items, pick the
+  top unblocked one, and follow the session ritual: branch/worktree → implement →
+  `just test` (pipeline) and `npm run typecheck` (web) → commit → move to Done → re-rank.
+- **Project facts / outputs / quickstart →** [`README.md`](README.md).
+- **Website setup →** [`web/README.md`](web/README.md).
+
 ## Project Purpose
 
-This is a **data pipeline**, not a web app. It downloads PDFs from the California FAIR Plan and CDI, extracts tables via regex, normalizes data into canonical CSVs, and produces JSON/CSV exports for `depopulatefairplan.com`. The website itself is a separate project.
+This is primarily a **data pipeline**. It downloads PDFs from the California FAIR Plan and CDI, extracts tables via regex, normalizes data into canonical CSVs, and produces JSON/CSV exports that feed `depopulatefairplan.com`. The website is an Astro app that lives in `web/` of this repo but is decoupled from the pipeline — it reads only the synced exports in `web/public/data/`. See [`web/README.md`](web/README.md).
 
 ## Architecture in One Sentence
 
@@ -20,22 +29,19 @@ This is a **data pipeline**, not a web app. It downloads PDFs from the Californi
 | `src/fairplan/models.py` | Dataclasses for canonical rows — change schema here first. |
 | `tests/golden/expected_metrics.json` | Golden metrics; update when new fixture data changes expected output. |
 | `sources/` | Committed source PDFs used by tests and the pipeline. Do not delete. |
-| `site/build.py` | Static site generator for GitHub Pages (renders CSVs + insights as HTML). |
+| `config/export_contract.json` | The list of website-facing exports `build_exports()` must produce. |
+| `web/` | The live website — Astro app deployed to GitHub Pages. See [`web/README.md`](web/README.md). (`site/build.py` is a legacy generator, no longer used by the deploy.) |
 
 ## Development Environment
 
-```bash
-just setup      # always run first in a fresh clone or after pyproject.toml changes
-just test       # run before any commit — tests use sources/, no network needed
-just build      # run full pipeline: normalize → exports → insights
-```
+Commands (`just setup` / `just build` / `just test`) are in the [README quickstart](README.md#quickstart). Conventions to follow:
 
-Python is **3.11 only** (`requires-python = ">=3.11,<3.12"`). Use `uv` for all package operations — do not use `pip` directly.
-
-Always prefix python runs with `PYTHONPATH=src`:
-```bash
-PYTHONPATH=src uv run python -m fairplan.cli <command>
-```
+- **`just test` before every commit** — tests use `sources/`, no network needed. Never commit a change that breaks it.
+- Python is **3.11 only** (`requires-python = ">=3.11,<3.12"`). Use `uv` for all package operations — never `pip` directly.
+- Prefix direct CLI runs with `PYTHONPATH=src`:
+  ```bash
+  PYTHONPATH=src uv run python -m fairplan.cli <command>
+  ```
 
 ## Adding a New Quarterly Release
 
