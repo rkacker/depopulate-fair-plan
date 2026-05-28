@@ -34,6 +34,7 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 - [ ] **Phase-1 design spec + wireframes** · `Viz` · L · I8 C9 E7 = **504**
   Run the redesign brief to produce the section-by-section spec, summary-panel system,
   story arc, and `/data` retirement map. *Gates every implementation task below.*
+  **Draft delivered → [`docs/redesign-phase1-spec.md`](docs/redesign-phase1-spec.md) (pending review).**
   DoD: a reviewed spec doc in `docs/`; section list + panel inventory agreed.
 
 - [ ] **Page-shell consolidation** · `Viz` · M · I7 C8 E6 = **336** · _blocked by: spec_
@@ -47,25 +48,17 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
   distressed-flag chip) so sections compose as one system.
   DoD: panel components in `web/src/components/`, used by ≥2 sections.
 
-## Quick wins (any time)
-
-Self-contained, unblocked, data already in `data/exports/` — good for a short session away
-from the redesign. The derived metric is reusable even if the redesign later restyles how
-it's presented.
-
-- [ ] **Concentration-risk summary stat** · `Depth`/`Viz` · S · I7 C9 E8 = **504**
-  "Top 10 ZIPs / cities hold X% of statewide FAIR exposure." Derive from existing
-  `california_zip_data.csv`; single quotable number + a small bar. No pipeline work.
-
-- [ ] **Premium-burden panel** · `Depth` · S · I7 C9 E8 = **504**
-  premium ÷ policy_count and exposure ÷ policy_count by county; cost-of-coverage angle.
-  Mostly export-ready; confirm premium is in the county export or add it.
-
 ## Next (ranked by score; most need a new export)
 
 - [ ] **Statewide-history inline section** · `Viz` · S · I5 C9 E8 = **360** · _blocked by: shell_
   Rebuild the existing quarterly-history tab as a home section. Data is export-ready
   (`fair_statewide_history.csv`). Low-risk warm-up.
+
+- [ ] **Premium-burden panel** · `Depth` · M · I7 C9 E5 = **315**
+  premium ÷ policy_count and exposure ÷ policy_count by county; cost-of-coverage angle.
+  **Not export-ready** — `california_county_data.csv` ships `policies` only; premium/exposure
+  exist in processed data (`fair/county_quarterly.csv`) but must be added to the export
+  contract first. Confirmed spread is ~12× across counties (not the brief's 2–3×).
 
 - [ ] **Market-failure context** · `Depth`/`Viz` · M · I8 C7 E5 = **280**
   Counties where voluntary PIF is flat/declining while FAIR PIF accelerates. Needs
@@ -94,6 +87,7 @@ it's presented.
 - [ ] `Depth` — Total-insured-value (TIV) trends vs. policy counts (`zip_tiv_history.csv`).
 - [ ] `Pipeline` — Remove dead `site/build.py` (legacy static generator superseded by `web/`).
 - [ ] `Pipeline` — Drop `california_city_data.csv` from `config/export_contract.json` + `build_exports()` — the city view is retired, so the export is produced but unused (and not synced to the site).
+- [ ] `Depth` — **Blocked:** "FAIR share of total market" *by ZIP*. CDI publishes total-market PIF only at the county level (`cdi_county_market_share.csv`); no ZIP-level denominator exists, so a true ZIP market-share table can't be built without fabricating one. Needs CDI ZIP-level market data (out of v1 scope). The county FAIR-share tab covers this dimension today.
 
 ## Done (rolling log)
 
