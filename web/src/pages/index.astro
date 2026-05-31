@@ -4,10 +4,12 @@ import { Home } from "@/components/Home";
 import {
   loadCountyDataServer,
   loadSiteStatsServer,
+  loadStatewideHistoryServer,
 } from "@/lib/loadData.server";
 
 const initialStats = loadSiteStatsServer();
 const initialCountyData = loadCountyDataServer();
+const initialStatewideRows = loadStatewideHistoryServer();
 ---
 
 <Base>
@@ -26,5 +28,10 @@ const initialCountyData = loadCountyDataServer();
       })();
     </script>
   </Fragment>
-  <Home initialStats={initialStats} initialCountyData={initialCountyData} client:load />
+  <Home
+    initialStats={initialStats}
+    initialCountyData={initialCountyData}
+    initialStatewideRows={initialStatewideRows}
+    client:load
+  />
 </Base>

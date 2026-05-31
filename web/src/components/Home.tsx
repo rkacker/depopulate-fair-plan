@@ -15,15 +15,21 @@ import {
   loadZipData,
 } from "@/lib/data";
 import type { CountyData, SiteStats, ZipData } from "@/types";
+import type { HistoryRow } from "@/components/sections/StatewideHistoryTab";
 
 type View = "county" | "zip";
 
 interface HomeProps {
   initialStats?: SiteStats | null;
   initialCountyData?: CountyData | null;
+  initialStatewideRows?: HistoryRow[] | null;
 }
 
-export function Home({ initialStats = null, initialCountyData = null }: HomeProps = {}) {
+export function Home({
+  initialStats = null,
+  initialCountyData = null,
+  initialStatewideRows = null,
+}: HomeProps = {}) {
   // ?view=zip is a query-string experiment — an alternate visualization that
   // will eventually fold into the main page. SSR can't read URL params, so we
   // default to "county" and adopt the requested view after hydration.
@@ -74,7 +80,7 @@ export function Home({ initialStats = null, initialCountyData = null }: HomeProp
   return (
     <>
       <Hero stats={stats} />
-      <CrisisStats stats={stats} />
+      <CrisisStats initialStatewideRows={initialStatewideRows} />
       {view === "zip" ? (
         <>
           <ZipMap zipData={zipData} stats={stats} loading={loading} />

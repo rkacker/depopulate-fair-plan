@@ -3,6 +3,7 @@ import { Download } from "lucide-react";
 import Papa from "papaparse";
 import { Card } from "@/components/ui/card";
 import { Sparkline } from "@/components/Sparkline";
+import { fmtBillions, fmtCoverage, fmtPolicies } from "@/lib/historyFormat";
 
 interface RawHistoryRow {
   coverage_end?: string;
@@ -66,33 +67,6 @@ const SOURCE_COLOR: Record<string, string> = {
   fy_history: "bg-blue-100 text-blue-800",
   snapshot: "bg-amber-100 text-amber-800",
 };
-
-// Em-dash with figure-spaces around it so null cells span the same character
-// width as the populated cells (combined with tabular-nums on the cell).
-const EMPTY_CELL = "—";
-
-function fmtPolicies(n: number | null): string {
-  if (n === null) return EMPTY_CELL;
-  return n.toLocaleString();
-}
-
-function fmtBillions(n: number | null): string {
-  if (n === null) return EMPTY_CELL;
-  // Always one decimal place, comma-separated thousands for clean alignment
-  // (e.g. "$115.3 B", "$1,000.0 B" should both line up under tabular-nums).
-  const billions = n / 1e9;
-  const formatted = billions.toLocaleString(undefined, {
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
-  });
-  return `$${formatted} B`;
-}
-
-function fmtCoverage(s: string): string {
-  const [y, m, d] = s.split("-");
-  const months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-  return `${months[Number(m)]} ${Number(d)}, ${y}`;
-}
 
 function sourceBadges(source: string) {
   return source.split(",").map((s) => (
