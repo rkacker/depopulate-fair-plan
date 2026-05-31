@@ -11,8 +11,10 @@ design spec. Self-contained — assumes no prior repo knowledge.
 
 ## Locked decisions
 
-- **End-state shape:** Single page. Fold `/data` into the home page as deep-dive sections.
-  Redirect `/data` → `/#data` (or relevant anchor).
+- **End-state shape:** Home page is a single-page advocacy narrative; **`/data` (Data &
+  Downloads) persists as a permanent, intentional hub** for deeper dimensional views,
+  downloads, and methodology. No retirement, no redirect. `/data` is linked from the
+  footer (not the header nav).
 - **Audience priority:** Advocacy + press first (policymakers, journalists, advocacy
   partners). Story arcs, shareable summary panels, copy-paste stats over dimensional drill-downs.
 - **Deliverable format:** Two phases. Phase 1 = design spec + low-fi wireframes for review.
@@ -44,9 +46,12 @@ deep dimensional filtering for clearer story arcs and shareable stats are correc
 
 ## Hard constraints
 
-- **Single-page end state.** Fold the existing `/data` page into the home page as in-flow
-  sections. After this redesign, `/data` 301-redirects to a home anchor. There is no second
-  page. Tabs may exist *within* a section, but not as the page's top-level navigation.
+- **Two-surface site, with clear roles.** The **home page** is a single-page advocacy
+  narrative: every section earns its place in the argument. **`/data` (Data & Downloads)**
+  is the permanent companion hub for journalists, researchers, and policy staff who want
+  to drill into the underlying tables and downloads. Design the home page as if `/data`
+  did not exist; design `/data` as if the home page were the front door. They share data
+  loaders, formatters, and the summary-panel design system, but their UX goals differ.
 - **Stack:** Astro 6 + React islands, Tailwind, react-simple-maps for choropleths, PapaParse
   for CSV. Data is bundled into the HTML at build time via Vite `?raw` imports; large datasets
   (ZIP-level, ~1,700 rows) lazy-load on the client. Keep this pattern — do not propose a
@@ -160,9 +165,12 @@ Produce a single Markdown document containing:
    "where," which lands the "what's broken," which lands the "what can be done." Map each
    beat to a section in the outline.
 
-5. **`/data` retirement note.** A short subsection naming exactly which existing `/data`
-   tabs survive (rebuilt as sections vs. retired entirely), and the redirect target for
-   each previous `?tab=` URL — preserve external links from press/research citations.
+5. **`/data` charter.** A short subsection naming what `/data` is *for* now that it's
+   permanent: which existing tabs stay, which new ones to add (methodology, data
+   dictionary, downloads index), and how `/data` complements the home page rather than
+   duplicating it. Note any deep-dive that should live on `/data` and only get a summary
+   panel on the home page (e.g., ZIP-level history). All current `?tab=` URLs stay live —
+   no redirect map needed.
 
 6. **Open design questions** — 3–6 questions for the team that genuinely block the spec
    (e.g., "Do we have legal sign-off to name individual senators?"). Don't pad.
@@ -213,12 +221,12 @@ A strong Phase 1 spec will:
 
 Once Phase 1 lands, the relevant code paths are:
 
-- `web/src/pages/index.astro` — page entry, build-time data loading
-- `web/src/components/Home.tsx` — section composition; remove the `?view=zip` toggle if Phase 1 retires it
-- `web/src/components/sections/` — new section components go here
-- `web/src/components/sections/DataPage.tsx` — entire file likely deleted; tabs become inline sections
-- `web/src/pages/data.astro` — replaced by a redirect (`Astro.redirect("/#data", 301)`)
-- `web/src/lib/loadData.server.ts` — add server loaders for new exports
+- `web/src/pages/index.astro` — home entry, build-time data loading
+- `web/src/components/Home.tsx` — home section composition; remove the `?view=zip` toggle if Phase 1 retires it
+- `web/src/components/sections/` — new home and `/data` section components go here
+- `web/src/pages/data.astro` and `web/src/components/sections/DataPage.tsx` — the `/data`
+  hub; extend with new tabs/sections rather than delete
+- `web/src/lib/loadData.server.ts` — add server loaders for new exports (used by both surfaces)
 - `web/src/lib/data.ts` — add lazy client loaders for ZIP/large datasets
 - `web/src/types.ts` — new TS types for added datasets
 - `web/scripts/sync-data.sh` — pulls new exports from `data/exports/` if added
@@ -227,8 +235,7 @@ Once Phase 1 lands, the relevant code paths are:
 
 ## Pre-flight checks before commissioning Phase 1
 
-1. Confirm the audience priority and the "single page, /data retired" decision still hold —
-   they shape the brief fundamentally.
+1. Confirm the audience priority and the "home is a single-page narrative; `/data` persists as a permanent hub" decision still holds — it shapes the brief fundamentally.
 2. Confirm there's appetite for naming individual senators in the senate-district section.
    If not, soften story angle #2 or move it to "open questions."
 3. Confirm whether the press kit / shareable-stat angle (image cards, share-this-number

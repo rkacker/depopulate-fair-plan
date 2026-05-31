@@ -1,3 +1,5 @@
+const GITHUB_URL = "https://github.com/rkacker/depopulate-fair-plan";
+
 export function Footer() {
   return (
     <footer className="bg-charcoal py-12 text-white">
@@ -14,6 +16,26 @@ export function Footer() {
         >
           info@depopulatefairplan.com
         </a>
+        <nav
+          aria-label="Site links"
+          className="mt-6 flex items-center justify-center gap-4 text-sm"
+        >
+          <a
+            href="/data"
+            className="text-golden-yellow transition-colors hover:text-golden-yellow-soft"
+          >
+            Data &amp; Downloads
+          </a>
+          <span aria-hidden className="text-gray-600">·</span>
+          <a
+            href={GITHUB_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-golden-yellow transition-colors hover:text-golden-yellow-soft"
+          >
+            GitHub
+          </a>
+        </nav>
         <p className="mt-6 text-xs text-gray-500">
           © {new Date().getFullYear()} Depopulate the FAIR Plan. All rights
           reserved.

@@ -6,7 +6,7 @@ Data pipeline that collects, normalizes, and publishes California FAIR Plan resi
 property insurance market data. Powers [depopulatefairplan.com](https://depopulatefairplan.com).
 
 - **The crisis, visualized →** [depopulatefairplan.com](https://depopulatefairplan.com)
-- **Browse the data →** [GitHub Pages site](https://rkacker.github.io/depopulate-fair-plan/)
+- **Browse the data →** [depopulatefairplan.com/data](https://depopulatefairplan.com/data) (Data &amp; Downloads)
 
 ## What this is
 

@@ -9,6 +9,14 @@ names, no file paths. Gating artifact for the implementation plan (Phase 2).
 > the actual headers/row counts in `data/exports/` and `data/processed/`. Where the brief's
 > assumptions did not survive that check, it is called out inline and in the open questions.
 
+> **Revision note (2026-05): `/data` is permanent.** The team has since locked in that
+> `/data` (Data & Downloads) **persists as the permanent companion hub** for deeper
+> dimensional views, downloads, and methodology — it is not retired and there is no
+> redirect. The home page is a single-page advocacy narrative; `/data` is its data-rich
+> sibling, linked from the footer rather than the header nav. Where the body of this spec
+> still uses "rebuilt from `/data` tab X," read it as "extended on home; full tab persists
+> on `/data`." Section 5 below has been replaced with a `/data` charter accordingly.
+
 ---
 
 ## Thesis — what the redesign changes about what the site *argues*
@@ -44,28 +52,31 @@ interesting.
 
 ## 1. Page outline
 
-Top-to-bottom, single page. Each section gets a stable anchor so press and the retired
-`/data` deep links can target it. One-sentence purpose each; the "lands which beat" column
-maps to the Story Arc in section 4.
+Top-to-bottom, single page on the home route. Each section gets a stable anchor so press
+and `/data` deep links can target it. One-sentence purpose each; the "lands which beat"
+column maps to the Story Arc in section 4. `/data` persists as the companion hub (see
+section 5).
 
 | # | Section (anchor) | Purpose | Story beat | Source today |
 |---|---|---|---|---|
 | 0 | **Hero** (`#top`) | One number that states the crisis and dates it. | Crisis | exists |
 | 1 | **The Crisis in Three Numbers** (`#crisis`) | Prior count → today's count → multiplier; "insurer of last resort" framing. | Crisis | exists (CrisisStats) |
-| 2 | **The Trajectory** (`#trajectory`) | The growth curve over time — show the slope, not just endpoints. | Why now | `/data` tab 1 (statewide history) rebuilt inline |
-| 3 | **Where It's Concentrated** (`#map`) | County choropleth + ranked table; one concentration stat. | Where | exists (CrisisMap + CountyTable); absorbs ZIP drill-down + `/data` tab 2 (ZIP history) |
+| 2 | **The Trajectory** (`#trajectory`) | The growth curve over time — show the slope, not just endpoints. | Why now | summary on home; full `/data` tab 1 (statewide history) persists |
+| 3 | **Where It's Concentrated** (`#map`) | County choropleth + ranked table; one concentration stat. | Where | exists (CrisisMap + CountyTable); absorbs ZIP drill-down; full ZIP history stays on `/data` tab 2 |
 | 4 | **The Cost of Last-Resort Coverage** (`#cost`) | Premium- and value-per-policy spread; the affordability angle. | Why it matters (deepened) | NEW (derived) |
-| 5 | **A Market Failure, Not Just a Fire Map** (`#market`) | FAIR Plan share of total market + voluntary-market retreat. | What's broken (1) | `/data` tab 3 (FAIR share) rebuilt + extended |
+| 5 | **A Market Failure, Not Just a Fire Map** (`#market`) | FAIR Plan share of total market + voluntary-market retreat. | What's broken (1) | extends `/data` tab 3 (FAIR share) on home |
 | 6 | **The Map the State Is Missing** (`#distressed`) | Distressed-flag vs. actual-growth divergence — 436 unflagged ZIPs. | What's broken (2) | NEW (derived) |
 | 7 | **Your District Is on the FAIR Plan** (`#districts`) | FAIR Plan policies apportioned to all 40 Senate districts. | Who can act | NEW (derived) |
 | 8 | **What Has to Change / Take Action** (`#act`) | Solutions framing + email signup. | Act | Signup exists; Solutions scaffolding to rebuild |
-| — | **Methodology & Data** (`#data`) | Disclosure strip + links to every CSV and the pipeline. Replaces the `/data` page as the canonical home for `/data` redirects. | (supporting) | replaces `/data` |
+| — | **Methodology & Data** (`#data`) | Inline disclosure strip on home: data-current-through badge + a single "more on `/data`" pointer. | (supporting) | links to `/data` hub |
 
-**Where today's `/data` tabs land:** tab 1 (Statewide History) becomes section 2
-(Trajectory). Tab 2 (ZIP History) folds into section 3 as the ZIP drill-down. Tab 3 (FAIR
-Share of Total Market) becomes the spine of section 5. The `/data` page itself is retired;
-its download/methodology role moves to the `#data` disclosure strip (section 7 / footer).
-See section 5 of this spec for the redirect map.
+**How the home sections relate to `/data`:** the home page tells the argument; `/data` is
+where readers go for the deep dimensional cuts and downloads. The Trajectory (section 2)
+summarizes the statewide history that lives in full on `/data` tab 1. The map's ZIP
+drill-down (section 3) gives a focused entry point for the per-ZIP history that lives in
+full on `/data` tab 2. A Market Failure (section 5) extends `/data` tab 3 (FAIR Share)
+with the voluntary-retreat overlay; the underlying table stays on `/data`. The `/data`
+page is **not retired**; see section 5 of this spec for the `/data` charter.
 
 ---
 
@@ -125,7 +136,7 @@ omit it for space but it is mandatory per the brief.
  └─────────────────────────────────────────────┘
 ```
 
-### 2. The Trajectory (`#trajectory`) — rebuilt from `/data` tab 1
+### 2. The Trajectory (`#trajectory`) — summary on home; full `/data` tab 1 persists
 
 - **Headline + copy:** "The line that should be flat." Voice cue: a last-resort backstop
   should be roughly flat over time; this one bends upward and is steepening. Hook
@@ -182,7 +193,7 @@ omit it for space but it is mandatory per the brief.
 - **Data binding:** county snapshot (`county`, `policies`, `change_pct`, `yoy_change_pct`,
   direction flags) for the default; ZIP snapshot (`zip`, `city`, `county`, `region`,
   `policies`, change/yoy) for the drill-down; ZIP history (`fy_2021…fy_2025`) powers the
-  per-ZIP sparkline in the drill-down table (this is where `/data` tab 2 lands).
+  per-ZIP sparkline in the drill-down table (the full per-ZIP history view stays on `/data` tab 2).
 - **Interaction:** county/ZIP segmented toggle (keyboard-focusable); table sort by column;
   map region click filters/scrolls the table. Map regions are also reachable as a list (the
   table *is* the keyboard/tab fallback for the map — clicking a county and tabbing a county
@@ -240,7 +251,7 @@ omit it for space but it is mandatory per the brief.
   ▸ Show all 58 counties
 ```
 
-### 5. A Market Failure, Not Just a Fire Map (`#market`) — rebuilt from `/data` tab 3
+### 5. A Market Failure, Not Just a Fire Map (`#market`) — extends `/data` tab 3 on home
 
 - **Headline + copy:** "When the private market leaves, the FAIR Plan fills the gap." Voice
   cue: the FAIR Plan isn't growing because of fire alone — it's growing where the voluntary
@@ -388,13 +399,15 @@ omit it for space but it is mandatory per the brief.
    └───────────────────────────────────────────┘
 ```
 
-### Methodology & Data strip (`#data`) — replaces the `/data` page
+### Methodology & Data strip (`#data`) — inline pointer to the `/data` hub
 
-- **Purpose:** Honor the disclosure constraint ("methodology in disclosures") and preserve
-  the download/citation role of the retired `/data` page. A compact strip near the footer:
-  one line of provenance, links to every published CSV, the open-source pipeline, and
-  per-source freshness dates. Not a section in the argument — it is the citation apparatus.
-- **Chart type:** None; a list of dataset links + a "data current through [date]" badge.
+- **Purpose:** Honor the disclosure constraint ("methodology in disclosures") with a
+  compact strip near the footer: a "data current through [date]" badge, a single line of
+  provenance, and a clear pointer to **`/data`** (Data & Downloads) for full citations,
+  per-dataset downloads, and methodology. Not a section in the argument — it is the
+  citation apparatus and the bridge to the deep hub.
+- **Chart type:** None; the badge + a "Browse all data on `/data`" link + a short list of
+  the most-cited dataset shortcuts.
 - **Interaction:** links only; keyboard-accessible.
 - **Mobile:** Links stack.
 
@@ -464,31 +477,44 @@ mis-measured." Everything before them is setup; everything after is the call.
 
 ---
 
-## 5. `/data` retirement note
+## 5. `/data` charter — what stays, what's added
 
-The `/data` page is retired. Its three tabs survive as follows:
+`/data` (Data & Downloads) is the **permanent companion hub** to the home page. The home
+page argues; `/data` provides the underlying tables, downloads, and methodology so a
+journalist, researcher, or policy staffer can cite, fact-check, or drill further. It is
+linked from the **footer**, not the header nav — discoverable but never noisy. All
+existing `?tab=` URLs stay live; no redirects.
 
-| Old tab (`?tab=`) | Fate | New home | Redirect target |
-|---|---|---|---|
-| `statewide_history` (also bare `/data`, the default tab) | **Rebuilt** as section 2 | The Trajectory | `/#trajectory` |
-| `zip_history` | **Rebuilt** (folded) into section 3's ZIP drill-down | Where It's Concentrated | `/#map` |
-| `fair_share` | **Rebuilt + extended** as section 5 | A Market Failure | `/#market` |
+**Today's tabs (kept, refined):**
 
-Redirect rules (301, to preserve press/research citations):
+| Tab (`?tab=`) | Relationship to home | What it does on `/data` |
+|---|---|---|
+| `statewide_history` (default) | Home shows the summary trajectory chart (§2). | The full quarterly + FY-end table with per-row source provenance, sparkline cards by metric, CSV download. |
+| `zip_history` | Home's map drill-down surfaces 1–3 ZIPs at a time. | The full ~1,700-ZIP searchable/sortable history with FY columns and sparklines, CSV download. |
+| `fair_share` | Home's §5 shows the headline divergence + 1–2 highlighted counties. | The full 58-county FAIR-share table with year columns and per-county trend sparklines, CSV download. |
 
-- `/data` (no query) → `/#trajectory` (the default tab was statewide history).
-- `/data?tab=statewide_history` → `/#trajectory`
-- `/data?tab=zip_history` → `/#map`
-- `/data?tab=fair_share` → `/#market`
-- `/data?tab=<anything else>` → `/#data` (the methodology/downloads strip — safe fallback).
-- The legacy `?page=data` query (still handled today on the home page) → continue
-  redirecting to `/data`, which then 301s onward per the above. Two hops is acceptable for a
-  deprecated URL form.
+**New on `/data` (Phase 2+ candidates, ranked by readiness):**
 
-Nothing from `/data` is dropped outright: every tab either becomes a section or folds into
-one, and the download/methodology function moves to the `#data` strip. The hidden
-`?view=zip` home experiment is **retired** as a top-level toggle and **re-homed** as the
-in-section county/ZIP drill-down in section 3.
+- **Methodology page (or tab).** How the canonical CSVs are derived from the published
+  PDFs, what's residential-only vs. modeled, cadence mix per dataset, and known
+  limitations. Today this lives in the GitHub README; lift the user-facing parts to `/data`
+  so they're citable without a code-repo round trip.
+- **Downloads index.** A flat list of every published CSV/JSON with size, last-refreshed
+  date, and a one-line description. Replaces the inline-only download buttons.
+- **Data dictionary.** Per-column definitions for the canonical exports, especially for
+  fields with non-obvious semantics (`source`, `direction`, `coverage_end` vs.
+  `published_date`).
+- **Source-freshness strip.** A row of badges per upstream source (FAIR Plan quarterly,
+  CDI annual, distressed list) showing latest publication date and lag — so a reader can
+  tell at a glance whether the page is current.
+
+**What does *not* belong on `/data`:** narrative copy, the advocacy ask, hero stats. Those
+live on home. `/data` reads like documentation; home reads like an argument.
+
+**The hidden `?view=zip` home experiment** is still **retired** as a top-level toggle and
+**re-homed** as the in-section county/ZIP drill-down in section 3. (That decision is
+unaffected by `/data`'s permanence — `?view=zip` was a separate experiment on the home
+page, not a `/data` view.)
 
 ---
 

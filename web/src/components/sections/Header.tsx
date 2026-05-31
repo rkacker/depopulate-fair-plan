@@ -7,8 +7,6 @@ const HOME_SECTIONS: Array<{ id: string; label: string }> = [
   { id: "heatmap", label: "Map" },
 ];
 
-const GITHUB_URL = "https://github.com/rkacker/depopulate-fair-plan";
-
 export function Header({ pathname }: { pathname: string }) {
   const onHome = pathname === "/";
 
@@ -47,20 +45,6 @@ export function Header({ pathname }: { pathname: string }) {
               </a>
             ),
           )}
-          <a
-            href="/data"
-            className="text-sm font-medium text-gray-600 transition-colors hover:text-patriot-red"
-          >
-            Data
-          </a>
-          <a
-            href={GITHUB_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm font-medium text-gray-600 transition-colors hover:text-patriot-red"
-          >
-            GitHub
-          </a>
           <Button
             size="sm"
             onClick={() => {
