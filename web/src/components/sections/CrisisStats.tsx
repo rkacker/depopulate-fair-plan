@@ -1,10 +1,5 @@
 import type { HistoryRow } from "@/components/sections/StatewideHistoryTab";
-import { fmtBillions, fmtCoverage, fmtPolicies } from "@/lib/historyFormat";
-
-// The site's chosen baseline for the "since X" growth framing. The full chart
-// extends back to 2019-09-30, but the headline multiple is anchored here so
-// the section still reads conservatively even if earlier data shifts.
-const GROWTH_BASELINE = "2021-09-30";
+import { fmtCoverage, fmtPolicies } from "@/lib/historyFormat";
 
 interface CrisisStatsProps {
   initialStatewideRows?: HistoryRow[] | null;
@@ -21,13 +16,11 @@ export function CrisisStats({ initialStatewideRows = null }: CrisisStatsProps = 
   const first = chronological[0] ?? null;
   const last = chronological[chronological.length - 1] ?? null;
 
-  // Growth-stat baseline: prefer the curated anchor (2021-09-30); fall back to
-  // the earliest populated row if the manifest ever drops that point.
-  const baselineRow =
-    chronological.find((r) => r.coverage_end === GROWTH_BASELINE) ?? first;
+  // Growth multiple spans the full chart range — earliest to latest — so the
+  // headline number matches what the curve visually shows.
   const growthMultiple =
-    baselineRow && last && baselineRow.policy_count && last.policy_count
-      ? last.policy_count / baselineRow.policy_count
+    first && last && first.policy_count && last.policy_count
+      ? last.policy_count / first.policy_count
       : null;
 
   return (
@@ -43,100 +36,52 @@ export function CrisisStats({ initialStatewideRows = null }: CrisisStatsProps = 
           </p>
         </div>
 
-        <div className="mb-10 grid gap-6 lg:grid-cols-3 lg:items-stretch">
-          {/* Chart card spans 2/3 on desktop, full-width on mobile. */}
-          <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 lg:col-span-2 lg:p-6">
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
-              Statewide FAIR Plan policies in force
-              {first && last && (
-                <>
-                  {" "}
-                  · {first.coverage_end.slice(0, 4)} → {last.coverage_end.slice(0, 4)}
-                </>
-              )}
-            </h3>
-            {chronological.length >= 2 && first && last ? (
-              <TrajectoryChart rows={chronological} first={first} last={last} />
-            ) : (
-              <p className="py-12 text-center text-gray-500">
-                Trajectory data unavailable.
-              </p>
+        {/* Chart card — full width. */}
+        <div className="mb-10 rounded-lg border border-gray-200 bg-gray-50 p-4 lg:p-6">
+          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
+            Statewide FAIR Plan policies in force
+            {first && last && (
+              <>
+                {" "}
+                · {first.coverage_end.slice(0, 4)} → {last.coverage_end.slice(0, 4)}
+              </>
             )}
-            <p className="mt-3 text-xs italic text-gray-500">
-              Blends true quarterly DWE PDFs (2025-06 →), fiscal-year-end PIF
-              history (2019–2024), and archived FAIR Plan webpage chart
-              snapshots for gap quarters. Full per-row provenance on the{" "}
-              <a className="underline hover:text-patriot-red" href="/data#statewide_history">
-                data page
-              </a>.
+          </h3>
+          {chronological.length >= 2 && first && last ? (
+            <TrajectoryChart rows={chronological} first={first} last={last} />
+          ) : (
+            <p className="py-12 text-center text-gray-500">
+              Trajectory data unavailable.
             </p>
-          </div>
-
-          {/* Growth-stat callout (replaces the old prior_year / current_year / growth cards). */}
-          <div className="rounded-xl border border-blue-100 bg-gradient-to-br from-blue-50 to-white p-6 text-center lg:flex lg:flex-col lg:justify-center">
-            <p className="text-4xl font-bold text-navy-blue tabular-nums lg:text-5xl">
-              {growthMultiple !== null ? `${growthMultiple.toFixed(1)}×` : "—"}
-            </p>
-            <p className="mt-2 font-medium text-charcoal">growth since</p>
-            <p className="text-sm text-gray-600">
-              {baselineRow ? fmtCoverage(baselineRow.coverage_end) : "Sep 30, 2021"}
-            </p>
-            {baselineRow && last && (
-              <p className="mt-4 text-sm tabular-nums text-gray-700">
-                <span className="font-semibold">{fmtPolicies(baselineRow.policy_count)}</span>
-                {" → "}
-                <span className="font-semibold">{fmtPolicies(last.policy_count)}</span>
-              </p>
-            )}
-          </div>
+          )}
         </div>
 
-        {/* Collapsed data table — always in the DOM for a11y; visually behind a disclosure. */}
-        {chronological.length > 0 && (
-          <details className="mx-auto mb-10 max-w-3xl rounded-lg border border-gray-200 bg-white">
-            <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-2 rounded-lg px-4 py-3 text-sm font-medium text-charcoal hover:bg-gray-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-patriot-red focus-visible:ring-offset-2">
-              <span>Show data table ({initialStatewideRows?.length ?? 0} rows)</span>
-              <span aria-hidden className="text-gray-400">▾</span>
-            </summary>
-            <div className="overflow-x-auto border-t border-gray-200">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-gray-200 bg-gray-50 text-charcoal">
-                    <th scope="col" className="px-4 py-2 text-left font-semibold">Coverage end</th>
-                    <th scope="col" className="px-4 py-2 text-right font-semibold">Policies</th>
-                    <th scope="col" className="px-4 py-2 text-right font-semibold">Exposure</th>
-                    <th scope="col" className="px-4 py-2 text-right font-semibold">Premium</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {(initialStatewideRows ?? []).map((r) => (
-                    <tr key={r.coverage_end} className="border-b border-gray-100">
-                      <td className="px-4 py-2 text-charcoal">{fmtCoverage(r.coverage_end)}</td>
-                      <td className="px-4 py-2 text-right tabular-nums text-gray-700">
-                        {fmtPolicies(r.policy_count)}
-                      </td>
-                      <td className="px-4 py-2 text-right tabular-nums text-gray-700">
-                        {fmtBillions(r.exposure)}
-                      </td>
-                      <td className="px-4 py-2 text-right tabular-nums text-gray-700">
-                        {fmtBillions(r.premium)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </details>
-        )}
+        {/* Full data table lives on /data — this section is chart-led. */}
 
-        {/* "Why This Matters" callout — bridges to the map. */}
+        {/* "Why This Matters" callout — bridges to the map; carries the
+            headline multiplier the chart proves. */}
         <div className="mx-auto max-w-4xl">
           <div className="rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-6">
             <p className="mb-2 font-semibold text-patriot-red">Why This Matters</p>
             <p className="text-gray-700">
-              The FAIR Plan's explosive growth doesn't just affect the families
-              on it — it creates hidden costs for every homeowner in California.
-              Here's how.
+              {growthMultiple !== null && first && last && (
+                <>
+                  <span className="text-lg font-bold tabular-nums text-charcoal lg:text-xl">
+                    {growthMultiple.toFixed(1)}× growth
+                  </span>{" "}
+                  since {fmtCoverage(first.coverage_end)} — from{" "}
+                  <span className="font-semibold tabular-nums">
+                    {fmtPolicies(first.policy_count)}
+                  </span>{" "}
+                  to{" "}
+                  <span className="font-semibold tabular-nums">
+                    {fmtPolicies(last.policy_count)}
+                  </span>{" "}
+                  policies.{" "}
+                </>
+              )}
+              This explosive growth doesn't just affect the families on it — it
+              creates hidden costs for every homeowner in California. Here's how.
             </p>
           </div>
         </div>
@@ -185,12 +130,19 @@ function TrajectoryChart({ rows, first, last }: TrajectoryChartProps) {
     .map((r) => `${xOf(r.coverage_end).toFixed(1)},${yOf(r.policy_count!).toFixed(1)}`)
     .join(" ");
 
-  // Four evenly-spaced time ticks on the x-axis (years).
-  const xTicks = [0, 1, 2, 3].map((i) => {
-    const t = xMin + (i / 3) * xRange;
-    const x = padL + (i / 3) * innerW;
-    return { x, label: new Date(t).getUTCFullYear().toString() };
-  });
+  // X-axis ticks at Jan 1 of each calendar year whose start falls inside the
+  // data range. The on-line dots (below) sit at FY-end rows (Sep 30 — the
+  // FAIR Plan's native annual cadence), so the calendar labels and the data
+  // markers are intentionally two separate views of time. Today the chart
+  // starts Sep 30, 2019, so Jan 1, 2019 is offscreen and naturally skipped.
+  const minYear = new Date(xMin).getUTCFullYear();
+  const maxYear = new Date(xMax).getUTCFullYear();
+  const xTicks: Array<{ x: number; label: string }> = [];
+  for (let y = minYear; y <= maxYear; y++) {
+    const t = Date.UTC(y, 0, 1);
+    if (t < xMin || t > xMax) continue;
+    xTicks.push({ x: padL + ((t - xMin) / xRange) * innerW, label: y.toString() });
+  }
 
   // Four evenly-spaced y ticks. Round labels to the nearest 100k for cleanliness.
   const yTickRaw = [0, 1, 2, 3].map((i) => yMin + (i / 3) * yRange);
@@ -248,7 +200,7 @@ function TrajectoryChart({ rows, first, last }: TrajectoryChartProps) {
         </g>
       ))}
 
-      {/* x-axis baseline + year labels */}
+      {/* x-axis baseline + per-year hash marks + labels */}
       <line
         x1={padL}
         x2={VB_W - padR}
@@ -258,16 +210,25 @@ function TrajectoryChart({ rows, first, last }: TrajectoryChartProps) {
         strokeWidth={1}
       />
       {xTicks.map((t, i) => (
-        <text
-          key={`x-${i}`}
-          x={t.x}
-          y={VB_H - padB + 20}
-          textAnchor="middle"
-          fontSize="12"
-          fill="#6b7280"
-        >
-          {t.label}
-        </text>
+        <g key={`x-${i}`}>
+          <line
+            x1={t.x}
+            x2={t.x}
+            y1={VB_H - padB}
+            y2={VB_H - padB + 6}
+            stroke="#9ca3af"
+            strokeWidth={1}
+          />
+          <text
+            x={t.x}
+            y={VB_H - padB + 20}
+            textAnchor="middle"
+            fontSize="12"
+            fill="#6b7280"
+          >
+            {t.label}
+          </text>
+        </g>
       ))}
 
       {/* the trajectory itself */}
@@ -280,28 +241,27 @@ function TrajectoryChart({ rows, first, last }: TrajectoryChartProps) {
         strokeLinejoin="round"
       />
 
-      {/* start point + labels (to the right of the dot, above + below) */}
+      {/* Dots at FY-end rows (Sep 30) — the FAIR Plan's native annual cadence.
+          Calendar-year labels on the x-axis use different x positions; the
+          data line and the time-reference labels are two separate views. */}
+      {rows
+        .filter((r) => r.coverage_end.endsWith("-09-30"))
+        .map((r) => {
+          if (r === first || r === last) return null; // emphasized endpoints
+          return (
+            <circle
+              key={`pt-${r.coverage_end}`}
+              cx={xOf(r.coverage_end)}
+              cy={yOf(r.policy_count!)}
+              r={3}
+              fill="#cb181d"
+            />
+          );
+        })}
+
+      {/* start point — visual anchor; the value + date appear in the
+          "Why This Matters" copy below, not on the chart itself. */}
       <circle cx={startX} cy={startY} r={5} fill="#cb181d" />
-      <text
-        x={startX + 10}
-        y={startY - 6}
-        textAnchor="start"
-        fontSize="13"
-        fontWeight="600"
-        fill="#1f2937"
-      >
-        {fmtPolicies(first.policy_count)}
-      </text>
-      <text
-        x={startX + 10}
-        y={startY + 8}
-        textAnchor="start"
-        dominantBaseline="hanging"
-        fontSize="11"
-        fill="#6b7280"
-      >
-        {fmtCoverage(first.coverage_end)}
-      </text>
 
       {/* end point + labels (to the left of the dot, above + below — emphasized) */}
       <circle cx={endX} cy={endY} r={6} fill="#cb181d" />
