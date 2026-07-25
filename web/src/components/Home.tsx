@@ -5,6 +5,7 @@ import { CrisisMap } from "@/components/sections/CrisisMap";
 import { CountyTable } from "@/components/sections/CountyTable";
 import { ZipMap } from "@/components/sections/ZipMap";
 import { ZipTable } from "@/components/sections/ZipTable";
+import { DistressedDivergence } from "@/components/sections/DistressedDivergence";
 // TODO(future): rebuild a Solutions section with sharper, data-grounded
 // content. The previous version (web/src/components/sections/Solutions.tsx)
 // is kept in-tree as scaffolding but is intentionally not rendered today.
@@ -14,7 +15,7 @@ import {
   loadSiteStats,
   loadZipData,
 } from "@/lib/data";
-import type { CountyData, SiteStats, ZipData } from "@/types";
+import type { CountyData, DistressedSummary, SiteStats, ZipData } from "@/types";
 import type { HistoryRow } from "@/components/sections/StatewideHistoryTab";
 
 type View = "county" | "zip";
@@ -23,12 +24,14 @@ interface HomeProps {
   initialStats?: SiteStats | null;
   initialCountyData?: CountyData | null;
   initialStatewideRows?: HistoryRow[] | null;
+  initialDistressedSummary?: DistressedSummary | null;
 }
 
 export function Home({
   initialStats = null,
   initialCountyData = null,
   initialStatewideRows = null,
+  initialDistressedSummary = null,
 }: HomeProps = {}) {
   // ?view=zip is a query-string experiment — an alternate visualization that
   // will eventually fold into the main page. SSR can't read URL params, so we
@@ -92,6 +95,7 @@ export function Home({
           <CountyTable countyData={countyData} stats={stats} loading={loading} />
         </>
       )}
+      <DistressedDivergence summary={initialDistressedSummary} />
       <Signup />
     </>
   );

@@ -10,11 +10,18 @@ import zipCsv from "../../public/data/california_zip_data.csv?raw";
 import statewideHistoryCsv from "../../public/data/fair_statewide_history.csv?raw";
 import marketShareCsv from "../../public/data/cdi_county_market_share.csv?raw";
 import zipHistoryCsv from "../../public/data/california_zip_history.csv?raw";
+import distressedReconCsv from "../../public/data/distressed_zip_reconciliation.csv?raw";
+import {
+  buildDistressedData,
+  DISTRESSED_PREVIEW_COUNT,
+  type RawReconciliationRow,
+} from "@/lib/distressed";
 import type {
   CountyData,
   CountyMarketShareRow,
   CountyRow,
   Direction,
+  DistressedSummary,
   SiteStats,
   ZipData,
   ZipHistoryRow,
@@ -224,4 +231,15 @@ export function loadZipHistoryServer(): ZipHistoryRow[] {
     });
   }
   return rows;
+}
+
+// Preview slice of the distressed-flag divergence for the homepage island.
+// The full ranked list stays out of the serialized props (per the lazy-load
+// performance budget) — the client fetches it on demand via loadDistressedData.
+export function loadDistressedSummaryServer(): DistressedSummary {
+  const { matrix, fairOnlyRows } = buildDistressedData(
+    parseCsv<RawReconciliationRow>(distressedReconCsv),
+    loadZipHistoryServer(),
+  );
+  return { matrix, previewRows: fairOnlyRows.slice(0, DISTRESSED_PREVIEW_COUNT) };
 }

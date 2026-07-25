@@ -1,9 +1,14 @@
 import Papa from "papaparse";
+import {
+  buildDistressedData,
+  type RawReconciliationRow,
+} from "@/lib/distressed";
 import type {
   CountyData,
   CountyMarketShareRow,
   CountyRow,
   Direction,
+  DistressedData,
   SiteStats,
   ZipData,
   ZipHistoryRow,
@@ -241,4 +246,21 @@ export function loadZipHistory(): Promise<ZipHistoryRow[]> {
       error: (err) => reject(err),
     });
   });
+}
+
+// Full distressed-flag divergence dataset — fetched lazily when the reader
+// expands the section's ZIP list beyond the server-rendered preview.
+export function loadDistressedData(): Promise<DistressedData> {
+  const reconRows = new Promise<RawReconciliationRow[]>((resolve, reject) => {
+    Papa.parse<RawReconciliationRow>("/data/distressed_zip_reconciliation.csv", {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: (results) => resolve(results.data),
+      error: (err) => reject(err),
+    });
+  });
+  return Promise.all([reconRows, loadZipHistory()]).then(([recon, history]) =>
+    buildDistressedData(recon, history),
+  );
 }

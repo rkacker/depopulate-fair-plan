@@ -655,6 +655,13 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
     if cdi_pif_wide.exists():
         shutil.copy(cdi_pif_wide, exports_dir / "cdi_county_market_share.csv")
 
+    # --- distressed_zip_reconciliation.csv: FAIR Plan distressed flag vs CDI list ---
+    # Copied verbatim from the derived analysis table: one row per reconciled ZIP
+    # with fair_plan_flag / cdi_flag / agree. Powers the divergence section.
+    reconciliation_path = processed_dir / "analysis" / "distressed_zip_reconciliation.csv"
+    if reconciliation_path.exists():
+        shutil.copy(reconciliation_path, exports_dir / "distressed_zip_reconciliation.csv")
+
     # --- california_zip_history.csv: ZIP-level FY2021-FY2025 policy counts ---
     # Project the full zip_wide table to just the columns the /data ZIP history
     # tab needs. Sorted by FY2025 descending (latest year, biggest first).

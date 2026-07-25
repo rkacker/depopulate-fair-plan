@@ -1,0 +1,1662 @@
+zip,county,fair_plan_flag,cdi_flag,agree
+90001,Los Angeles,0,0,1
+90002,Los Angeles,0,0,1
+90003,Los Angeles,0,0,1
+90004,Los Angeles,0,0,1
+90005,Los Angeles,0,0,1
+90006,Los Angeles,0,0,1
+90007,Los Angeles,0,0,1
+90008,Los Angeles,1,0,0
+90011,Los Angeles,0,0,1
+90012,Los Angeles,0,0,1
+90013,Los Angeles,0,0,1
+90014,Los Angeles,0,0,1
+90015,Los Angeles,0,0,1
+90016,Los Angeles,0,0,1
+90017,Los Angeles,0,0,1
+90018,Los Angeles,0,0,1
+90019,Los Angeles,0,0,1
+90020,Los Angeles,0,0,1
+90021,Los Angeles,0,0,1
+90022,Los Angeles,1,0,0
+90023,Los Angeles,0,0,1
+90024,Los Angeles,0,0,1
+90025,Los Angeles,0,0,1
+90026,Los Angeles,0,0,1
+90027,Los Angeles,1,0,0
+90028,Los Angeles,1,0,0
+90029,Los Angeles,0,0,1
+90031,Los Angeles,0,0,1
+90032,Los Angeles,0,0,1
+90033,Los Angeles,0,0,1
+90034,Los Angeles,0,0,1
+90035,Los Angeles,0,0,1
+90036,Los Angeles,0,0,1
+90037,Los Angeles,0,0,1
+90038,Los Angeles,0,0,1
+90039,Los Angeles,1,0,0
+90040,Los Angeles,0,0,1
+90041,Los Angeles,1,0,0
+90042,Los Angeles,0,0,1
+90043,Los Angeles,1,0,0
+90044,Los Angeles,0,0,1
+90045,Los Angeles,1,0,0
+90046,Los Angeles,1,1,1
+90047,Los Angeles,0,0,1
+90048,Los Angeles,0,0,1
+90049,Los Angeles,1,0,0
+90056,Los Angeles,1,0,0
+90057,Los Angeles,0,0,1
+90058,Los Angeles,0,0,1
+90059,Los Angeles,0,0,1
+90061,Los Angeles,0,0,1
+90062,Los Angeles,0,0,1
+90063,Los Angeles,1,1,1
+90064,Los Angeles,0,0,1
+90065,Los Angeles,1,0,0
+90066,Los Angeles,0,0,1
+90067,Los Angeles,0,0,1
+90068,Los Angeles,1,1,1
+90069,Los Angeles,1,0,0
+90077,Los Angeles,1,1,1
+90089,Los Angeles,0,0,1
+90094,Los Angeles,1,0,0
+90201,Los Angeles,0,0,1
+90210,Los Angeles,1,1,1
+90211,Los Angeles,0,0,1
+90212,Los Angeles,0,0,1
+90220,Los Angeles,1,0,0
+90221,Los Angeles,0,0,1
+90222,Los Angeles,0,0,1
+90230,Los Angeles,1,0,0
+90232,Los Angeles,1,0,0
+90240,Los Angeles,0,0,1
+90241,Los Angeles,0,0,1
+90242,Los Angeles,0,0,1
+90245,Los Angeles,1,0,0
+90247,Los Angeles,0,0,1
+90248,Los Angeles,0,0,1
+90249,Los Angeles,0,0,1
+90250,Los Angeles,0,0,1
+90254,Los Angeles,0,0,1
+90255,Los Angeles,0,0,1
+90260,Los Angeles,0,0,1
+90262,Los Angeles,0,0,1
+90265,Los Angeles,1,1,1
+90266,Los Angeles,0,0,1
+90270,Los Angeles,0,0,1
+90272,Los Angeles,1,0,0
+90274,Los Angeles,1,0,0
+90275,Los Angeles,1,0,0
+90277,Los Angeles,1,0,0
+90278,Los Angeles,0,0,1
+90280,Los Angeles,0,0,1
+90290,Los Angeles,1,1,1
+90291,Los Angeles,0,0,1
+90292,Los Angeles,1,0,0
+90293,Los Angeles,1,0,0
+90301,Los Angeles,0,0,1
+90302,Los Angeles,0,0,1
+90303,Los Angeles,0,0,1
+90304,Los Angeles,0,0,1
+90305,Los Angeles,0,0,1
+90401,Los Angeles,0,0,1
+90402,Los Angeles,1,0,0
+90403,Los Angeles,0,0,1
+90404,Los Angeles,0,0,1
+90405,Los Angeles,0,0,1
+90501,Los Angeles,0,0,1
+90502,Los Angeles,0,0,1
+90503,Los Angeles,0,0,1
+90504,Los Angeles,0,0,1
+90505,Los Angeles,0,0,1
+90601,Los Angeles,1,0,0
+90602,Los Angeles,1,0,0
+90603,Los Angeles,1,0,0
+90604,Los Angeles,0,0,1
+90605,Los Angeles,1,0,0
+90606,Los Angeles,0,0,1
+90620,Orange,0,0,1
+90621,Orange,1,0,0
+90623,Orange,0,0,1
+90630,Orange,0,0,1
+90631,Orange,1,0,0
+90638,Los Angeles,1,0,0
+90640,Los Angeles,0,0,1
+90650,Los Angeles,0,0,1
+90660,Los Angeles,0,0,1
+90670,Los Angeles,0,0,1
+90680,Orange,0,0,1
+90701,Los Angeles,0,0,1
+90703,Los Angeles,0,0,1
+90704,Los Angeles,1,1,1
+90706,Los Angeles,0,0,1
+90710,Los Angeles,0,0,1
+90712,Los Angeles,0,0,1
+90713,Los Angeles,0,0,1
+90715,Los Angeles,0,0,1
+90716,Los Angeles,0,0,1
+90717,Los Angeles,0,0,1
+90720,Orange,1,0,0
+90723,Los Angeles,0,0,1
+90731,Los Angeles,1,0,0
+90732,Los Angeles,1,0,0
+90740,Orange,1,0,0
+90742,Orange,0,0,1
+90743,Orange,0,0,1
+90744,Los Angeles,1,0,0
+90745,Los Angeles,1,0,0
+90746,Los Angeles,1,0,0
+90755,Los Angeles,0,0,1
+90802,Los Angeles,0,0,1
+90803,Los Angeles,0,0,1
+90804,Los Angeles,0,0,1
+90805,Los Angeles,0,0,1
+90806,Los Angeles,0,0,1
+90807,Los Angeles,0,0,1
+90808,Los Angeles,0,0,1
+90810,Los Angeles,0,0,1
+90813,Los Angeles,0,0,1
+90814,Los Angeles,0,0,1
+90815,Los Angeles,0,0,1
+91001,Los Angeles,1,0,0
+91006,Los Angeles,1,0,0
+91007,Los Angeles,0,0,1
+91008,Los Angeles,1,1,1
+91010,Los Angeles,1,0,0
+91011,Los Angeles,1,0,0
+91016,Los Angeles,1,0,0
+91020,Los Angeles,1,0,0
+91024,Los Angeles,1,0,0
+91030,Los Angeles,0,0,1
+91040,Los Angeles,1,0,0
+91042,Los Angeles,1,0,0
+91101,Los Angeles,0,0,1
+91103,Los Angeles,1,0,0
+91104,Los Angeles,0,0,1
+91105,Los Angeles,1,0,0
+91106,Los Angeles,0,0,1
+91107,Los Angeles,1,0,0
+91108,Los Angeles,0,0,1
+91201,Los Angeles,1,0,0
+91202,Los Angeles,1,0,0
+91203,Los Angeles,0,0,1
+91204,Los Angeles,0,0,1
+91205,Los Angeles,0,0,1
+91206,Los Angeles,1,0,0
+91207,Los Angeles,1,0,0
+91208,Los Angeles,1,0,0
+91210,Los Angeles,0,0,1
+91214,Los Angeles,1,0,0
+91301,Los Angeles,1,0,0
+91302,Los Angeles,1,1,1
+91303,Los Angeles,0,0,1
+91304,Los Angeles,1,0,0
+91306,Los Angeles,0,0,1
+91307,Los Angeles,1,0,0
+91311,Los Angeles,1,0,0
+91316,Los Angeles,1,0,0
+91320,Ventura,1,1,1
+91321,Los Angeles,1,0,0
+91324,Los Angeles,0,0,1
+91325,Los Angeles,0,0,1
+91326,Los Angeles,1,0,0
+91331,Los Angeles,1,0,0
+91335,Los Angeles,0,0,1
+91340,Los Angeles,0,0,1
+91342,Los Angeles,1,0,0
+91343,Los Angeles,0,0,1
+91344,Los Angeles,1,0,0
+91345,Los Angeles,0,0,1
+91350,Los Angeles,1,0,0
+91351,Los Angeles,1,0,0
+91352,Los Angeles,1,0,0
+91354,Los Angeles,1,0,0
+91355,Los Angeles,1,0,0
+91356,Los Angeles,0,0,1
+91360,Ventura,1,1,1
+91361,Ventura,1,1,1
+91362,Ventura,1,1,1
+91364,Los Angeles,1,0,0
+91367,Los Angeles,1,0,0
+91377,Ventura,1,1,1
+91381,Los Angeles,1,0,0
+91384,Los Angeles,1,1,1
+91387,Los Angeles,1,0,0
+91390,Los Angeles,1,1,1
+91401,Los Angeles,0,0,1
+91402,Los Angeles,0,0,1
+91403,Los Angeles,1,0,0
+91405,Los Angeles,0,0,1
+91406,Los Angeles,0,0,1
+91411,Los Angeles,0,0,1
+91423,Los Angeles,1,0,0
+91436,Los Angeles,1,0,0
+91501,Los Angeles,1,0,0
+91502,Los Angeles,0,0,1
+91504,Los Angeles,1,0,0
+91505,Los Angeles,1,0,0
+91506,Los Angeles,0,0,1
+91601,Los Angeles,0,0,1
+91602,Los Angeles,0,0,1
+91604,Los Angeles,1,0,0
+91605,Los Angeles,0,0,1
+91606,Los Angeles,0,0,1
+91607,Los Angeles,0,0,1
+91701,San Bernardino,1,0,0
+91702,Los Angeles,1,0,0
+91706,Los Angeles,1,0,0
+91708,San Bernardino,1,0,0
+91709,San Bernardino,1,0,0
+91710,San Bernardino,1,0,0
+91711,Los Angeles,1,0,0
+91722,Los Angeles,0,0,1
+91723,Los Angeles,0,0,1
+91724,Los Angeles,1,0,0
+91730,San Bernardino,1,0,0
+91731,Los Angeles,0,0,1
+91732,Los Angeles,0,0,1
+91733,Los Angeles,1,0,0
+91737,San Bernardino,1,0,0
+91739,San Bernardino,0,0,1
+91740,Los Angeles,1,0,0
+91741,Los Angeles,1,0,0
+91744,Los Angeles,0,0,1
+91745,Los Angeles,1,0,0
+91746,Los Angeles,1,0,0
+91748,Los Angeles,1,0,0
+91750,Los Angeles,1,0,0
+91752,Riverside,0,0,1
+91754,Los Angeles,1,0,0
+91755,Los Angeles,0,0,1
+91759,San Bernardino,1,1,1
+91761,San Bernardino,1,0,0
+91762,San Bernardino,1,0,0
+91763,San Bernardino,1,0,0
+91764,San Bernardino,0,0,1
+91765,Los Angeles,1,0,0
+91766,Los Angeles,1,0,0
+91767,Los Angeles,0,0,1
+91768,Los Angeles,1,0,0
+91770,Los Angeles,0,0,1
+91773,Los Angeles,1,0,0
+91775,Los Angeles,0,0,1
+91776,Los Angeles,0,0,1
+91780,Los Angeles,0,0,1
+91784,San Bernardino,1,0,0
+91786,San Bernardino,1,0,0
+91789,Los Angeles,1,0,0
+91790,Los Angeles,0,0,1
+91791,Los Angeles,1,0,0
+91792,Los Angeles,1,0,0
+91801,Los Angeles,0,0,1
+91803,Los Angeles,0,0,1
+91901,San Diego,1,1,1
+91902,San Diego,1,0,0
+91905,San Diego,1,1,1
+91906,San Diego,1,1,1
+91910,San Diego,0,0,1
+91911,San Diego,0,0,1
+91913,San Diego,1,0,0
+91914,San Diego,1,0,0
+91915,San Diego,1,0,0
+91916,San Diego,1,1,1
+91917,San Diego,1,1,1
+91931,San Diego,1,1,1
+91932,San Diego,1,0,0
+91934,San Diego,1,1,1
+91935,San Diego,1,1,1
+91941,San Diego,1,0,0
+91942,San Diego,0,0,1
+91945,San Diego,0,0,1
+91950,San Diego,0,0,1
+91962,San Diego,1,1,1
+91963,San Diego,1,1,1
+91977,San Diego,1,0,0
+91978,San Diego,1,0,0
+91980,San Diego,1,1,1
+92003,San Diego,1,0,0
+92004,San Diego,1,0,0
+92007,San Diego,1,0,0
+92008,San Diego,1,0,0
+92009,San Diego,0,0,1
+92010,San Diego,1,0,0
+92011,San Diego,1,0,0
+92014,San Diego,1,0,0
+92019,San Diego,1,0,0
+92020,San Diego,1,0,0
+92021,San Diego,1,0,0
+92024,San Diego,1,0,0
+92025,San Diego,1,0,0
+92026,San Diego,1,0,0
+92027,San Diego,1,0,0
+92028,San Diego,1,0,0
+92029,San Diego,1,0,0
+92036,San Diego,1,1,1
+92037,San Diego,1,0,0
+92040,San Diego,1,0,0
+92054,San Diego,0,0,1
+92056,San Diego,0,0,1
+92057,San Diego,1,0,0
+92058,San Diego,1,0,0
+92059,San Diego,1,1,1
+92060,San Diego,1,1,1
+92061,San Diego,1,1,1
+92064,San Diego,1,0,0
+92065,San Diego,1,1,1
+92066,San Diego,1,1,1
+92067,San Diego,1,0,0
+92069,San Diego,1,0,0
+92070,San Diego,1,1,1
+92071,San Diego,1,0,0
+92075,San Diego,1,0,0
+92078,San Diego,1,0,0
+92081,San Diego,1,0,0
+92082,San Diego,1,1,1
+92083,San Diego,0,0,1
+92084,San Diego,1,0,0
+92086,San Diego,1,1,1
+92091,San Diego,1,0,0
+92101,San Diego,0,0,1
+92102,San Diego,0,0,1
+92103,San Diego,0,0,1
+92104,San Diego,0,0,1
+92105,San Diego,0,0,1
+92106,San Diego,1,0,0
+92107,San Diego,1,0,0
+92108,San Diego,1,0,0
+92109,San Diego,0,0,1
+92110,San Diego,0,0,1
+92111,San Diego,1,0,0
+92113,San Diego,0,0,1
+92114,San Diego,0,0,1
+92115,San Diego,0,0,1
+92116,San Diego,0,0,1
+92117,San Diego,1,0,0
+92118,San Diego,0,0,1
+92119,San Diego,1,0,0
+92120,San Diego,1,0,0
+92121,San Diego,1,0,0
+92122,San Diego,1,0,0
+92123,San Diego,1,0,0
+92124,San Diego,1,0,0
+92126,San Diego,1,0,0
+92127,San Diego,1,0,0
+92128,San Diego,1,0,0
+92129,San Diego,1,0,0
+92130,San Diego,1,0,0
+92131,San Diego,1,0,0
+92139,San Diego,0,0,1
+92140,San Diego,0,0,1
+92145,San Diego,1,0,0
+92154,San Diego,1,0,0
+92173,San Diego,1,0,0
+92201,Riverside,0,0,1
+92203,Riverside,0,0,1
+92210,Riverside,1,0,0
+92211,Riverside,0,0,1
+92220,Riverside,1,0,0
+92223,Riverside,1,0,0
+92225,Riverside,0,0,1
+92227,Imperial,0,0,1
+92230,Riverside,1,1,1
+92231,Imperial,0,0,1
+92233,Imperial,0,0,1
+92234,Riverside,1,0,0
+92236,Riverside,0,0,1
+92239,Riverside,1,1,1
+92240,Riverside,1,0,0
+92241,Riverside,0,0,1
+92242,San Bernardino,0,0,1
+92243,Imperial,0,0,1
+92249,Imperial,0,0,1
+92250,Imperial,0,0,1
+92251,Imperial,0,0,1
+92252,San Bernardino,1,0,0
+92253,Riverside,0,0,1
+92254,Riverside,0,0,1
+92256,San Bernardino,1,1,1
+92257,Imperial,0,0,1
+92258,Riverside,0,0,1
+92259,Imperial,0,0,1
+92260,Riverside,1,0,0
+92262,Riverside,1,0,0
+92264,Riverside,1,0,0
+92266,Imperial,1,1,1
+92267,San Bernardino,0,0,1
+92268,San Bernardino,1,0,0
+92270,Riverside,0,0,1
+92273,Imperial,0,0,1
+92274,Riverside,0,0,1
+92275,Imperial,0,0,1
+92276,Riverside,0,0,1
+92277,San Bernardino,1,0,0
+92280,San Bernardino,0,0,1
+92281,Imperial,0,0,1
+92282,Riverside,1,1,1
+92283,Imperial,0,0,1
+92284,San Bernardino,1,0,0
+92285,San Bernardino,1,1,1
+92301,San Bernardino,0,0,1
+92305,San Bernardino,1,1,1
+92307,San Bernardino,1,0,0
+92308,San Bernardino,1,0,0
+92309,San Bernardino,0,0,1
+92310,San Bernardino,0,0,1
+92311,San Bernardino,0,0,1
+92313,San Bernardino,0,0,1
+92314,San Bernardino,1,1,1
+92315,San Bernardino,1,1,1
+92316,San Bernardino,0,0,1
+92317,San Bernardino,1,1,1
+92318,San Bernardino,1,0,0
+92320,Riverside,1,0,0
+92321,San Bernardino,1,1,1
+92322,San Bernardino,1,1,1
+92324,San Bernardino,1,0,0
+92325,San Bernardino,1,1,1
+92327,San Bernardino,0,0,1
+92333,San Bernardino,1,1,1
+92335,San Bernardino,1,0,0
+92336,San Bernardino,1,0,0
+92337,San Bernardino,0,0,1
+92338,San Bernardino,0,0,1
+92339,San Bernardino,1,1,1
+92341,San Bernardino,1,1,1
+92342,San Bernardino,0,0,1
+92344,San Bernardino,1,0,0
+92345,San Bernardino,1,0,0
+92346,San Bernardino,1,0,0
+92347,San Bernardino,0,0,1
+92352,San Bernardino,1,1,1
+92354,San Bernardino,1,0,0
+92356,San Bernardino,1,1,1
+92358,San Bernardino,1,1,1
+92359,San Bernardino,1,0,0
+92363,San Bernardino,0,0,1
+92364,San Bernardino,0,0,1
+92365,San Bernardino,0,0,1
+92368,San Bernardino,0,0,1
+92371,San Bernardino,1,1,1
+92372,San Bernardino,1,1,1
+92373,San Bernardino,1,0,0
+92374,San Bernardino,1,0,0
+92376,San Bernardino,1,0,0
+92377,San Bernardino,1,0,0
+92378,San Bernardino,1,1,1
+92382,San Bernardino,1,1,1
+92384,Inyo,0,0,1
+92385,San Bernardino,1,1,1
+92386,San Bernardino,1,1,1
+92389,Inyo,0,0,1
+92391,San Bernardino,1,1,1
+92392,San Bernardino,0,0,1
+92394,San Bernardino,0,0,1
+92395,San Bernardino,0,0,1
+92397,San Bernardino,1,1,1
+92398,San Bernardino,0,0,1
+92399,San Bernardino,1,0,0
+92401,San Bernardino,0,0,1
+92404,San Bernardino,1,0,0
+92405,San Bernardino,1,0,0
+92407,San Bernardino,1,0,0
+92408,San Bernardino,1,0,0
+92410,San Bernardino,1,0,0
+92411,San Bernardino,1,0,0
+92501,Riverside,1,0,0
+92503,Riverside,1,0,0
+92504,Riverside,1,0,0
+92505,Riverside,1,0,0
+92506,Riverside,1,0,0
+92507,Riverside,1,0,0
+92508,Riverside,1,0,0
+92509,Riverside,0,0,1
+92518,Riverside,1,0,0
+92530,Riverside,1,0,0
+92532,Riverside,1,0,0
+92536,Riverside,1,1,1
+92539,Riverside,1,1,1
+92543,Riverside,1,0,0
+92544,Riverside,1,0,0
+92545,Riverside,1,0,0
+92548,Riverside,1,1,1
+92549,Riverside,1,1,1
+92551,Riverside,1,0,0
+92553,Riverside,1,0,0
+92555,Riverside,1,0,0
+92557,Riverside,1,0,0
+92561,Riverside,1,1,1
+92562,Riverside,1,0,0
+92563,Riverside,1,0,0
+92567,Riverside,1,0,0
+92570,Riverside,1,0,0
+92571,Riverside,1,0,0
+92582,Riverside,1,0,0
+92583,Riverside,1,0,0
+92584,Riverside,1,0,0
+92585,Riverside,1,0,0
+92586,Riverside,0,0,1
+92587,Riverside,1,0,0
+92590,Riverside,1,1,1
+92591,Riverside,1,0,0
+92592,Riverside,1,0,0
+92595,Riverside,1,0,0
+92596,Riverside,1,0,0
+92602,Orange,1,0,0
+92603,Orange,1,0,0
+92604,Orange,0,0,1
+92606,Orange,0,0,1
+92610,Orange,1,0,0
+92612,Orange,1,0,0
+92614,Orange,1,0,0
+92617,Orange,1,0,0
+92618,Orange,1,0,0
+92620,Orange,1,0,0
+92624,Orange,1,0,0
+92625,Orange,1,0,0
+92626,Orange,0,0,1
+92627,Orange,1,0,0
+92629,Orange,1,0,0
+92630,Orange,1,0,0
+92637,Orange,1,0,0
+92646,Orange,1,0,0
+92647,Orange,1,0,0
+92648,Orange,1,0,0
+92649,Orange,1,0,0
+92651,Orange,1,0,0
+92653,Orange,1,0,0
+92655,Orange,0,0,1
+92656,Orange,1,0,0
+92657,Orange,1,0,0
+92660,Orange,1,0,0
+92661,Orange,0,0,1
+92662,Orange,0,0,1
+92663,Orange,1,0,0
+92672,Orange,0,0,1
+92673,Orange,1,0,0
+92675,Orange,1,0,0
+92676,Orange,1,1,1
+92677,Orange,1,0,0
+92679,Orange,1,0,0
+92683,Orange,1,0,0
+92688,Orange,1,0,0
+92691,Orange,1,0,0
+92692,Orange,1,0,0
+92694,Orange,1,0,0
+92701,Orange,0,0,1
+92703,Orange,0,0,1
+92704,Orange,0,0,1
+92705,Orange,1,0,0
+92706,Orange,0,0,1
+92707,Orange,0,0,1
+92708,Orange,0,0,1
+92780,Orange,0,0,1
+92782,Orange,1,0,0
+92801,Orange,0,0,1
+92802,Orange,0,0,1
+92804,Orange,0,0,1
+92805,Orange,0,0,1
+92806,Orange,0,0,1
+92807,Orange,1,0,0
+92808,Orange,1,0,0
+92821,Orange,1,0,0
+92823,Orange,1,0,0
+92831,Orange,1,0,0
+92832,Orange,1,0,0
+92833,Orange,1,0,0
+92835,Orange,1,0,0
+92840,Orange,0,0,1
+92841,Orange,0,0,1
+92843,Orange,0,0,1
+92844,Orange,0,0,1
+92845,Orange,0,0,1
+92860,Riverside,1,0,0
+92861,Orange,1,0,0
+92865,Orange,0,0,1
+92866,Orange,0,0,1
+92867,Orange,1,0,0
+92868,Orange,0,0,1
+92869,Orange,1,0,0
+92870,Orange,1,0,0
+92879,Riverside,1,0,0
+92880,Riverside,1,0,0
+92881,Riverside,0,0,1
+92882,Riverside,1,0,0
+92883,Riverside,1,0,0
+92886,Orange,1,0,0
+92887,Orange,1,0,0
+93001,Ventura,1,1,1
+93003,Ventura,1,1,1
+93004,Ventura,1,1,1
+93010,Ventura,1,1,1
+93012,Ventura,1,1,1
+93013,Santa Barbara,1,0,0
+93015,Ventura,1,1,1
+93021,Ventura,1,1,1
+93022,Ventura,1,1,1
+93023,Ventura,1,1,1
+93030,Ventura,1,1,1
+93033,Ventura,1,1,1
+93035,Ventura,1,1,1
+93036,Ventura,1,1,1
+93040,Ventura,1,1,1
+93041,Ventura,1,1,1
+93060,Ventura,1,1,1
+93063,Ventura,1,1,1
+93065,Ventura,1,1,1
+93066,Ventura,1,1,1
+93067,Santa Barbara,0,0,1
+93101,Santa Barbara,1,0,0
+93103,Santa Barbara,1,0,0
+93105,Santa Barbara,1,0,0
+93108,Santa Barbara,1,1,1
+93109,Santa Barbara,1,0,0
+93110,Santa Barbara,1,0,0
+93111,Santa Barbara,1,0,0
+93117,Santa Barbara,1,0,0
+93201,Tulare,0,0,1
+93202,Kings,0,0,1
+93203,Kern,1,0,0
+93204,Kings,1,0,0
+93205,Kern,1,1,1
+93206,Kern,0,0,1
+93207,Tulare,1,1,1
+93208,Tulare,1,0,0
+93210,Fresno,1,0,0
+93212,Kings,0,0,1
+93215,Kern,0,0,1
+93218,Tulare,0,0,1
+93219,Tulare,0,0,1
+93221,Tulare,1,0,0
+93222,Kern,1,1,1
+93223,Tulare,0,0,1
+93224,Kern,1,1,1
+93225,Kern,1,1,1
+93226,Kern,1,1,1
+93230,Kings,0,0,1
+93234,Fresno,1,0,0
+93235,Tulare,0,0,1
+93238,Kern,1,1,1
+93239,Kings,1,0,0
+93240,Kern,1,1,1
+93241,Kern,0,0,1
+93242,Fresno,0,0,1
+93243,Kern,1,1,1
+93244,Tulare,1,0,0
+93245,Kings,0,0,1
+93247,Tulare,1,0,0
+93249,Kern,1,0,0
+93250,Kern,0,0,1
+93252,Kern,1,1,1
+93254,Santa Barbara,1,0,0
+93255,Kern,1,1,1
+93256,Tulare,0,0,1
+93257,Tulare,1,0,0
+93260,Tulare,1,1,1
+93262,Tulare,1,1,1
+93263,Kern,0,0,1
+93265,Tulare,1,1,1
+93266,Kings,0,0,1
+93267,Tulare,1,0,0
+93268,Kern,1,0,0
+93270,Tulare,1,0,0
+93271,Tulare,1,1,1
+93272,Tulare,0,0,1
+93274,Tulare,0,0,1
+93276,Kern,0,0,1
+93277,Tulare,0,0,1
+93280,Kern,0,0,1
+93283,Kern,1,1,1
+93285,Kern,1,1,1
+93286,Tulare,1,0,0
+93287,Kern,1,1,1
+93291,Tulare,0,0,1
+93292,Tulare,0,0,1
+93301,Kern,0,0,1
+93304,Kern,0,0,1
+93305,Kern,0,0,1
+93306,Kern,1,0,0
+93307,Kern,1,0,0
+93308,Kern,1,0,0
+93309,Kern,1,0,0
+93311,Kern,0,0,1
+93312,Kern,0,0,1
+93313,Kern,1,0,0
+93314,Kern,1,0,0
+93401,San Luis Obispo,1,1,1
+93402,San Luis Obispo,1,1,1
+93405,San Luis Obispo,1,1,1
+93420,San Luis Obispo,1,1,1
+93422,San Luis Obispo,1,1,1
+93424,San Luis Obispo,1,1,1
+93426,Monterey,1,1,1
+93427,Santa Barbara,1,0,0
+93428,San Luis Obispo,1,1,1
+93429,Santa Barbara,1,0,0
+93430,San Luis Obispo,1,1,1
+93432,San Luis Obispo,1,1,1
+93433,San Luis Obispo,1,1,1
+93434,Santa Barbara,1,0,0
+93435,San Luis Obispo,1,1,1
+93436,Santa Barbara,1,0,0
+93440,Santa Barbara,1,0,0
+93441,Santa Barbara,1,0,0
+93442,San Luis Obispo,1,1,1
+93444,San Luis Obispo,1,1,1
+93445,San Luis Obispo,1,1,1
+93446,San Luis Obispo,1,1,1
+93449,San Luis Obispo,1,1,1
+93450,Monterey,1,1,1
+93451,San Luis Obispo,1,1,1
+93452,San Luis Obispo,1,1,1
+93453,San Luis Obispo,1,1,1
+93454,Santa Barbara,1,0,0
+93455,Santa Barbara,1,0,0
+93458,Santa Barbara,1,0,0
+93460,Santa Barbara,1,0,0
+93461,San Luis Obispo,1,1,1
+93463,Santa Barbara,1,0,0
+93465,San Luis Obispo,1,1,1
+93501,Kern,1,0,0
+93505,Kern,0,0,1
+93510,Los Angeles,1,1,1
+93512,Mono,1,1,1
+93513,Inyo,1,0,0
+93514,Inyo,1,0,0
+93516,Kern,0,0,1
+93517,Mono,1,1,1
+93518,Kern,1,1,1
+93523,Kern,0,0,1
+93526,Inyo,1,0,0
+93527,Kern,1,0,0
+93528,Kern,0,0,1
+93529,Mono,1,1,1
+93531,Kern,1,1,1
+93532,Los Angeles,1,1,1
+93534,Los Angeles,0,0,1
+93535,Los Angeles,0,0,1
+93536,Los Angeles,1,0,0
+93541,Mono,1,1,1
+93543,Los Angeles,1,0,0
+93544,Los Angeles,1,1,1
+93545,Inyo,1,0,0
+93546,Mono,1,1,1
+93549,Inyo,1,1,1
+93550,Los Angeles,1,0,0
+93551,Los Angeles,1,0,0
+93552,Los Angeles,1,0,0
+93553,Los Angeles,1,1,1
+93554,Kern,0,0,1
+93555,Kern,0,0,1
+93558,San Bernardino,1,1,1
+93560,Kern,1,0,0
+93561,Kern,1,1,1
+93562,San Bernardino,0,0,1
+93563,Los Angeles,1,1,1
+93591,Los Angeles,0,0,1
+93601,Madera,1,1,1
+93602,Fresno,1,1,1
+93603,Tulare,1,1,1
+93604,Madera,1,1,1
+93606,Fresno,0,0,1
+93608,Fresno,0,0,1
+93609,Fresno,0,0,1
+93610,Madera,1,1,1
+93611,Fresno,0,0,1
+93612,Fresno,0,0,1
+93614,Madera,1,1,1
+93615,Tulare,1,0,0
+93616,Fresno,0,0,1
+93618,Tulare,0,0,1
+93619,Fresno,1,0,0
+93620,Merced,1,0,0
+93621,Fresno,1,1,1
+93622,Fresno,1,0,0
+93623,Mariposa,1,1,1
+93624,Fresno,0,0,1
+93625,Fresno,0,0,1
+93626,Fresno,1,0,0
+93628,Fresno,1,1,1
+93630,Fresno,0,0,1
+93631,Fresno,0,0,1
+93633,Fresno,1,1,1
+93634,Fresno,1,1,1
+93635,Merced,1,0,0
+93636,Madera,1,1,1
+93637,Madera,1,1,1
+93638,Madera,1,1,1
+93640,Fresno,1,0,0
+93641,Fresno,1,1,1
+93643,Madera,1,1,1
+93644,Madera,1,1,1
+93645,Madera,1,1,1
+93646,Fresno,1,0,0
+93647,Tulare,1,0,0
+93648,Fresno,0,0,1
+93650,Fresno,0,0,1
+93651,Fresno,1,1,1
+93653,Madera,1,1,1
+93654,Fresno,0,0,1
+93656,Fresno,0,0,1
+93657,Fresno,1,0,0
+93660,Fresno,0,0,1
+93662,Fresno,0,0,1
+93664,Fresno,1,1,1
+93666,Tulare,0,0,1
+93667,Fresno,1,1,1
+93668,Fresno,0,0,1
+93669,Madera,1,1,1
+93673,Tulare,0,0,1
+93675,Fresno,1,1,1
+93701,Fresno,0,0,1
+93702,Fresno,0,0,1
+93703,Fresno,0,0,1
+93704,Fresno,0,0,1
+93705,Fresno,0,0,1
+93706,Fresno,0,0,1
+93710,Fresno,0,0,1
+93711,Fresno,0,0,1
+93720,Fresno,0,0,1
+93721,Fresno,0,0,1
+93722,Fresno,0,0,1
+93723,Fresno,0,0,1
+93725,Fresno,0,0,1
+93726,Fresno,0,0,1
+93727,Fresno,0,0,1
+93728,Fresno,0,0,1
+93730,Fresno,0,0,1
+93737,Fresno,0,0,1
+93901,Monterey,1,1,1
+93905,Monterey,1,1,1
+93906,Monterey,1,1,1
+93907,Monterey,1,1,1
+93908,Monterey,1,1,1
+93920,Monterey,1,1,1
+93923,Monterey,1,1,1
+93924,Monterey,1,1,1
+93925,Monterey,1,1,1
+93926,Monterey,1,1,1
+93927,Monterey,1,1,1
+93930,Monterey,1,1,1
+93932,Monterey,1,1,1
+93933,Monterey,1,1,1
+93940,Monterey,1,1,1
+93950,Monterey,1,1,1
+93953,Monterey,1,1,1
+93954,Monterey,1,1,1
+93955,Monterey,1,1,1
+93960,Monterey,1,1,1
+93962,Monterey,1,1,1
+94002,San Mateo,1,0,0
+94005,San Mateo,0,0,1
+94010,San Mateo,1,0,0
+94014,San Mateo,0,0,1
+94015,San Mateo,0,0,1
+94018,San Mateo,0,0,1
+94019,San Mateo,1,0,0
+94020,San Mateo,1,1,1
+94021,San Mateo,1,1,1
+94022,Santa Clara,0,0,1
+94024,Santa Clara,0,0,1
+94025,San Mateo,0,0,1
+94027,San Mateo,0,0,1
+94028,San Mateo,1,0,0
+94030,San Mateo,1,0,0
+94037,San Mateo,1,0,0
+94038,San Mateo,1,0,0
+94040,Santa Clara,0,0,1
+94041,Santa Clara,0,0,1
+94043,Santa Clara,1,0,0
+94044,San Mateo,1,0,0
+94060,San Mateo,1,1,1
+94061,San Mateo,0,0,1
+94062,San Mateo,1,0,0
+94063,San Mateo,1,0,0
+94065,San Mateo,0,0,1
+94066,San Mateo,1,0,0
+94070,San Mateo,1,0,0
+94074,San Mateo,1,1,1
+94080,San Mateo,0,0,1
+94085,Santa Clara,0,0,1
+94086,Santa Clara,0,0,1
+94087,Santa Clara,0,0,1
+94089,Santa Clara,1,0,0
+94102,San Francisco,0,0,1
+94103,San Francisco,0,0,1
+94105,San Francisco,0,0,1
+94107,San Francisco,0,0,1
+94108,San Francisco,0,0,1
+94109,San Francisco,0,0,1
+94110,San Francisco,0,0,1
+94111,San Francisco,0,0,1
+94112,San Francisco,1,0,0
+94114,San Francisco,0,0,1
+94115,San Francisco,0,0,1
+94116,San Francisco,0,0,1
+94117,San Francisco,0,0,1
+94118,San Francisco,0,0,1
+94121,San Francisco,0,0,1
+94122,San Francisco,0,0,1
+94123,San Francisco,0,0,1
+94124,San Francisco,0,0,1
+94127,San Francisco,0,0,1
+94131,San Francisco,0,0,1
+94132,San Francisco,0,0,1
+94133,San Francisco,0,0,1
+94134,San Francisco,1,0,0
+94158,San Francisco,0,0,1
+94301,Santa Clara,0,0,1
+94303,San Mateo,1,0,0
+94304,Santa Clara,0,0,1
+94305,Santa Clara,1,0,0
+94306,Santa Clara,0,0,1
+94401,San Mateo,1,0,0
+94402,San Mateo,1,0,0
+94403,San Mateo,0,0,1
+94404,San Mateo,1,0,0
+94501,Alameda,1,0,0
+94502,Alameda,1,0,0
+94503,Napa,1,1,1
+94505,Contra Costa,0,0,1
+94506,Contra Costa,1,0,0
+94507,Contra Costa,1,0,0
+94508,Napa,1,1,1
+94509,Contra Costa,1,0,0
+94510,Solano,0,0,1
+94511,Contra Costa,0,0,1
+94513,Contra Costa,1,0,0
+94514,Contra Costa,1,0,0
+94515,Napa,1,1,1
+94517,Contra Costa,0,0,1
+94518,Contra Costa,1,0,0
+94519,Contra Costa,1,0,0
+94520,Contra Costa,1,0,0
+94521,Contra Costa,1,0,0
+94523,Contra Costa,1,0,0
+94525,Contra Costa,1,0,0
+94526,Contra Costa,1,0,0
+94528,Contra Costa,1,0,0
+94530,Contra Costa,1,0,0
+94531,Contra Costa,1,0,0
+94533,Solano,1,0,0
+94534,Solano,1,0,0
+94536,Alameda,1,0,0
+94538,Alameda,1,0,0
+94539,Alameda,1,0,0
+94541,Alameda,1,0,0
+94542,Alameda,1,0,0
+94544,Alameda,1,0,0
+94545,Alameda,1,0,0
+94546,Alameda,1,0,0
+94547,Contra Costa,1,0,0
+94548,Contra Costa,0,0,1
+94549,Contra Costa,1,0,0
+94550,Alameda,1,0,0
+94551,Alameda,1,0,0
+94552,Alameda,1,0,0
+94553,Contra Costa,1,0,0
+94555,Alameda,1,0,0
+94556,Contra Costa,1,0,0
+94558,Napa,1,1,1
+94559,Napa,1,1,1
+94560,Alameda,1,0,0
+94561,Contra Costa,0,0,1
+94563,Contra Costa,1,0,0
+94564,Contra Costa,0,0,1
+94565,Contra Costa,0,0,1
+94566,Alameda,0,0,1
+94567,Napa,1,1,1
+94568,Alameda,1,0,0
+94569,Contra Costa,1,0,0
+94571,Solano,0,0,1
+94572,Contra Costa,1,0,0
+94574,Napa,1,1,1
+94576,Napa,1,1,1
+94577,Alameda,1,0,0
+94578,Alameda,1,0,0
+94579,Alameda,1,0,0
+94580,Alameda,1,0,0
+94582,Contra Costa,1,0,0
+94583,Contra Costa,1,0,0
+94585,Solano,1,0,0
+94586,Alameda,1,0,0
+94587,Alameda,1,0,0
+94588,Alameda,1,0,0
+94589,Solano,1,0,0
+94590,Solano,0,0,1
+94591,Solano,0,0,1
+94592,Solano,1,0,0
+94595,Contra Costa,1,0,0
+94596,Contra Costa,1,0,0
+94597,Contra Costa,1,0,0
+94598,Contra Costa,1,0,0
+94599,Napa,1,1,1
+94601,Alameda,1,0,0
+94602,Alameda,1,0,0
+94603,Alameda,0,0,1
+94605,Alameda,1,0,0
+94606,Alameda,0,0,1
+94607,Alameda,0,0,1
+94608,Alameda,0,0,1
+94609,Alameda,0,0,1
+94610,Alameda,1,0,0
+94611,Alameda,1,0,0
+94612,Alameda,0,0,1
+94613,Alameda,1,0,0
+94618,Alameda,1,0,0
+94619,Alameda,0,0,1
+94621,Alameda,0,0,1
+94702,Alameda,0,0,1
+94703,Alameda,0,0,1
+94704,Alameda,0,0,1
+94705,Alameda,0,0,1
+94706,Alameda,0,0,1
+94707,Alameda,0,0,1
+94708,Alameda,0,0,1
+94709,Alameda,0,0,1
+94710,Alameda,0,0,1
+94720,Alameda,0,0,1
+94801,Contra Costa,0,0,1
+94803,Contra Costa,0,0,1
+94804,Contra Costa,0,0,1
+94805,Contra Costa,0,0,1
+94806,Contra Costa,0,0,1
+94901,Marin,1,1,1
+94903,Marin,1,1,1
+94904,Marin,1,1,1
+94920,Marin,1,1,1
+94922,Sonoma,0,0,1
+94923,Sonoma,0,0,1
+94924,Marin,1,1,1
+94925,Marin,1,1,1
+94928,Sonoma,0,0,1
+94929,Marin,1,1,1
+94930,Marin,1,1,1
+94931,Sonoma,0,0,1
+94933,Marin,1,1,1
+94937,Marin,1,1,1
+94938,Marin,1,1,1
+94939,Marin,1,1,1
+94940,Marin,1,1,1
+94941,Marin,1,1,1
+94945,Marin,1,1,1
+94946,Marin,1,1,1
+94947,Marin,1,1,1
+94949,Marin,1,1,1
+94951,Sonoma,0,0,1
+94952,Sonoma,0,0,1
+94954,Sonoma,0,0,1
+94956,Marin,1,1,1
+94957,Marin,1,1,1
+94960,Marin,1,1,1
+94963,Marin,1,1,1
+94965,Marin,1,1,1
+94970,Marin,1,1,1
+94971,Marin,1,1,1
+94972,Sonoma,0,0,1
+94973,Marin,1,1,1
+95002,Santa Clara,0,0,1
+95003,Santa Cruz,1,1,1
+95004,Monterey,1,1,1
+95005,Santa Cruz,1,1,1
+95006,Santa Cruz,1,1,1
+95007,Santa Cruz,1,1,1
+95008,Santa Clara,0,0,1
+95010,Santa Cruz,1,1,1
+95012,Monterey,1,1,1
+95013,Santa Clara,0,0,1
+95014,Santa Clara,0,0,1
+95017,Santa Cruz,1,1,1
+95018,Santa Cruz,1,1,1
+95019,Santa Cruz,1,1,1
+95020,Santa Clara,0,0,1
+95023,San Benito,0,0,1
+95030,Santa Clara,0,0,1
+95032,Santa Clara,0,0,1
+95033,Santa Cruz,1,1,1
+95035,Santa Clara,0,0,1
+95037,Santa Clara,0,0,1
+95039,Monterey,1,1,1
+95041,Santa Cruz,1,1,1
+95043,San Benito,1,1,1
+95045,San Benito,0,0,1
+95046,Santa Clara,0,0,1
+95050,Santa Clara,0,0,1
+95051,Santa Clara,0,0,1
+95054,Santa Clara,0,0,1
+95060,Santa Cruz,1,1,1
+95062,Santa Cruz,1,1,1
+95064,Santa Cruz,1,1,1
+95065,Santa Cruz,1,1,1
+95066,Santa Cruz,1,1,1
+95070,Santa Clara,0,0,1
+95073,Santa Cruz,1,1,1
+95075,San Benito,0,0,1
+95076,Santa Cruz,1,1,1
+95110,Santa Clara,0,0,1
+95111,Santa Clara,0,0,1
+95112,Santa Clara,0,0,1
+95116,Santa Clara,0,0,1
+95117,Santa Clara,0,0,1
+95118,Santa Clara,0,0,1
+95119,Santa Clara,0,0,1
+95120,Santa Clara,0,0,1
+95121,Santa Clara,0,0,1
+95122,Santa Clara,0,0,1
+95123,Santa Clara,0,0,1
+95124,Santa Clara,0,0,1
+95125,Santa Clara,0,0,1
+95126,Santa Clara,0,0,1
+95127,Santa Clara,0,0,1
+95128,Santa Clara,0,0,1
+95129,Santa Clara,0,0,1
+95130,Santa Clara,0,0,1
+95131,Santa Clara,0,0,1
+95132,Santa Clara,0,0,1
+95133,Santa Clara,0,0,1
+95134,Santa Clara,0,0,1
+95135,Santa Clara,0,0,1
+95136,Santa Clara,0,0,1
+95138,Santa Clara,0,0,1
+95139,Santa Clara,0,0,1
+95140,Santa Clara,0,0,1
+95148,Santa Clara,0,0,1
+95202,San Joaquin,0,0,1
+95203,San Joaquin,0,0,1
+95204,San Joaquin,0,0,1
+95205,San Joaquin,0,0,1
+95206,San Joaquin,0,0,1
+95207,San Joaquin,0,0,1
+95209,San Joaquin,0,0,1
+95210,San Joaquin,0,0,1
+95212,San Joaquin,0,0,1
+95215,San Joaquin,0,0,1
+95219,San Joaquin,0,0,1
+95220,San Joaquin,0,0,1
+95222,Calaveras,1,1,1
+95223,Calaveras,1,1,1
+95225,Calaveras,1,1,1
+95226,Calaveras,1,1,1
+95227,San Joaquin,0,0,1
+95228,Calaveras,1,1,1
+95230,San Joaquin,0,0,1
+95231,San Joaquin,0,0,1
+95232,Calaveras,1,1,1
+95236,San Joaquin,0,0,1
+95237,San Joaquin,0,0,1
+95240,San Joaquin,0,0,1
+95242,San Joaquin,0,0,1
+95245,Calaveras,1,1,1
+95246,Calaveras,1,1,1
+95247,Calaveras,1,1,1
+95249,Calaveras,1,1,1
+95251,Calaveras,1,1,1
+95252,Calaveras,1,1,1
+95253,San Joaquin,0,0,1
+95254,Calaveras,1,1,1
+95255,Calaveras,1,1,1
+95257,Calaveras,1,1,1
+95258,San Joaquin,0,0,1
+95301,Merced,0,0,1
+95303,Merced,0,0,1
+95304,San Joaquin,0,0,1
+95305,Tuolumne,1,1,1
+95306,Mariposa,1,1,1
+95307,Stanislaus,0,0,1
+95310,Tuolumne,1,1,1
+95311,Mariposa,1,1,1
+95313,Stanislaus,0,0,1
+95315,Merced,0,0,1
+95316,Stanislaus,0,0,1
+95317,Merced,0,0,1
+95318,Mariposa,1,1,1
+95319,Stanislaus,0,0,1
+95320,San Joaquin,0,0,1
+95321,Tuolumne,1,1,1
+95322,Merced,0,0,1
+95323,Stanislaus,0,0,1
+95324,Merced,0,0,1
+95326,Stanislaus,0,0,1
+95327,Tuolumne,1,1,1
+95328,Stanislaus,0,0,1
+95329,Tuolumne,1,1,1
+95330,San Joaquin,0,0,1
+95333,Merced,0,0,1
+95334,Merced,0,0,1
+95335,Tuolumne,1,1,1
+95336,San Joaquin,0,0,1
+95337,San Joaquin,0,0,1
+95338,Mariposa,1,1,1
+95340,Merced,0,0,1
+95341,Merced,0,0,1
+95345,Mariposa,1,1,1
+95346,Tuolumne,1,1,1
+95348,Merced,0,0,1
+95350,Stanislaus,0,0,1
+95351,Stanislaus,0,0,1
+95354,Stanislaus,0,0,1
+95355,Stanislaus,0,0,1
+95356,Stanislaus,0,0,1
+95357,Stanislaus,0,0,1
+95358,Stanislaus,0,0,1
+95360,Stanislaus,0,0,1
+95361,Stanislaus,0,0,1
+95363,Stanislaus,0,0,1
+95364,Alpine,1,1,1
+95365,Merced,0,0,1
+95366,San Joaquin,0,0,1
+95367,Stanislaus,0,0,1
+95368,Stanislaus,0,0,1
+95369,Merced,1,1,1
+95370,Tuolumne,1,1,1
+95372,Tuolumne,1,1,1
+95374,Merced,0,0,1
+95376,San Joaquin,0,0,1
+95377,San Joaquin,0,0,1
+95379,Tuolumne,1,1,1
+95380,Stanislaus,0,0,1
+95382,Stanislaus,0,0,1
+95383,Tuolumne,1,1,1
+95385,Stanislaus,0,0,1
+95386,Stanislaus,0,0,1
+95388,Merced,0,0,1
+95389,Mariposa,1,1,1
+95391,San Joaquin,0,0,1
+95401,Sonoma,0,0,1
+95403,Sonoma,0,0,1
+95404,Sonoma,0,0,1
+95405,Sonoma,0,0,1
+95407,Sonoma,0,0,1
+95409,Sonoma,0,0,1
+95410,Mendocino,1,1,1
+95412,Sonoma,1,1,1
+95415,Mendocino,1,1,1
+95417,Mendocino,1,1,1
+95419,Sonoma,0,0,1
+95420,Mendocino,1,1,1
+95421,Sonoma,0,0,1
+95422,Lake,1,1,1
+95423,Lake,1,1,1
+95425,Sonoma,0,0,1
+95426,Lake,1,1,1
+95427,Mendocino,1,1,1
+95428,Mendocino,1,1,1
+95429,Mendocino,1,1,1
+95432,Mendocino,1,1,1
+95436,Sonoma,0,0,1
+95437,Mendocino,1,1,1
+95439,Sonoma,0,0,1
+95441,Sonoma,1,1,1
+95442,Sonoma,0,0,1
+95443,Lake,1,1,1
+95444,Sonoma,0,0,1
+95445,Mendocino,1,1,1
+95446,Sonoma,0,0,1
+95448,Sonoma,0,0,1
+95449,Mendocino,1,1,1
+95450,Sonoma,1,1,1
+95451,Lake,1,1,1
+95452,Sonoma,0,0,1
+95453,Lake,1,1,1
+95454,Mendocino,1,1,1
+95456,Mendocino,1,1,1
+95457,Lake,1,1,1
+95458,Lake,1,1,1
+95459,Mendocino,1,1,1
+95460,Mendocino,1,1,1
+95461,Lake,1,1,1
+95462,Sonoma,0,0,1
+95463,Mendocino,1,1,1
+95464,Lake,1,1,1
+95465,Sonoma,0,0,1
+95466,Mendocino,1,1,1
+95467,Lake,1,1,1
+95468,Mendocino,1,1,1
+95469,Mendocino,1,1,1
+95470,Mendocino,1,1,1
+95471,Sonoma,0,0,1
+95472,Sonoma,0,0,1
+95476,Sonoma,0,0,1
+95482,Mendocino,1,1,1
+95485,Lake,1,1,1
+95488,Mendocino,1,1,1
+95490,Mendocino,1,1,1
+95492,Sonoma,0,0,1
+95493,Lake,1,1,1
+95494,Mendocino,1,1,1
+95497,Sonoma,0,0,1
+95501,Humboldt,1,1,1
+95503,Humboldt,1,1,1
+95511,Humboldt,1,1,1
+95514,Humboldt,1,1,1
+95519,Humboldt,1,1,1
+95521,Humboldt,1,1,1
+95524,Humboldt,1,1,1
+95525,Humboldt,1,1,1
+95526,Trinity,1,1,1
+95527,Trinity,1,1,1
+95528,Humboldt,1,1,1
+95531,Del Norte,1,1,1
+95536,Humboldt,1,1,1
+95540,Humboldt,1,1,1
+95542,Humboldt,1,1,1
+95543,Del Norte,1,1,1
+95546,Humboldt,1,1,1
+95547,Humboldt,1,1,1
+95548,Del Norte,1,1,1
+95549,Humboldt,1,1,1
+95550,Humboldt,1,1,1
+95551,Humboldt,1,1,1
+95552,Trinity,1,1,1
+95554,Humboldt,1,1,1
+95555,Humboldt,1,1,1
+95556,Humboldt,1,1,1
+95558,Humboldt,1,1,1
+95560,Humboldt,1,1,1
+95562,Humboldt,1,1,1
+95563,Trinity,1,1,1
+95564,Humboldt,1,1,1
+95565,Humboldt,1,1,1
+95567,Del Norte,1,1,1
+95568,Siskiyou,1,1,1
+95569,Humboldt,1,1,1
+95570,Humboldt,1,1,1
+95573,Humboldt,1,1,1
+95585,Mendocino,1,1,1
+95587,Mendocino,1,1,1
+95589,Humboldt,1,1,1
+95595,Trinity,1,1,1
+95601,Amador,1,1,1
+95602,Placer,1,1,1
+95603,Placer,1,1,1
+95605,Yolo,0,0,1
+95606,Yolo,0,0,1
+95607,Yolo,1,1,1
+95608,Sacramento,0,0,1
+95610,Sacramento,0,0,1
+95612,Yolo,0,0,1
+95614,El Dorado,1,1,1
+95615,Sacramento,0,0,1
+95616,Yolo,0,0,1
+95618,Yolo,0,0,1
+95619,El Dorado,1,1,1
+95620,Solano,0,0,1
+95621,Sacramento,0,0,1
+95623,El Dorado,1,1,1
+95624,Sacramento,0,0,1
+95626,Sacramento,0,0,1
+95627,Yolo,0,0,1
+95628,Sacramento,0,0,1
+95629,Amador,1,1,1
+95630,Sacramento,0,0,1
+95631,Placer,1,1,1
+95632,Sacramento,0,0,1
+95633,El Dorado,1,1,1
+95634,El Dorado,1,1,1
+95635,El Dorado,1,1,1
+95636,El Dorado,1,1,1
+95637,Yolo,0,0,1
+95638,Sacramento,0,0,1
+95640,Amador,1,1,1
+95641,Sacramento,0,0,1
+95642,Amador,1,1,1
+95645,Sutter,0,0,1
+95648,Placer,1,1,1
+95650,Placer,1,1,1
+95651,El Dorado,1,1,1
+95653,Yolo,0,0,1
+95655,Sacramento,0,0,1
+95658,Placer,1,1,1
+95660,Sacramento,0,0,1
+95661,Placer,1,1,1
+95662,Sacramento,0,0,1
+95663,Placer,1,1,1
+95664,El Dorado,1,1,1
+95665,Amador,1,1,1
+95666,Amador,1,1,1
+95667,El Dorado,1,1,1
+95668,Sutter,0,0,1
+95669,Amador,1,1,1
+95670,Sacramento,0,0,1
+95672,El Dorado,1,1,1
+95673,Sacramento,0,0,1
+95674,Sutter,0,0,1
+95677,Placer,1,1,1
+95678,Placer,1,1,1
+95679,Yolo,1,1,1
+95681,Placer,1,1,1
+95682,El Dorado,1,1,1
+95683,Sacramento,0,0,1
+95684,El Dorado,1,1,1
+95685,Amador,1,1,1
+95686,San Joaquin,0,0,1
+95687,Solano,0,0,1
+95688,Solano,0,0,1
+95689,Amador,1,1,1
+95690,Sacramento,0,0,1
+95691,Yolo,0,0,1
+95692,Yuba,0,0,1
+95693,Sacramento,0,0,1
+95694,Yolo,0,0,1
+95695,Yolo,0,0,1
+95698,Yolo,0,0,1
+95699,Amador,1,1,1
+95701,Placer,1,1,1
+95703,Placer,1,1,1
+95709,El Dorado,1,1,1
+95713,Placer,1,1,1
+95714,Placer,1,1,1
+95715,Placer,1,1,1
+95717,Placer,1,1,1
+95720,El Dorado,1,1,1
+95721,El Dorado,1,1,1
+95722,Placer,1,1,1
+95724,Placer,1,1,1
+95726,El Dorado,1,1,1
+95728,Nevada,1,1,1
+95735,El Dorado,1,1,1
+95736,Placer,1,1,1
+95742,Sacramento,0,0,1
+95746,Placer,1,1,1
+95747,Placer,1,1,1
+95757,Sacramento,0,0,1
+95758,Sacramento,0,0,1
+95762,El Dorado,1,1,1
+95765,Placer,1,1,1
+95776,Yolo,0,0,1
+95811,Sacramento,0,0,1
+95814,Sacramento,0,1,0
+95815,Sacramento,0,0,1
+95816,Sacramento,0,0,1
+95817,Sacramento,0,0,1
+95818,Sacramento,0,0,1
+95819,Sacramento,0,0,1
+95820,Sacramento,0,0,1
+95821,Sacramento,0,0,1
+95822,Sacramento,0,0,1
+95823,Sacramento,0,0,1
+95824,Sacramento,0,0,1
+95825,Sacramento,0,0,1
+95826,Sacramento,0,0,1
+95827,Sacramento,0,0,1
+95828,Sacramento,0,0,1
+95829,Sacramento,0,0,1
+95830,Sacramento,0,0,1
+95831,Sacramento,0,0,1
+95832,Sacramento,0,0,1
+95833,Sacramento,0,0,1
+95834,Sacramento,0,0,1
+95835,Sacramento,0,0,1
+95837,Sacramento,0,0,1
+95838,Sacramento,0,0,1
+95841,Sacramento,0,0,1
+95842,Sacramento,0,0,1
+95843,Sacramento,0,0,1
+95864,Sacramento,0,0,1
+95901,Yuba,0,0,1
+95910,Sierra,1,1,1
+95912,Colusa,0,0,1
+95914,Butte,1,1,1
+95915,Plumas,1,1,1
+95916,Butte,1,1,1
+95917,Butte,1,1,1
+95918,Yuba,0,0,1
+95919,Yuba,1,1,1
+95922,Yuba,1,1,1
+95923,Plumas,1,1,1
+95925,Yuba,1,1,1
+95926,Butte,1,1,1
+95928,Butte,1,1,1
+95930,Butte,1,1,1
+95932,Colusa,0,0,1
+95934,Plumas,1,1,1
+95935,Yuba,1,1,1
+95936,Sierra,1,1,1
+95937,Yolo,1,1,1
+95938,Butte,1,1,1
+95939,Glenn,1,1,1
+95941,Butte,1,1,1
+95942,Butte,1,1,1
+95944,Sierra,1,1,1
+95945,Nevada,1,1,1
+95946,Nevada,1,1,1
+95947,Plumas,1,1,1
+95948,Butte,1,1,1
+95949,Nevada,1,1,1
+95951,Glenn,0,0,1
+95953,Sutter,0,0,1
+95954,Butte,1,1,1
+95956,Plumas,1,1,1
+95957,Sutter,0,0,1
+95959,Nevada,1,1,1
+95960,Nevada,1,1,1
+95961,Yuba,0,0,1
+95962,Yuba,1,1,1
+95963,Glenn,0,0,1
+95965,Butte,1,1,1
+95966,Butte,1,1,1
+95968,Butte,1,1,1
+95969,Butte,1,1,1
+95970,Colusa,0,0,1
+95971,Plumas,1,1,1
+95972,Yuba,1,1,1
+95973,Butte,1,1,1
+95975,Nevada,1,1,1
+95977,Nevada,1,1,1
+95979,Colusa,1,1,1
+95981,Yuba,0,0,1
+95982,Sutter,0,0,1
+95983,Plumas,1,1,1
+95984,Plumas,1,1,1
+95987,Colusa,0,0,1
+95988,Glenn,0,0,1
+95991,Sutter,0,0,1
+95993,Sutter,0,0,1
+96001,Shasta,1,1,1
+96002,Shasta,1,1,1
+96003,Shasta,1,1,1
+96006,Modoc,1,1,1
+96007,Shasta,1,1,1
+96008,Shasta,1,1,1
+96009,Lassen,1,1,1
+96010,Trinity,1,1,1
+96013,Shasta,1,1,1
+96014,Siskiyou,1,1,1
+96015,Modoc,1,1,1
+96016,Shasta,1,1,1
+96017,Shasta,1,1,1
+96019,Shasta,1,1,1
+96020,Plumas,1,1,1
+96021,Tehama,1,1,1
+96022,Tehama,1,1,1
+96023,Siskiyou,1,1,1
+96024,Trinity,1,1,1
+96025,Siskiyou,1,1,1
+96027,Siskiyou,1,1,1
+96028,Shasta,1,1,1
+96031,Siskiyou,1,1,1
+96032,Siskiyou,1,1,1
+96033,Shasta,1,1,1
+96034,Siskiyou,1,1,1
+96035,Tehama,1,1,1
+96038,Siskiyou,1,1,1
+96039,Siskiyou,1,1,1
+96040,Shasta,1,1,1
+96041,Trinity,1,1,1
+96044,Siskiyou,1,1,1
+96046,Trinity,1,1,1
+96047,Shasta,1,1,1
+96048,Trinity,1,1,1
+96050,Siskiyou,1,1,1
+96051,Shasta,1,1,1
+96052,Trinity,1,1,1
+96054,Modoc,1,1,1
+96055,Tehama,1,1,1
+96056,Lassen,1,1,1
+96057,Siskiyou,1,1,1
+96058,Siskiyou,1,1,1
+96059,Tehama,1,1,1
+96061,Tehama,1,1,1
+96062,Shasta,1,1,1
+96063,Plumas,1,1,1
+96064,Siskiyou,1,1,1
+96065,Shasta,1,1,1
+96067,Siskiyou,1,1,1
+96069,Shasta,1,1,1
+96071,Shasta,1,1,1
+96073,Shasta,1,1,1
+96075,Tehama,1,1,1
+96076,Shasta,1,1,1
+96080,Tehama,1,1,1
+96085,Siskiyou,1,1,1
+96086,Siskiyou,1,1,1
+96087,Shasta,1,1,1
+96088,Shasta,1,1,1
+96089,Shasta,1,1,1
+96091,Trinity,1,1,1
+96093,Trinity,1,1,1
+96094,Siskiyou,1,1,1
+96096,Shasta,1,1,1
+96097,Siskiyou,1,1,1
+96101,Modoc,1,1,1
+96103,Plumas,1,1,1
+96104,Modoc,1,1,1
+96105,Plumas,1,1,1
+96106,Plumas,1,1,1
+96107,Mono,1,1,1
+96108,Modoc,1,1,1
+96109,Lassen,1,1,1
+96110,Modoc,1,1,1
+96111,Nevada,1,1,1
+96112,Modoc,1,1,1
+96113,Lassen,1,1,1
+96114,Lassen,1,1,1
+96115,Modoc,1,1,1
+96116,Modoc,1,1,1
+96117,Lassen,1,1,1
+96118,Sierra,1,1,1
+96119,Lassen,1,1,1
+96120,Alpine,1,1,1
+96121,Lassen,1,1,1
+96122,Plumas,1,1,1
+96124,Sierra,1,1,1
+96125,Sierra,1,1,1
+96126,Sierra,1,1,1
+96128,Lassen,1,1,1
+96129,Plumas,1,1,1
+96130,Lassen,1,1,1
+96132,Lassen,1,1,1
+96133,Mono,1,1,1
+96134,Siskiyou,1,1,1
+96136,Lassen,1,1,1
+96137,Plumas,1,1,1
+96140,Placer,1,1,1
+96141,Placer,1,1,1
+96142,El Dorado,1,1,1
+96143,Placer,1,1,1
+96145,Placer,1,1,1
+96146,Placer,1,1,1
+96148,Placer,1,1,1
+96150,El Dorado,1,1,1
+96161,Nevada,1,1,1
+97635,Lake,0,0,1

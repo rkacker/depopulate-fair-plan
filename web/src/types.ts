@@ -82,3 +82,34 @@ export interface CountyMarketShareRow {
   years: number[];
 }
 
+
+// Distressed-flag divergence: the FAIR Plan's own distressed-area marker vs
+// CDI's official distressed-ZIP list, per reconciled ZIP.
+export interface DistressedMatrix {
+  bothFlagged: number; // FAIR flags + CDI lists
+  neither: number; // agree: not distressed
+  fairOnly: number; // FAIR flags, CDI list misses — the divergence
+  cdiOnly: number; // CDI lists, FAIR data doesn't flag
+}
+
+export interface DistressedZipRow {
+  zip: string;
+  county: string;
+  policies: number | null; // latest FY policy count
+  growthPct: number | null; // first FY → latest FY change, whole percent
+  series: number[]; // FY sparkline values
+}
+
+export interface DistressedData {
+  matrix: DistressedMatrix;
+  // ZIPs flagged by FAIR Plan data but absent from CDI's list,
+  // sorted by 5-year growth descending.
+  fairOnlyRows: DistressedZipRow[];
+}
+
+// Build-time slice serialized into the homepage island; the full row list
+// lazy-loads on the client only when the reader expands it.
+export interface DistressedSummary {
+  matrix: DistressedMatrix;
+  previewRows: DistressedZipRow[];
+}
