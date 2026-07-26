@@ -32,6 +32,42 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 
 ## Now
 
+- [ ] **SB 1301 data-needs memo (Sen. Allen)** · `Depth` · M · I9 C8 E7 = **504**
+  One-page memo for Sen. Allen's office: the concrete data SB 1301 (nonrenewal
+  protections) needs to be auditable, anchored in `/analysis/depopulation-promise`
+  findings. Bulleted asks:
+  - Codify the residential new/renew/nonrenew series (state + county + ZIP) on a
+    fixed cadence, machine-readable — the series stops at CY2023, before the
+    nonrenewal wave the bill responds to.
+  - Aggregated nonrenewal reason-code reporting (roof age, prior claim, wildfire
+    model score) so the prohibited-reasons provisions can be monitored.
+  - Require CDI to re-run the § 2644.4.8 undermarketed-ZIP test against current
+    enrollment on a defined cadence: our recomputation finds 90 qualifying ZIPs
+    missing from the 2025 list and 186 listed ZIPs that no longer qualify.
+  - Anchor stat: of 574 designated ZIPs, 534 grew since the Sept 2023 deal.
+  Source material: `notes/legislative-data-note.md` + the live analysis page.
+  DoD: memo in `notes/`, reviewed by Rishi, ready to send.
+
+- [ ] **AB 69 + AB 1680 combined data-needs memo (Asm. Calderon)** · `Depth` · M · I9 C8 E7 = **504**
+  One-page combined memo for Asm. Calderon's office (author of both). Bulleted asks:
+  - AB 69 clearinghouse reporting at county + ZIP grain (not one statewide number),
+    published as CSV with a data dictionary.
+  - Net flows: policies leaving the FAIR Plan alongside policies entering, same
+    period — gross take-out alone can show "success" while the Plan grows.
+  - 12-month retention follow-up on taken-out policies.
+  - Begin aggregate reporting the first quarter after enactment (May 2027 start
+    leaves a two-year measurement blackout).
+  - AB 1680: make the quarterly county/ZIP policy+premium+exposure releases a
+    statutory duty with a *consistent* distressed-area flag — the FAIR Plan's own
+    releases flipped between a ~1,009-ZIP set and the official 663-ZIP list across
+    2025 quarters (documented on the analysis page).
+  - AB 1680: quarterly TIV vs. surplus/reinsurance + assessment disclosure; average
+    premium per policy by county (~12× spread, $621–$7,234).
+  - Anchor stat: same named-zones scorecard; depopulation is unmeasured and, where
+    measurable, absent.
+  Source material: `notes/legislative-data-note.md` + the live analysis page.
+  DoD: memo in `notes/`, reviewed by Rishi, ready to send.
+
 - [ ] **Phase-1 design spec + wireframes** · `Viz` · L · I8 C9 E7 = **504**
   Section-by-section spec for the home advocacy narrative, summary-panel system,
   story arc, and a `/data` charter (what lives there, what stays). *Gates the remaining
@@ -91,10 +127,19 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 - [ ] `Pipeline` — Remove dead `site/build.py` (legacy static generator superseded by `web/`).
 - [ ] `Pipeline` — Drop `california_city_data.csv` from `config/export_contract.json` + `build_exports()` — the city view is retired, so the export is produced but unused (and not synced to the site).
 - [ ] `Pipeline` — Retire `site_stats.json.stats_cards` from the export. `CrisisStats` no longer renders it after the Trajectory merge; the field stays in the export but is unread. Thin the export and update `build_exports()`.
-- [ ] `Depth` — **Blocked:** "FAIR share of total market" *by ZIP*. CDI publishes total-market PIF only at the county level (`cdi_county_market_share.csv`); no ZIP-level denominator exists, so a true ZIP market-share table can't be built without fabricating one. Needs CDI ZIP-level market data (out of v1 scope). The county FAIR-share tab covers this dimension today.
+- [ ] `Depth` — **Unblocked 2026-07:** "FAIR share of total market" *by ZIP*. The CDI ZIP-level voluntary-market xlsx (2020–2023) now parses into `cdi/zip_yearly.csv`, giving a ZIP denominator through 2023 (used for the § 2644.4.8 penetration recomputation). A ZIP market-share table is now buildable with a "denominator as of 2023" caveat; current-year denominators still wait on the CPRA response.
 
 ## Done (rolling log)
 
+- [x] 2026-07 — **Ship `/analysis/depopulation-promise`** — long-form analysis citing/extending
+  the NYT Nov 2025 investigation: named-zones depopulation scorecard (534 of 574 designated
+  ZIPs grew since the Sept 2023 deal), § 2644.4.8 fire-prong recomputation (478 qualify, 90
+  missing from the official list, 186 stale), FAIR "Is Distressed Area" column as disclosed
+  corroboration. Home page gets a slim callout (matrix section cut in review).
+- [x] 2026-07 — Pipeline: CAL FIRE FHSZ ZIP overlap table (`config/zip_fire_hazard.csv` +
+  generator script); CDI ZIP voluntary xlsx parser (`cdi/zip_yearly.csv`, 2020–2023);
+  reconciliation export gains `fhsz_high_pct` / `penetration_pct` / `meets_criteria`.
+- [x] 2026-07 — CI: bump all actions to current majors (Node 20 runner deprecation).
 - [x] 2026-05 — Remove city-level view; add build-time (SSR) data loading.
 - [x] 2026-05 — Add `@astrojs/check` for `astro check` typecheck.
 - [x] 2026-05 — Fix `?view=zip` loading flash; empty-`initialRows` fetch suppression; numeric year sort.
