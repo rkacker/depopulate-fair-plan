@@ -13,7 +13,9 @@ import zipHistoryCsv from "../../public/data/california_zip_history.csv?raw";
 import distressedReconCsv from "../../public/data/distressed_zip_reconciliation.csv?raw";
 import {
   buildDistressedData,
+  buildPromiseStats,
   DISTRESSED_PREVIEW_COUNT,
+  type PromiseStats,
   type RawReconciliationRow,
 } from "@/lib/distressed";
 import type {
@@ -242,4 +244,12 @@ export function loadDistressedSummaryServer(): DistressedSummary {
     loadZipHistoryServer(),
   );
   return { matrix, previewRows: fairOnlyRows.slice(0, DISTRESSED_PREVIEW_COUNT) };
+}
+
+// Aggregates for the /analysis/depopulation-promise article page.
+export function loadPromiseStatsServer(): PromiseStats {
+  return buildPromiseStats(
+    parseCsv<RawReconciliationRow>(distressedReconCsv),
+    loadZipHistoryServer(),
+  );
 }

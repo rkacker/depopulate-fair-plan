@@ -151,6 +151,28 @@ export function DistressedDivergence({ summary = null }: DistressedDivergencePro
           </div>
         </div>
 
+        {/* Handoff to the long-form analysis page. */}
+        <div className="mx-auto mt-10 max-w-3xl">
+          <div className="rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-6">
+            <p className="mb-2 font-semibold text-patriot-red">
+              The story behind this gap
+            </p>
+            <p className="text-gray-700">
+              California's 2023 deal with insurers promised to shrink the FAIR
+              Plan using this very list of distressed areas. Our full analysis
+              — building on the New York Times' investigation with the state's
+              own data — shows the Plan doubled instead, and why the map is
+              part of the problem.{" "}
+              <a
+                href="/analysis/depopulation-promise"
+                className="font-semibold underline"
+              >
+                Read: The Depopulation Promise →
+              </a>
+            </p>
+          </div>
+        </div>
+
         {/* Methodology disclosure — this is an accountability claim, so the
             flag derivation must be explicit and heavier than other sections. */}
         <div className="mx-auto mt-6 max-w-3xl text-xs leading-relaxed text-gray-500">
