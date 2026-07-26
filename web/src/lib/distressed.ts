@@ -19,16 +19,16 @@ export const MIN_GROWTH_BASE = 50;
 export const FY_FIRST = 2021;
 export const FY_LAST = 2025;
 
-// Rows serialized into the homepage HTML; the full list lazy-loads on intent
-// per the site's performance budget.
-export const DISTRESSED_PREVIEW_COUNT = 10;
-
 export interface RawReconciliationRow {
   zip?: string;
   county?: string;
   fair_plan_flag?: string;
   cdi_flag?: string;
   fhsz_high_pct?: string; // % of ZIP land area in CAL FIRE High/Very High zones
+  total_policies_2023?: string; // CDI voluntary (new+renewed) 2023 + FAIR FY2023
+  fair_policies_current?: string; // FAIR policies, latest quarterly release
+  penetration_pct?: string; // fair_policies_current ÷ total_policies_2023
+  meets_criteria?: string; // §2644.4.8 fire prong: penetration ≥15% + FHSZ overlap
 }
 
 export function buildDistressedData(
@@ -104,6 +104,8 @@ export interface PromiseStats {
   unlisted: DealGroupGrowth; // everything not on CDI's list
   fireDesignated: FireShareDist; // CDI-designated ZIPs vs fire hazard
   fireMissing: FireShareDist; // the FAIR-only (unflagged) ZIPs vs fire hazard
+  scorecard: DesignatedScorecard; // per-ZIP depopulation outcome in named zones
+  criteria: CriteriaCounts; // §2644.4.8 fire-prong recomputation
 }
 
 function fireShareDist(pcts: number[]): FireShareDist {
@@ -130,6 +132,13 @@ export function buildPromiseStats(
     unlisted: { deal: 0, last: 0 },
   };
   const firePcts = { designated: [] as number[], missing: [] as number[] };
+  const scorecard: DesignatedScorecard = { total: 0, grew: 0, flat: 0, declined: 0 };
+  const criteria: CriteriaCounts = {
+    scoreable: 0,
+    qualify: 0,
+    missedByCriteria: 0,
+    listedNotQualifying: 0,
+  };
 
   for (const r of reconRows) {
     if (!r.zip) continue;
@@ -143,6 +152,23 @@ export function buildPromiseStats(
       const bucket = cdi ? sums.designated : sums.unlisted;
       bucket.deal += deal;
       bucket.last += last;
+      if (cdi) {
+        scorecard.total += 1;
+        if (last > deal) scorecard.grew += 1;
+        else if (last < deal) scorecard.declined += 1;
+        else scorecard.flat += 1;
+      }
+    }
+
+    if (r.meets_criteria === "0" || r.meets_criteria === "1") {
+      criteria.scoreable += 1;
+      const meets = r.meets_criteria === "1";
+      if (meets) {
+        criteria.qualify += 1;
+        if (!cdi) criteria.missedByCriteria += 1;
+      } else if (cdi) {
+        criteria.listedNotQualifying += 1;
+      }
     }
 
     const firePct = r.fhsz_high_pct === undefined || r.fhsz_high_pct === ""
@@ -166,5 +192,21 @@ export function buildPromiseStats(
     unlisted: growth(sums.unlisted),
     fireDesignated: fireShareDist(firePcts.designated),
     fireMissing: fireShareDist(firePcts.missing),
+    scorecard,
+    criteria,
   };
+}
+
+export interface DesignatedScorecard {
+  total: number; // designated ZIPs with FY data at both endpoints
+  grew: number;
+  flat: number;
+  declined: number;
+}
+
+export interface CriteriaCounts {
+  scoreable: number; // ZIPs with penetration + fire inputs
+  qualify: number; // meet the §2644.4.8 fire prong today
+  missedByCriteria: number; // qualify but absent from the official list
+  listedNotQualifying: number; // on the list, don't meet the fire prong now
 }

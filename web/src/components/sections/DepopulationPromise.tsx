@@ -1,14 +1,18 @@
 import type { StatewideHistoryRow } from "@/lib/loadData.server";
 import type { PromiseStats } from "@/lib/distressed";
-import { DEAL_FY, FY_LAST, MIN_GROWTH_BASE } from "@/lib/distressed";
+import { DEAL_FY, FY_LAST } from "@/lib/distressed";
 import { fmtPolicies } from "@/lib/historyFormat";
 
 // Static long-form article: "The Depopulation Promise". Rendered entirely at
 // build time (no client directive — zero JS shipped). Cites and extends the
 // NYT's Nov 2025 investigation of the Sept 2023 insurer deal with this
-// project's own datasets.
+// project's own datasets. Primary claim: no depopulation happened in the
+// very ZIP codes the state named. Secondary: the list undercounts by the
+// state's own criteria. Punchline: designated or not, nothing depopulated.
 const NYT_URL =
   "https://www.nytimes.com/2025/11/01/us/los-angeles-california-fire-insurance-regulations.html";
+const CDI_LIST_URL =
+  "https://www.insurance.ca.gov/01-consumers/180-climate-change/upload/catastrophe-modeling-and-ratemaking-insurer-commitments-to-increase-writing-of-policies-in-high-risk-wildfire-areas-list-of-distressed-counties-and-undermarketed-zip-codes-residential-property-insurance-commitments.pdf";
 const DEAL_DATE = "2023-09-30"; // FY close nearest the Sept 21, 2023 announcement
 
 interface DepopulationPromiseProps {
@@ -22,12 +26,11 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
     .sort((a, b) => a.coverage_end.localeCompare(b.coverage_end));
   const deal = points.find((r) => r.coverage_end === DEAL_DATE) ?? null;
   const latest = points[points.length - 1] ?? null;
-  const sinceDealPct =
-    deal?.policy_count && latest?.policy_count
-      ? Math.round(((latest.policy_count - deal.policy_count) / deal.policy_count) * 100)
-      : null;
 
-  const m = stats.matrix;
+  const { scorecard, criteria, matrix } = stats;
+  const grewPct = scorecard.total
+    ? Math.round((100 * scorecard.grew) / scorecard.total)
+    : 0;
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
@@ -38,10 +41,11 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
         The Depopulation Promise
       </h1>
       <p className="mb-2 text-xl leading-relaxed text-gray-600">
-        California's 2023 deal with insurers promised to shrink the FAIR Plan
-        and bring coverage back to "distressed" areas. The state's own data
-        shows the opposite happened — and that the distressed-area map at the
-        center of the deal fails in both directions.
+        California's 2023 deal with insurers promised to move homeowners off
+        the FAIR Plan, starting with a named list of distressed ZIP codes. In{" "}
+        {grewPct}% of those very ZIP codes, FAIR Plan enrollment has grown
+        since the deal. Distressed or not, listed or not — nothing has
+        depopulated.
       </p>
       <p className="mb-10 text-sm text-gray-500">
         By depopulatefairplan.com · Data through{" "}
@@ -57,35 +61,69 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
         In September 2023, facing insurer walkouts, the Newsom administration
         and Insurance Commissioner Ricardo Lara struck what was billed as a
         historic bargain: insurers could charge higher, catastrophe-model-based
-        rates, and in exchange they would have to write policies in
-        "distressed" areas at no less than 85 percent of their statewide market
-        share. The deal's stated goal was to move homeowners <em>off</em> the
-        FAIR Plan — to depopulate it.
-      </p>
-      <p className="mb-4 leading-relaxed text-gray-700">
-        A{" "}
+        rates, and in exchange they would have to write policies in distressed
+        areas at no less than 85 percent of their statewide market share. The
+        instrument of that promise is a{" "}
+        <a href={CDI_LIST_URL} className="underline" rel="noopener">
+          published list
+        </a>{" "}
+        of distressed counties and undermarketed ZIP codes — the places the
+        deal was supposed to rescue. A{" "}
         <a href={NYT_URL} className="underline" rel="noopener">
           New York Times investigation (Nov. 1, 2025)
         </a>{" "}
-        found that quietly negotiated loopholes all but eliminated that
-        guarantee: the "distressed" designations sprawl far beyond the state's
-        actual fire-hazard zones, letting insurers meet their targets by
-        writing policies on the safest blocks of nominally distressed ZIP
-        codes; offramps let companies qualify for higher rates anyway; and a
-        wave of pre-regulation nonrenewals was grandfathered in. The Times
-        counted FAIR Plan policies nearly doubling from 320,581 to 625,033 by
-        fall 2025.
-      </p>
-      <p className="mb-4 leading-relaxed text-gray-700">
-        Our datasets — built from the FAIR Plan's and the Department of
-        Insurance's own published data — let us extend that account past the
-        Times' publication date, and test the deal's central instrument: the
-        distressed-area list itself.
+        documented the loopholes insurers negotiated around that commitment.
+        Here we ask the outcome question: in the ZIP codes the state itself
+        named, did anyone actually leave the FAIR Plan?
       </p>
 
-      {/* ——— Finding 1: still doubling ——— */}
+      {/* ——— PRIMARY: the named zones ——— */}
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
-        1. The FAIR Plan has kept growing since the Times published
+        1. In the named ZIP codes, depopulation never started
+      </h2>
+      <div className="mb-4 grid grid-cols-3 gap-3">
+        <div className="rounded-lg border-2 border-patriot-red bg-red-50 p-4 text-center">
+          <div className="text-3xl font-bold tabular-nums text-patriot-red">
+            {scorecard.grew}
+          </div>
+          <div className="mt-1 text-xs font-semibold text-patriot-red">grew</div>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-center">
+          <div className="text-3xl font-bold tabular-nums text-gray-400">
+            {scorecard.flat}
+          </div>
+          <div className="mt-1 text-xs text-gray-500">flat</div>
+        </div>
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 text-center">
+          <div className="text-3xl font-bold tabular-nums text-gray-400">
+            {scorecard.declined}
+          </div>
+          <div className="mt-1 text-xs text-gray-500">declined</div>
+        </div>
+      </div>
+      <p className="mb-4 leading-relaxed text-gray-700">
+        Of the {scorecard.total} state-designated distressed ZIP codes that
+        appear in the FAIR Plan's reporting, <strong>{scorecard.grew} had
+        more FAIR Plan policies in FY{FY_LAST} than at the deal</strong> (FY
+        {DEAL_FY}); {scorecard.flat} were flat; {scorecard.declined} declined.
+        In aggregate, enrollment in the named zones rose{" "}
+        <strong>+{stats.designated.growthPct}%</strong> (
+        {fmtPolicies(stats.designated.fyDeal)} →{" "}
+        {fmtPolicies(stats.designated.fyLast)}). And the handful of declines
+        are not success stories: the largest is a Shasta County burn-area ZIP
+        that fell to zero — homes lost, not homes returned to the private
+        market.
+      </p>
+      <p className="mb-4 leading-relaxed text-gray-700">
+        This is the deal's own scoreboard. The 85-percent commitment names
+        these ZIP codes; the FAIR Plan's quarterly releases count policies in
+        them. Two years on, the count went up almost everywhere the promise
+        applies.
+      </p>
+
+      {/* ——— Statewide context ——— */}
+      <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
+        2. Statewide, the Plan has more than doubled since the deal
       </h2>
       {deal && latest && (
         <div className="mb-4 rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-5">
@@ -94,99 +132,62 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
               {fmtPolicies(deal.policy_count)} → {fmtPolicies(latest.policy_count)}
             </span>
             <br />
-            residential policies in force, {fmtDate(deal.coverage_end)} (the
-            deal) to {fmtDate(latest.coverage_end)} — up{" "}
-            <span className="font-bold">{sinceDealPct}%</span>.
+            residential policies in force, {fmtDate(deal.coverage_end)} to{" "}
+            {fmtDate(latest.coverage_end)}.
           </p>
         </div>
       )}
       <TrajectorySvg points={points} dealDate={DEAL_DATE} />
       <p className="mb-4 mt-4 leading-relaxed text-gray-700">
-        The Times' count ended in fall 2025. Five more months of the FAIR
-        Plan's own quarterly releases show the line still climbing — the
-        program the deal promised to shrink has more than doubled since the
-        deal was announced, with no quarter of decline.
+        The Times counted 320,581 → 625,033 through fall 2025. Five more
+        months of quarterly releases show the line still climbing, with no
+        quarter of decline. Outside the designated ZIP codes, growth since the
+        deal (+{stats.unlisted.growthPct}%) has outpaced growth inside them
+        (+{stats.designated.growthPct}%) — the crisis is spreading fastest in
+        places the list doesn't reach at all.
       </p>
 
-      {/* ——— Finding 2: growth outran the list ——— */}
+      {/* ——— SECONDARY: the list undercounts by its own test ——— */}
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
-        2. Growth is now fastest <em>outside</em> the designated areas
+        3. And the list misses ZIP codes that pass the state's own test
       </h2>
-      <div className="mb-4 grid gap-3 sm:grid-cols-2">
-        <div className="rounded-lg border border-gray-200 bg-gray-50 p-5">
-          <div className="text-3xl font-bold tabular-nums text-charcoal">
-            +{stats.designated.growthPct}%
-          </div>
-          <div className="mt-1 text-sm text-gray-600">
-            FAIR Plan growth <span className="font-semibold">inside</span>{" "}
-            CDI-designated distressed ZIPs, FY{DEAL_FY} → FY{FY_LAST} (
-            {fmtPolicies(stats.designated.fyDeal)} →{" "}
-            {fmtPolicies(stats.designated.fyLast)})
-          </div>
-        </div>
-        <div className="rounded-lg border-2 border-patriot-red bg-red-50 p-5">
-          <div className="text-3xl font-bold tabular-nums text-patriot-red">
-            +{stats.unlisted.growthPct}%
-          </div>
-          <div className="mt-1 text-sm text-gray-600">
-            Growth <span className="font-semibold">outside</span> the
-            designated ZIPs over the same period (
-            {fmtPolicies(stats.unlisted.fyDeal)} →{" "}
-            {fmtPolicies(stats.unlisted.fyLast)})
-          </div>
-        </div>
+      <p className="mb-4 leading-relaxed text-gray-700">
+        California regulation (10 CCR § 2644.4.8) defines an undermarketed ZIP
+        code: FAIR Plan penetration of at least 15 percent, in a ZIP that
+        overlaps a CAL FIRE high or very-high fire hazard severity zone. We
+        applied that test to current enrollment — using the last denominator
+        CDI ever published (2023) and CAL FIRE's current hazard maps.{" "}
+        <strong>
+          {criteria.qualify} ZIP codes qualify today; {criteria.missedByCriteria}{" "}
+          of them are not on the state's list.
+        </strong>{" "}
+        That count is conservative: we apply only the fire prong (the
+        regulation's low-income premium prong could only add ZIPs), and CDI
+        stopped publishing the penetration denominator after 2023 — we cannot
+        apply the state's own test precisely because the state stopped
+        publishing its inputs.
+      </p>
+      <p className="mb-4 leading-relaxed text-gray-700">
+        The FAIR Plan's own releases corroborate the undercount. Its quarterly
+        ZIP tables carry an unexplained "Is Distressed Area" column that flags{" "}
+        <strong>{matrix.fairOnly + matrix.bothFlagged} ZIP codes — {matrix.fairOnly} more
+        than the official list</strong> — and 95 percent of the ZIPs that pass
+        the regulatory test are flagged in it. Whatever definition the FAIR
+        Plan applies internally, it too finds distress far beyond the state's
+        list. Meanwhile {criteria.listedNotQualifying} listed ZIP codes no
+        longer meet the fire-prong test at all — the same over-breadth the
+        Times documented, measured from the other side.
+      </p>
+
+      {/* ——— Punchline ——— */}
+      <div className="my-10 rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-6">
+        <p className="text-lg font-semibold leading-relaxed text-charcoal">
+          Designated or not, qualifying or not, fire country or not: there is
+          no cohort of ZIP codes — none — where the 2023 deal produced
+          depopulation. The list argues about where the promise applies. The
+          data says the promise hasn't been kept anywhere.
+        </p>
       </div>
-      <p className="mb-4 leading-relaxed text-gray-700">
-        The 85-percent rule points insurers at the designated distressed areas.
-        But since the deal, FAIR Plan enrollment has grown roughly{" "}
-        <span className="font-semibold">
-          {ratioLabel(stats.unlisted.growthPct, stats.designated.growthPct)} as
-          fast in ZIP codes the list doesn't cover
-        </span>
-        . The crisis has outrun the map that is supposed to target the remedy.
-      </p>
-
-      {/* ——— Finding 3: the list fails both ways ——— */}
-      <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
-        3. The distressed list fails in both directions
-      </h2>
-      <p className="mb-4 leading-relaxed text-gray-700">
-        The Times showed the list is too <em>broad</em> where breadth helps
-        insurers: vast stretches of designated ZIP codes lie outside the
-        state's high fire-hazard zones, so policies written there earn credit
-        toward the 85-percent promise without touching a high-risk home. Our
-        area analysis of CAL FIRE's current hazard maps reproduces that
-        finding:{" "}
-        <span className="font-semibold">
-          {stats.fireDesignated.under10} of {stats.fireDesignated.matched}{" "}
-          designated ZIPs have less than 10% of their land in High or Very High
-          hazard zones
-        </span>{" "}
-        ({stats.fireDesignated.underThird} are under one-third).
-      </p>
-      <p className="mb-4 leading-relaxed text-gray-700">
-        But the list is simultaneously too <em>narrow</em> where narrowness
-        hurts homeowners. Reconciling it against the FAIR Plan's own
-        distressed-area markers,{" "}
-        <span className="font-semibold text-patriot-red">
-          {m.fairOnly} ZIP codes are flagged as distressed in the FAIR Plan's
-          data but appear nowhere on the state's list
-        </span>{" "}
-        — against exactly {m.cdiOnly} in the other direction. And{" "}
-        {stats.fireMissing.under10} of those {stats.fireMissing.matched}{" "}
-        missing ZIPs have less than 10% of their land in high hazard zones: the
-        distress the state isn't seeing is largely not in fire country at all.
-        It is a market failure, not a fire map.
-      </p>
-      <p className="mb-4 leading-relaxed text-gray-700">
-        A list that is over-inclusive where it relieves insurers and
-        under-inclusive where it would protect homeowners is not a neutral
-        imperfection — it is the loophole, mapped. See the full{" "}
-        <a href="/#distressed" className="underline">
-          divergence analysis
-        </a>{" "}
-        for every missing ZIP.
-      </p>
 
       {/* ——— What would fix it ——— */}
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
@@ -197,19 +198,21 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
           <span className="font-semibold">Measure depopulation itself.</span>{" "}
           AB 69's clearinghouse reporting should publish take-out counts at
           county and ZIP level, net of new FAIR Plan entries — one statewide
-          number can show "success" while the Plan keeps growing.
+          number can show "success" while every named ZIP keeps growing.
         </li>
         <li>
           <span className="font-semibold">
-            Recalibrate the distressed list against enrollment data.
+            Re-run the undermarketed-ZIP test on a fixed cadence.
           </span>{" "}
-          The state should reconcile its designations against FAIR Plan growth
-          on a fixed cadence — the data to do it is already public.
+          The designation criteria are already in regulation; the state should
+          apply them to current data and republish the list, rather than
+          leaving a 2025 snapshot to govern a moving crisis.
         </li>
         <li>
           <span className="font-semibold">Reopen the data pipeline.</span>{" "}
-          Every CDI market dataset that would test the deal's outcomes stops at
-          calendar 2023. The 2024 and 2025 editions should be published now.
+          The penetration denominator — total residential policies by ZIP —
+          stops at calendar 2023. The 2024 and 2025 editions should be
+          published now.
         </li>
       </ul>
 
@@ -217,43 +220,50 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
       <h2 className="mb-3 mt-10 text-xl font-bold text-charcoal">Methodology</h2>
       <div className="space-y-3 text-sm leading-relaxed text-gray-600">
         <p>
-          <span className="font-semibold">Statewide trajectory:</span> FAIR
-          Plan quarterly and fiscal-year releases (policies in force),
-          September 2019 – {latest ? fmtDate(latest.coverage_end) : "present"}.
-          The "deal" point is FY {DEAL_FY} close (Sept. 30, 2023), nine days
-          after the September 21, 2023 announcement.
+          <span className="font-semibold">The official list:</span> CDI's
+          "List of Distressed Counties and Undermarketed ZIP Codes" (March
+          2025), 663 ZIP codes, of which {scorecard.total} appear in the FAIR
+          Plan's ZIP-level reporting.
         </p>
         <p>
-          <span className="font-semibold">Inside/outside growth:</span> FAIR
-          Plan policies in force summed by ZIP over the state's distressed-ZIP
-          list, FY{DEAL_FY} → FY{FY_LAST}; ZIPs missing either endpoint are
-          excluded.
+          <span className="font-semibold">Named-zone scorecard:</span> FAIR
+          Plan policies in force per designated ZIP, FY{DEAL_FY} (ending Sept.
+          30, 2023 — nine days after the deal was announced) vs. FY{FY_LAST}.
         </p>
         <p>
-          <span className="font-semibold">Fire-hazard overlap:</span> share of
-          each ZIP's land area inside CAL FIRE Fire Hazard Severity Zones
-          rated High or Very High (combined SRA 2024 / LRA 2025 layer,
-          geometry simplified to 50 m). Unlike the Times' analysis, which
-          counted homes via FEMA building footprints, ours measures land area —
-          a coarser proxy that does not weight where structures sit within a
-          ZIP.
+          <span className="font-semibold">§ 2644.4.8 recomputation:</span>{" "}
+          penetration = current FAIR Plan policies (Mar. 2026 release) ÷ total
+          residential policies in 2023, where the total is CDI's ZIP-level
+          voluntary-market count (new + renewed, 2023 — the latest published)
+          plus FAIR Plan FY2023. This assumes the housing stock is roughly
+          stable since 2023; policy movement between the voluntary market and
+          the FAIR Plan does not change the denominator. Fire overlap = any
+          share of ZIP land area in CAL FIRE High/Very High severity zones
+          (combined SRA 2024 / LRA 2025 layer). We do not apply the
+          regulation's alternative low-income premium prong; applying it could
+          only increase the qualifying count.
         </p>
         <p>
-          <span className="font-semibold">Divergence matrix:</span> the FAIR
-          Plan's own distressed-area marker from its quarterly ZIP releases,
-          reconciled against CDI's official distressed-ZIP list across{" "}
-          {(m.bothFlagged + m.neither + m.fairOnly + m.cdiOnly).toLocaleString()}{" "}
-          ZIPs. Growth rankings shown elsewhere use a {MIN_GROWTH_BASE}-policy
-          FY2021 floor.
+          <span className="font-semibold">
+            The FAIR Plan's "Is Distressed Area" column:
+          </span>{" "}
+          printed per ZIP in the FAIR Plan's quarterly releases with no
+          published definition. It flagged the same ~1,009 ZIP codes in the
+          June 2025, December 2025, and March 2026 releases (drifting by a
+          single ZIP), but matched the official 663-ZIP list exactly in the
+          September 2025 release — an inconsistency we disclose and have asked
+          the FAIR Plan to explain. We treat this column as corroboration, not
+          as the primary definition.
         </p>
         <p>
           All inputs are published, cited, and downloadable on{" "}
           <a href="/data" className="underline">Data &amp; Downloads</a>,
           including the{" "}
           <a href="/data/distressed_zip_reconciliation.csv" className="underline" download>
-            ZIP reconciliation table
+            per-ZIP reconciliation table
           </a>{" "}
-          with per-ZIP fire-hazard shares. The pipeline is open source.
+          with penetration, fire-hazard share, and qualification flags. The
+          pipeline is open source.
         </p>
       </div>
     </article>
@@ -264,13 +274,6 @@ function fmtDate(iso: string): string {
   const [y, mo] = iso.split("-").map(Number);
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   return `${months[(mo ?? 1) - 1]} ${y}`;
-}
-
-function ratioLabel(fast: number, slow: number): string {
-  if (slow <= 0) return "far faster";
-  const ratio = fast / slow;
-  const rounded = Math.round(ratio);
-  return Math.abs(ratio - rounded) < 0.25 ? `${rounded}× as fast` : `${ratio.toFixed(1)}× as fast`;
 }
 
 // Minimal static line chart: policies over time with the deal marked.

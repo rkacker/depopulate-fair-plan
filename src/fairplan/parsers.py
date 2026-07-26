@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import re
+from contextlib import closing
 from pathlib import Path
 
+from openpyxl import load_workbook
 from pypdf import PdfReader
 
 from fairplan.models import SourceConfig
@@ -254,6 +256,77 @@ def parse_cdi_fact_sheet_appendix_a(path: Path, source: SourceConfig) -> list[di
                     "source_id": source.id,
                 }
             )
+    return rows
+
+
+def parse_cdi_zip_xlsx(path: Path, source: SourceConfig) -> list[dict[str, object]]:
+    flow_metric_by_header = {
+        "new": "new",
+        "renewed": "renewed",
+        "non-renewed": "nonrenewed",
+        "nonrenewed": "nonrenewed",
+        "non renewed": "nonrenewed",
+    }
+    rows: list[dict[str, object]] = []
+    with closing(load_workbook(path, read_only=True, data_only=True)) as wb:
+        rows_iter = wb.active.iter_rows(values_only=True)
+        try:
+            header = next(rows_iter)
+        except StopIteration as exc:
+            raise ValueError(f"{path}: workbook has no rows") from exc
+
+        normalized_header = [
+            str(cell).strip().lower() if cell is not None else "" for cell in header
+        ]
+        try:
+            zip_idx = normalized_header.index("zip code")
+            year_idx = normalized_header.index("year")
+        except ValueError as exc:
+            raise ValueError(
+                f"{path}: unexpected header {header!r}; expected 'ZIP Code' and 'Year' columns"
+            ) from exc
+
+        flow_columns = [
+            (idx, flow_metric_by_header[name])
+            for idx, name in enumerate(normalized_header)
+            if name in flow_metric_by_header
+        ]
+        if not flow_columns:
+            raise ValueError(
+                f"{path}: no flow_metric columns found in header {header!r}; "
+                "expected one of New/Renewed/Non-Renewed"
+            )
+
+        for row in rows_iter:
+            if row is None or all(cell is None for cell in row):
+                continue
+            zip_raw = row[zip_idx]
+            year_raw = row[year_idx]
+            if zip_raw is None or year_raw is None:
+                continue
+            zip_token = str(zip_raw).strip()
+            if not zip_token.isdigit() or len(zip_token) > 5:
+                continue
+            zip_code = zip_token.zfill(5)
+            year = int(year_raw)
+            for col_idx, flow_metric in flow_columns:
+                cell = row[col_idx]
+                if cell is None:
+                    value = 0
+                elif isinstance(cell, str):
+                    value = clean_int(cell)
+                else:
+                    value = int(cell)
+                rows.append(
+                    {
+                        "year": year,
+                        "zip": zip_code,
+                        "market_segment": "voluntary",
+                        "flow_metric": flow_metric,
+                        "value": value,
+                        "source_id": source.id,
+                    }
+                )
     return rows
 
 

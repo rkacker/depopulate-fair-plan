@@ -210,3 +210,13 @@ published_date = "2025-03-06"
 coverage_end = "2025-03-06"
 file_name = "distressed_geographies_2025.pdf"
 
+[[sources]]
+id = "cdi_residential_zip_yearly_2024_release"
+family = "cdi"
+dataset = "residential_zip_yearly"
+format = "xlsx"
+url = "https://www.insurance.ca.gov/01-consumers/200-wrr/upload/Residential-Insurance-Voluntary-Market-New-Renew-NonRenew-by-ZIP-2020-2023.xlsx"
+published_date = "2025-01-13"
+coverage_end = "2023-12-31"
+file_name = "residential_zip_voluntary_2020_2023.xlsx"
+

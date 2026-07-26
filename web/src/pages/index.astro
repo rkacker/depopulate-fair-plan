@@ -3,7 +3,6 @@ import Base from "@/layouts/Base.astro";
 import { Home } from "@/components/Home";
 import {
   loadCountyDataServer,
-  loadDistressedSummaryServer,
   loadSiteStatsServer,
   loadStatewideHistoryServer,
 } from "@/lib/loadData.server";
@@ -11,7 +10,6 @@ import {
 const initialStats = loadSiteStatsServer();
 const initialCountyData = loadCountyDataServer();
 const initialStatewideRows = loadStatewideHistoryServer();
-const initialDistressedSummary = loadDistressedSummaryServer();
 ---
 
 <Base>
@@ -34,7 +32,6 @@ const initialDistressedSummary = loadDistressedSummaryServer();
     initialStats={initialStats}
     initialCountyData={initialCountyData}
     initialStatewideRows={initialStatewideRows}
-    initialDistressedSummary={initialDistressedSummary}
     client:load
   />
 </Base>

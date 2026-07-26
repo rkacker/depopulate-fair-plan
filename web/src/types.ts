@@ -106,10 +106,3 @@ export interface DistressedData {
   // sorted by 5-year growth descending.
   fairOnlyRows: DistressedZipRow[];
 }
-
-// Build-time slice serialized into the homepage island; the full row list
-// lazy-loads on the client only when the reader expands it.
-export interface DistressedSummary {
-  matrix: DistressedMatrix;
-  previewRows: DistressedZipRow[];
-}

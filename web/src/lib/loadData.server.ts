@@ -12,9 +12,7 @@ import marketShareCsv from "../../public/data/cdi_county_market_share.csv?raw";
 import zipHistoryCsv from "../../public/data/california_zip_history.csv?raw";
 import distressedReconCsv from "../../public/data/distressed_zip_reconciliation.csv?raw";
 import {
-  buildDistressedData,
   buildPromiseStats,
-  DISTRESSED_PREVIEW_COUNT,
   type PromiseStats,
   type RawReconciliationRow,
 } from "@/lib/distressed";
@@ -23,7 +21,6 @@ import type {
   CountyMarketShareRow,
   CountyRow,
   Direction,
-  DistressedSummary,
   SiteStats,
   ZipData,
   ZipHistoryRow,
@@ -233,17 +230,6 @@ export function loadZipHistoryServer(): ZipHistoryRow[] {
     });
   }
   return rows;
-}
-
-// Preview slice of the distressed-flag divergence for the homepage island.
-// The full ranked list stays out of the serialized props (per the lazy-load
-// performance budget) — the client fetches it on demand via loadDistressedData.
-export function loadDistressedSummaryServer(): DistressedSummary {
-  const { matrix, fairOnlyRows } = buildDistressedData(
-    parseCsv<RawReconciliationRow>(distressedReconCsv),
-    loadZipHistoryServer(),
-  );
-  return { matrix, previewRows: fairOnlyRows.slice(0, DISTRESSED_PREVIEW_COUNT) };
 }
 
 // Aggregates for the /analysis/depopulation-promise article page.

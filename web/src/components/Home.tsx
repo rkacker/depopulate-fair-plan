@@ -5,7 +5,6 @@ import { CrisisMap } from "@/components/sections/CrisisMap";
 import { CountyTable } from "@/components/sections/CountyTable";
 import { ZipMap } from "@/components/sections/ZipMap";
 import { ZipTable } from "@/components/sections/ZipTable";
-import { DistressedDivergence } from "@/components/sections/DistressedDivergence";
 // TODO(future): rebuild a Solutions section with sharper, data-grounded
 // content. The previous version (web/src/components/sections/Solutions.tsx)
 // is kept in-tree as scaffolding but is intentionally not rendered today.
@@ -15,7 +14,7 @@ import {
   loadSiteStats,
   loadZipData,
 } from "@/lib/data";
-import type { CountyData, DistressedSummary, SiteStats, ZipData } from "@/types";
+import type { CountyData, SiteStats, ZipData } from "@/types";
 import type { HistoryRow } from "@/components/sections/StatewideHistoryTab";
 
 type View = "county" | "zip";
@@ -24,14 +23,12 @@ interface HomeProps {
   initialStats?: SiteStats | null;
   initialCountyData?: CountyData | null;
   initialStatewideRows?: HistoryRow[] | null;
-  initialDistressedSummary?: DistressedSummary | null;
 }
 
 export function Home({
   initialStats = null,
   initialCountyData = null,
   initialStatewideRows = null,
-  initialDistressedSummary = null,
 }: HomeProps = {}) {
   // ?view=zip is a query-string experiment — an alternate visualization that
   // will eventually fold into the main page. SSR can't read URL params, so we
@@ -95,7 +92,29 @@ export function Home({
           <CountyTable countyData={countyData} stats={stats} loading={loading} />
         </>
       )}
-      <DistressedDivergence summary={initialDistressedSummary} />
+      {/* Pointer to the long-form analysis — the deep dive lives on its own
+          page rather than as a home section. */}
+      <section className="bg-white py-12">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-6">
+            <p className="mb-2 font-semibold text-patriot-red">
+              Analysis: The Depopulation Promise
+            </p>
+            <p className="text-gray-700">
+              California's 2023 deal with insurers promised to shrink the FAIR
+              Plan, starting with a named list of distressed ZIP codes. Our
+              analysis of the state's own data: enrollment grew in 93% of
+              those very ZIP codes.{" "}
+              <a
+                href="/analysis/depopulation-promise"
+                className="font-semibold underline"
+              >
+                Read the analysis →
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
       <Signup />
     </>
   );

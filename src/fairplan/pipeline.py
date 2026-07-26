@@ -11,6 +11,7 @@ from fairplan.models import SourceConfig
 from fairplan.parsers import (
     parse_cdi_county_pdf,
     parse_cdi_fact_sheet_appendix_a,
+    parse_cdi_zip_xlsx,
     parse_distressed_geographies,
     parse_fair_category_pdf,
     parse_fair_history_pdf,
@@ -112,6 +113,7 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
     pif_rows: list[dict[str, object]] = []
     tiv_rows: list[dict[str, object]] = []
     cdi_county_rows: list[dict[str, object]] = []
+    cdi_zip_rows: list[dict[str, object]] = []
     cdi_fact_rows: list[dict[str, object]] = []
     distressed_rows: list[dict[str, object]] = []
     category_rows: list[dict[str, object]] = []
@@ -126,6 +128,8 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
             tiv_rows.extend(parse_fair_history_pdf(file_path, source, "zip", metric="exposure"))
         elif source.dataset == "residential_county_yearly":
             cdi_county_rows.extend(parse_cdi_county_pdf(file_path, source))
+        elif source.dataset == "residential_zip_yearly":
+            cdi_zip_rows.extend(parse_cdi_zip_xlsx(file_path, source))
         elif source.dataset == "residential_fact_sheet":
             cdi_fact_rows.extend(parse_cdi_fact_sheet_appendix_a(file_path, source))
         elif source.dataset == "distressed_geographies":
@@ -319,6 +323,12 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         ["year", "county", "market_segment", "flow_metric", "value", "source_id"],
     )
 
+    write_csv(
+        processed_dir / "cdi" / "zip_yearly.csv",
+        cdi_zip_rows,
+        ["year", "zip", "market_segment", "flow_metric", "value", "source_id"],
+    )
+
     distressed_county_rows = [r for r in distressed_rows if r["geo_type"] == "county"]
     distressed_zip_rows = [r for r in distressed_rows if r["geo_type"] == "zip"]
 
@@ -435,13 +445,53 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
             if fire_hazard_path.exists()
             else {}
         )
+        # §2644.4.8 undermarketed-ZIP test, fire prong, approximated with
+        # best-available inputs: FAIR penetration = current FAIR policies ÷
+        # total residential policies in 2023 (CDI voluntary new+renewed for
+        # 2023 — the latest published — plus FAIR FY2023; assumes the housing
+        # stock is roughly stable since 2023), and FHSZ overlap = any share of
+        # ZIP land area in CAL FIRE High/Very High zones. The regulation's
+        # second (low-income premium) prong is not applied — it could only add
+        # qualifying ZIPs, so the resulting count is conservative.
+        fair_now: dict[str, int] = {}
+        for r in category_rows:
+            if str(r["coverage_end"]) == latest_coverage_end and r["metric"] == "count":
+                z = str(r["zip"])
+                fair_now[z] = fair_now.get(z, 0) + int(r["value"])
+        fair_fy2023 = {
+            str(r["geography_id"]): int(r["value"])
+            for r in zip_pif_rows
+            if int(r["fiscal_year"]) == 2023 and str(r["geography_id"]) != "Total"
+        }
+        vol_2023: dict[str, int] = {}
+        for r in cdi_zip_rows:
+            if int(r["year"]) == 2023 and r["flow_metric"] in {"new", "renewed"}:
+                z = str(r["zip"])
+                vol_2023[z] = vol_2023.get(z, 0) + int(r["value"])
+
         for r in reconciliation_rows:
+            z = str(r["zip"])
             r["agree"] = int(r["fair_plan_flag"] == r["cdi_flag"])
-            r["fhsz_high_pct"] = fire_pct.get(str(r["zip"]), "")
+            r["fhsz_high_pct"] = fire_pct.get(z, "")
+            total_2023 = vol_2023.get(z, 0) + fair_fy2023.get(z, 0)
+            r["total_policies_2023"] = total_2023 if total_2023 else ""
+            r["fair_policies_current"] = fair_now.get(z, "")
+            fire = float(fire_pct.get(z, 0) or 0)
+            if total_2023 and z in fair_now:
+                penetration = 100.0 * fair_now[z] / total_2023
+                r["penetration_pct"] = round(penetration, 1)
+                r["meets_criteria"] = int(penetration >= 15.0 and fire > 0)
+            else:
+                r["penetration_pct"] = ""
+                r["meets_criteria"] = ""
         write_csv(
             processed_dir / "analysis" / "distressed_zip_reconciliation.csv",
             reconciliation_rows,
-            ["zip", "county", "fair_plan_flag", "cdi_flag", "agree", "fhsz_high_pct"],
+            [
+                "zip", "county", "fair_plan_flag", "cdi_flag", "agree",
+                "fhsz_high_pct", "total_policies_2023", "fair_policies_current",
+                "penetration_pct", "meets_criteria",
+            ],
         )
 
     # --- analysis/ derived: Senate district PIF estimates ---
@@ -792,7 +842,8 @@ def build_insights(processed_dir: Path, exports_dir: Path, insights_dir: Path) -
             "",
             "- FAIR Plan ZIP history and county history PDFs are parsed directly from text-extractable source documents.",
             "- CDI county annual counts provide market context.",
-            "- CDI ZIP-level yearly policy data is scaffolded but not populated in v1 because a machine-readable source has not yet been added.",
+            "- CDI ZIP-level yearly voluntary-market policy counts (new, renewed, nonrenewed) are populated for 2020-2023.",
+            "- FAIR Plan and surplus-lines ZIP-level breakouts are not available from the CDI voluntary-market source.",
         ]
     )
     insight_path = insights_dir / "market_health_report.md"
