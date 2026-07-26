@@ -172,7 +172,7 @@ function TrajectoryChart({ rows, first, last }: TrajectoryChartProps) {
       className="h-60 w-full sm:h-72 lg:h-80"
     >
       <title id="traj-title">
-        Statewide FAIR Plan policies in force, {first.coverage_end.slice(0, 4)} to {last.coverage_end.slice(0, 4)}
+        {`Statewide FAIR Plan policies in force, ${first.coverage_end.slice(0, 4)} to ${last.coverage_end.slice(0, 4)}`}
       </title>
       <desc id="traj-desc">{desc}</desc>
 
