@@ -251,9 +251,9 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
           published definition. It flagged the same ~1,009 ZIP codes in the
           June 2025, December 2025, and March 2026 releases (drifting by a
           single ZIP), but matched the official 663-ZIP list exactly in the
-          September 2025 release — an inconsistency we disclose and have asked
-          the FAIR Plan to explain. We treat this column as corroboration, not
-          as the primary definition.
+          September 2025 release — an inconsistency the FAIR Plan has not
+          publicly explained. We treat this column as corroboration, not as
+          the primary definition.
         </p>
         <p>
           All inputs are published, cited, and downloadable on{" "}
