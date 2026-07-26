@@ -21,3 +21,6 @@ data/exports/**
 insights/**
 !insights/.gitkeep
 _site/
+
+# Working memos / session notes — kept local, not published
+notes/
