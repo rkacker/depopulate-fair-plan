@@ -6,6 +6,7 @@ from pathlib import Path
 from fairplan.manifest import load_sources
 from fairplan.parsers import (
     parse_cdi_county_pdf,
+    parse_cdi_zip_xlsx,
     parse_distressed_geographies,
     parse_fair_category_pdf,
 )
@@ -79,6 +80,24 @@ def test_cdi_county_parser_extracts_statewide_renewals() -> None:
     assert target["value"] == 7_576_693
 
 
+def test_cdi_zip_xlsx_parser_emits_voluntary_flow_metrics() -> None:
+    source = source_by_dataset("residential_zip_yearly")
+    rows = parse_cdi_zip_xlsx(FIXTURES / "cdi" / source.file_name, source)
+    assert len(rows) > 0
+    assert all(isinstance(row["year"], int) for row in rows)
+    assert all(isinstance(row["zip"], str) and len(row["zip"]) == 5 for row in rows)
+    assert {row["market_segment"] for row in rows} == {"voluntary"}
+    assert {row["flow_metric"] for row in rows} == {"new", "renewed", "nonrenewed"}
+    assert all(int(row["value"]) >= 0 for row in rows)
+
+    target = next(
+        row
+        for row in rows
+        if row["zip"] == "90001" and row["year"] == 2023 and row["flow_metric"] == "renewed"
+    )
+    assert target["value"] == 5_569
+
+
 def test_distressed_parser_extracts_counties_and_zips() -> None:
     source = source_by_dataset("distressed_geographies")
     rows = parse_distressed_geographies(FIXTURES / "cdi" / source.file_name, source)
@@ -143,6 +162,23 @@ def test_fixture_pipeline_matches_golden_metrics(tmp_path: Path) -> None:
         if r["county"] == "Alameda" and r["coverage_end"] == latest_coverage_end
     )
     assert alameda_latest == expected["fair_category_alameda_policy_count_latest_quarter"]
+
+    cdi_zip = read_csv(processed_dir / "cdi" / "zip_yearly.csv")
+    assert len(cdi_zip) == expected["cdi_zip_yearly_row_count"]
+    voluntary_renewed_total = sum(
+        int(r["value"])
+        for r in cdi_zip
+        if r["market_segment"] == "voluntary" and r["flow_metric"] == "renewed"
+    )
+    assert voluntary_renewed_total == expected["cdi_zip_yearly_voluntary_renewed_total"]
+    zip_90001_2023_renewed = next(
+        int(r["value"])
+        for r in cdi_zip
+        if r["zip"] == "90001"
+        and int(r["year"]) == 2023
+        and r["flow_metric"] == "renewed"
+    )
+    assert zip_90001_2023_renewed == expected["cdi_zip_yearly_zip_90001_2023_renewed"]
 
     # Processed CSVs exist in correct subdirectories
     assert (processed_dir / "fair" / "county_pif_history.csv").exists()

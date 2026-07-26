@@ -92,6 +92,29 @@ export function Home({
           <CountyTable countyData={countyData} stats={stats} loading={loading} />
         </>
       )}
+      {/* Pointer to the long-form analysis — the deep dive lives on its own
+          page rather than as a home section. */}
+      <section className="bg-white py-12">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <div className="rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-6">
+            <p className="mb-2 font-semibold text-patriot-red">
+              Analysis: The Depopulation Promise
+            </p>
+            <p className="text-gray-700">
+              California's 2023 deal with insurers promised to shrink the FAIR
+              Plan, starting with a named list of distressed ZIP codes. Our
+              analysis of the state's own data: enrollment grew in 93% of
+              those very ZIP codes.{" "}
+              <a
+                href="/analysis/depopulation-promise"
+                className="font-semibold underline"
+              >
+                Read the analysis →
+              </a>
+            </p>
+          </div>
+        </div>
+      </section>
       <Signup />
     </>
   );

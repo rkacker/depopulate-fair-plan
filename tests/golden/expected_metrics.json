@@ -4,6 +4,9 @@
   "fair_category_policy_count_2025q3": 621234,
   "fair_category_alameda_policy_count_latest_quarter": 11803,
   "cdi_statewide_fair_renewed_latest_year": 232507,
+  "cdi_zip_yearly_row_count": 24096,
+  "cdi_zip_yearly_voluntary_renewed_total": 30242997,
+  "cdi_zip_yearly_zip_90001_2023_renewed": 5569,
   "distressed_counties": 29,
   "distressed_zip_codes": 663
 }

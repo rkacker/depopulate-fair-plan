@@ -10,6 +10,12 @@ import zipCsv from "../../public/data/california_zip_data.csv?raw";
 import statewideHistoryCsv from "../../public/data/fair_statewide_history.csv?raw";
 import marketShareCsv from "../../public/data/cdi_county_market_share.csv?raw";
 import zipHistoryCsv from "../../public/data/california_zip_history.csv?raw";
+import distressedReconCsv from "../../public/data/distressed_zip_reconciliation.csv?raw";
+import {
+  buildPromiseStats,
+  type PromiseStats,
+  type RawReconciliationRow,
+} from "@/lib/distressed";
 import type {
   CountyData,
   CountyMarketShareRow,
@@ -224,4 +230,12 @@ export function loadZipHistoryServer(): ZipHistoryRow[] {
     });
   }
   return rows;
+}
+
+// Aggregates for the /analysis/depopulation-promise article page.
+export function loadPromiseStatsServer(): PromiseStats {
+  return buildPromiseStats(
+    parseCsv<RawReconciliationRow>(distressedReconCsv),
+    loadZipHistoryServer(),
+  );
 }
