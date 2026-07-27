@@ -133,36 +133,6 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
         </p>
       </div>
 
-      <div className="mt-10 border-t border-gray-200 pt-6 text-sm text-gray-600">
-        <p className="mb-2 font-semibold uppercase tracking-wide text-gray-500">
-          Related
-        </p>
-        <ul className="space-y-1">
-          <li>
-            <a href="/analysis/depopulation-promise" className="underline">
-              The Depopulation Promise
-            </a>{" "}
-            — the full analysis behind these numbers
-          </li>
-          <li>
-            <a href="/analysis/ab-69-ab-1680" className="underline">
-              AB 69 &amp; AB 1680: Measuring Depopulation
-            </a>{" "}
-            — the companion memo for the Assembly package
-          </li>
-          <li>
-            <a href="/data" className="underline">Data &amp; Downloads</a> —
-            every dataset cited here, including the{" "}
-            <a
-              href="/data/distressed_zip_reconciliation.csv"
-              className="underline"
-              download
-            >
-              per-ZIP reconciliation table
-            </a>
-          </li>
-        </ul>
-      </div>
     </article>
   );
 }
