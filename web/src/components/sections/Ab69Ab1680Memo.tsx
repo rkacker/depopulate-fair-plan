@@ -34,9 +34,9 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
       </h1>
       <p className="mb-2 text-xl leading-relaxed text-gray-600">
         Assemblymember Calderon's package is the first legislation to treat
-        FAIR Plan depopulation as an outcome to measure, not a promise to
-        announce. A handful of reporting details will decide whether the
-        public can actually count it.
+        moving households off the FAIR Plan as something to measure, not just
+        something to promise. A handful of reporting details will decide
+        whether the public can actually count it.
       </p>
       <p className="mb-10 text-sm text-gray-500">
         depopulatefairplan.com · Data through{" "}
@@ -82,11 +82,11 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
         </div>
       )}
       <p className="mb-4 leading-relaxed text-gray-700">
-        Today, depopulation progress is reported as carrier commitments and
-        rate approvals — policies a carrier <em>plans</em> to write — while no
-        public dataset counts households actually leaving the FAIR Plan. The
-        clearinghouse reporting AB 69 creates is the first chance to fix
-        that. Whether it does depends on grain, netting, and timing.
+        Today, progress is reported as insurer commitments and rate
+        approvals: policies a carrier <em>plans</em> to write. We could find
+        no public dataset that counts households actually leaving the FAIR
+        Plan. The reporting AB 69 creates is the first real chance to change
+        that. Whether it does comes down to the details below.
       </p>
 
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
@@ -104,10 +104,10 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
           isn't happening.
         </li>
         <li>
-          <span className="font-semibold">Net flows, not gross.</span> Report
-          policies leaving the FAIR Plan alongside policies entering it in
-          the same period. Gross take-out alone can show "success" while the
-          Plan keeps growing.
+          <span className="font-semibold">Count both directions.</span>{" "}
+          Report policies leaving the FAIR Plan alongside policies entering
+          it in the same period. A count of departures alone could look like
+          progress even while the Plan keeps growing.
         </li>
         <li>
           <span className="font-semibold">Retention.</span> A 12-month
@@ -120,9 +120,9 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
           leaves a two-year measurement blackout in the middle of the crisis.
         </li>
         <li>
-          <span className="font-semibold">Machine-readable.</span> CSV with a
-          data dictionary, not PDF — today every analyst in the state re-keys
-          the same tables by hand.
+          <span className="font-semibold">Machine-readable.</span> Publish as
+          CSV with a data dictionary rather than PDF. Today, anyone who wants
+          to analyze these figures re-keys the same tables from PDFs by hand.
         </li>
       </ul>
       <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
@@ -133,36 +133,40 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
           <span className="font-semibold">
             Codify the quarterly geographic releases
           </span>{" "}
-          (county/ZIP policy, premium, and exposure) as a statutory duty
-          subject to the bill's corrective-action regime — with a{" "}
-          <em>consistent</em> distressed-area flag. The FAIR Plan's own
-          releases flipped between a ~1,009-ZIP internal set and the official
-          663-ZIP list across the 2025 quarters, with no published definition
-          for either.
+          (county and ZIP policy, premium, and insured-value figures) as a
+          statutory duty subject to the bill's corrective-action provisions,
+          with a <em>consistent</em> distressed-area flag. In 2025, the FAIR
+          Plan's own quarterly releases switched between an internal set of
+          roughly 1,009 ZIP codes and the official 663-ZIP list, without a
+          published definition for either.
         </li>
         <li>
-          <span className="font-semibold">Financial-fragility disclosure.</span>{" "}
-          Quarterly reporting of total insured value against surplus and
-          reinsurance, plus any assessment activity — the numbers that decide
-          when every insured Californian pays for FAIR Plan losses, as
-          happened with the $1 billion post-fire assessment.
+          <span className="font-semibold">Financial-health disclosure.</span>{" "}
+          Quarterly reporting of total insured value against reserves and
+          reinsurance, plus any assessment activity. These are the numbers
+          that determine when every insured Californian helps pay for FAIR
+          Plan losses, as happened with the $1 billion assessment after the
+          2025 fires.
         </li>
         <li>
           <span className="font-semibold">Cost-of-coverage reporting.</span>{" "}
           Average premium per policy by county. Our analysis of the FAIR
-          Plan's own releases shows a roughly 12× spread — about $621 to
-          $7,234 per policy per year — invisible in any official publication.
+          Plan's own releases found a roughly twelve-fold spread across
+          counties, from about $621 to $7,234 per policy per year, a figure
+          not available in any official publication.
         </li>
       </ul>
 
       <div className="my-8 rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-5">
         <p className="leading-relaxed text-gray-800">
-          <span className="font-semibold">None of this is new collection.</span>{" "}
-          The FAIR Plan already produces quarterly geographic data; AB 69
-          already creates the reporting channel; the 2023 Sustainable
+          <span className="font-semibold">
+            None of this requires new data collection.
+          </span>{" "}
+          The FAIR Plan already produces quarterly county and ZIP data. AB 69
+          already creates the reporting channel. The 2023 Sustainable
           Insurance Strategy already committed the FAIR Plan to expanded
-          reporting on reducing its policyholder count. The asks are grain,
-          netting, timing, and format.
+          reporting on reducing its policyholder count. These asks are about
+          detail, completeness, timing, and format.
         </p>
       </div>
 

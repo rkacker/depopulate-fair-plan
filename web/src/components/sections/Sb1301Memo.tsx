@@ -31,9 +31,10 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
       </h1>
       <p className="mb-2 text-xl leading-relaxed text-gray-600">
         Senator Allen's bill gives homeowners real protections against being
-        dropped. But every protection it creates is unauditable with today's
-        public data — the state's nonrenewal statistics stop in 2023, and its
-        distressed-area list hasn't kept up with its own criteria.
+        dropped by their insurer. Whether those protections work will be hard
+        to verify with today's public data: the state's nonrenewal statistics
+        end in 2023, and its distressed-area list has not been revised since
+        early 2025.
       </p>
       <p className="mb-10 text-sm text-gray-500">
         depopulatefairplan.com · Data through{" "}
@@ -69,23 +70,25 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
             {scorecard.grew} of {scorecard.total}
           </span>{" "}
           state-designated distressed ZIP codes had <em>more</em> FAIR Plan
-          policies in FY{FY_LAST} than at the deal (FY{DEAL_FY}) — enrollment
-          in the named zones rose {stats.designated.growthPct}% (
-          {fmtPolicies(stats.designated.fyDeal)} →{" "}
-          {fmtPolicies(stats.designated.fyLast)}).
+          policies in fiscal {FY_LAST} than when the deal was announced.
+          Across the named zones, enrollment rose{" "}
+          {stats.designated.growthPct}%, from{" "}
+          {fmtPolicies(stats.designated.fyDeal)} to{" "}
+          {fmtPolicies(stats.designated.fyLast)} policies.
         </p>
       </div>
       <p className="mb-4 leading-relaxed text-gray-700">
-        Whether SB 1301's protections work will be a question about nonrenewal
-        patterns — and the Department of Insurance's residential
-        new/renewed/nonrenewed series was last published for calendar{" "}
-        <strong>2023</strong>, before the fires and before the wave the bill
-        answers. Meanwhile the distressed-area designations that trigger
-        moratoria and protections have drifted from the department's own
-        criteria: applying the § 2644.4.8 test to current enrollment,{" "}
-        <strong>{criteria.missedByCriteria} qualifying ZIP codes are missing
-        from the official list</strong> and {criteria.listedNotQualifying}{" "}
-        listed ZIPs no longer meet the fire-prong test.
+        Whether SB 1301's protections work will be a question about
+        nonrenewal patterns. The Department of Insurance's count of new,
+        renewed, and nonrenewed residential policies was last published for
+        calendar <strong>2023</strong>, before the fires and before the wave
+        of nonrenewals the bill responds to. The distressed-area list that
+        triggers moratoria and protections has also aged: applying the
+        state's own qualifying test (10 CCR § 2644.4.8) to current
+        enrollment, <strong>{criteria.missedByCriteria} ZIP codes qualify
+        today but are missing from the official list</strong>, and{" "}
+        {criteria.listedNotQualifying} listed ZIPs no longer meet the
+        fire-risk half of the test.
       </p>
 
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
@@ -94,10 +97,11 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
       <ul className="mb-4 list-disc space-y-3 pl-6 leading-relaxed text-gray-700">
         <li>
           <span className="font-semibold">Codify the nonrenewal series.</span>{" "}
-          Require CDI to publish residential new / renewed / nonrenewed counts
-          at state, county, and ZIP level on a fixed cadence (quarterly
-          preferred, at least annual), in machine-readable form. The series
-          exists — its latest public edition is simply three years old.
+          Require CDI to publish residential new, renewed, and nonrenewed
+          counts at state, county, and ZIP level on a fixed schedule
+          (quarterly preferred, at least annual), in machine-readable form.
+          The series already exists; the most recent public edition covers
+          2023.
         </li>
         <li>
           <span className="font-semibold">Reason-code reporting.</span> Once
@@ -119,11 +123,13 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
 
       <div className="my-8 rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-5">
         <p className="leading-relaxed text-gray-800">
-          <span className="font-semibold">None of this is new collection.</span>{" "}
-          CDI compiled every one of these datasets through 2023 and cites
-          near-current figures on its own Sustainable Insurance Strategy page.
-          The asks are cadence, grain, and format — publishing what exists, on
-          a schedule, in a form the public can use.
+          <span className="font-semibold">
+            None of this requires new data collection.
+          </span>{" "}
+          CDI compiled each of these datasets through 2023 and cites
+          near-current figures on its own Sustainable Insurance Strategy
+          page. These asks are about schedule, detail, and format: publishing
+          what already exists, regularly, in a form the public can use.
         </p>
       </div>
 
