@@ -32,26 +32,6 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 
 ## Now
 
-- [ ] **CDI/SIS activities timeline + trajectory honesty amendments** · `Depth`/`Trust` · M · I8 C8 E6 = **384**
-  Amend `/analysis/depopulation-promise` (and its trajectory chart) with the regulatory
-  timeline so the "Sept 2023 deal" framing is precise: the deal was a *framework
-  announcement* (Newsom EO + Lara SIS package, 2023-09-21); the mechanics (85% test,
-  § 2644.4.8 definitions, undermarketed-ZIP list) were built through 2024 rulemakings and
-  the SIS became fully operative Jan 2025 — days before the Palisades/Eaton fires.
-  - Build a **curated, structured timeline source** (e.g. `config/cdi_sis_timeline.csv`:
-    date, actor, action, category, source_url) usable by both the article and future
-    pages; drafted from `notes/cdi-sis-timeline.md`.
-  - Add **multiple time markers** to the trajectory chart: Lara's start (Jan 2019), SIS
-    announcement (Sept 2023), rulemakings complete (Dec 2024), SIS operative + LA fires
-    (Jan 2025), distressed-list revision (Mar 2025). Keep the chart readable — marker
-    density is the design risk.
-  - Reword article §2 to be honest that implementation lagged announcement; consider a
-    compact timeline strip section between §2 and §3.
-  - Include the **non-action** entries (penetration denominator unpublished since 2023;
-    2025 list never re-run) alongside actions — that's the accountability record.
-  DoD: timeline source committed; chart markers shipped; §2 copy amended; timeline
-  reviewed against sources before publish.
-
 - [ ] **Phase-1 design spec + wireframes** · `Viz` · L · I8 C9 E7 = **504**
   Section-by-section spec for the home advocacy narrative, summary-panel system,
   story arc, and a `/data` charter (what lives there, what stays). *Gates the remaining
@@ -84,11 +64,6 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
   Replace the `?view=zip` query-string experiment with a proper drill-down from the
   county map/table on the home page. The richer ZIP-history view stays on `/data`.
 
-- [ ] **Distressed-vs-growth divergence** · `Depth`/`Viz` · L · I9 C7 E4 = **252**
-  Where CDI's distressed flag disagrees with actual FAIR growth — the sharpest angle.
-  Needs `analysis/distressed_zip_reconciliation.csv` exported; chart form TBD by spec
-  (slope graph vs. map).
-
 - [ ] **Trajectory: multi-series toggle** · `Viz` · S · I4 C8 E7 = **224**
   Add policies / exposure / premium toggle to the merged "Understanding the Crisis"
   chart, with cadence-aware gray-out for missing-data segments (premium pre-2024-12,
@@ -115,6 +90,13 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 
 ## Done (rolling log)
 
+- [x] 2026-07-26 — **CDI/SIS regulatory timeline shipped** on the analysis page:
+  structured source (`web/src/lib/sisTimeline.ts`, 13 entries), trajectory chart gains
+  announcement/rulemaking-band/operative markers + list-revision tick, §2 honesty copy.
+  Non-action entries built then cut in review; live in `notes/cdi-sis-timeline.md`.
+- [x] 2026-07-25 — **Distressed-vs-growth divergence** superseded: shipped as the
+  `/analysis/depopulation-promise` reconciliation work (matrix section later replaced by
+  the article + `/data` tab per review).
 - [x] 2026-07-27 — `/data` gains a **CDI Distressed List** tab: the official March 2025
   list verbatim (29 counties, 663 ZIPs, new `cdi_distressed_list.csv` export, contract
   v12) with per-ZIP dots cross-checking the FAIR quarterly "Is Distressed Area" flag
