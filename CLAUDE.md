@@ -37,6 +37,12 @@ This is primarily a **data pipeline**. It downloads PDFs from the California FAI
 Commands (`just setup` / `just build` / `just test`) are in the [README quickstart](README.md#quickstart). Conventions to follow:
 
 - **`just test` before every commit** — tests use `sources/`, no network needed. Never commit a change that breaks it.
+- **Manual local review before pushing to production.** Pushing `main` deploys the live
+  site. Before any push that changes user-visible pages — *especially text/copy changes*
+  (analysis pages, memos, headlines, methodology disclosures) — start the dev server
+  (`npm run dev` in `web/`), tell Rishi the URL(s) to look at, and wait for his OK.
+  Automated checks (typecheck, curl greps) verify rendering, not tone or correctness of
+  claims; copy on this site gets quoted by press and legislators.
 - Python is **3.11 only** (`requires-python = ">=3.11,<3.12"`). Use `uv` for all package operations — never `pip` directly.
 - Prefix direct CLI runs with `PYTHONPATH=src`:
   ```bash
