@@ -43,6 +43,11 @@ Commands (`just setup` / `just build` / `just test`) are in the [README quicksta
   (`npm run dev` in `web/`), tell Rishi the URL(s) to look at, and wait for his OK.
   Automated checks (typecheck, curl greps) verify rendering, not tone or correctness of
   claims; copy on this site gets quoted by press and legislators.
+- **Site copy follows the editorial standards in
+  [`.claude/skills/copy-review/SKILL.md`](.claude/skills/copy-review/SKILL.md)**
+  (citizen-professional voice, claims scoped to what we verified, state's own numbers
+  preferred, no gotchas). Apply them when writing copy; invoke `/copy-review` for a
+  structured pass before anything ships.
 - Python is **3.11 only** (`requires-python = ">=3.11,<3.12"`). Use `uv` for all package operations — never `pip` directly.
 - Prefix direct CLI runs with `PYTHONPATH=src`:
   ```bash

@@ -38,10 +38,7 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
       </p>
       <p className="mb-10 text-sm text-gray-500">
         depopulatefairplan.com · Data through{" "}
-        {latest ? fmtDate(latest.coverage_end) : "—"} · Companion to{" "}
-        <a href="/analysis/depopulation-promise" className="underline">
-          The Depopulation Promise
-        </a>
+        {latest ? fmtDate(latest.coverage_end) : "—"}
       </p>
 
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
@@ -133,6 +130,15 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
         </p>
       </div>
 
+      <p className="mt-8 border-t border-gray-200 pt-4 text-sm text-gray-500">
+        Every figure on this page is reproducible from the datasets on{" "}
+        <a href="/data" className="underline">Data &amp; Downloads</a>.
+        Questions, corrections, or data requests:{" "}
+        <a href="mailto:info@depopulatefairplan.com" className="underline">
+          info@depopulatefairplan.com
+        </a>
+        .
+      </p>
     </article>
   );
 }

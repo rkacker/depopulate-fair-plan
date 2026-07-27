@@ -3,8 +3,9 @@ import type { PromiseStats } from "@/lib/distressed";
 import { DEAL_FY } from "@/lib/distressed";
 import { fmtPolicies } from "@/lib/historyFormat";
 
-// Static memo page: AB 69 + AB 1680 (Calderon) and the reporting they need
-// for depopulation to be measurable. Companion to the SB 1301 memo. Zero
+// Static memo page: AB 69 + AB 1680 (Calderon) and the reporting details
+// that make FAIR Plan oversight work. Framed on measurement/transparency
+// common ground — does NOT assume the reader favors depopulation. Zero
 // client JS.
 const AB69_URL =
   "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB69";
@@ -30,20 +31,17 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
         Analysis · Legislation
       </p>
       <h1 className="mb-4 text-4xl font-bold leading-tight text-charcoal lg:text-5xl">
-        AB 69 &amp; AB 1680: Depopulation You Can Count
+        AB 69 &amp; AB 1680: FAIR Plan Oversight Needs FAIR Plan Data
       </h1>
       <p className="mb-2 text-xl leading-relaxed text-gray-600">
-        Assemblymember Calderon's package is the first legislation to treat
-        moving households off the FAIR Plan as something to measure, not just
-        something to promise. A handful of reporting details will decide
-        whether the public can actually count it.
+        Assemblymember Calderon's package strengthens FAIR Plan reporting and
+        oversight. With the Plan now larger than it has ever been, a handful
+        of reporting details will decide whether the public — and the
+        Legislature — can see what the Plan is actually doing.
       </p>
       <p className="mb-10 text-sm text-gray-500">
         depopulatefairplan.com · Data through{" "}
-        {latest ? fmtDate(latest.coverage_end) : "—"} · Companion to{" "}
-        <a href="/analysis/depopulation-promise" className="underline">
-          The Depopulation Promise
-        </a>
+        {latest ? fmtDate(latest.coverage_end) : "—"}
       </p>
 
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
@@ -75,39 +73,42 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
               {fmtPolicies(deal.policy_count)} → {fmtPolicies(latest.policy_count)}
             </span>
             <br />
-            FAIR Plan policies in force since the September 2023 insurer deal
-            — and in {scorecard.grew} of the {scorecard.total} ZIP codes the
-            state designated as distressed, enrollment went up, not down.
+            FAIR Plan policies in force since the September 2023 insurer
+            deal, including growth in {scorecard.grew} of the{" "}
+            {scorecard.total} ZIP codes the state designated as distressed —
+            where the deal itself promised the opposite. The larger the
+            Plan's role becomes, the more its reporting matters.
           </p>
         </div>
       )}
       <p className="mb-4 leading-relaxed text-gray-700">
-        Today, progress is reported as insurer commitments and rate
+        Today, the public record consists of insurer commitments and rate
         approvals: policies a carrier <em>plans</em> to write. We could find
-        no public dataset that counts households actually leaving the FAIR
-        Plan. The reporting AB 69 creates is the first real chance to change
-        that. Whether it does comes down to the details below.
+        no public dataset that counts households actually moving between the
+        FAIR Plan and the private market, in either direction. The reporting
+        AB 69 creates is the first real chance to change that. Whether it
+        does comes down to the details below.
       </p>
 
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
         The incremental data asks
       </h2>
       <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
-        AB 69 — make take-out reporting mean something
+        AB 69 — reporting details that make the count meaningful
       </p>
       <ul className="mb-6 list-disc space-y-3 pl-6 leading-relaxed text-gray-700">
         <li>
-          <span className="font-semibold">County and ZIP grain.</span> Publish
-          the aggregated quarterly clearinghouse report at county and ZIP
-          level, matching the FAIR Plan's existing quarterly releases — one
-          statewide number cannot show <em>where</em> depopulation is and
-          isn't happening.
+          <span className="font-semibold">County and ZIP detail.</span>{" "}
+          Publish the aggregated quarterly clearinghouse report at county and
+          ZIP level, matching the FAIR Plan's existing quarterly releases.
+          One statewide number cannot show <em>where</em> policyholders are
+          finding their way back to the private market and where they aren't.
         </li>
         <li>
           <span className="font-semibold">Count both directions.</span>{" "}
           Report policies leaving the FAIR Plan alongside policies entering
-          it in the same period. A count of departures alone could look like
-          progress even while the Plan keeps growing.
+          it in the same period, so the Plan's net direction is visible
+          rather than inferred from one-way counts.
         </li>
         <li>
           <span className="font-semibold">Retention.</span> A 12-month
@@ -170,6 +171,15 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
         </p>
       </div>
 
+      <p className="mt-8 border-t border-gray-200 pt-4 text-sm text-gray-500">
+        Every figure on this page is reproducible from the datasets on{" "}
+        <a href="/data" className="underline">Data &amp; Downloads</a>.
+        Questions, corrections, or data requests:{" "}
+        <a href="mailto:info@depopulatefairplan.com" className="underline">
+          info@depopulatefairplan.com
+        </a>
+        .
+      </p>
     </article>
   );
 }
