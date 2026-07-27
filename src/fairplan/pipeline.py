@@ -721,6 +721,19 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
     if reconciliation_path.exists():
         shutil.copy(reconciliation_path, exports_dir / "distressed_zip_reconciliation.csv")
 
+    # --- cdi_distressed_list.csv: CDI's official distressed geographies ---
+    # Counties + ZIPs from the March 2025 "Catastrophe Modeling and Ratemaking"
+    # list, concatenated verbatim (geo_type distinguishes the two).
+    distressed_counties_path = processed_dir / "cdi" / "distressed_counties.csv"
+    distressed_zips_path = processed_dir / "cdi" / "distressed_zips.csv"
+    if distressed_counties_path.exists() and distressed_zips_path.exists():
+        combined = read_csv(distressed_counties_path) + read_csv(distressed_zips_path)
+        write_csv(
+            exports_dir / "cdi_distressed_list.csv",
+            combined,
+            ["effective_date", "geo_type", "geo_id", "geo_name", "status", "source_id"],
+        )
+
     # --- california_zip_history.csv: ZIP-level FY2021-FY2025 policy counts ---
     # Project the full zip_wide table to just the columns the /data ZIP history
     # tab needs. Sorted by FY2025 descending (latest year, biggest first).

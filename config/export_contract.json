@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "exports": [
     "site_stats.json",
     "california_county_data.csv",
@@ -7,6 +7,7 @@
     "california_city_data.csv",
     "california_zip_history.csv",
     "cdi_county_market_share.csv",
+    "cdi_distressed_list.csv",
     "fair_statewide_history.csv",
     "distressed_zip_reconciliation.csv",
     "quarterly_totals.json"

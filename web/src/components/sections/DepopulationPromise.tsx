@@ -120,6 +120,9 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
         families finding private coverage.
       </p>
       <p className="mb-4 leading-relaxed text-gray-700">
+        The same holds at every scale. The list's ZIP codes cover virtually
+        all of the 29 counties the state designated as distressed in their
+        entirety, and in all 29 of those counties, FAIR Plan enrollment grew.
         These are the deal's own terms. The state chose these ZIP codes in a
         document whose title says exactly what the list is for:{" "}
         <a href={CDI_LIST_URL} className="underline" rel="noopener">
@@ -228,7 +231,11 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
         <p>
           <span className="font-semibold">Named-zone scorecard:</span> FAIR
           Plan policies in force per designated ZIP, FY{DEAL_FY} (ending Sept.
-          30, 2023 — nine days after the deal was announced) vs. FY{FY_LAST}.
+          30, 2023, nine days after the deal was announced) vs. FY{FY_LAST}.
+          The ZIP list effectively covers the full designated footprint: it
+          includes all but one of the reporting ZIP codes inside the 29
+          designated counties, so a county-level or union-of-both scorecard
+          gives materially identical results (93% grew, +51%).
         </p>
         <p>
           <span className="font-semibold">Regulatory timeline:</span> curated

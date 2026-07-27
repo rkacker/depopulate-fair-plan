@@ -1,6 +1,6 @@
 import type { StatewideHistoryRow } from "@/lib/loadData.server";
 import type { PromiseStats } from "@/lib/distressed";
-import { DEAL_FY, FY_LAST } from "@/lib/distressed";
+import { FY_LAST } from "@/lib/distressed";
 import { fmtPolicies } from "@/lib/historyFormat";
 
 // Static memo page: SB 1301 (Allen) and the data it needs to be auditable.

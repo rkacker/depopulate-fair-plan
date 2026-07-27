@@ -27,6 +27,7 @@ function useSearchParam(
   }
   return [value, set];
 }
+import { DistressedListTab } from "@/components/sections/DistressedListTab";
 import { FairShareTab } from "@/components/sections/FairShareTab";
 import {
   StatewideHistoryTab,
@@ -50,7 +51,7 @@ function GitHubMark({ className }: { className?: string }) {
   );
 }
 
-type TabId = "fair_share" | "statewide_history" | "zip_history";
+type TabId = "fair_share" | "statewide_history" | "zip_history" | "distressed_list";
 
 interface TabDef {
   id: TabId;
@@ -64,7 +65,7 @@ interface DataPageProps {
 
 const GITHUB_URL = "https://github.com/rkacker/depopulate-fair-plan";
 
-const TAB_ORDER: TabId[] = ["statewide_history", "zip_history", "fair_share"];
+const TAB_ORDER: TabId[] = ["statewide_history", "zip_history", "fair_share", "distressed_list"];
 
 export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
   const TABS: TabDef[] = [
@@ -82,6 +83,11 @@ export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
       id: "fair_share",
       label: "FAIR Share of Total Market",
       render: () => <FairShareTab />,
+    },
+    {
+      id: "distressed_list",
+      label: "CDI Distressed List",
+      render: () => <DistressedListTab />,
     },
   ];
   const TAB_IDS = TAB_ORDER;

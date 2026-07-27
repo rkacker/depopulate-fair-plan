@@ -1,6 +1,6 @@
 import type { StatewideHistoryRow } from "@/lib/loadData.server";
 import type { PromiseStats } from "@/lib/distressed";
-import { DEAL_FY, FY_LAST } from "@/lib/distressed";
+import { DEAL_FY } from "@/lib/distressed";
 import { fmtPolicies } from "@/lib/historyFormat";
 
 // Static memo page: AB 69 + AB 1680 (Calderon) and the reporting they need

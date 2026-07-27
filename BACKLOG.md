@@ -115,6 +115,11 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 
 ## Done (rolling log)
 
+- [x] 2026-07-27 — `/data` gains a **CDI Distressed List** tab: the official March 2025
+  list verbatim (29 counties, 663 ZIPs, new `cdi_distressed_list.csv` export, contract
+  v12) with per-ZIP dots cross-checking the FAIR quarterly "Is Distressed Area" flag
+  (573 / 1 / 89). Article notes the list covers the full designated footprint (all 29
+  counties grew; union scorecard identical).
 - [x] 2026-07-26 — **Ship the bill-memo pages** — `/analysis/sb-1301` (Allen: codify the
   nonrenewal series, reason codes, § 2644.4.8 re-runs) and `/analysis/ab-69-ab-1680`
   (Calderon: ZIP-grain net take-out flows w/ retention, earlier start, consistent
