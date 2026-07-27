@@ -1,0 +1,207 @@
+import type { StatewideHistoryRow } from "@/lib/loadData.server";
+import type { PromiseStats } from "@/lib/distressed";
+import { DEAL_FY, FY_LAST } from "@/lib/distressed";
+import { fmtPolicies } from "@/lib/historyFormat";
+
+// Static memo page: AB 69 + AB 1680 (Calderon) and the reporting they need
+// for depopulation to be measurable. Companion to the SB 1301 memo. Zero
+// client JS.
+const AB69_URL =
+  "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB69";
+const AB1680_URL =
+  "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260AB1680";
+
+interface Ab69Ab1680MemoProps {
+  history: StatewideHistoryRow[];
+  stats: PromiseStats;
+}
+
+export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
+  const points = history
+    .filter((r) => r.policy_count !== null)
+    .sort((a, b) => a.coverage_end.localeCompare(b.coverage_end));
+  const deal = points.find((r) => r.coverage_end === `${DEAL_FY}-09-30`) ?? null;
+  const latest = points[points.length - 1] ?? null;
+  const { scorecard } = stats;
+
+  return (
+    <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+      <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-patriot-red">
+        Analysis · Legislation
+      </p>
+      <h1 className="mb-4 text-4xl font-bold leading-tight text-charcoal lg:text-5xl">
+        AB 69 &amp; AB 1680: Depopulation You Can Count
+      </h1>
+      <p className="mb-2 text-xl leading-relaxed text-gray-600">
+        Assemblymember Calderon's package is the first legislation to treat
+        FAIR Plan depopulation as an outcome to measure, not a promise to
+        announce. A handful of reporting details will decide whether the
+        public can actually count it.
+      </p>
+      <p className="mb-10 text-sm text-gray-500">
+        depopulatefairplan.com · Data through{" "}
+        {latest ? fmtDate(latest.coverage_end) : "—"} · Companion to{" "}
+        <a href="/analysis/depopulation-promise" className="underline">
+          The Depopulation Promise
+        </a>
+      </p>
+
+      <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
+        What the bills do
+      </h2>
+      <p className="mb-4 leading-relaxed text-gray-700">
+        <a href={AB69_URL} className="underline" rel="noopener">AB 69</a>{" "}
+        (Calderon) builds out the FAIR Plan clearinghouse — the mechanism for
+        moving policyholders back to the private market. It requires clear
+        notices to policyholders about their options, broker education, and,
+        beginning May 2027, quarterly reporting by participating insurers of
+        the policies they issue to FAIR Plan policyholders, with aggregated
+        public reporting by the association.{" "}
+        <a href={AB1680_URL} className="underline" rel="noopener">AB 1680</a>{" "}
+        (the "Make It FAIR Act") strengthens Department of Insurance oversight
+        of the FAIR Plan itself: corrective-action authority with penalties,
+        examination powers, and staffing requirements. As of July 2026 both
+        bills have passed the Assembly and await action in Senate
+        Appropriations.
+      </p>
+
+      <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
+        What the data shows
+      </h2>
+      {deal && latest && (
+        <div className="mb-4 rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-5">
+          <p className="text-gray-800">
+            <span className="text-2xl font-bold tabular-nums text-patriot-red">
+              {fmtPolicies(deal.policy_count)} → {fmtPolicies(latest.policy_count)}
+            </span>
+            <br />
+            FAIR Plan policies in force since the September 2023 insurer deal
+            — and in {scorecard.grew} of the {scorecard.total} ZIP codes the
+            state designated as distressed, enrollment went up, not down.
+          </p>
+        </div>
+      )}
+      <p className="mb-4 leading-relaxed text-gray-700">
+        Today, depopulation progress is reported as carrier commitments and
+        rate approvals — policies a carrier <em>plans</em> to write — while no
+        public dataset counts households actually leaving the FAIR Plan. The
+        clearinghouse reporting AB 69 creates is the first chance to fix
+        that. Whether it does depends on grain, netting, and timing.
+      </p>
+
+      <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
+        The incremental data asks
+      </h2>
+      <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
+        AB 69 — make take-out reporting mean something
+      </p>
+      <ul className="mb-6 list-disc space-y-3 pl-6 leading-relaxed text-gray-700">
+        <li>
+          <span className="font-semibold">County and ZIP grain.</span> Publish
+          the aggregated quarterly clearinghouse report at county and ZIP
+          level, matching the FAIR Plan's existing quarterly releases — one
+          statewide number cannot show <em>where</em> depopulation is and
+          isn't happening.
+        </li>
+        <li>
+          <span className="font-semibold">Net flows, not gross.</span> Report
+          policies leaving the FAIR Plan alongside policies entering it in
+          the same period. Gross take-out alone can show "success" while the
+          Plan keeps growing.
+        </li>
+        <li>
+          <span className="font-semibold">Retention.</span> A 12-month
+          follow-up count: how many taken-out policies are still in the
+          voluntary market a year later.
+        </li>
+        <li>
+          <span className="font-semibold">Start sooner.</span> Begin aggregate
+          reporting the first quarter after enactment. A May 2027 start
+          leaves a two-year measurement blackout in the middle of the crisis.
+        </li>
+        <li>
+          <span className="font-semibold">Machine-readable.</span> CSV with a
+          data dictionary, not PDF — today every analyst in the state re-keys
+          the same tables by hand.
+        </li>
+      </ul>
+      <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
+        AB 1680 — put data duties inside FAIR Plan oversight
+      </p>
+      <ul className="mb-4 list-disc space-y-3 pl-6 leading-relaxed text-gray-700">
+        <li>
+          <span className="font-semibold">
+            Codify the quarterly geographic releases
+          </span>{" "}
+          (county/ZIP policy, premium, and exposure) as a statutory duty
+          subject to the bill's corrective-action regime — with a{" "}
+          <em>consistent</em> distressed-area flag. The FAIR Plan's own
+          releases flipped between a ~1,009-ZIP internal set and the official
+          663-ZIP list across the 2025 quarters, with no published definition
+          for either.
+        </li>
+        <li>
+          <span className="font-semibold">Financial-fragility disclosure.</span>{" "}
+          Quarterly reporting of total insured value against surplus and
+          reinsurance, plus any assessment activity — the numbers that decide
+          when every insured Californian pays for FAIR Plan losses, as
+          happened with the $1 billion post-fire assessment.
+        </li>
+        <li>
+          <span className="font-semibold">Cost-of-coverage reporting.</span>{" "}
+          Average premium per policy by county. Our analysis of the FAIR
+          Plan's own releases shows a roughly 12× spread — about $621 to
+          $7,234 per policy per year — invisible in any official publication.
+        </li>
+      </ul>
+
+      <div className="my-8 rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-5">
+        <p className="leading-relaxed text-gray-800">
+          <span className="font-semibold">None of this is new collection.</span>{" "}
+          The FAIR Plan already produces quarterly geographic data; AB 69
+          already creates the reporting channel; the 2023 Sustainable
+          Insurance Strategy already committed the FAIR Plan to expanded
+          reporting on reducing its policyholder count. The asks are grain,
+          netting, timing, and format.
+        </p>
+      </div>
+
+      <div className="mt-10 border-t border-gray-200 pt-6 text-sm text-gray-600">
+        <p className="mb-2 font-semibold uppercase tracking-wide text-gray-500">
+          Related
+        </p>
+        <ul className="space-y-1">
+          <li>
+            <a href="/analysis/depopulation-promise" className="underline">
+              The Depopulation Promise
+            </a>{" "}
+            — the full analysis behind these numbers
+          </li>
+          <li>
+            <a href="/analysis/sb-1301" className="underline">
+              SB 1301: Nonrenewal Protections Need Nonrenewal Data
+            </a>{" "}
+            — the companion memo for the Senate bill
+          </li>
+          <li>
+            <a href="/data" className="underline">Data &amp; Downloads</a> —
+            every dataset cited here, including the{" "}
+            <a
+              href="/data/distressed_zip_reconciliation.csv"
+              className="underline"
+              download
+            >
+              per-ZIP reconciliation table
+            </a>
+          </li>
+        </ul>
+      </div>
+    </article>
+  );
+}
+
+function fmtDate(iso: string): string {
+  const [y, mo] = iso.split("-").map(Number);
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return `${months[(mo ?? 1) - 1]} ${y}`;
+}

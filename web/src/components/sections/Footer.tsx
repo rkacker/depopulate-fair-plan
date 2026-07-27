@@ -21,6 +21,13 @@ export function Footer() {
           className="mt-6 flex items-center justify-center gap-4 text-sm"
         >
           <a
+            href="/analysis"
+            className="text-golden-yellow transition-colors hover:text-golden-yellow-soft"
+          >
+            Analysis
+          </a>
+          <span aria-hidden className="text-gray-600">·</span>
+          <a
             href="/data"
             className="text-golden-yellow transition-colors hover:text-golden-yellow-soft"
           >

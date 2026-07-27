@@ -32,41 +32,25 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 
 ## Now
 
-- [ ] **SB 1301 data-needs memo (Sen. Allen)** · `Depth` · M · I9 C8 E7 = **504**
-  One-page memo for Sen. Allen's office: the concrete data SB 1301 (nonrenewal
-  protections) needs to be auditable, anchored in `/analysis/depopulation-promise`
-  findings. Bulleted asks:
-  - Codify the residential new/renew/nonrenew series (state + county + ZIP) on a
-    fixed cadence, machine-readable — the series stops at CY2023, before the
-    nonrenewal wave the bill responds to.
-  - Aggregated nonrenewal reason-code reporting (roof age, prior claim, wildfire
-    model score) so the prohibited-reasons provisions can be monitored.
-  - Require CDI to re-run the § 2644.4.8 undermarketed-ZIP test against current
-    enrollment on a defined cadence: our recomputation finds 90 qualifying ZIPs
-    missing from the 2025 list and 186 listed ZIPs that no longer qualify.
-  - Anchor stat: of 574 designated ZIPs, 534 grew since the Sept 2023 deal.
-  Source material: `notes/legislative-data-note.md` + the live analysis page.
-  DoD: memo in `notes/`, reviewed by Rishi, ready to send.
-
-- [ ] **AB 69 + AB 1680 combined data-needs memo (Asm. Calderon)** · `Depth` · M · I9 C8 E7 = **504**
-  One-page combined memo for Asm. Calderon's office (author of both). Bulleted asks:
-  - AB 69 clearinghouse reporting at county + ZIP grain (not one statewide number),
-    published as CSV with a data dictionary.
-  - Net flows: policies leaving the FAIR Plan alongside policies entering, same
-    period — gross take-out alone can show "success" while the Plan grows.
-  - 12-month retention follow-up on taken-out policies.
-  - Begin aggregate reporting the first quarter after enactment (May 2027 start
-    leaves a two-year measurement blackout).
-  - AB 1680: make the quarterly county/ZIP policy+premium+exposure releases a
-    statutory duty with a *consistent* distressed-area flag — the FAIR Plan's own
-    releases flipped between a ~1,009-ZIP set and the official 663-ZIP list across
-    2025 quarters (documented on the analysis page).
-  - AB 1680: quarterly TIV vs. surplus/reinsurance + assessment disclosure; average
-    premium per policy by county (~12× spread, $621–$7,234).
-  - Anchor stat: same named-zones scorecard; depopulation is unmeasured and, where
-    measurable, absent.
-  Source material: `notes/legislative-data-note.md` + the live analysis page.
-  DoD: memo in `notes/`, reviewed by Rishi, ready to send.
+- [ ] **CDI/SIS activities timeline + trajectory honesty amendments** · `Depth`/`Trust` · M · I8 C8 E6 = **384**
+  Amend `/analysis/depopulation-promise` (and its trajectory chart) with the regulatory
+  timeline so the "Sept 2023 deal" framing is precise: the deal was a *framework
+  announcement* (Newsom EO + Lara SIS package, 2023-09-21); the mechanics (85% test,
+  § 2644.4.8 definitions, undermarketed-ZIP list) were built through 2024 rulemakings and
+  the SIS became fully operative Jan 2025 — days before the Palisades/Eaton fires.
+  - Build a **curated, structured timeline source** (e.g. `config/cdi_sis_timeline.csv`:
+    date, actor, action, category, source_url) usable by both the article and future
+    pages; drafted from `notes/cdi-sis-timeline.md`.
+  - Add **multiple time markers** to the trajectory chart: Lara's start (Jan 2019), SIS
+    announcement (Sept 2023), rulemakings complete (Dec 2024), SIS operative + LA fires
+    (Jan 2025), distressed-list revision (Mar 2025). Keep the chart readable — marker
+    density is the design risk.
+  - Reword article §2 to be honest that implementation lagged announcement; consider a
+    compact timeline strip section between §2 and §3.
+  - Include the **non-action** entries (penetration denominator unpublished since 2023;
+    2025 list never re-run) alongside actions — that's the accountability record.
+  DoD: timeline source committed; chart markers shipped; §2 copy amended; timeline
+  reviewed against sources before publish.
 
 - [ ] **Phase-1 design spec + wireframes** · `Viz` · L · I8 C9 E7 = **504**
   Section-by-section spec for the home advocacy narrative, summary-panel system,
@@ -131,6 +115,13 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 
 ## Done (rolling log)
 
+- [x] 2026-07-26 — **Ship the bill-memo pages** — `/analysis/sb-1301` (Allen: codify the
+  nonrenewal series, reason codes, § 2644.4.8 re-runs) and `/analysis/ab-69-ab-1680`
+  (Calderon: ZIP-grain net take-out flows w/ retention, earlier start, consistent
+  distressed flag, financial-fragility + cost reporting). Shipped as public analysis
+  pages (not letters); Rishi sends concrete request lists to each office separately.
+  Plus: `/analysis` index page, footer Analysis link, sitemap fixed (was missing the
+  depopulation-promise URL entirely).
 - [x] 2026-07 — **Ship `/analysis/depopulation-promise`** — long-form analysis citing/extending
   the NYT Nov 2025 investigation: named-zones depopulation scorecard (534 of 574 designated
   ZIPs grew since the Sept 2023 deal), § 2644.4.8 fire-prong recomputation (478 qualify, 90

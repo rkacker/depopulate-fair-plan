@@ -1,0 +1,64 @@
+---
+import Base from "@/layouts/Base.astro";
+
+const title = "Analysis — Depopulate the FAIR Plan";
+const description =
+  "Long-form, data-grounded analysis of the FAIR Plan crisis: the depopulation promise, and the reporting California's insurance bills need to make it real.";
+
+const pieces = [
+  {
+    href: "/analysis/depopulation-promise",
+    title: "The Depopulation Promise",
+    dek: "California's 2023 deal with insurers promised to shrink the FAIR Plan. In 93% of the state's own designated distressed ZIP codes, enrollment grew instead.",
+    date: "July 2026",
+  },
+  {
+    href: "/analysis/sb-1301",
+    title: "SB 1301: Nonrenewal Protections Need Nonrenewal Data",
+    dek: "Sen. Allen's protections are unauditable with today's public data — the state's nonrenewal series stops in 2023. The asks that would make the bill self-verifying.",
+    date: "July 2026",
+  },
+  {
+    href: "/analysis/ab-69-ab-1680",
+    title: "AB 69 & AB 1680: Depopulation You Can Count",
+    dek: "Asm. Calderon's package is the first to treat FAIR Plan depopulation as measurable. Grain, netting, and timing will decide whether the public can count it.",
+    date: "July 2026",
+  },
+];
+---
+
+<Base title={title} description={description}>
+  <section class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+    <p class="mb-3 text-sm font-semibold uppercase tracking-wide text-patriot-red">
+      Analysis
+    </p>
+    <h1 class="mb-4 text-4xl font-bold leading-tight text-charcoal lg:text-5xl">
+      Data-grounded analysis of the FAIR Plan crisis
+    </h1>
+    <p class="mb-10 text-lg text-gray-600">
+      Original analysis built on the FAIR Plan's and the Department of
+      Insurance's own published data. Every figure is reproducible from the
+      datasets on <a href="/data" class="underline">Data &amp; Downloads</a>.
+    </p>
+    <ul class="space-y-8">
+      {
+        pieces.map((p) => (
+          <li class="border-l-4 border-patriot-red pl-5">
+            <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">
+              {p.date}
+            </p>
+            <h2 class="mt-1 text-2xl font-bold text-charcoal">
+              <a href={p.href} class="hover:underline">
+                {p.title}
+              </a>
+            </h2>
+            <p class="mt-2 leading-relaxed text-gray-600">{p.dek}</p>
+            <a href={p.href} class="mt-2 inline-block font-semibold text-patriot-red hover:underline">
+              Read →
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

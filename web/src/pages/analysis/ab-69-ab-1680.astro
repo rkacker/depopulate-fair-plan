@@ -1,0 +1,20 @@
+---
+import Base from "@/layouts/Base.astro";
+import { Ab69Ab1680Memo } from "@/components/sections/Ab69Ab1680Memo";
+import {
+  loadPromiseStatsServer,
+  loadStatewideHistoryServer,
+} from "@/lib/loadData.server";
+
+const title = "AB 69 & AB 1680: Depopulation You Can Count — Depopulate the FAIR Plan";
+const description =
+  "Asm. Calderon's FAIR Plan package is the first to treat depopulation as measurable. The reporting details — grain, netting, timing — that decide whether the public can count it.";
+
+const history = loadStatewideHistoryServer();
+const stats = loadPromiseStatsServer();
+---
+
+<Base title={title} description={description}>
+  {/* Static memo — no client directive, zero JS shipped. */}
+  <Ab69Ab1680Memo history={history} stats={stats} />
+</Base>

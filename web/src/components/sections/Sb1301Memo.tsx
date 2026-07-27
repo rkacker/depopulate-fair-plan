@@ -1,0 +1,168 @@
+import type { StatewideHistoryRow } from "@/lib/loadData.server";
+import type { PromiseStats } from "@/lib/distressed";
+import { DEAL_FY, FY_LAST } from "@/lib/distressed";
+import { fmtPolicies } from "@/lib/historyFormat";
+
+// Static memo page: SB 1301 (Allen) and the data it needs to be auditable.
+// Not a letter — a public, linkable summary of the bill and the incremental
+// data asks that support depopulating the FAIR Plan. Zero client JS.
+const BILL_URL =
+  "https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB1301";
+
+interface Sb1301MemoProps {
+  history: StatewideHistoryRow[];
+  stats: PromiseStats;
+}
+
+export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
+  const points = history
+    .filter((r) => r.policy_count !== null)
+    .sort((a, b) => a.coverage_end.localeCompare(b.coverage_end));
+  const latest = points[points.length - 1] ?? null;
+  const { scorecard, criteria } = stats;
+
+  return (
+    <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+      <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-patriot-red">
+        Analysis · Legislation
+      </p>
+      <h1 className="mb-4 text-4xl font-bold leading-tight text-charcoal lg:text-5xl">
+        SB 1301: Nonrenewal Protections Need Nonrenewal Data
+      </h1>
+      <p className="mb-2 text-xl leading-relaxed text-gray-600">
+        Senator Allen's bill gives homeowners real protections against being
+        dropped. But every protection it creates is unauditable with today's
+        public data — the state's nonrenewal statistics stop in 2023, and its
+        distressed-area list hasn't kept up with its own criteria.
+      </p>
+      <p className="mb-10 text-sm text-gray-500">
+        depopulatefairplan.com · Data through{" "}
+        {latest ? fmtDate(latest.coverage_end) : "—"} · Companion to{" "}
+        <a href="/analysis/depopulation-promise" className="underline">
+          The Depopulation Promise
+        </a>
+      </p>
+
+      <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
+        What the bill does
+      </h2>
+      <p className="mb-4 leading-relaxed text-gray-700">
+        <a href={BILL_URL} className="underline" rel="noopener">SB 1301</a>{" "}
+        (Allen) requires property insurers to give six months' notice of
+        nonrenewal, state the specific reasons, and offer a path to keep
+        coverage through repairs and mitigation. It bars dropping a homeowner
+        solely for roof age or a prior claim. As of July 2026 it has passed
+        the Senate and awaits action in Assembly Appropriations.
+      </p>
+      <p className="mb-4 leading-relaxed text-gray-700">
+        The bill responds to the nonrenewal wave that pushed hundreds of
+        thousands of households onto the FAIR Plan — the state's insurer of
+        last resort — after the September 2023 regulatory deal with insurers.
+      </p>
+
+      <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
+        What the data shows
+      </h2>
+      <div className="mb-4 rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-5">
+        <p className="text-gray-800">
+          <span className="text-2xl font-bold tabular-nums text-patriot-red">
+            {scorecard.grew} of {scorecard.total}
+          </span>{" "}
+          state-designated distressed ZIP codes had <em>more</em> FAIR Plan
+          policies in FY{FY_LAST} than at the deal (FY{DEAL_FY}) — enrollment
+          in the named zones rose {stats.designated.growthPct}% (
+          {fmtPolicies(stats.designated.fyDeal)} →{" "}
+          {fmtPolicies(stats.designated.fyLast)}).
+        </p>
+      </div>
+      <p className="mb-4 leading-relaxed text-gray-700">
+        Whether SB 1301's protections work will be a question about nonrenewal
+        patterns — and the Department of Insurance's residential
+        new/renewed/nonrenewed series was last published for calendar{" "}
+        <strong>2023</strong>, before the fires and before the wave the bill
+        answers. Meanwhile the distressed-area designations that trigger
+        moratoria and protections have drifted from the department's own
+        criteria: applying the § 2644.4.8 test to current enrollment,{" "}
+        <strong>{criteria.missedByCriteria} qualifying ZIP codes are missing
+        from the official list</strong> and {criteria.listedNotQualifying}{" "}
+        listed ZIPs no longer meet the fire-prong test.
+      </p>
+
+      <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
+        The incremental data asks
+      </h2>
+      <ul className="mb-4 list-disc space-y-3 pl-6 leading-relaxed text-gray-700">
+        <li>
+          <span className="font-semibold">Codify the nonrenewal series.</span>{" "}
+          Require CDI to publish residential new / renewed / nonrenewed counts
+          at state, county, and ZIP level on a fixed cadence (quarterly
+          preferred, at least annual), in machine-readable form. The series
+          exists — its latest public edition is simply three years old.
+        </li>
+        <li>
+          <span className="font-semibold">Reason-code reporting.</span> Once
+          insurers must state a reason for each nonrenewal, require aggregated
+          reason-code statistics (roof age, prior claim, wildfire model score,
+          etc.). Without them, the bill's prohibited-reasons provisions cannot
+          be monitored by anyone outside the insurer.
+        </li>
+        <li>
+          <span className="font-semibold">
+            Re-run the distressed-area test on a schedule.
+          </span>{" "}
+          The designation criteria are already in regulation (10 CCR
+          § 2644.4.8); require CDI to reapply them to current enrollment on a
+          defined cadence and republish the list, so protections attach where
+          the distress actually is.
+        </li>
+      </ul>
+
+      <div className="my-8 rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-5">
+        <p className="leading-relaxed text-gray-800">
+          <span className="font-semibold">None of this is new collection.</span>{" "}
+          CDI compiled every one of these datasets through 2023 and cites
+          near-current figures on its own Sustainable Insurance Strategy page.
+          The asks are cadence, grain, and format — publishing what exists, on
+          a schedule, in a form the public can use.
+        </p>
+      </div>
+
+      <div className="mt-10 border-t border-gray-200 pt-6 text-sm text-gray-600">
+        <p className="mb-2 font-semibold uppercase tracking-wide text-gray-500">
+          Related
+        </p>
+        <ul className="space-y-1">
+          <li>
+            <a href="/analysis/depopulation-promise" className="underline">
+              The Depopulation Promise
+            </a>{" "}
+            — the full analysis behind these numbers
+          </li>
+          <li>
+            <a href="/analysis/ab-69-ab-1680" className="underline">
+              AB 69 &amp; AB 1680: Measuring Depopulation
+            </a>{" "}
+            — the companion memo for the Assembly package
+          </li>
+          <li>
+            <a href="/data" className="underline">Data &amp; Downloads</a> —
+            every dataset cited here, including the{" "}
+            <a
+              href="/data/distressed_zip_reconciliation.csv"
+              className="underline"
+              download
+            >
+              per-ZIP reconciliation table
+            </a>
+          </li>
+        </ul>
+      </div>
+    </article>
+  );
+}
+
+function fmtDate(iso: string): string {
+  const [y, mo] = iso.split("-").map(Number);
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  return `${months[(mo ?? 1) - 1]} ${y}`;
+}

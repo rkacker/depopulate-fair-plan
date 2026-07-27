@@ -1,0 +1,20 @@
+---
+import Base from "@/layouts/Base.astro";
+import { Sb1301Memo } from "@/components/sections/Sb1301Memo";
+import {
+  loadPromiseStatsServer,
+  loadStatewideHistoryServer,
+} from "@/lib/loadData.server";
+
+const title = "SB 1301: Nonrenewal Protections Need Nonrenewal Data — Depopulate the FAIR Plan";
+const description =
+  "Sen. Allen's nonrenewal protections are unauditable with today's public data. The concrete reporting asks that would make SB 1301 self-verifying.";
+
+const history = loadStatewideHistoryServer();
+const stats = loadPromiseStatsServer();
+---
+
+<Base title={title} description={description}>
+  {/* Static memo — no client directive, zero JS shipped. */}
+  <Sb1301Memo history={history} stats={stats} />
+</Base>
