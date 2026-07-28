@@ -51,6 +51,19 @@
         "exposure": 691806787207,
         "premium": 1788773322
       }
+    },
+    {
+      "coverage_end": "2026-06-30",
+      "source_ids": {
+        "count": "fair_residential_policy_count_2026_06",
+        "exposure": "fair_residential_policy_exposure_2026_06",
+        "premium": "fair_residential_policy_premium_2026_06"
+      },
+      "totals": {
+        "count": 665862,
+        "exposure": 709443462973,
+        "premium": 1814466107
+      }
     }
   ]
 }

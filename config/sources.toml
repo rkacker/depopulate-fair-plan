@@ -181,6 +181,36 @@ coverage_end = "2026-03-31"
 file_name = "residential_policy_exposure_2026_03.pdf"
 
 [[sources]]
+id = "fair_residential_policy_count_2026_06"
+family = "fair"
+dataset = "residential_policy_count"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2026/07/Policies-by-category-DWE-as-of-260630-DL-260717v001.pdf"
+published_date = "2026-07-17"
+coverage_end = "2026-06-30"
+file_name = "residential_policy_count_2026_06.pdf"
+
+[[sources]]
+id = "fair_residential_policy_premium_2026_06"
+family = "fair"
+dataset = "residential_policy_premium"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2026/07/Premium-by-category-DWE-as-of-260630-DL-260717v001.pdf"
+published_date = "2026-07-17"
+coverage_end = "2026-06-30"
+file_name = "residential_policy_premium_2026_06.pdf"
+
+[[sources]]
+id = "fair_residential_policy_exposure_2026_06"
+family = "fair"
+dataset = "residential_policy_exposure"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2026/07/Exposure-by-category-DWE-as-of-260630-DL-260717v001.pdf"
+published_date = "2026-07-17"
+coverage_end = "2026-06-30"
+file_name = "residential_policy_exposure_2026_06.pdf"
+
+[[sources]]
 id = "cdi_residential_county_analysis_2024_release"
 family = "cdi"
 dataset = "residential_county_yearly"
