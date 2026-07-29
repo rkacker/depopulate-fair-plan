@@ -13,6 +13,12 @@ def fetch_sources(sources: list[SourceConfig], raw_dir: Path) -> list[dict[str, 
     fetched: list[dict[str, object]] = []
     for source in sources:
         target = source.output_path(raw_dir)
+        if not source.url:
+            # Archival source (no longer published upstream); the committed
+            # copy in sources/ is authoritative.
+            continue
+        if target.exists():
+            continue
         ensure_directory(target.parent)
         urllib.request.urlretrieve(source.url, target)
         metadata = {
