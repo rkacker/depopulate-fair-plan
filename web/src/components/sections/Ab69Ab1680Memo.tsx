@@ -58,9 +58,10 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
         <a href={AB1680_URL} className="underline" rel="noopener">AB 1680</a>{" "}
         (the "Make It FAIR Act") strengthens Department of Insurance oversight
         of the FAIR Plan itself: corrective-action authority with penalties,
-        examination powers, and staffing requirements. As of July 2026 both
-        bills have passed the Assembly and await action in Senate
-        Appropriations.
+        examination powers, and staffing requirements. As of late July 2026
+        both bills have passed the Assembly and sit in Senate Appropriations,
+        with final votes ahead before the session ends. The window for
+        amendments is now.
       </p>
 
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
@@ -91,10 +92,16 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
       </p>
 
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
-        The incremental data asks
+        The amendments
       </h2>
+      <p className="mb-4 leading-relaxed text-gray-700">
+        Nearly all of this data already exists inside the FAIR Plan and the
+        Department of Insurance. The six amendments below — three per bill —
+        make it public, regular, and usable, and are small enough to adopt in
+        the time the bills have left.
+      </p>
       <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
-        AB 69 — reporting details that make the count meaningful
+        AB 69 — three amendments to make the clearinghouse count meaningful
       </p>
       <ul className="mb-6 list-disc space-y-3 pl-6 leading-relaxed text-gray-700">
         <li>
@@ -111,23 +118,16 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
           rather than inferred from one-way counts.
         </li>
         <li>
-          <span className="font-semibold">Retention.</span> A 12-month
-          follow-up count: how many taken-out policies are still in the
-          voluntary market a year later.
-        </li>
-        <li>
-          <span className="font-semibold">Start sooner.</span> Begin aggregate
-          reporting the first quarter after enactment. A May 2027 start
-          leaves a two-year measurement blackout in the middle of the crisis.
-        </li>
-        <li>
-          <span className="font-semibold">Machine-readable.</span> Publish as
-          CSV with a data dictionary rather than PDF. Today, anyone who wants
-          to analyze these figures re-keys the same tables from PDFs by hand.
+          <span className="font-semibold">
+            Start the first quarter after enactment.
+          </span>{" "}
+          A May 2027 start leaves a two-year measurement blackout in the
+          middle of the crisis.
         </li>
       </ul>
       <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
-        AB 1680 — put data duties inside FAIR Plan oversight
+        AB 1680 — three amendments to put data duties inside FAIR Plan
+        oversight
       </p>
       <ul className="mb-4 list-disc space-y-3 pl-6 leading-relaxed text-gray-700">
         <li>
@@ -136,9 +136,9 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
           </span>{" "}
           (county and ZIP policy, premium, and insured-value figures) as a
           statutory duty subject to the bill's corrective-action provisions,
-          with a <em>consistent</em> distressed-area flag. In 2025, the FAIR
-          Plan's own quarterly releases switched between an internal set of
-          roughly 1,009 ZIP codes and the official 663-ZIP list, without a
+          with a single, published distressed-area definition. In 2025, the
+          FAIR Plan's own quarterly releases switched between an internal set
+          of roughly 1,009 ZIP codes and the official 663-ZIP list, with no
           published definition for either.
         </li>
         <li>
@@ -166,8 +166,9 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
           The FAIR Plan already produces quarterly county and ZIP data. AB 69
           already creates the reporting channel. The 2023 Sustainable
           Insurance Strategy already committed the FAIR Plan to expanded
-          reporting on reducing its policyholder count. These asks are about
-          detail, completeness, timing, and format.
+          reporting on reducing its policyholder count. These amendments are
+          about detail, completeness, timing, and format — publishing data
+          the Plan already holds.
         </p>
       </div>
 
