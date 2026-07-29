@@ -136,6 +136,25 @@ export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
           <GitHubMark className="mt-0.5 h-6 w-6 flex-shrink-0 text-charcoal" />
         </a>
 
+        {/* Counts-basis disclosure: our totals follow the FAIR Plan's
+            ZIP-level data files, which run below the Plan's dashboard
+            headline. Documented 2026-07; revisit each quarterly release. */}
+        <div className="mb-8 rounded-md border border-gray-200 bg-white p-4 text-sm text-gray-700">
+          <p className="font-semibold text-charcoal">A note on policy counts</p>
+          <p className="mt-1">
+            Our FAIR Plan figures come from the Plan&apos;s ZIP-level data
+            files and match the totals printed in those files exactly (for
+            example, 665,862 residential policies as of June 30, 2026). The
+            FAIR Plan&apos;s own dashboard headline reports higher figures —
+            675,229 dwelling policies as of the same date, a difference of
+            9,367 — and we could find no published document that defines or
+            reconciles the two. The Plan&apos;s reporting materials note that
+            &ldquo;Totals may vary based on data source.&rdquo; We use the
+            ZIP-level files because they are the only FAIR Plan publication
+            with geographic detail.
+          </p>
+        </div>
+
         <div
           role="tablist"
           aria-label="Datasets"
