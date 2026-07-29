@@ -46,6 +46,13 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 
 ## Next (ranked by score; most need a new export)
 
+- [ ] **Analysis page: growth relocation (Q2 2026)** · `Depth`/`Viz` · M · I8 C8 E7 = **448**
+  "The FAIR Plan's growth moved out of fire country": >50-policy movers are 67 up /
+  1 down; 55/67 gainers off the distressed list; 62/67 in SoCal-6. Draft + all
+  computed facts in [`notes/q2-2026-status-update.md`](notes/q2-2026-status-update.md)
+  (sent as Rishi's status update 2026-07-28). Data already in synced exports — needs
+  page + `/copy-review` pass. *Timely: pairs with the AB 69/1680 amendment window.*
+
 - [ ] **Premium-burden panel** · `Depth` · M · I7 C9 E5 = **315**
   premium ÷ policy_count and exposure ÷ policy_count by county; cost-of-coverage angle.
   **Not export-ready** — `california_county_data.csv` ships `policies` only; premium/exposure
@@ -90,6 +97,21 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 
 ## Done (rolling log)
 
+- [x] 2026-07-28 — **Q2 2026 quarterly release ingested** (as of 2026-06-30, published
+  2026-07-17): 3 new DWE sources, goldens updated (665,862 statewide; Alameda 12,134),
+  exports synced, deployed. `fetch` now skips archival (no-URL) sources and files
+  already on disk. Analysis: slowest QoQ growth in series (+1.63%); 535 ZIPs declined
+  (vs 63 all last FY); growth concentrated in non-distressed SoCal (top-5 counties =
+  ~82% of net); deepest ZIP decline just −53 (Carmel).
+- [x] 2026-07-28 — **Counts-basis note on `/data`**: our totals match the FAIR Plan's
+  ZIP-level files exactly; the Plan's dashboard headline runs higher (675,229 vs
+  665,862 dwelling, +9,367 / +1.4% as of 2026-06-30; gap has grown from ~0 in 2023)
+  with no published reconciliation — their own footnote: "Totals may vary based on
+  data source." Re-check the gap each quarterly release.
+- [x] 2026-07-28 — **AB 69/1680 page aligned to the sent amendment memo** (3+3 asks):
+  dropped Retention + Machine-readable, headline start-first-quarter-after-enactment,
+  "single, published distressed-area definition" wording, late-July status + amendment
+  window.
 - [x] 2026-07-26 — **CDI/SIS regulatory timeline shipped** on the analysis page:
   structured source (`web/src/lib/sisTimeline.ts`, 13 entries), trajectory chart gains
   announcement/rulemaking-band/operative markers + list-revision tick, §2 honesty copy.
