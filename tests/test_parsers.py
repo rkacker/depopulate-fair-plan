@@ -318,9 +318,9 @@ def test_non_ca_zips_excluded_from_history(tmp_path: Path) -> None:
         assert not non_ca, f"non-CA ZIPs leaked into {name}: {non_ca[:3]}"
 
 
-def test_zip_pif_history_spans_fy2019_through_fy2025(tmp_path: Path) -> None:
-    """With the FY2023+FY2024+FY2025 PIF files all ingested, the rolled-up
-    zip_pif_history should cover FY2019-FY2025 and statewide Totals must
+def test_zip_pif_history_spans_fy2019_through_fy2026(tmp_path: Path) -> None:
+    """With the FY2023 through FY2026 PIF files all ingested, the rolled-up
+    zip_pif_history should cover FY2019-FY2026 and statewide Totals must
     match the published values."""
     from fairplan.io_utils import read_csv
 
@@ -328,7 +328,7 @@ def test_zip_pif_history_spans_fy2019_through_fy2025(tmp_path: Path) -> None:
     normalize(FIXTURES, processed_dir, MANIFEST)
     rows = read_csv(processed_dir / "fair" / "zip_pif_history.csv")
     fys = sorted({int(r["fiscal_year"]) for r in rows})
-    assert fys == [2019, 2020, 2021, 2022, 2023, 2024, 2025]
+    assert fys == [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
 
     totals = {
         int(r["fiscal_year"]): int(r["value"])
@@ -339,25 +339,27 @@ def test_zip_pif_history_spans_fy2019_through_fy2025(tmp_path: Path) -> None:
     assert totals[2019] == 155243
     assert totals[2023] == 320572
     assert totals[2025] == 621234
+    assert totals[2026] == 665673
 
 
 def test_zip_tiv_history_present_and_statewide_match(tmp_path: Path) -> None:
-    """FY2024 + FY2025 TIV files should give us exposure history FY2020-FY2025."""
+    """FY2024 through FY2026 TIV files should give us exposure history FY2020-FY2026."""
     from fairplan.io_utils import read_csv
 
     processed_dir = tmp_path / "processed"
     normalize(FIXTURES, processed_dir, MANIFEST)
     rows = read_csv(processed_dir / "fair" / "zip_tiv_history.csv")
     fys = sorted({int(r["fiscal_year"]) for r in rows})
-    assert fys == [2020, 2021, 2022, 2023, 2024, 2025]
+    assert fys == [2020, 2021, 2022, 2023, 2024, 2025, 2026]
 
     totals = {
         int(r["fiscal_year"]): int(r["value"])
         for r in rows
         if r["geography_id"] == "Total" and r["metric"] == "exposure"
     }
-    # Sanity-check the statewide exposure at FY2025 ≈ $645B.
+    # Sanity-check the statewide exposure at FY2025 ≈ $645B and FY2026 ≈ $715B.
     assert 640_000_000_000 < totals[2025] < 650_000_000_000
+    assert totals[2026] == 714651760473
 
 
 def test_fair_statewide_history_export(tmp_path: Path) -> None:
@@ -388,8 +390,8 @@ def test_fair_statewide_history_export(tmp_path: Path) -> None:
 
 
 def test_california_zip_history_export_schema(tmp_path: Path) -> None:
-    """california_zip_history.csv exposes per-ZIP FY2020-FY2024 policy counts
-    with city + county joined in. Sorted by FY2024 desc."""
+    """california_zip_history.csv exposes per-ZIP FY2021-FY2026 policy counts
+    with city + county joined in. Sorted by the latest FY desc."""
     from fairplan.io_utils import read_csv
 
     processed_dir = tmp_path / "processed"
@@ -402,12 +404,12 @@ def test_california_zip_history_export_schema(tmp_path: Path) -> None:
     rows = read_csv(path)
     assert len(rows) >= 1500, f"expected ~1681 ZIPs, got {len(rows)}"
 
-    expected = {"zip", "city", "county", "fy_2021", "fy_2022", "fy_2023", "fy_2024", "fy_2025"}
+    expected = {"zip", "city", "county", "fy_2021", "fy_2022", "fy_2023", "fy_2024", "fy_2025", "fy_2026"}
     assert expected.issubset(rows[0].keys())
 
-    # Sorted by FY2025 desc — first row must have the largest FY2025 value.
-    fy2025_values = [int(r["fy_2025"]) if r["fy_2025"] else 0 for r in rows]
-    assert fy2025_values == sorted(fy2025_values, reverse=True)
+    # Sorted by FY2026 desc — first row must have the largest FY2026 value.
+    fy2026_values = [int(r["fy_2026"]) if r["fy_2026"] else 0 for r in rows]
+    assert fy2026_values == sorted(fy2026_values, reverse=True)
 
     # Spot-check ZIP 90001 (Los Angeles): FY2024 = 1673, FY2025 jumped to 1976
     # after the wildfire-driven uptick.
@@ -416,6 +418,7 @@ def test_california_zip_history_export_schema(tmp_path: Path) -> None:
     assert la["city"] == "Los Angeles"
     assert int(la["fy_2024"]) == 1673
     assert int(la["fy_2025"]) == 1976
+    assert int(la["fy_2026"]) == 1925
 
 
 def test_cdi_county_market_share_export_schema(tmp_path: Path) -> None:
