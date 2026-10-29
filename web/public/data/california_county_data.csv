@@ -1,59 +1,59 @@
 county,policies,prior_policies,change_pct,direction,yoy_change_pct,yoy_direction
-Los Angeles,155369,153229,1.4,up,36.2,up
-San Bernardino,69840,68143,2.5,up,28.0,up
-Riverside,65750,63001,4.4,up,70.6,up
-San Diego,63292,62114,1.9,up,57.8,up
-El Dorado,27892,27866,0.1,flat,17.6,up
-Orange,26812,25848,3.7,up,73.8,up
-Nevada,23454,23334,0.5,up,17.8,up
-Placer,19050,19078,-0.1,flat,20.9,up
-Ventura,16348,15922,2.7,up,59.1,up
-Tuolumne,13970,13882,0.6,up,8.6,up
-Contra Costa,13481,13375,0.8,up,96.3,up
-Santa Cruz,12741,12824,-0.6,down,60.3,up
-Alameda,12134,11803,2.8,up,69.5,up
-Kern,11615,11464,1.3,up,32.0,up
-Calaveras,10404,10401,0.0,flat,10.5,up
-Butte,9141,9282,-1.5,down,14.4,up
-Sonoma,8540,8523,0.2,flat,39.0,up
-Santa Barbara,6867,6868,-0.0,flat,41.7,up
-Shasta,6812,6690,1.8,up,23.5,up
-Santa Clara,6325,6306,0.3,flat,67.9,up
-Amador,6073,6088,-0.2,flat,12.6,up
-Lake,5998,5872,2.1,up,18.6,up
-Fresno,5766,5755,0.2,flat,23.7,up
-Madera,5560,5602,-0.7,down,18.2,up
-Monterey,5292,5367,-1.4,down,26.2,up
-Mendocino,4873,4744,2.7,up,21.2,up
-San Luis Obispo,4858,4892,-0.7,down,56.2,up
-Marin,4713,4578,2.9,up,50.2,up
-San Mateo,3995,3884,2.9,up,64.6,up
-Plumas,3895,3857,1.0,up,12.8,up
-Humboldt,3329,3125,6.5,up,37.2,up
-Siskiyou,3291,3171,3.8,up,32.2,up
-Mariposa,3274,3277,-0.1,flat,9.4,up
-Tulare,3022,2983,1.3,up,26.3,up
-Napa,2767,2790,-0.8,down,25.8,up
-Mono,2152,2096,2.7,up,45.0,up
-San Francisco,2055,2016,1.9,up,72.5,up
-Sacramento,1817,1883,-3.5,down,77.1,up
-Tehama,1812,1807,0.3,flat,18.9,up
-Yuba,1527,1543,-1.0,down,10.8,up
-Trinity,1419,1409,0.7,up,9.9,up
-Solano,1343,1337,0.4,flat,82.3,up
-San Joaquin,1174,1192,-1.5,down,57.4,up
-Lassen,1112,1098,1.3,up,32.2,up
-Del Norte,713,667,6.9,up,60.6,up
-Imperial,688,694,-0.9,down,47.0,up
-Stanislaus,654,666,-1.8,down,77.0,up
-Sierra,515,506,1.8,up,12.2,up
-San Benito,409,410,-0.2,flat,75.2,up
-Alpine,379,378,0.3,flat,11.8,up
-Merced,312,311,0.3,flat,58.7,up
-Inyo,305,313,-2.6,down,60.8,up
-Modoc,293,292,0.3,flat,51.7,up
-Yolo,237,242,-2.1,down,38.0,up
-Kings,152,155,-1.9,down,57.3,up
-Sutter,107,114,-6.1,down,131.2,up
-Glenn,73,67,9.0,up,17.0,up
-Colusa,71,70,1.4,up,38.3,up
+Los Angeles,155124,155369,-0.2,flat,5.2,up
+San Bernardino,70167,69840,0.5,flat,9.6,up
+Riverside,67407,65750,2.5,up,20.0,up
+San Diego,63401,63292,0.2,flat,9.4,up
+El Dorado,27521,27892,-1.3,down,-0.3,flat
+Orange,27241,26812,1.6,up,17.2,up
+Nevada,23392,23454,-0.3,flat,2.0,up
+Placer,18703,19050,-1.8,down,0.2,flat
+Ventura,16526,16348,1.1,up,13.1,up
+Tuolumne,13704,13755,-0.4,flat,1.5,up
+Contra Costa,13276,13481,-1.5,down,5.3,up
+Santa Cruz,12419,12741,-2.5,down,-1.1,down
+Alameda,11969,12134,-1.4,down,10.2,up
+Kern,11572,11615,-0.4,flat,5.4,up
+Calaveras,10330,10404,-0.7,down,0.1,flat
+Butte,8944,9141,-2.2,down,-2.4,down
+Sonoma,8427,8540,-1.3,down,2.1,up
+Shasta,6859,6856,0.0,flat,8.2,up
+Santa Barbara,6750,6867,-1.7,down,2.8,up
+Santa Clara,6170,6325,-2.5,down,4.3,up
+Lake,6091,5998,1.6,up,8.9,up
+Amador,5992,6073,-1.3,down,-0.4,flat
+Fresno,5713,5766,-0.9,down,2.4,up
+Madera,5455,5560,-1.9,down,-0.5,down
+Monterey,5269,5292,-0.4,flat,2.6,up
+Mendocino,4924,4873,1.0,up,9.8,up
+Marin,4742,4713,0.6,up,14.2,up
+San Luis Obispo,4737,4858,-2.5,down,3.1,up
+Plumas,4008,4020,-0.3,flat,3.5,up
+San Mateo,3896,3995,-2.5,down,10.4,up
+Mariposa,3618,3665,-1.3,down,-1.2,down
+Humboldt,3480,3375,3.1,up,25.8,up
+Siskiyou,3339,3291,1.5,up,10.2,up
+Tulare,3010,3022,-0.4,flat,4.3,up
+Napa,2651,2767,-4.2,down,-2.1,down
+Mono,2214,2152,2.9,up,18.0,up
+San Francisco,1998,2055,-2.8,down,7.4,up
+Tehama,1816,1812,0.2,flat,5.7,up
+Sacramento,1747,1817,-3.9,down,-6.9,down
+Yuba,1396,1402,-0.4,flat,-0.1,flat
+Trinity,1390,1386,0.3,flat,2.9,up
+Solano,1340,1343,-0.2,flat,8.4,up
+San Joaquin,1147,1174,-2.3,down,-2.5,down
+Lassen,1059,1055,0.4,flat,5.5,up
+Del Norte,756,713,6.0,up,37.2,up
+Imperial,699,688,1.6,up,10.6,up
+Stanislaus,638,654,-2.4,down,-6.9,down
+Sierra,522,515,1.4,up,3.0,up
+San Benito,405,409,-1.0,down,8.0,up
+Inyo,312,305,2.3,up,7.2,up
+Merced,306,312,-1.9,down,2.0,up
+Modoc,296,293,1.0,up,10.9,up
+Yolo,221,238,-7.1,down,-4.4,down
+Alpine,192,203,-5.4,down,-0.3,flat
+Kings,147,152,-3.3,down,-15.0,down
+Sutter,103,106,-2.8,down,-5.4,down
+Colusa,72,71,1.4,up,10.8,up
+Glenn,70,73,-4.1,down,27.3,up

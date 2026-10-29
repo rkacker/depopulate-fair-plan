@@ -131,7 +131,7 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
         </a>
         . That list was last revised in March 2025 and has not been updated
         since. The FAIR Plan counts its own policies in these ZIP codes every
-        quarter. Two years in, the count went up almost everywhere the
+        quarter. Three years in, the count went up almost everywhere the
         promise applies.
       </p>
 
@@ -153,9 +153,12 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
       )}
       <TrajectorySvg points={points} />
       <p className="mb-4 mt-4 leading-relaxed text-gray-700">
-        The Times counted 320,581 to 625,033 through fall 2025. Five more
-        months of quarterly reports show the line still climbing. There has
-        not been a single quarter of decline. The shaded band shows the
+        The Times counted 320,581 to 625,033 through fall 2025. Four more
+        quarterly reports show the line climbing through June 2026, then
+        pausing: the September 30, 2026 count was 189 policies below
+        June&apos;s, the first quarter-over-quarter decline in the series,
+        set against roughly 345,000 policies added since the deal. The
+        shaded band shows the
         sixteen months it took to turn the announcement into working rules;
         enrollment sped up during that stretch and kept climbing after the
         rules took effect. And growth outside the listed ZIP codes (+
@@ -232,10 +235,11 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
           <span className="font-semibold">Named-zone scorecard:</span> FAIR
           Plan policies in force per designated ZIP, FY{DEAL_FY} (ending Sept.
           30, 2023, nine days after the deal was announced) vs. FY{FY_LAST}.
+          ZIP codes with no FAIR Plan policies in FY{DEAL_FY} are excluded.
           The ZIP list effectively covers the full designated footprint: it
           includes all but one of the reporting ZIP codes inside the 29
           designated counties, so a county-level or union-of-both scorecard
-          gives materially identical results (93% grew, +51%).
+          gives materially identical results (92% grew, +55%).
         </p>
         <p>
           <span className="font-semibold">Regulatory timeline:</span> curated

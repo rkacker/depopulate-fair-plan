@@ -9,6 +9,7 @@ from fairplan.parsers import (
     parse_cdi_zip_xlsx,
     parse_distressed_geographies,
     parse_fair_category_pdf,
+    parse_fair_history_pdf,
 )
 from fairplan.pipeline import build_exports, build_insights, normalize
 
@@ -518,3 +519,53 @@ def test_california_zip_data_export_has_quarterly_velocity(tmp_path: Path) -> No
             assert sample["direction"] == "down"
         else:
             assert sample["direction"] == "flat"
+
+
+def test_apply_category_corrections_adds_only_missing_rows() -> None:
+    from fairplan.pipeline import apply_category_corrections
+
+    parsed = [
+        {
+            "coverage_end": "2026-09-30", "zip": "95961", "county": "Yuba",
+            "is_distressed_area": 0, "region": "Northern CA", "risk_band": "low",
+            "policy_category": "owner_occupied_single_family", "metric": "count",
+            "value": 19, "source_id": "fair_residential_policy_count_2026_09",
+        }
+    ]
+    correction = {
+        "id": "test",
+        "dataset": "residential_policy_count",
+        "coverage_end": "2026-09-30",
+        "source_id": "fair_residential_policy_count_2026_09",
+        "rows": [
+            {"zip": "95962", "county": "Yuba", "is_distressed_area": 1, "region": "Northern CA", "value": 273},
+        ],
+    }
+    out = apply_category_corrections(parsed, [correction])
+    assert len(out) == 2
+    added = out[-1]
+    assert added["zip"] == "95962"
+    assert added["value"] == 273
+    assert added["metric"] == "count"
+    assert added["risk_band"] == added["policy_category"] == "unallocated"
+
+    # A correction that would overwrite a parsed row must fail loudly.
+    clashing = dict(correction, rows=[{**correction["rows"][0], "zip": "95961"}])
+    try:
+        apply_category_corrections(parsed, [clashing])
+    except ValueError as exc:
+        assert "95961" in str(exc)
+    else:
+        raise AssertionError("expected ValueError for a correction that overwrites parsed data")
+
+
+def test_fair_history_parser_reads_fy2026_layout() -> None:
+    """FY2026 5-year files print a yoy% before every value (10 tokens)."""
+    source = next(s for s in load_sources(MANIFEST) if s.id == "fair_residential_zip_pif_history_fy2026")
+    rows = parse_fair_history_pdf(FIXTURES / "fair" / source.file_name, source, "zip")
+    totals = {int(r["fiscal_year"]): r for r in rows if r["geography_id"] == "Total"}
+    assert set(totals) == {2022, 2023, 2024, 2025, 2026}
+    assert totals[2026]["value"] == 665673
+    assert totals[2025]["value"] == 621234
+    # The oldest column now carries a growth figure too.
+    assert totals[2022]["yoy_growth_pct"] == "12"

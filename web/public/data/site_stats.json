@@ -11,8 +11,8 @@
     },
     "current_year": {
       "value": "665K",
-      "label": "Jun 30, 2026",
-      "detail": "Policies as of June 30, 2026"
+      "label": "Sep 30, 2026",
+      "detail": "Policies as of September 30, 2026"
     },
     "growth": {
       "value": "4.3x",
@@ -22,12 +22,12 @@
   },
   "map": {
     "title": "FAIR Plan Crisis Map",
-    "description": "Explore how FAIR Plan policies are distributed across California's 58 counties. Data current through June 30, 2026.",
-    "data_source": "California FAIR Plan data through June 30, 2026",
-    "total_label": "Total FAIR Plan Policies in California (Jun 30, 2026)"
+    "description": "Explore how FAIR Plan policies are distributed across California's 58 counties. Data current through September 30, 2026.",
+    "data_source": "California FAIR Plan data through September 30, 2026",
+    "total_label": "Total FAIR Plan Policies in California (Sep 30, 2026)"
   },
   "table": {
-    "description": "FAIR Plan policies by county as of June 30, 2026",
-    "data_source": "Data source: California FAIR Plan through June 30, 2026"
+    "description": "FAIR Plan policies by county as of September 30, 2026",
+    "data_source": "Data source: California FAIR Plan through September 30, 2026"
   }
 }

@@ -17,7 +17,7 @@ export const MIN_GROWTH_BASE = 50;
 // FY window of the ZIP history export; endpoints drive the growth calc and
 // the section's methodology copy.
 export const FY_FIRST = 2021;
-export const FY_LAST = 2025;
+export const FY_LAST = 2026;
 
 export interface RawReconciliationRow {
   zip?: string;
@@ -82,7 +82,7 @@ export function buildDistressedData(
 
 // FY endpoints used for the "since the deal" comparison. The Sept 2023
 // insurer deal was announced days before FY2023's Sept 30 close, so
-// FY2023 → FY2025 growth reads as "since the deal was announced".
+// FY2023 → FY_LAST growth reads as "since the deal was announced".
 export const DEAL_FY = 2023;
 
 export interface DealGroupGrowth {
@@ -148,7 +148,10 @@ export function buildPromiseStats(
     const h = historyByZip.get(r.zip);
     const deal = h?.fy[DEAL_FY] ?? null;
     const last = h?.fy[FY_LAST] ?? null;
-    if (deal !== null && last !== null) {
+    // A ZIP with no FAIR policies at the deal has nothing to depopulate; such
+    // ZIPs (e.g. five that first appear in the FY2026 file after the Plan
+    // re-geocoded neighbors) are excluded from the scorecard and the sums.
+    if (deal !== null && last !== null && deal > 0) {
       const bucket = cdi ? sums.designated : sums.unlisted;
       bucket.deal += deal;
       bucket.last += last;

@@ -46,12 +46,14 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 
 ## Next (ranked by score; most need a new export)
 
-- [ ] **Analysis page: growth relocation (Q2 2026)** · `Depth`/`Viz` · M · I8 C8 E7 = **448**
-  "The FAIR Plan's growth moved out of fire country": >50-policy movers are 67 up /
-  1 down; 55/67 gainers off the distressed list; 62/67 in SoCal-6. Draft + all
-  computed facts in [`notes/q2-2026-status-update.md`](notes/q2-2026-status-update.md)
-  (sent as Rishi's status update 2026-07-28). Data already in synced exports — needs
-  page + `/copy-review` pass. *Timely: pairs with the AB 69/1680 amendment window.*
+- [ ] **Analysis page: the quarter growth stopped (Q3 2026)** · `Depth`/`Viz` · M · I9 C8 E7 = **504**
+  First QoQ decline in the series (−189); distressed ZIPs −1,447 vs non-distressed
+  +1,258; 37/58 counties down; SoCal-6 +2,455 vs rest of state −2,644; only the
+  medium risk band grew (+2,586). Draft framing + every computed fact in
+  [`notes/q3-2026-status-update.md`](notes/q3-2026-status-update.md); Q2 "growth
+  relocation" facts in [`notes/q2-2026-status-update.md`](notes/q2-2026-status-update.md)
+  become the setup. Data in synced exports — needs page + `/copy-review` pass.
+  Must respect the re-geocoding caveat (Arnold −250 is not real).
 
 - [ ] **Premium-burden panel** · `Depth` · M · I7 C9 E5 = **315**
   premium ÷ policy_count and exposure ÷ policy_count by county; cost-of-coverage angle.
@@ -97,6 +99,20 @@ Themes: `Depth` (metrics/tables) · `Viz` (sections/charts) · `Trust` · `Craft
 
 ## Done (rolling log)
 
+- [x] 2026-10-28 — **Q3 2026 quarterly release ingested** (as of 2026-09-30, published
+  2026-10-19; branch `data/2026q3`): 3 DWE sources + FY2026 5-year PIF/TIV files;
+  goldens 665,673 statewide / 665,673 FY2026 / Alameda 11,969; exports synced; ZIP
+  history export and scorecard extended to FY2026 (92% grew, +55%). Pipeline work the
+  release forced: (1) `config/corrections.toml` + `apply_category_corrections()` for
+  two Yuba ZIPs the count PDF dropped (filled from the Plan's 5-year file); (2) stable
+  ZIP→county assignment in `normalize()` after the Plan relabeled 7 ZIPs; (3) history
+  parser accepts the new 10-token layout; (4) scorecard excludes zero-FY2023 ZIPs
+  (5 new ZIPs are re-geocodes of Arnold/Magalia/Myers Flat). Counts-basis note on
+  `/data` updated (dashboard 698,307 all-lines vs 686,376 county file). Analysis: first
+  QoQ decline (−189); distressed ZIPs −1,447, non-distressed +1,258; details in
+  `notes/q3-2026-status-update.md`. **Quarterly ritual additions:** diff the by-category
+  count total against the 5-year file total; check ZIP row counts across the three
+  DWE PDFs; check for county relabels and first-appearing ZIPs.
 - [x] 2026-07-28 — **Q2 2026 quarterly release ingested** (as of 2026-06-30, published
   2026-07-17): 3 new DWE sources, goldens updated (665,862 statewide; Alameda 12,134),
   exports synced, deployed. `fetch` now skips archival (no-URL) sources and files
