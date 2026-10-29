@@ -6,7 +6,7 @@ from pathlib import Path
 
 from fairplan.fetch import fetch_sources
 from fairplan.io_utils import ensure_directory, read_csv, sha256sum, write_csv, write_json
-from fairplan.manifest import load_sources
+from fairplan.manifest import load_corrections, load_sources
 from fairplan.models import SourceConfig
 from fairplan.parsers import (
     parse_cdi_county_pdf,
@@ -40,6 +40,55 @@ CATEGORY_FIELDNAMES = [
 
 def default_manifest_path() -> Path:
     return Path("config/sources.toml")
+
+
+def default_corrections_path() -> Path:
+    return Path("config/corrections.toml")
+
+
+def apply_category_corrections(
+    category_rows: list[dict[str, object]],
+    corrections: list[dict[str, object]],
+) -> list[dict[str, object]]:
+    """Inject documented correction rows into the FAIR category breakdown.
+
+    A correction fills ZIP rows the Plan dropped from one by-category file but
+    published elsewhere (see config/corrections.toml). It only adds rows for
+    (coverage_end, zip, metric) combinations that are absent from the parsed
+    data, so a fixed upstream file makes the correction a no-op. Raises if a
+    correction would overwrite a parsed value: that means the upstream file
+    changed and the correction must be reviewed, not silently applied.
+    """
+    if not corrections:
+        return category_rows
+    present = {
+        (str(r["coverage_end"]), str(r["zip"]), str(r["metric"]))
+        for r in category_rows
+    }
+    added: list[dict[str, object]] = []
+    for corr in corrections:
+        metric = CATEGORY_DATASETS[str(corr["dataset"])]
+        coverage_end = str(corr["coverage_end"])
+        for row in corr["rows"]:  # type: ignore[union-attr]
+            key = (coverage_end, str(row["zip"]), metric)
+            if key in present:
+                raise ValueError(
+                    f"correction {corr['id']} targets {key}, which is present in the "
+                    "parsed data; review the correction against the new source file"
+                )
+            added.append({
+                "coverage_end": coverage_end,
+                "zip": str(row["zip"]),
+                "county": str(row["county"]),
+                "is_distressed_area": int(row["is_distressed_area"]),
+                "region": str(row["region"]),
+                "risk_band": "unallocated",
+                "policy_category": "unallocated",
+                "metric": metric,
+                "value": int(row["value"]),
+                "source_id": str(corr["source_id"]),
+            })
+    return category_rows + added
 
 
 def build_source_releases(sources: list[SourceConfig], raw_dir: Path) -> list[dict[str, object]]:
@@ -106,9 +155,15 @@ def _dedupe_history_rows(rows: list[dict[str, object]], pub_dates: dict[str, str
     return list(best.values())
 
 
-def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = None) -> None:
+def normalize(
+    raw_dir: Path,
+    processed_dir: Path,
+    manifest_path: Path | None = None,
+    corrections_path: Path | None = None,
+) -> None:
     """Parse PDFs and write analysis-ready CSVs to processed_dir."""
     manifest = load_sources(manifest_path or default_manifest_path())
+    corrections = load_corrections(corrections_path or default_corrections_path())
     pub_dates: dict[str, str] = {s.id: s.published_date or "" for s in manifest}
     pif_rows: list[dict[str, object]] = []
     tiv_rows: list[dict[str, object]] = []
@@ -137,6 +192,9 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         elif source.dataset in CATEGORY_DATASETS:
             metric = CATEGORY_DATASETS[source.dataset]
             category_rows.extend(parse_fair_category_pdf(file_path, source, metric))
+
+    # Documented fixes for rows the Plan dropped from a by-category file.
+    category_rows = apply_category_corrections(category_rows, corrections)
 
     # Dedupe overlapping fiscal years across history files; newer file wins.
     pif_rows = _dedupe_history_rows(pif_rows, pub_dates)
@@ -170,11 +228,24 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         ["coverage_end", "metric", "value", "source_id"],
     )
 
+    # --- stable ZIP → county/region assignment ---
+    # The Plan assigns split ZIPs to one county and occasionally moves one
+    # (Q3 2026 relabeled seven ZIPs). Aggregating each quarter with its own
+    # file's labels would show spurious county swings, so every quarter uses
+    # the assignment from the most recent file in which the ZIP appears.
+    zip_geo_latest: dict[str, tuple[str, str, str]] = {}
+    for r in category_rows:
+        z = str(r["zip"])
+        ce = str(r["coverage_end"])
+        if z not in zip_geo_latest or ce > zip_geo_latest[z][0]:
+            zip_geo_latest[z] = (ce, str(r["county"]), str(r["region"]))
+
     # --- fair/ county_quarterly: per-county totals per coverage_end × metric ---
     county_metric_totals: dict[tuple[str, str, str], int] = {}
     county_source_ids: dict[tuple[str, str], str] = {}
     for r in category_rows:
-        key = (str(r["coverage_end"]), str(r["county"]), str(r["metric"]))
+        county = zip_geo_latest[str(r["zip"])][1]
+        key = (str(r["coverage_end"]), county, str(r["metric"]))
         county_metric_totals[key] = county_metric_totals.get(key, 0) + int(r["value"])
         county_source_ids[(str(r["coverage_end"]), str(r["metric"]))] = str(r["source_id"])
     county_quarterly_rows: list[dict[str, object]] = []
@@ -213,7 +284,7 @@ def normalize(raw_dir: Path, processed_dir: Path, manifest_path: Path | None = N
         zip_metric_totals[(ce, z, str(r["metric"]))] = (
             zip_metric_totals.get((ce, z, str(r["metric"])), 0) + int(r["value"])
         )
-        zip_meta.setdefault(z, {"county": str(r["county"]), "region": str(r["region"])})
+        zip_meta.setdefault(z, {"county": zip_geo_latest[z][1], "region": zip_geo_latest[z][2]})
         zip_source_ids[(ce, str(r["metric"]))] = str(r["source_id"])
         zip_pairs.add((ce, z))
     zip_quarterly_rows: list[dict[str, object]] = [
@@ -734,11 +805,14 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
             ["effective_date", "geo_type", "geo_id", "geo_name", "status", "source_id"],
         )
 
-    # --- california_zip_history.csv: ZIP-level FY2021-FY2025 policy counts ---
+    # --- california_zip_history.csv: ZIP-level FY2021-FY2026 policy counts ---
     # Project the full zip_wide table to just the columns the /data ZIP history
-    # tab needs. Sorted by FY2025 descending (latest year, biggest first).
+    # tab needs. Sorted by the latest FY descending (biggest first). The FY
+    # window is mirrored in web/src/lib/distressed.ts (FY_FIRST / FY_LAST).
     zip_wide_path = processed_dir / "fair" / "zip_wide.csv"
     if zip_wide_path.exists():
+        history_fys = (2021, 2022, 2023, 2024, 2025, 2026)
+        latest_fy = f"fy_{history_fys[-1]}"
         zip_history_rows = []
         for r in read_csv(zip_wide_path):
             row = {
@@ -746,17 +820,17 @@ def build_exports(processed_dir: Path, exports_dir: Path) -> None:
                 "city": r.get("city", ""),
                 "county": r.get("county", ""),
             }
-            for fy in (2021, 2022, 2023, 2024, 2025):
+            for fy in history_fys:
                 row[f"fy_{fy}"] = r.get(f"policy_count_{fy}-09-30", "")
             zip_history_rows.append(row)
         zip_history_rows.sort(
-            key=lambda row: int(row["fy_2025"]) if row["fy_2025"] != "" else 0,
+            key=lambda row: int(row[latest_fy]) if row[latest_fy] != "" else 0,
             reverse=True,
         )
         write_csv(
             exports_dir / "california_zip_history.csv",
             zip_history_rows,
-            ["zip", "city", "county", "fy_2021", "fy_2022", "fy_2023", "fy_2024", "fy_2025"],
+            ["zip", "city", "county", *[f"fy_{fy}" for fy in history_fys]],
         )
 
     # --- fair_statewide_history.csv: long-running statewide quarterly + annual series ---

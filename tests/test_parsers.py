@@ -9,6 +9,7 @@ from fairplan.parsers import (
     parse_cdi_zip_xlsx,
     parse_distressed_geographies,
     parse_fair_category_pdf,
+    parse_fair_history_pdf,
 )
 from fairplan.pipeline import build_exports, build_insights, normalize
 
@@ -317,9 +318,9 @@ def test_non_ca_zips_excluded_from_history(tmp_path: Path) -> None:
         assert not non_ca, f"non-CA ZIPs leaked into {name}: {non_ca[:3]}"
 
 
-def test_zip_pif_history_spans_fy2019_through_fy2025(tmp_path: Path) -> None:
-    """With the FY2023+FY2024+FY2025 PIF files all ingested, the rolled-up
-    zip_pif_history should cover FY2019-FY2025 and statewide Totals must
+def test_zip_pif_history_spans_fy2019_through_fy2026(tmp_path: Path) -> None:
+    """With the FY2023 through FY2026 PIF files all ingested, the rolled-up
+    zip_pif_history should cover FY2019-FY2026 and statewide Totals must
     match the published values."""
     from fairplan.io_utils import read_csv
 
@@ -327,7 +328,7 @@ def test_zip_pif_history_spans_fy2019_through_fy2025(tmp_path: Path) -> None:
     normalize(FIXTURES, processed_dir, MANIFEST)
     rows = read_csv(processed_dir / "fair" / "zip_pif_history.csv")
     fys = sorted({int(r["fiscal_year"]) for r in rows})
-    assert fys == [2019, 2020, 2021, 2022, 2023, 2024, 2025]
+    assert fys == [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
 
     totals = {
         int(r["fiscal_year"]): int(r["value"])
@@ -338,25 +339,27 @@ def test_zip_pif_history_spans_fy2019_through_fy2025(tmp_path: Path) -> None:
     assert totals[2019] == 155243
     assert totals[2023] == 320572
     assert totals[2025] == 621234
+    assert totals[2026] == 665673
 
 
 def test_zip_tiv_history_present_and_statewide_match(tmp_path: Path) -> None:
-    """FY2024 + FY2025 TIV files should give us exposure history FY2020-FY2025."""
+    """FY2024 through FY2026 TIV files should give us exposure history FY2020-FY2026."""
     from fairplan.io_utils import read_csv
 
     processed_dir = tmp_path / "processed"
     normalize(FIXTURES, processed_dir, MANIFEST)
     rows = read_csv(processed_dir / "fair" / "zip_tiv_history.csv")
     fys = sorted({int(r["fiscal_year"]) for r in rows})
-    assert fys == [2020, 2021, 2022, 2023, 2024, 2025]
+    assert fys == [2020, 2021, 2022, 2023, 2024, 2025, 2026]
 
     totals = {
         int(r["fiscal_year"]): int(r["value"])
         for r in rows
         if r["geography_id"] == "Total" and r["metric"] == "exposure"
     }
-    # Sanity-check the statewide exposure at FY2025 ≈ $645B.
+    # Sanity-check the statewide exposure at FY2025 ≈ $645B and FY2026 ≈ $715B.
     assert 640_000_000_000 < totals[2025] < 650_000_000_000
+    assert totals[2026] == 714651760473
 
 
 def test_fair_statewide_history_export(tmp_path: Path) -> None:
@@ -387,8 +390,8 @@ def test_fair_statewide_history_export(tmp_path: Path) -> None:
 
 
 def test_california_zip_history_export_schema(tmp_path: Path) -> None:
-    """california_zip_history.csv exposes per-ZIP FY2020-FY2024 policy counts
-    with city + county joined in. Sorted by FY2024 desc."""
+    """california_zip_history.csv exposes per-ZIP FY2021-FY2026 policy counts
+    with city + county joined in. Sorted by the latest FY desc."""
     from fairplan.io_utils import read_csv
 
     processed_dir = tmp_path / "processed"
@@ -401,12 +404,12 @@ def test_california_zip_history_export_schema(tmp_path: Path) -> None:
     rows = read_csv(path)
     assert len(rows) >= 1500, f"expected ~1681 ZIPs, got {len(rows)}"
 
-    expected = {"zip", "city", "county", "fy_2021", "fy_2022", "fy_2023", "fy_2024", "fy_2025"}
+    expected = {"zip", "city", "county", "fy_2021", "fy_2022", "fy_2023", "fy_2024", "fy_2025", "fy_2026"}
     assert expected.issubset(rows[0].keys())
 
-    # Sorted by FY2025 desc — first row must have the largest FY2025 value.
-    fy2025_values = [int(r["fy_2025"]) if r["fy_2025"] else 0 for r in rows]
-    assert fy2025_values == sorted(fy2025_values, reverse=True)
+    # Sorted by FY2026 desc — first row must have the largest FY2026 value.
+    fy2026_values = [int(r["fy_2026"]) if r["fy_2026"] else 0 for r in rows]
+    assert fy2026_values == sorted(fy2026_values, reverse=True)
 
     # Spot-check ZIP 90001 (Los Angeles): FY2024 = 1673, FY2025 jumped to 1976
     # after the wildfire-driven uptick.
@@ -415,6 +418,7 @@ def test_california_zip_history_export_schema(tmp_path: Path) -> None:
     assert la["city"] == "Los Angeles"
     assert int(la["fy_2024"]) == 1673
     assert int(la["fy_2025"]) == 1976
+    assert int(la["fy_2026"]) == 1925
 
 
 def test_cdi_county_market_share_export_schema(tmp_path: Path) -> None:
@@ -518,3 +522,53 @@ def test_california_zip_data_export_has_quarterly_velocity(tmp_path: Path) -> No
             assert sample["direction"] == "down"
         else:
             assert sample["direction"] == "flat"
+
+
+def test_apply_category_corrections_adds_only_missing_rows() -> None:
+    from fairplan.pipeline import apply_category_corrections
+
+    parsed = [
+        {
+            "coverage_end": "2026-09-30", "zip": "95961", "county": "Yuba",
+            "is_distressed_area": 0, "region": "Northern CA", "risk_band": "low",
+            "policy_category": "owner_occupied_single_family", "metric": "count",
+            "value": 19, "source_id": "fair_residential_policy_count_2026_09",
+        }
+    ]
+    correction = {
+        "id": "test",
+        "dataset": "residential_policy_count",
+        "coverage_end": "2026-09-30",
+        "source_id": "fair_residential_policy_count_2026_09",
+        "rows": [
+            {"zip": "95962", "county": "Yuba", "is_distressed_area": 1, "region": "Northern CA", "value": 273},
+        ],
+    }
+    out = apply_category_corrections(parsed, [correction])
+    assert len(out) == 2
+    added = out[-1]
+    assert added["zip"] == "95962"
+    assert added["value"] == 273
+    assert added["metric"] == "count"
+    assert added["risk_band"] == added["policy_category"] == "unallocated"
+
+    # A correction that would overwrite a parsed row must fail loudly.
+    clashing = dict(correction, rows=[{**correction["rows"][0], "zip": "95961"}])
+    try:
+        apply_category_corrections(parsed, [clashing])
+    except ValueError as exc:
+        assert "95961" in str(exc)
+    else:
+        raise AssertionError("expected ValueError for a correction that overwrites parsed data")
+
+
+def test_fair_history_parser_reads_fy2026_layout() -> None:
+    """FY2026 5-year files print a yoy% before every value (10 tokens)."""
+    source = next(s for s in load_sources(MANIFEST) if s.id == "fair_residential_zip_pif_history_fy2026")
+    rows = parse_fair_history_pdf(FIXTURES / "fair" / source.file_name, source, "zip")
+    totals = {int(r["fiscal_year"]): r for r in rows if r["geography_id"] == "Total"}
+    assert set(totals) == {2022, 2023, 2024, 2025, 2026}
+    assert totals[2026]["value"] == 665673
+    assert totals[2025]["value"] == 621234
+    # The oldest column now carries a growth figure too.
+    assert totals[2022]["yoy_growth_pct"] == "12"

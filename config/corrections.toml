@@ -1,0 +1,21 @@
+# Documented corrections for defects in upstream source files.
+#
+# Each correction injects rows into the FAIR category breakdown for one
+# (dataset, coverage_end) so that ZIP, county, and statewide totals carry the
+# corrected value. Injected rows use risk_band = policy_category =
+# "unallocated" because the corroborating document gives only ZIP totals.
+# normalize() applies these after parsing; `reason` and `corroborating_url`
+# are the audit trail. Keep this file short: a correction is a last resort
+# for a row the Plan published elsewhere but dropped from the file we parse.
+
+[[corrections]]
+id = "fair_2026_09_count_missing_yuba_zips"
+dataset = "residential_policy_count"
+coverage_end = "2026-09-30"
+source_id = "fair_residential_policy_count_2026_09"
+reason = "The Q3 2026 Policies-by-category DWE PDF (DL 2026-10-19) has 1,662 ZIP rows; the matching premium and exposure PDFs have 1,664. ZIPs 95962 (Oregon House) and 95972 (Rackerby), both Yuba County, are missing from the count file only. Both carry premium and exposure in the companion files, and the Plan's 5-year PIF-by-ZIP file published 2026-10-20 reports 273 and 32 residential policies for them as of 2026-09-30. Without this correction the two ZIPs would show a spurious drop to zero (-303 combined), the largest ZIP-level decline in the state."
+corroborating_url = "https://www.cfpnet.com/wp-content/uploads/2026/10/CFP-5-yr-PIF-Zip-FY26-DWE-261020.pdf"
+rows = [
+  { zip = "95962", county = "Yuba", is_distressed_area = 1, region = "Northern CA", value = 273 },
+  { zip = "95972", county = "Yuba", is_distressed_area = 1, region = "Northern CA", value = 32 },
+]

@@ -101,6 +101,16 @@ coverage_end = "2025-09-30"
 file_name = "residential_zip_pif_history_fy2025.pdf"
 
 [[sources]]
+id = "fair_residential_zip_pif_history_fy2026"
+family = "fair"
+dataset = "residential_zip_pif_history"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2026/10/CFP-5-yr-PIF-Zip-FY26-DWE-261020.pdf"
+published_date = "2026-10-20"
+coverage_end = "2026-09-30"
+file_name = "residential_zip_pif_history_fy2026.pdf"
+
+[[sources]]
 id = "fair_residential_zip_tiv_history_fy2024"
 family = "fair"
 dataset = "residential_zip_tiv_history"
@@ -119,6 +129,18 @@ url = "https://www.cfpnet.com/wp-content/uploads/2025/11/CFP-5-yr-TIV-Zip-FY25-D
 published_date = "2025-11-14"
 coverage_end = "2025-09-30"
 file_name = "residential_zip_tiv_history_fy2025.pdf"
+
+[[sources]]
+id = "fair_residential_zip_tiv_history_fy2026"
+family = "fair"
+dataset = "residential_zip_tiv_history"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2026/10/CFP-5-yr-TIV-Zip-FY26-DWE-261020.pdf"
+published_date = "2026-10-20"
+coverage_end = "2026-09-30"
+file_name = "residential_zip_tiv_history_fy2026.pdf"
+# Note: the first column header in this PDF is misprinted "9/30/20256"; the
+# values are the FY2026 column (they match the Plan's Reporting Period Changes sheet).
 
 [[sources]]
 id = "fair_residential_policy_count_2025_12"
@@ -209,6 +231,36 @@ url = "https://www.cfpnet.com/wp-content/uploads/2026/07/Exposure-by-category-DW
 published_date = "2026-07-17"
 coverage_end = "2026-06-30"
 file_name = "residential_policy_exposure_2026_06.pdf"
+
+[[sources]]
+id = "fair_residential_policy_count_2026_09"
+family = "fair"
+dataset = "residential_policy_count"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2026/10/Policies-by-category-DWE-as-of-260930-DL-261019v001.pdf"
+published_date = "2026-10-19"
+coverage_end = "2026-09-30"
+file_name = "residential_policy_count_2026_09.pdf"
+
+[[sources]]
+id = "fair_residential_policy_premium_2026_09"
+family = "fair"
+dataset = "residential_policy_premium"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2026/10/Premium-by-category-DWE-as-of-260930-DL-261019v001.pdf"
+published_date = "2026-10-19"
+coverage_end = "2026-09-30"
+file_name = "residential_policy_premium_2026_09.pdf"
+
+[[sources]]
+id = "fair_residential_policy_exposure_2026_09"
+family = "fair"
+dataset = "residential_policy_exposure"
+format = "pdf"
+url = "https://www.cfpnet.com/wp-content/uploads/2026/10/Exposure-by-category-DWE-as-of-260930-DL-261019v001.pdf"
+published_date = "2026-10-19"
+coverage_end = "2026-09-30"
+file_name = "residential_policy_exposure_2026_09.pdf"
 
 [[sources]]
 id = "cdi_residential_county_analysis_2024_release"

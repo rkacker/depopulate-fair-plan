@@ -109,6 +109,9 @@ def parse_fair_history_pdf(
     snapshot (e.g. the FY2023 file's leftmost col is ~12/31/2023, not a
     fiscal year). That column is detected by token count (11 instead of 9)
     and skipped — only the standard 5-year FY history is emitted.
+
+    Files from FY2026 on print a yoy% before every value (10 tokens instead
+    of 9); both layouts are accepted.
     """
     rows: list[dict[str, object]] = []
     coverage_year = int(source.coverage_end[:4])
@@ -142,13 +145,18 @@ def parse_fair_history_pdf(
         if len(tokens) < 9:
             continue
         years = [coverage_year - offset for offset in range(5)]
-        pairs = [
-            (years[0], tokens[1], tokens[0]),
-            (years[1], tokens[3], tokens[2]),
-            (years[2], tokens[5], tokens[4]),
-            (years[3], tokens[7], tokens[6]),
-            (years[4], tokens[8], None),
-        ]
+        if len(tokens) == 10 and tokens[8].endswith("%"):
+            # FY2026+ layout: a yoy% precedes every one of the 5 values
+            # (the oldest year's growth is printed too).
+            pairs = [(years[i], tokens[2 * i + 1], tokens[2 * i]) for i in range(5)]
+        else:
+            pairs = [
+                (years[0], tokens[1], tokens[0]),
+                (years[1], tokens[3], tokens[2]),
+                (years[2], tokens[5], tokens[4]),
+                (years[3], tokens[7], tokens[6]),
+                (years[4], tokens[8], None),
+            ]
         geography_id = match.group("geo")
         geography_name = (
             normalize_county_name(geography_id)

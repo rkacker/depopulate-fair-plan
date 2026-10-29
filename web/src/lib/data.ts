@@ -200,6 +200,7 @@ interface RawZipHistoryRow {
   fy_2023?: string;
   fy_2024?: string;
   fy_2025?: string;
+  fy_2026?: string;
 }
 
 function parseIntOrNull(s: string | undefined): number | null {
@@ -224,8 +225,9 @@ export function loadZipHistory(): Promise<ZipHistoryRow[]> {
             2023: parseIntOrNull(r.fy_2023),
             2024: parseIntOrNull(r.fy_2024),
             2025: parseIntOrNull(r.fy_2025),
+      2026: parseIntOrNull(r.fy_2026),
           };
-          const series = ([2021, 2022, 2023, 2024, 2025] as const)
+          const series = ([2021, 2022, 2023, 2024, 2025, 2026] as const)
             .map((y) => fy[y])
             .filter((v): v is number => v !== null);
           rows.push({

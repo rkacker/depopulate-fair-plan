@@ -138,20 +138,44 @@ export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
 
         {/* Counts-basis disclosure: our totals follow the FAIR Plan's
             ZIP-level data files, which run below the Plan's dashboard
-            headline. Documented 2026-07; revisit each quarterly release. */}
+            headline. Documented 2026-07, updated 2026-10 (Q3 2026 release);
+            revisit each quarterly release. */}
         <div className="mb-8 rounded-md border border-gray-200 bg-white p-4 text-sm text-gray-700">
           <p className="font-semibold text-charcoal">A note on policy counts</p>
           <p className="mt-1">
             Our FAIR Plan figures come from the Plan&apos;s ZIP-level data
-            files and match the totals printed in those files exactly (for
-            example, 665,862 residential policies as of June 30, 2026). The
-            FAIR Plan&apos;s own dashboard headline reports higher figures —
-            675,229 dwelling policies as of the same date, a difference of
-            9,367 — and we could find no published document that defines or
-            reconciles the two. The Plan&apos;s reporting materials note that
-            &ldquo;Totals may vary based on data source.&rdquo; We use the
-            ZIP-level files because they are the only FAIR Plan publication
-            with geographic detail.
+            files and match the totals printed in those files (665,673
+            residential policies as of September 30, 2026, the same figure
+            the Plan reports in its fiscal-year-end summary). The FAIR
+            Plan&apos;s dashboard headline runs higher: it reports 698,307
+            residential and commercial policies as of that date, while the
+            Plan&apos;s county-level file for the same date totals 686,376, a
+            difference of 11,931. Last quarter the dwelling-only gap was
+            9,367. We could find no published document that defines or
+            reconciles the two bases. The Plan&apos;s reporting materials
+            note that &ldquo;Totals may vary based on data source.&rdquo; We
+            use the ZIP-level files because they are the only FAIR Plan
+            publication with geographic detail.
+          </p>
+          <p className="mt-2">
+            One correction this quarter: the Plan&apos;s September 30, 2026
+            policy-count file omits two Yuba County ZIP codes (95962 Oregon
+            House and 95972 Rackerby) that appear in its premium and exposure
+            files for the same date. We fill their counts (273 and 32) from
+            the Plan&apos;s own five-year policies-in-force file. The
+            correction is documented in the repository and would otherwise
+            have shown a spurious drop to zero in both ZIP codes.
+          </p>
+          <p className="mt-2">
+            Two further quirks in the September 2026 files to keep in mind
+            when reading ZIP-level changes. Five ZIP codes appear for the
+            first time (Avery, Rail Road Flat, Miranda, Weott, and Stirling
+            City) with offsetting declines in neighboring ZIP codes such as
+            Arnold and Magalia, a pattern consistent with the Plan
+            re-geocoding addresses rather than with policies leaving. And the
+            Plan moved seven ZIP codes to different counties; we apply each
+            ZIP code&apos;s most recent county assignment to every quarter so
+            county totals stay comparable over time.
           </p>
         </div>
 

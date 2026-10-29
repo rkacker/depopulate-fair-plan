@@ -103,7 +103,7 @@ export function Home({
             <p className="text-gray-700">
               California's 2023 deal with insurers promised to shrink the FAIR
               Plan, starting with a named list of distressed ZIP codes. Our
-              analysis of the state's own data: enrollment grew in 93% of
+              analysis of the state's own data: enrollment grew in 92% of
               those very ZIP codes.{" "}
               <a
                 href="/analysis/depopulation-promise"
