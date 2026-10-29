@@ -109,9 +109,15 @@ function TrajectoryChart({ rows, first, last }: TrajectoryChartProps) {
   const innerW = VB_W - padL - padR;
   const innerH = VB_H - padT - padB;
 
-  // Time scale on x — real dates, not categorical.
+  // Time scale on x — real dates, not categorical. The domain runs through
+  // Jan 1 of the year after the latest release so the next calendar-year
+  // hash mark is always visible and the end-point label has room.
   const xMin = Date.parse(first.coverage_end);
-  const xMax = Date.parse(last.coverage_end);
+  const xDataMax = Date.parse(last.coverage_end);
+  const xMax = Math.max(
+    xDataMax,
+    Date.UTC(new Date(xDataMax).getUTCFullYear() + 1, 0, 1),
+  );
   const xRange = xMax - xMin || 1;
   const xOf = (s: string) => padL + ((Date.parse(s) - xMin) / xRange) * innerW;
 
@@ -131,7 +137,7 @@ function TrajectoryChart({ rows, first, last }: TrajectoryChartProps) {
     .join(" ");
 
   // X-axis ticks at Jan 1 of each calendar year whose start falls inside the
-  // data range. The on-line dots (below) sit at FY-end rows (Sep 30 — the
+  // axis domain. The on-line dots (below) sit at FY-end rows (Sep 30 — the
   // FAIR Plan's native annual cadence), so the calendar labels and the data
   // markers are intentionally two separate views of time. Today the chart
   // starts Sep 30, 2019, so Jan 1, 2019 is offscreen and naturally skipped.
