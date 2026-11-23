@@ -2,19 +2,40 @@ import { FACTS } from "@/lib/policy";
 import { Cite, Sources } from "@/components/home/Sources";
 
 // Section 6: practical steps for a homeowner. Static.
-export function WhatYouCanDo() {
+export function WhatYouCanDo({ asOf }: { asOf: string }) {
   return (
     <section id="act" className="bg-white py-20 scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
           <h2 className="mb-4 text-3xl font-bold text-charcoal lg:text-4xl">
-            What you can do
+            Take action
           </h2>
           <p className="text-lg text-gray-700">
-            None of this is legal or insurance advice. These are the rights
-            and tools the state publishes, in one place.
+            Two kinds of action: ask the people who set the rules to publish
+            the record, and use the rights you already have. None of this is
+            legal or insurance advice.
           </p>
         </div>
+
+        <article className="mb-6 rounded-xl border-2 border-navy-blue bg-gray-50 p-6">
+          <h3 className="text-lg font-bold text-charcoal">
+            Ask for the scorecard to be public
+          </h3>
+          <p className="mt-2 max-w-3xl text-gray-700">
+            The state has not published how many policies insurers have
+            written against their commitments, and its nonrenewal data ends
+            in 2023. Both already exist inside the Department of Insurance.
+            Ask your state senator and assemblymember, and the commissioner's
+            office, to publish them every quarter.{" "}
+            <a
+              href="https://findyourrep.legislature.ca.gov/"
+              className="font-semibold underline"
+              rel="noopener noreferrer"
+            >
+              Find your legislators
+            </a>
+          </p>
+        </article>
 
         <div className="grid gap-6 md:grid-cols-2">
           <article className="rounded-xl border border-gray-200 p-6">
@@ -81,6 +102,13 @@ export function WhatYouCanDo() {
         <Sources
           keys={["nonrenewalNotice", "moratorium", "resGuide", "saferFromWildfires", "helpLine"]}
         />
+        <p className="mt-6 border-t border-gray-200 pt-6 text-sm text-gray-600">
+          FAIR Plan figures on this page are current through {asOf} and come
+          from the Plan's published ZIP-level files. Market-wide figures come
+          from the California Department of Insurance and end in 2023. This
+          site is an independent project and is not affiliated with the FAIR
+          Plan, the Department, or any insurer.
+        </p>
       </div>
     </section>
   );

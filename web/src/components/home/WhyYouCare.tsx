@@ -68,7 +68,7 @@ export function WhyYouCare({ stats }: { stats: HomeStats }) {
               In return, those insurers committed to write more policies in
               wildfire-distressed areas. Whether that trade is working is{" "}
               <a href="#lara-era" className="font-semibold underline">
-                what the scorecard below measures
+                what the record below measures
               </a>
               .
             </p>

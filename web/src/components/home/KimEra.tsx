@@ -67,7 +67,7 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
     <section id="kim-era" className="bg-coastal-beige py-20 scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-patriot-red">
-          2027 to 2030 · Commissioner-elect Jane Kim
+          Under Commissioner Jane Kim · 2027 onward
         </p>
         <h2 className="mb-6 text-3xl font-bold text-charcoal lg:text-4xl">
           The next four years start here

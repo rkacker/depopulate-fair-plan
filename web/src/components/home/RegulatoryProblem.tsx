@@ -56,8 +56,9 @@ export function RegulatoryProblem() {
         </div>
         <p className="mt-10 max-w-3xl text-lg leading-relaxed text-gray-100">
           So the size of the FAIR Plan is a measure of how those rules are
-          working. The sections below take it one commissioner at a time:
-          what each era tried, in regulation and in legislation, and what the
+          working. That is what this site tracks: whether regulation and
+          legislation succeed or fail at shrinking it. The record below
+          goes one commissioner at a time, with what each tried and what the
           count did.
         </p>
       </div>

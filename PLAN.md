@@ -74,15 +74,18 @@ is the only place the dashboard difference is explained.
 
 | # | Section (anchor) | Component (`web/src/components/home/`) |
 |---|---|---|
-| 0 | Hero with ZIP lookup (`#top`) | `HomeHero`, `ZipLookup` (island) |
+| 0 | Hero: the problem and five key facts (`#top`) | `HomeHero` |
 | 1 | Why this matters to you (`#why`) | `WhyYouCare` |
-| 2 | The problem: a backstop that became a market (`#numbers`) | `Numbers` |
-| 3 | County map and table (`#where`) | `WhereIsland` (island) |
-| 4 | It is a regulatory problem (`#regulation`) | `RegulatoryProblem` |
-| 5 | 2019 to 2026, the Lara era (`#lara-era`) | `LaraEra` |
-| 6 | 2027 to 2030, the Kim era (`#kim-era`) | `KimEra` |
-| 7 | What you can do (`#act`) | `WhatYouCanDo` |
-| 8 | Read deeper (`#more`) | `ReadDeeper` |
+| 2 | Map with ZIP lookup and county table (`#where`) | `ZipLookup` (island), `WhereIsland` (island) |
+| 3 | It is a regulatory problem (`#regulation`); states that the site tracks regulatory and legislative success or failure | `RegulatoryProblem` |
+| 4 | Under Commissioner Lara, 2019 to 2026 (`#lara-era`) | `LaraEra`, `EraTrajectoryChart` |
+| 5 | Under Commissioner Kim, 2027 onward (`#kim-era`) | `KimEra` |
+| 6 | Take action (`#act`) | `WhatYouCanDo` |
+
+Decided in review (2026-11-23):
+- The hero carries the problem and the key facts; there is no separate numbers section. The hero does not mention the 2023 deal. Its message: the Plan grew 4.3 times over the last eight-year term, regulation and legislation set its size, and the new term will be held to account.
+- No "Read deeper" section. The header links only to sections of the home page. `/analysis` and `/data` are reached from the footer and from inline links in the era sections and the ZIP result.
+- The ZIP lookup sits with the map and shows policies, one-year change, change since fiscal 2023, share of insured homes, fire-hazard share, distressed-list status, and a six-year history.
 
 Era scorecards are computed in `web/src/lib/homeStats.ts` and `lib/distressed.ts`.
 Hand-entered facts are in `web/src/lib/policy.ts`. The Lara scorecard is start

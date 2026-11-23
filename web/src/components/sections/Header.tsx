@@ -2,15 +2,11 @@ import { scrollToSection } from "@/lib/utils";
 
 const HOME_SECTIONS: Array<{ id: string; label: string }> = [
   { id: "why", label: "Why it matters" },
-  { id: "numbers", label: "Numbers" },
+  { id: "where", label: "Map and ZIP lookup" },
   { id: "regulation", label: "A regulatory problem" },
   { id: "lara-era", label: "2019 to 2026" },
   { id: "kim-era", label: "2027 onward" },
-];
-
-const PAGES: Array<{ href: string; label: string }> = [
-  { href: "/analysis", label: "Analysis" },
-  { href: "/data", label: "Data" },
+  { id: "act", label: "Take action" },
 ];
 
 export function Header({ pathname }: { pathname: string }) {
@@ -51,16 +47,6 @@ export function Header({ pathname }: { pathname: string }) {
               </a>
             ),
           )}
-          {PAGES.map((p) => (
-            <a
-              key={p.href}
-              href={p.href}
-              aria-current={pathname.startsWith(p.href) ? "page" : undefined}
-              className="text-sm font-medium text-charcoal transition-colors hover:text-patriot-red"
-            >
-              {p.label}
-            </a>
-          ))}
         </nav>
       </div>
     </header>

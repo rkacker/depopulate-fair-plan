@@ -197,7 +197,7 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
     <section id="lara-era" className="bg-white py-20 scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-patriot-red">
-          2019 to 2026 · Commissioner Ricardo Lara
+          Under Commissioner Ricardo Lara · 2019 to 2026
         </p>
         <h2 className="mb-6 text-3xl font-bold text-charcoal lg:text-4xl">
           Eight years: {stats.sinceFirstMultiple.toFixed(1)} times the policies
