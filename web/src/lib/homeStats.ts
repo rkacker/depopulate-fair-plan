@@ -25,16 +25,13 @@ export const DEAL_COVERAGE_END = "2023-09-30";
 export interface HomeStats {
   latest: StatewideHistoryRow;
   prior: StatewideHistoryRow; // previous quarter
-  yearAgo: StatewideHistoryRow | null;
   deal: StatewideHistoryRow;
   first: StatewideHistoryRow; // earliest row in the series (Sept 2019)
   firstExposure: StatewideHistoryRow | null; // earliest row with insured value
   sinceFirstMultiple: number;
-  quarterChange: number;
   // True when the quarterly move is too small to read as a direction. The
   // Plan's own publications differ by more than this from one another.
   quarterIsFlat: boolean;
-  sinceDealChange: number;
   sinceDealMultiple: number;
   marketShare: {
     year: number;
@@ -56,8 +53,6 @@ export function buildHomeStats(history: StatewideHistoryRow[]): HomeStats {
   if (!latest || !prior || !deal) {
     throw new Error("statewide history is missing the latest, prior or deal-year row");
   }
-  const yearAgoDate = `${Number(latest.coverage_end.slice(0, 4)) - 1}${latest.coverage_end.slice(4)}`;
-  const yearAgo = rows.find((r) => r.coverage_end === yearAgoDate) ?? null;
   const n = (r: StatewideHistoryRow) => r.policy_count ?? 0;
   const first = rows[rows.length - 1];
   const firstExposure =
@@ -68,11 +63,8 @@ export function buildHomeStats(history: StatewideHistoryRow[]): HomeStats {
     sinceFirstMultiple: n(latest) / n(first),
     latest,
     prior,
-    yearAgo,
     deal,
-    quarterChange: n(latest) - n(prior),
     quarterIsFlat: Math.abs(n(latest) - n(prior)) / n(prior) < FLAT_THRESHOLD,
-    sinceDealChange: n(latest) - n(deal),
     sinceDealMultiple: n(latest) / n(deal),
     marketShare: loadStateMarketShare(),
   };
@@ -114,11 +106,6 @@ export function loadDistressedCounties(): { counties: string[]; effectiveDate: s
     counties: rows.map((r) => r.geo_name).sort(),
     effectiveDate: rows[0]?.effective_date ?? "",
   };
-}
-
-export function fmtSigned(n: number): string {
-  const s = Math.abs(n).toLocaleString("en-US");
-  return n < 0 ? `−${s}` : `+${s}`;
 }
 
 export function fmtLongDate(iso: string): string {
