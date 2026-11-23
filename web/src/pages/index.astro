@@ -60,14 +60,25 @@ const description = `California's insurer of last resort holds ${fmtPolicies(sta
   <WhoIsInCharge />
   <LaraEra stats={stats} promise={promise} history={history} />
   <KimEra stats={stats} promise={promise} />
-  <section class="bg-white py-10">
+  <section class="bg-navy-blue py-16 text-white">
+    <div class="mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
+      <h2 class="mb-4 text-3xl font-bold lg:text-4xl">One test</h2>
+      <p class="text-lg leading-relaxed text-gray-100">
+        Eight years of regulation left the FAIR Plan {stats.sinceFirstMultiple.toFixed(1)} times
+        larger. The next term will be judged the same way: does it get
+        smaller. This page is updated with every quarterly FAIR Plan release.
+      </p>
+      <a
+        href="/take-action"
+        class="mt-8 inline-block rounded-md bg-patriot-red px-8 py-3 text-base font-semibold text-white shadow transition-colors hover:bg-patriot-red-dark"
+      >
+        Take action
+      </a>
+    </div>
+  </section>
+  <section class="bg-white py-8">
     <div class="mx-auto max-w-5xl px-4 text-sm text-gray-600 sm:px-6 lg:px-8">
       <p>
-        <a href="/take-action" class="font-semibold text-patriot-red underline">
-          What you can do about it →
-        </a>
-      </p>
-      <p class="mt-4 border-t border-gray-200 pt-4">
         FAIR Plan figures on this page are current through {asOf} and come from
         the Plan's published ZIP-level files. Market-wide figures come from the
         California Department of Insurance and end in 2023. This site is an

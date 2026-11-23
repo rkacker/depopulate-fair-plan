@@ -160,6 +160,10 @@ export function ZipLookup({ initial, distressedCounties, asOf }: ZipLookupProps)
             <ZipCard snap={view.snap} isDefault={view.isDefault} asOf={asOf} />
           )}
         </div>
+        <p className="mt-10 text-center text-lg text-gray-700">
+          Where the FAIR Plan grows follows from rules set in Sacramento.
+          The next section explains who sets them.
+        </p>
       </div>
     </section>
   );
@@ -258,17 +262,17 @@ function ZipCard({ snap, isDefault, asOf }: { snap: ZipSnapshot; isDefault: bool
       <p className="mt-5 text-sm text-gray-700">
         {listed ? (
           <>
-            This {snap.zipListed ? "ZIP code" : "county"} is on the Department
-            of Insurance's list of distressed areas, where insurers that use
-            the new pricing rules have committed to write more policies.
+            This {snap.zipListed ? "ZIP code" : "county"} is on the state's
+            distressed list: the areas where insurers promised to write more
+            policies in exchange for permission to charge higher rates.
           </>
         ) : (
           <>
-            This ZIP code is not on the Department of Insurance's list of
-            distressed areas, so insurers' commitments to write more policies
-            do not apply here.
+            This ZIP code is not on the state's distressed list, the areas
+            where insurers promised to write more policies in exchange for
+            permission to charge higher rates. No such promise applies here.
             {snap.meetsFireTest &&
-              " By our calculation it meets the fire-risk half of the state's own qualifying test."}
+              " By our calculation it meets the fire-risk half of the state's own test for the list."}
           </>
         )}
       </p>

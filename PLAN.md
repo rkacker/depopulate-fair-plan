@@ -40,6 +40,11 @@ Rules that follow:
 - **The hero sets up the problem and the blame:** the headline, who is responsible,
   and four key facts. No 2023 deal, no quarterly movement, no statement of purpose.
   The links to the two scorecards sit at the end of "Who is responsible".
+- **Each section leads with its point.** The Lara era opens with the chart and the
+  verdict, then the scorecard, then what was tried. The Kim era states the test before
+  the starting line and the proposals. "Why it matters" stays on the household effect
+  and leaves mechanics to the era sections. Terms like "distressed list" are defined
+  where they first appear. The page closes on the one test and the Take action link.
 - **NDIFA gets no endorsement; it gets a scorecard,** with possible benefits and risks
   attributed to named people and to the state's own study.
 - **Fact and advocacy page.** No signup form, no "contact us", no contact email.

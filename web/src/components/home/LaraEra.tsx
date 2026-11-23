@@ -209,34 +209,6 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
           by the size of the insurer of last resort.
         </p>
 
-        <h3 className="mb-4 mt-10 text-xl font-bold text-charcoal">
-          The scorecard
-        </h3>
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[40rem] text-left text-sm">
-            <thead>
-              <tr className="border-b-2 border-gray-300 text-xs uppercase tracking-wide text-gray-500">
-                <th scope="col" className="py-2 pr-4">Measure</th>
-                <th scope="col" className="py-2 pr-4">Start</th>
-                <th scope="col" className="py-2 pr-4">End</th>
-                <th scope="col" className="py-2">Reading</th>
-              </tr>
-            </thead>
-            <tbody>
-              {era.map((r) => (
-                <tr key={r.measure} className="border-b border-gray-200 align-top">
-                  <th scope="row" className="py-3 pr-4 font-semibold text-charcoal">
-                    {r.measure}
-                  </th>
-                  <td className="py-3 pr-4 tabular-nums text-gray-700">{r.start}</td>
-                  <td className="py-3 pr-4 tabular-nums text-gray-700">{r.end}</td>
-                  <td className="py-3 font-semibold text-charcoal">{r.reading}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
         <div className="mt-10">
           <EraBarChart points={points} />
           <details className="mt-4 text-sm">
@@ -266,6 +238,56 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
               </table>
             </div>
           </details>
+        </div>
+
+        <div className="mt-10 max-w-3xl rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-6">
+          <p className="mb-2 font-semibold text-patriot-red">The verdict</p>
+          <p className="text-gray-700">
+            The FAIR Plan ends these eight years{" "}
+            {stats.sinceFirstMultiple.toFixed(1)} times the size it started.
+            It grew every year until the last, when it went flat. A 2023
+            strategy meant to shrink it, explained below, stopped the growth
+            and has not brought a decline. Homeowners are paying the higher
+            rates that were the price of that strategy, and the policies it
+            was meant to move off the Plan are still on it.
+          </p>
+          <p className="mt-3 text-gray-700">
+            <a href="/analysis/depopulation-promise" className="font-semibold underline">
+              Read the full analysis
+            </a>{" "}
+            ·{" "}
+            <a href="/data?tab=distressed_list" className="font-semibold underline">
+              See the state's distressed list
+            </a>
+          </p>
+        </div>
+
+        <h3 className="mb-4 mt-12 text-xl font-bold text-charcoal">
+          The scorecard
+        </h3>
+        <div className="overflow-x-auto">
+          <table className="w-full min-w-[40rem] text-left text-sm">
+            <thead>
+              <tr className="border-b-2 border-gray-300 text-xs uppercase tracking-wide text-gray-500">
+                <th scope="col" className="py-2 pr-4">Measure</th>
+                <th scope="col" className="py-2 pr-4">Start</th>
+                <th scope="col" className="py-2 pr-4">End</th>
+                <th scope="col" className="py-2">Reading</th>
+              </tr>
+            </thead>
+            <tbody>
+              {era.map((r) => (
+                <tr key={r.measure} className="border-b border-gray-200 align-top">
+                  <th scope="row" className="py-3 pr-4 font-semibold text-charcoal">
+                    {r.measure}
+                  </th>
+                  <td className="py-3 pr-4 tabular-nums text-gray-700">{r.start}</td>
+                  <td className="py-3 pr-4 tabular-nums text-gray-700">{r.end}</td>
+                  <td className="py-3 font-semibold text-charcoal">{r.reading}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
         <h3 className="mb-4 mt-12 text-xl font-bold text-charcoal">
@@ -351,29 +373,6 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
             against the commitments.
           </li>
         </ul>
-
-        <div className="mt-10 max-w-3xl rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-6">
-          <p className="mb-2 font-semibold text-patriot-red">
-            The result of the era
-          </p>
-          <p className="text-gray-700">
-            The FAIR Plan ends these eight years{" "}
-            {stats.sinceFirstMultiple.toFixed(1)} times the size it started.
-            The strategy meant to shrink it stopped the growth and has not
-            brought a decline. Homeowners are paying the higher rates that
-            were the price of the deal. The return half of the trade,
-            policies moving off the Plan, has not shown up in the count.
-          </p>
-          <p className="mt-3 text-gray-700">
-            <a href="/analysis/depopulation-promise" className="font-semibold underline">
-              Read the full analysis
-            </a>{" "}
-            ·{" "}
-            <a href="/data?tab=distressed_list" className="font-semibold underline">
-              See the state's distressed list
-            </a>
-          </p>
-        </div>
 
         <Sources
           keys={[

@@ -84,6 +84,16 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
           </p>
         </div>
 
+        <div className="mt-10 max-w-3xl rounded-r-lg border-l-4 border-patriot-red bg-white p-6">
+          <p className="mb-2 font-semibold text-patriot-red">The test</p>
+          <p className="text-gray-700">
+            This term will be scored by the test the last one did not pass:
+            does the FAIR Plan get smaller. We take no position on any
+            proposal described below. We will report the count each quarter
+            against the starting line.
+          </p>
+        </div>
+
         <h3 className="mb-4 mt-10 text-xl font-bold text-charcoal">
           The starting line
         </h3>
@@ -249,16 +259,6 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
           Statements as reported by <Cite k="election">CalMatters</Cite> and
           the <Cite k="latimesPlan">Los Angeles Times</Cite>, November 2026.
         </p>
-
-        <div className="mt-10 max-w-3xl rounded-r-lg border-l-4 border-navy-blue bg-white p-6">
-          <p className="mb-2 font-semibold text-charcoal">How we will score it</p>
-          <p className="text-gray-700">
-            We take no position on the proposal. The test for this era is
-            the one the last era did not pass: does the FAIR Plan get
-            smaller. We will report the count each quarter against the
-            starting line above.
-          </p>
-        </div>
 
         <Sources
           keys={[

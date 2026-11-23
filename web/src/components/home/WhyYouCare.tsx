@@ -53,22 +53,19 @@ export function WhyYouCare({ stats }: { stats: HomeStats }) {
               If a private insurer covers you
             </p>
             <h3 className="mt-2 text-xl font-bold text-charcoal">
-              Your rate is set under new rules
+              You are paying for the fix
             </h3>
             <p className="mt-3 text-gray-700">
-              To bring insurers back, the state now lets them price wildfire
-              with forward-looking catastrophe models and charge customers for
-              the insurers' own reinsurance. Increases approved since include{" "}
-              <Cite k="rateApprovals">
-                6.9% for Mercury and for CSAA
-              </Cite>
-              .
+              Since 2025 the state has let insurers charge more for wildfire
+              risk. Increases approved since then include{" "}
+              <Cite k="rateApprovals">6.9% for Mercury and for CSAA</Cite>.
             </p>
             <p className="mt-3 text-gray-700">
-              In return, those insurers committed to write more policies in
-              wildfire-distressed areas. Whether that trade is working is{" "}
+              The state's stated reason was to bring insurers back and shrink
+              the FAIR Plan. You are paying for that plan whether or not it
+              works.{" "}
               <a href="#lara-era" className="font-semibold underline">
-                what the record below measures
+                See whether it has
               </a>
               .
             </p>
