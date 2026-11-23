@@ -192,6 +192,47 @@ export const FACTS = {
     level: "press",
   },
 
+  // --- Who regulates ---
+  noDutyToWrite: {
+    value: "not required by law to write policies",
+    note: "the Department's own description of insurers before the 2023 strategy",
+    asOf: "2026-11-20",
+    source: "CDI, Sustainable Insurance Strategy page",
+    url: SIS_PAGE,
+    level: "primary",
+  },
+  sisAnnouncement: {
+    value: "September 21, 2023",
+    asOf: "2023-09-21",
+    source: "CDI press release 051-2023",
+    url: `${CDI}/0400-news/0100-press-releases/2023/release051-2023.cfm`,
+    level: "primary",
+  },
+  distressedList: {
+    value: "29 counties and 663 ZIP codes",
+    note: "published March 6, 2025 and not revised since",
+    asOf: "2025-03-06",
+    source: "CDI, list of distressed counties and undermarketed ZIP codes",
+    url: `${CDI}/01-consumers/180-climate-change/upload/catastrophe-modeling-and-ratemaking-insurer-commitments-to-increase-writing-of-policies-in-high-risk-wildfire-areas-list-of-distressed-counties-and-undermarketed-zip-codes-residential-property-insurance-commitments.pdf`,
+    level: "primary",
+  },
+  bills2026: {
+    value: "September 27, 2026",
+    note: "SB 1301 (Chapter 693), AB 69 (Chapter 496) and AB 1680 (Chapter 540)",
+    asOf: "2026-09-27",
+    source: "California Legislative Information",
+    url: "https://leginfo.legislature.ca.gov/faces/billStatusClient.xhtml?bill_id=202520260AB69",
+    level: "primary",
+  },
+  rateFreeze: {
+    value: "a freeze on home insurance premiums",
+    note: "proposed by Governor-elect Xavier Becerra; his office says the details are still being worked out",
+    asOf: "2026-11-09",
+    source: "Sacramento Bee",
+    url: "https://www.sacbee.com/news/politics-government/capitol-alert/article317966757.html",
+    level: "press",
+  },
+
   // --- Homeowner rights and tools ---
   nonrenewalNotice: {
     value: "75 days",

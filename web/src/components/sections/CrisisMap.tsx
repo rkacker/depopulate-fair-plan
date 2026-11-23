@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { AlertTriangle } from "lucide-react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { colorForPolicies } from "@/lib/data";
-import { scrollToSection } from "@/lib/utils";
 import type { CountyData, SiteStats } from "@/types";
 
 const TIERS = [
@@ -159,11 +157,6 @@ export function CrisisMap({ countyData, stats, loading }: CrisisMapProps) {
                 </div>
               </div>
 
-              <div className="mt-6">
-                <Button className="w-full" onClick={() => scrollToSection("signup")}>
-                  Stay Informed
-                </Button>
-              </div>
             </Card>
           </div>
         </div>

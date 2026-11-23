@@ -10,12 +10,6 @@ export function Footer() {
           transparency, and public education on California's insurance crisis.
         </p>
         <p className="mb-6 text-xs text-gray-500">501(c)(3) status pending</p>
-        <a
-          href="mailto:info@depopulatefairplan.com"
-          className="text-sm text-golden-yellow transition-colors hover:text-golden-yellow-soft"
-        >
-          info@depopulatefairplan.com
-        </a>
         <nav
           aria-label="Site links"
           className="mt-6 flex items-center justify-center gap-4 text-sm"

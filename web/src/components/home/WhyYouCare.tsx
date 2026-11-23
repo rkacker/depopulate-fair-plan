@@ -67,8 +67,8 @@ export function WhyYouCare({ stats }: { stats: HomeStats }) {
             <p className="mt-3 text-gray-700">
               In return, those insurers committed to write more policies in
               wildfire-distressed areas. Whether that trade is working is{" "}
-              <a href="#deal" className="font-semibold underline">
-                the question the scorecard below answers
+              <a href="#lara-era" className="font-semibold underline">
+                what the scorecard below measures
               </a>
               .
             </p>

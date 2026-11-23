@@ -104,7 +104,7 @@ web/
 │   ├── layouts/             # Base.astro (shared shell, <head>, scripts)
 │   ├── components/
 │   │   ├── home/            # home-page sections (static) + ZipLookup, WhereIsland islands
-│   │   ├── sections/        # CrisisMap, CountyTable, Signup, DataPage + tabs,
+│   │   ├── sections/        # CrisisMap, CountyTable, DataPage + tabs,
 │   │   │                    # analysis articles and memos
 │   │   └── ui/              # Button, Card primitives
 │   ├── lib/

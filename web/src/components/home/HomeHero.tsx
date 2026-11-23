@@ -6,7 +6,6 @@ import type { HomeStats } from "@/lib/homeStats";
 export function HomeHero({ stats, children }: { stats: HomeStats; children?: ReactNode }) {
   const policies = stats.latest.policy_count ?? 0;
   const rounded = (Math.floor(policies / 1000) * 1000).toLocaleString("en-US");
-  const multiple = stats.sinceDealMultiple;
   return (
     <section
       id="top"
@@ -35,9 +34,10 @@ export function HomeHero({ stats, children }: { stats: HomeStats; children?: Rea
         </h1>
         <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-100">
           The FAIR Plan was built as a temporary backstop for homes no insurer
-          would cover. It is {multiple.toFixed(1)} times the size it was in
-          2023, when the state struck a deal with insurers to shrink it. It
-          has stopped growing, and it is not shrinking. When
+          would cover. It has grown {stats.sinceFirstMultiple.toFixed(1)} times
+          over since 2019, and a 2023 deal meant to shrink it has only stopped
+          the growth. That is a failure of regulation, and it is measurable.
+          When
           the Plan runs short after a major fire, the bill goes to every home
           insurer in California, and part of it can be passed on to their
           customers.
@@ -48,12 +48,12 @@ export function HomeHero({ stats, children }: { stats: HomeStats; children?: Rea
             Why this matters to you
           </a>{" "}
           ·{" "}
-          <a href="#deal" className="underline hover:text-golden-yellow">
-            What the state promised
+          <a href="#lara-era" className="underline hover:text-golden-yellow">
+            What eight years of regulation produced
           </a>{" "}
           ·{" "}
-          <a href="#next" className="underline hover:text-golden-yellow">
-            What changes in 2027
+          <a href="#kim-era" className="underline hover:text-golden-yellow">
+            What the next four could change
           </a>
         </p>
       </div>

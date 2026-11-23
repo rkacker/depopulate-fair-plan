@@ -75,11 +75,7 @@ export function ReadDeeper({ asOf }: { asOf: string }) {
           published ZIP-level files. Market-wide figures come from the
           California Department of Insurance and end in 2023. This site is an
           independent community project and is not affiliated with the FAIR
-          Plan, the Department, or any insurer. Questions and corrections:{" "}
-          <a href="mailto:info@depopulatefairplan.com" className="underline">
-            info@depopulatefairplan.com
-          </a>
-          .
+          Plan, the Department, or any insurer.
         </p>
       </div>
     </section>

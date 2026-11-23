@@ -16,13 +16,23 @@ export interface HomeStats {
   prior: StatewideHistoryRow; // previous quarter
   yearAgo: StatewideHistoryRow | null;
   deal: StatewideHistoryRow;
+  first: StatewideHistoryRow; // earliest row in the series (Sept 2019)
+  firstExposure: StatewideHistoryRow | null; // earliest row with insured value
+  sinceFirstMultiple: number;
   quarterChange: number;
   // True when the quarterly move is too small to read as a direction. The
   // Plan's own publications differ by more than this from one another.
   quarterIsFlat: boolean;
   sinceDealChange: number;
   sinceDealMultiple: number;
-  marketShare: { year: number; pct: number; fair: number; total: number } | null;
+  marketShare: {
+    year: number;
+    pct: number;
+    fair: number;
+    total: number;
+    firstYear: number;
+    firstPct: number;
+  } | null;
 }
 
 export function buildHomeStats(history: StatewideHistoryRow[]): HomeStats {
@@ -38,7 +48,13 @@ export function buildHomeStats(history: StatewideHistoryRow[]): HomeStats {
   const yearAgoDate = `${Number(latest.coverage_end.slice(0, 4)) - 1}${latest.coverage_end.slice(4)}`;
   const yearAgo = rows.find((r) => r.coverage_end === yearAgoDate) ?? null;
   const n = (r: StatewideHistoryRow) => r.policy_count ?? 0;
+  const first = rows[rows.length - 1];
+  const firstExposure =
+    [...rows].reverse().find((r) => r.exposure !== null) ?? null;
   return {
+    first,
+    firstExposure,
+    sinceFirstMultiple: n(latest) / n(first),
     latest,
     prior,
     yearAgo,
@@ -64,7 +80,10 @@ function loadStateMarketShare(): HomeStats["marketShare"] {
     .sort((a, b) => a - b);
   const year = years[years.length - 1];
   if (!year) return null;
+  const firstYear = years[0];
   return {
+    firstYear,
+    firstPct: parseFloat(state[`fair_plan_share_${firstYear}`] ?? "0"),
     year,
     pct: parseFloat(state[`fair_plan_share_${year}`] ?? "0"),
     fair: parseInt(state[`fair_plan_pif_${year}`] ?? "0", 10),

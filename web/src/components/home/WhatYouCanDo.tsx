@@ -1,7 +1,7 @@
 import { FACTS } from "@/lib/policy";
 import { Cite, Sources } from "@/components/home/Sources";
 
-// Section 6: practical steps for a homeowner. Static; the signup form follows.
+// Section 6: practical steps for a homeowner. Static.
 export function WhatYouCanDo() {
   return (
     <section id="act" className="bg-white py-20 scroll-mt-16">

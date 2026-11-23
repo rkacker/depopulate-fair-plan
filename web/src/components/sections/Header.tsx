@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
 
 const HOME_SECTIONS: Array<{ id: string; label: string }> = [
   { id: "why", label: "Why it matters" },
   { id: "numbers", label: "Numbers" },
-  { id: "deal", label: "The 2023 deal" },
-  { id: "next", label: "What's next" },
+  { id: "regulation", label: "A regulatory problem" },
+  { id: "lara-era", label: "2019 to 2026" },
+  { id: "kim-era", label: "2027 onward" },
 ];
 
 const PAGES: Array<{ href: string; label: string }> = [
@@ -61,15 +61,6 @@ export function Header({ pathname }: { pathname: string }) {
               {p.label}
             </a>
           ))}
-          <Button
-            size="sm"
-            onClick={() => {
-              if (onHome) scrollToSection("signup");
-              else window.location.href = "/#signup";
-            }}
-          >
-            Get Updates
-          </Button>
         </nav>
       </div>
     </header>

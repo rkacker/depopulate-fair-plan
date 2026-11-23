@@ -141,11 +141,6 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
       <p className="mt-8 border-t border-gray-200 pt-4 text-sm text-gray-500">
         Every figure on this page is reproducible from the datasets on{" "}
         <a href="/data" className="underline">Data &amp; Downloads</a>.
-        Questions, corrections, or data requests:{" "}
-        <a href="mailto:info@depopulatefairplan.com" className="underline">
-          info@depopulatefairplan.com
-        </a>
-        .
       </p>
     </article>
   );
