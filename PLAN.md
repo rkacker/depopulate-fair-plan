@@ -78,12 +78,15 @@ is the only place the dashboard difference is explained.
 | 1 | Why this matters to you (`#why`) | `WhyYouCare` |
 | 2 | County map and table (`#where`) | `WhereIsland` (island) |
 | 2b | Your ZIP code (`#zip`), its own panel after the counties | `ZipLookup` (island), `lib/zipSnapshot.ts` |
-| 3 | Failed regulation (`#regulation`); states that the site tracks regulatory and legislative success or failure | `RegulatoryProblem` |
+| 3 | Who is in charge (`#regulation`): a civics panel (commissioner, Legislature, governor) that names the commissioner as the office the site scores | `WhoIsInCharge` |
 | 4 | Under Commissioner Lara, 2019 to 2026 (`#lara-era`) | `LaraEra`, `EraBarChart` (one bar per fiscal year; chosen in review over a line chart) |
 | 5 | Under Commissioner Kim, 2027 onward (`#kim-era`) | `KimEra` |
-| 6 | Take action (`#act`) | `WhatYouCanDo` |
+
+Take action is its own page, `/take-action` (`WhatYouCanDo`), linked from the header button and a line at the end of the home page.
 
 Decided in review (2026-11-23):
+- The page must not assume the reader knows who regulates insurance. The hero says Californians elect an insurance commissioner, and "Who is in charge" explains the three sets of officials. Success and failure are scored against the commissioner's office, one term at a time.
+- The hero links to two panels: the last eight years ("failed regulation") and the next four (an open question).
 - The hero carries the problem and the key facts; there is no separate numbers section. The hero does not mention the 2023 deal. Its message: the Plan grew 4.3 times over the last eight-year term, regulation and legislation set its size, and the new term will be held to account.
 - No "Read deeper" section. The header links only to sections of the home page. `/analysis` and `/data` are reached from the footer and from inline links in the era sections and the ZIP result.
 - County and ZIP data are separate panels. The ZIP panel is pre-populated at build time with an example chosen from the data (`pickDefaultZip` in `lib/homeStats.ts`): the ZIP code outside the state's distressed list that added the most FAIR Plan policies since fiscal 2023 (92223 Beaumont as of the Q3 2026 data). It shows policies, one-year change, change since fiscal 2023, share of insured homes, fire-hazard share, distressed-list status, and a six-year history.

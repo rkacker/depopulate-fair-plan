@@ -56,14 +56,41 @@ export function HomeHero({ stats }: { stats: HomeStats }) {
             <span className="text-golden-yellow">{rounded} home policies</span>.
             Every homeowner shares the risk.
           </h1>
-          <p className="mx-auto mb-10 max-w-3xl text-lg leading-relaxed text-gray-100">
-            The FAIR Plan was built as a temporary backstop for homes no
-            insurer would cover. A backstop is healthy when it is small. Over
-            the last commissioner's eight years it grew{" "}
-            {stats.sinceFirstMultiple.toFixed(1)} times over. Its size is set
-            by regulation and legislation, so the term that just ended can be
-            scored, and the one that starts in 2027 can be held to account.
+          <p className="mx-auto mb-8 max-w-3xl text-lg leading-relaxed text-gray-100">
+            The FAIR Plan is California's insurer of last resort, built as a
+            small backstop for homes no company would cover. Californians
+            elect one official to regulate insurance, the insurance
+            commissioner. Under the last one it grew{" "}
+            {stats.sinceFirstMultiple.toFixed(1)} times over. A new one takes
+            office in January.
           </p>
+        </div>
+
+        <div className="mx-auto mb-10 grid max-w-4xl gap-4 sm:grid-cols-2">
+          <a
+            href="#lara-era"
+            className="group rounded-lg border-2 border-white/30 bg-navy-blue/60 p-5 text-left transition-colors hover:border-golden-yellow"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wide text-golden-yellow">
+              2019 to 2026 · Commissioner Lara
+            </p>
+            <p className="mt-1 text-xl font-bold">Eight years of failed regulation</p>
+            <p className="mt-1 text-sm text-gray-200 group-hover:text-white">
+              See the scorecard →
+            </p>
+          </a>
+          <a
+            href="#kim-era"
+            className="group rounded-lg border-2 border-white/30 bg-navy-blue/60 p-5 text-left transition-colors hover:border-golden-yellow"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wide text-golden-yellow">
+              2027 onward · Commissioner Kim
+            </p>
+            <p className="mt-1 text-xl font-bold">What will the next four bring?</p>
+            <p className="mt-1 text-sm text-gray-200 group-hover:text-white">
+              See the starting line →
+            </p>
+          </a>
         </div>
 
         <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">

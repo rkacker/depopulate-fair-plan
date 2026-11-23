@@ -7,9 +7,9 @@ export function WhatYouCanDo({ asOf }: { asOf: string }) {
     <section id="act" className="bg-white py-20 scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
-          <h2 className="mb-4 text-3xl font-bold text-charcoal lg:text-4xl">
+          <h1 className="mb-4 text-3xl font-bold text-charcoal lg:text-4xl">
             Take action
-          </h2>
+          </h1>
           <p className="text-lg text-gray-700">
             Two kinds of action: ask the people who set the rules to publish
             the record, and use the rights you already have. None of this is
@@ -18,9 +18,9 @@ export function WhatYouCanDo({ asOf }: { asOf: string }) {
         </div>
 
         <article className="mb-6 rounded-xl border-2 border-navy-blue bg-gray-50 p-6">
-          <h3 className="text-lg font-bold text-charcoal">
+          <h2 className="text-lg font-bold text-charcoal">
             Ask for the scorecard to be public
-          </h3>
+          </h2>
           <p className="mt-2 max-w-3xl text-gray-700">
             The state has not published how many policies insurers have
             written against their commitments, and its nonrenewal data ends
@@ -39,9 +39,9 @@ export function WhatYouCanDo({ asOf }: { asOf: string }) {
 
         <div className="grid gap-6 md:grid-cols-2">
           <article className="rounded-xl border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-charcoal">
+            <h2 className="text-lg font-bold text-charcoal">
               If you get a nonrenewal notice
-            </h3>
+            </h2>
             <p className="mt-2 text-gray-700">
               Your insurer must give you at least{" "}
               <Cite k="nonrenewalNotice">{FACTS.nonrenewalNotice.value}</Cite>{" "}
@@ -54,9 +54,9 @@ export function WhatYouCanDo({ asOf }: { asOf: string }) {
           </article>
 
           <article className="rounded-xl border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-charcoal">
+            <h2 className="text-lg font-bold text-charcoal">
               Before you accept the FAIR Plan
-            </h3>
+            </h2>
             <p className="mt-2 text-gray-700">
               The Plan is meant for homes that cannot find other coverage. Ask
               your agent or broker which insurers they checked. More insurers
@@ -67,9 +67,9 @@ export function WhatYouCanDo({ asOf }: { asOf: string }) {
           </article>
 
           <article className="rounded-xl border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-charcoal">
+            <h2 className="text-lg font-bold text-charcoal">
               If you are on the FAIR Plan
-            </h3>
+            </h2>
             <p className="mt-2 text-gray-700">
               Check what your policy leaves out. A FAIR Plan policy does not
               cover <Cite k="fairGaps">{FACTS.fairGaps.value}</Cite>; a
@@ -80,9 +80,9 @@ export function WhatYouCanDo({ asOf }: { asOf: string }) {
           </article>
 
           <article className="rounded-xl border border-gray-200 p-6">
-            <h3 className="text-lg font-bold text-charcoal">
+            <h2 className="text-lg font-bold text-charcoal">
               Lower your own rate
-            </h3>
+            </h2>
             <p className="mt-2 text-gray-700">
               Under the state's{" "}
               <Cite k="saferFromWildfires">{FACTS.saferFromWildfires.value}</Cite>{" "}
@@ -103,7 +103,7 @@ export function WhatYouCanDo({ asOf }: { asOf: string }) {
           keys={["nonrenewalNotice", "moratorium", "resGuide", "saferFromWildfires", "helpLine"]}
         />
         <p className="mt-6 border-t border-gray-200 pt-6 text-sm text-gray-600">
-          FAIR Plan figures on this page are current through {asOf} and come
+          FAIR Plan figures on this site are current through {asOf} and come
           from the Plan's published ZIP-level files. Market-wide figures come
           from the California Department of Insurance and end in 2023. This
           site is an independent project and is not affiliated with the FAIR

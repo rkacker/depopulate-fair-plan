@@ -1,0 +1,16 @@
+---
+import Base from "@/layouts/Base.astro";
+import { WhatYouCanDo } from "@/components/home/WhatYouCanDo";
+import { loadStatewideHistoryServer } from "@/lib/loadData.server";
+import { buildHomeStats, fmtLongDate } from "@/lib/homeStats";
+
+const stats = buildHomeStats(loadStatewideHistoryServer());
+const asOf = fmtLongDate(stats.latest.coverage_end);
+const title = "Take action — Depopulate the FAIR Plan";
+const description =
+  "What California homeowners can do about the FAIR Plan: ask for the scorecard data to be made public, and use the rights and tools the state already provides.";
+---
+
+<Base title={title} description={description}>
+  <WhatYouCanDo asOf={asOf} />
+</Base>

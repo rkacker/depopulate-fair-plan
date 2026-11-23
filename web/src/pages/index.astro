@@ -4,10 +4,9 @@ import { HomeHero } from "@/components/home/HomeHero";
 import { ZipLookup } from "@/components/home/ZipLookup";
 import { WhyYouCare } from "@/components/home/WhyYouCare";
 import { WhereIsland } from "@/components/home/WhereIsland";
-import { RegulatoryProblem } from "@/components/home/RegulatoryProblem";
+import { WhoIsInCharge } from "@/components/home/WhoIsInCharge";
 import { LaraEra } from "@/components/home/LaraEra";
 import { KimEra } from "@/components/home/KimEra";
-import { WhatYouCanDo } from "@/components/home/WhatYouCanDo";
 import {
   loadCountyDataServer,
   loadPromiseStatsServer,
@@ -58,8 +57,23 @@ const description = `California's insurer of last resort holds ${fmtPolicies(sta
     asOf={asOf}
     client:visible
   />
-  <RegulatoryProblem />
+  <WhoIsInCharge />
   <LaraEra stats={stats} promise={promise} history={history} />
   <KimEra stats={stats} promise={promise} />
-  <WhatYouCanDo asOf={asOf} />
+  <section class="bg-white py-10">
+    <div class="mx-auto max-w-5xl px-4 text-sm text-gray-600 sm:px-6 lg:px-8">
+      <p>
+        <a href="/take-action" class="font-semibold text-patriot-red underline">
+          What you can do about it →
+        </a>
+      </p>
+      <p class="mt-4 border-t border-gray-200 pt-4">
+        FAIR Plan figures on this page are current through {asOf} and come from
+        the Plan's published ZIP-level files. Market-wide figures come from the
+        California Department of Insurance and end in 2023. This site is an
+        independent project and is not affiliated with the FAIR Plan, the
+        Department, or any insurer.
+      </p>
+    </div>
+  </section>
 </Base>
