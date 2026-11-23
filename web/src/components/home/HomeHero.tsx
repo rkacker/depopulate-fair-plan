@@ -24,9 +24,6 @@ export function HomeHero({ stats, children }: { stats: HomeStats; children?: Rea
       </div>
 
       <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-        <p className="mb-4 text-sm font-medium uppercase tracking-widest text-golden-yellow">
-          A California community resource
-        </p>
         <h1 className="mb-6 text-3xl font-black leading-tight sm:text-4xl lg:text-5xl">
           California's insurer of last resort now holds{" "}
           <span className="text-golden-yellow">{rounded} home policies</span>.
