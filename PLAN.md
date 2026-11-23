@@ -1,8 +1,8 @@
 # PLAN: depopulatefairplan.com
 
-The single planning document for the site: direction, page design, and the backlog.
-It replaces `BACKLOG.md`, `docs/redesign-brief.md`, and `docs/redesign-phase1-spec.md`
-(all in git history before 2026-11-23).
+The single planning document for the site: the message, how the site is built around
+it, and the backlog. It replaces `BACKLOG.md`, `docs/redesign-brief.md`, and
+`docs/redesign-phase1-spec.md` (all in git history before 2026-11-23).
 
 ## How to use this file (session ritual)
 
@@ -12,49 +12,83 @@ It replaces `BACKLOG.md`, `docs/redesign-brief.md`, and `docs/redesign-phase1-sp
 4. Promote the next item into **Now**.
 5. Never push `main` with user-visible changes before Rishi reviews the dev server (push deploys production).
 
-## Direction (decided 2026-11-23)
+## The message (decided 2026-11-23)
 
-The homepage is one integrated, homeowner-first argument, told by regulatory era:
+The site makes one argument, in five steps. Every page, dataset and analysis belongs
+to one of them.
 
-1. FAIR Plan growth is a problem (what it costs you, the numbers, where).
-2. It is a regulatory problem (who sets prices, the duty to insure, the backstop).
-3. **2019 to 2026, Commissioner Lara:** the eight-year scorecard, what was tried in
-   regulation and in legislation, the Sustainable Insurance Strategy and risk models,
-   and the result: growth stopped, no decline.
-4. **2027 to 2030, Commissioner-elect Kim:** the starting-line scorecard, what is on
-   the table in regulation and legislation, Natural Disaster Insurance for All with
-   its possible benefits and risks, and how we will score the term.
-5. What you can do. Read deeper.
+| # | Step | The claim | Home section (anchor) |
+|---|---|---|---|
+| 1 | **The problem** | California's insurer of last resort holds 665,000 home policies, 4.3 times what it held in 2019. A backstop is healthy when it is small. | Hero (`#top`) |
+| 2 | **Why it matters** | Every homeowner pays: assessments, rates under the new rules, and worse coverage on the Plan. It is in your county and your ZIP code. | Why this matters (`#why`), county panel (`#where`), ZIP panel (`#zip`) |
+| 3 | **Who is responsible** | Elected officials set the rules. The insurance commissioner holds most of the power, so that office is the one scored. | Who is responsible (`#regulation`) |
+| 4 | **Scorecard: the last eight years** | Commissioner Lara, 2019 to 2026. Failed regulation: the Plan grew every year, and the 2023 strategy stopped growth without bringing a decline. | The last eight years (`#lara-era`) |
+| 5 | **Scorecard: the next term** | Commissioner Kim, 2027 onward. An open question, scored against a starting line by the same test: does the FAIR Plan get smaller. | The next four years (`#kim-era`) |
 
-Rules that follow from Rishi's review:
+`/take-action` is the companion page: what a reader can do once they accept the argument.
 
-- **Policy is always discussed inside an era**, split into regulation (the
-  commissioner) and legislation (the Legislature and governor). New policy content
-  goes into the era it belongs to, not into a standalone section.
-- **The site is a fact and advocacy page.** No signup form, no "contact us", no
-  contact email on any page. (Removed 2026-11-23: `Signup.tsx`, the header and map
-  buttons, the footer and memo email lines, `web/docs/apps-script.md`.)
-- **Framing:** FAIR Plan growth is a failure of regulation, shown by the record.
-  NDIFA gets no endorsement; it gets a scorecard.
-- `/data` and `/analysis/*` keep their URLs and are linked from the era sections.
+Rules that follow:
 
-## Constraints (carried over)
+- **Do not assume the reader knows who regulates insurance.** Say that Californians
+  elect an insurance commissioner before relying on it.
+- **Score the office, one term at a time.** Policy is always discussed inside a term,
+  split into regulation (the commissioner) and legislation (the Legislature and
+  governor). New policy content goes into the term it belongs to.
+- **The site's purpose is three things: the problem, the data, and the
+  blame, kept as scorecards.** The hero says exactly that: the problem, who is
+  responsible, four key facts, and one line naming the three things. No 2023 deal, no
+  quarterly movement. The links to the two scorecards sit at the end of "Who is
+  responsible", not in the hero.
+- **NDIFA gets no endorsement; it gets a scorecard,** with possible benefits and risks
+  attributed to named people and to the state's own study.
+- **Fact and advocacy page.** No signup form, no "contact us", no contact email.
+- **One count.** Our integrated ZIP-level data (665,673 at 2026-09-30). Never show the
+  FAIR Plan dashboard's or CDI's higher totals beside it. A quarterly move under 0.5%
+  of the base is "flat" (`quarterIsFlat` in `web/src/lib/homeStats.ts`). The point is
+  that the base is not declining. The counts note on `/data` is the only place the
+  dashboard difference is explained.
+- A commissioner's term is four years, with a two-term limit. The Kim scorecard is
+  written for the first term ("the next four years"); extend it if she is reelected.
+
+## How the site maps to the message
+
+| Step | Home components (`web/src/components/home/`) | Data (`/data` tab or export) | Analysis | Gaps (see backlog) |
+|---|---|---|---|---|
+| 1 Problem | `HomeHero` (four key facts) | Statewide history; FAIR share of market | none | Earlier baseline (Jan 2019) |
+| 2 Why it matters | `WhyYouCare`, `WhereIsland` (county map and table), `ZipLookup` (pre-filled example ZIP) | County data; ZIP data; ZIP history; reconciliation | none | Premium burden by county; nonrenewals and market-failure context |
+| 3 Who is responsible | `WhoIsInCharge` | none | none | Sources for the civics facts |
+| 4 Last eight years | `LaraEra`, `EraBarChart` | Distressed list; reconciliation; statewide history | The Depopulation Promise; SB 1301 memo; AB 69 and AB 1680 memo | "The quarter growth stopped" piece; memos rewritten against enacted text |
+| 5 Next term | `KimEra` | Same exports, read against the starting line | none yet | Results column each quarter; log of the term's regulatory and legislative actions; NDIFA explainer |
+| Companion | `WhatYouCanDo` on `/take-action` | none | none | none |
+
+Navigation: the header links to the home sections and has a Take action button.
+`/analysis` and `/data` are linked from the footer and inline from steps 2, 4 and 5.
+They are the evidence layer, not destinations in the main story. When either is next
+revised, group its contents under the five steps (analysis index by step; `/data`
+tabs labeled by the step they support).
+
+Implementation notes:
+
+- Static Astro. Sections ship no JavaScript; islands are the header, the county map
+  and table, and the ZIP panel.
+- `web/src/lib/homeStats.ts` computes the headline figures, the flat flag, the
+  distressed counties and the default ZIP (`pickDefaultZip`: the ZIP code outside the
+  state's list with the largest increase since fiscal 2023; 92223 Beaumont on Q3 2026 data).
+- `web/src/lib/policy.ts` holds every hand-entered fact with its source, date, and a
+  `primary` or `press` level. `web/src/lib/zipSnapshot.ts` builds one ZIP's figures
+  the same way at build time and in the browser.
+- The Lara scorecard is start against end. The Kim scorecard is a starting line plus
+  "what progress would look like"; a results column is added each quarter.
+- The Depopulation Promise article keeps its own deal-annotated chart
+  (`DealTrajectoryChart`).
+
+## Constraints
 
 - **Stack.** Astro 6 with React islands, Tailwind 4, react-simple-maps for maps, hand-written SVG for charts, PapaParse for CSV. No backend, no API, no runtime fetch from the pipeline.
-- **Data.** County and statewide data ship in the HTML at build time (`loadData.server.ts`). ZIP-level data loads only on intent.
-- **Performance.** Fast first paint on mobile. Hydrate only what is interactive.
+- **Data.** County and statewide data ship in the HTML at build time (`loadData.server.ts`). ZIP-level data loads only on a lookup.
 - **Accessibility.** Every chart has a tabular fallback in the DOM. No hover-only information. Keyboard-usable controls.
-- **Copy.** Follows `.claude/skills/copy-review/SKILL.md`. Every number traces to a `/data` export or to a dated, sourced entry in `web/src/lib/policy.ts`.
-- **Pipeline.** `config/export_contract.json` is authoritative for exports. Phase 1 changes no exports.
-
-## Counting rule (decided 2026-11-23)
-
-The site uses one FAIR Plan count: our integrated ZIP-level data (665,673 at
-2026-09-30). It does not show the FAIR Plan dashboard's or CDI's higher totals beside
-it. A quarterly move that is tiny against the base is reported as **flat**
-(`quarterIsFlat` in `web/src/lib/homeStats.ts`, under 0.5% of the base). Q3 2026 was
-flat. The message is that the base is not declining. The counts-basis note on `/data`
-is the only place the dashboard difference is explained.
+- **Copy.** Every number traces to a `/data` export or to a dated, sourced entry in `policy.ts`. The site states "failed regulation" outright, on Rishi's instruction; this goes past the older copy standard of letting data carry criticism, so the supporting numbers must sit next to every such statement.
+- **Pipeline.** `config/export_contract.json` is authoritative for exports. The redesign changed no exports.
 
 ## What the November 2026 research settled
 
@@ -67,83 +101,57 @@ is the only place the dashboard difference is explained.
 - Verisk, KCC and Moody's RMS wildfire models cleared CDI review by 2025-08-01.
 - Jane Kim won the commissioner race (AP call 2026-11-07) and is due to take office
   2027-01-04. On SIS: "we're going to be examining this program."
-- Every such fact is in `web/src/lib/policy.ts` with its source and a
-  `primary` or `press` level.
-
-## Homepage outline (`/`)
-
-| # | Section (anchor) | Component (`web/src/components/home/`) |
-|---|---|---|
-| 0 | Hero: the problem and five key facts (`#top`) | `HomeHero` |
-| 1 | Why this matters to you (`#why`) | `WhyYouCare` |
-| 2 | County map and table (`#where`) | `WhereIsland` (island) |
-| 2b | Your ZIP code (`#zip`), its own panel after the counties | `ZipLookup` (island), `lib/zipSnapshot.ts` |
-| 3 | Who is in charge (`#regulation`): a civics panel (commissioner, Legislature, governor) that names the commissioner as the office the site scores | `WhoIsInCharge` |
-| 4 | Under Commissioner Lara, 2019 to 2026 (`#lara-era`) | `LaraEra`, `EraBarChart` (one bar per fiscal year; chosen in review over a line chart) |
-| 5 | Under Commissioner Kim, 2027 onward (`#kim-era`) | `KimEra` |
-
-Take action is its own page, `/take-action` (`WhatYouCanDo`), linked from the header button and a line at the end of the home page.
-
-Decided in review (2026-11-23):
-- The page must not assume the reader knows who regulates insurance. The hero says Californians elect an insurance commissioner, and "Who is in charge" explains the three sets of officials. Success and failure are scored against the commissioner's office, one term at a time.
-- The hero links to two panels: the last eight years ("failed regulation") and the next four (an open question).
-- The hero carries the problem and the key facts; there is no separate numbers section. The hero does not mention the 2023 deal. Its message: the Plan grew 4.3 times over the last eight-year term, regulation and legislation set its size, and the new term will be held to account.
-- No "Read deeper" section. The header links only to sections of the home page. `/analysis` and `/data` are reached from the footer and from inline links in the era sections and the ZIP result.
-- County and ZIP data are separate panels. The ZIP panel is pre-populated at build time with an example chosen from the data (`pickDefaultZip` in `lib/homeStats.ts`): the ZIP code outside the state's distressed list that added the most FAIR Plan policies since fiscal 2023 (92223 Beaumont as of the Q3 2026 data). It shows policies, one-year change, change since fiscal 2023, share of insured homes, fire-hazard share, distressed-list status, and a six-year history.
-
-Era scorecards are computed in `web/src/lib/homeStats.ts` and `lib/distressed.ts`.
-Hand-entered facts are in `web/src/lib/policy.ts`. The Lara scorecard is start
-against end. The Kim scorecard is a starting line plus "what progress would look
-like"; a results column gets filled in each quarter.
-
-### Implementation approach
-
-- Convert `Home.tsx` from one `client:load` island into Astro sections. Hydrate only the header, the map, and the ZIP lookup.
-- `web/src/lib/policy.ts` holds every hand-entered fact for sections 1, 4, 5 as typed entries (value, as-of date, source URL), so a review can check them in one file.
-- The ZIP lookup lazy-loads its two CSVs on first input. Retire `?view=zip`, `ZipMap`, and `ZipTable` (keeps the 2.8 MB ZIP geometry off the page).
-- Header nav: Why, Numbers, The deal, What's next, plus Data and Analysis.
-- `Base.astro`: compute the default description from the statewide history.
 
 ## Backlog
 
-### Now
+### Now (before launch)
 
-- [ ] **Rishi's review of the era-structured homepage** on the dev server, then merge and push.
-- [ ] **Verify three dates in the Lara-era timeline** that came from memory, not a checked source: Safer from Wildfires (2022), the nonrenewal moratorium taking effect (2019), SB 254 (2025).
-- [ ] **Run `/copy-review`** on the home page before it ships.
-- [ ] **Upgrade press-level facts to primary sources** in `policy.ts`: FAIR Plan 29.1% rate increase (find the CDI or FAIR Plan document), insurer rate approvals (CDI approval lists), swearing-in date (state source).
-- [ ] **Confirm SB 254 study page numbers by eye** (pp. 46-49 came from automated extraction).
-- [ ] **Click-test the ZIP lookup** in a browser: 95667 (listed), 94110 (unlisted), 99999 (no data), "12" (invalid).
+- [ ] **Rishi's final read** of `/` and `/take-action` on the dev server, then merge `redesign/integrated-home` and push.
+- [ ] **Click-test the ZIP panel** in a browser: 95667 (listed), 94110 (unlisted), 99999 (no data), "12" (invalid).
+- [ ] **Verify facts that came from memory, not a checked source:**
+  - Step 3 civics: four-year term, two-term limit, 80 Assembly and 40 Senate members, governor does not appoint the commissioner.
+  - Step 4 timeline dates: Safer from Wildfires (2022), nonrenewal moratorium in effect (2019), SB 254 (2025).
+- [ ] **Upgrade press-level facts to primary sources** in `policy.ts`: FAIR Plan 29.1% increase, insurer rate approvals, swearing-in date, Becerra rate-freeze proposal.
+- [ ] **Confirm SB 254 study page numbers by eye** (pp. 46-49 came from automated extraction), and that the Sacramento Bee and study links open in a browser (both timed out to an automated check).
+- [ ] **Mobile navigation.** Section links are hidden below the `lg` breakpoint; only the logo and the Take action button show. Add a compact menu or accept it.
 
-### Next (after launch)
+### Next, by step
 
-- [ ] **Analysis page: the quarter growth stopped (Q3 2026).** Facts and draft framing in `notes/q3-2026-status-update.md`; Q2 setup in `notes/q2-2026-status-update.md`. Respect the re-geocoding caveat (Arnold −250 is not real).
-- [ ] **Rewrite the two bill memos against the enacted text.** Both pages carry a dated "signed" note; the bodies still describe the July 2026 versions.
-- [ ] **NDIFA standalone explainer** at `/analysis/ndifa`, if the home section outgrows itself.
-- [ ] **Kim-era results column.** Each quarterly release, fill in results against the starting-line scorecard in `KimEra.tsx`; add a dated log of regulatory and legislative actions for the era.
-- [ ] **Earlier baseline for the Lara era.** Our series starts Sept 2019; find a FAIR Plan count for Dec 2018 or Jan 2019 so the scorecard covers the full term.
-- [ ] **Premium-burden panel.** Premium per policy and exposure per policy by county. Needs premium and exposure added to the export contract (`fair/county_quarterly.csv` has them). Spread is about 12× across counties.
-- [ ] **Market-failure context.** Counties where voluntary policies are flat or falling while FAIR Plan policies climb; nonrenewals. Needs `cdi/county_yearly.csv` in the export contract.
-- [ ] **Trajectory hover tooltip**, mirrored to an ARIA live region.
+Step 1, the problem
+- [ ] **Earlier baseline.** Our series starts Sept 2019; find a FAIR Plan count for Dec 2018 or Jan 2019 so the scorecard covers Lara's full term.
+
+Step 2, why it matters
+- [ ] **Premium burden by county.** Premium and exposure per policy. Needs both added to the export contract (`fair/county_quarterly.csv` has them). Spread is about 12× across counties.
+- [ ] **Market-failure context.** Nonrenewals, and counties where voluntary policies fall while FAIR Plan policies climb. Needs `cdi/county_yearly.csv` in the export contract.
+
+Step 4, the last eight years
+- [ ] **Analysis: the quarter growth stopped (Q3 2026),** written in the flat framing. Facts in `notes/q3-2026-status-update.md`. Respect the re-geocoding caveat (Arnold −250 is not real).
+- [ ] **Rewrite the two bill memos against the enacted text.** Both carry a dated "signed" note; the bodies describe the July 2026 versions.
+- [ ] **Bring the Depopulation Promise article into the era frame** (title, intro, links back to the scorecard).
+
+Step 5, the next term
+- [ ] **Results column.** Each quarterly release, fill in results against the starting line in `KimEra.tsx`.
+- [ ] **Term log.** A dated record of the term's regulatory and legislative actions, in the same two columns as the Lara era.
+- [ ] **NDIFA explainer** at `/analysis/ndifa` once there is a bill.
+
+Evidence layer
+- [ ] **Regroup `/analysis` and `/data` under the five steps.**
+- [ ] **Send the CPRA request to CDI** (`notes/cpra-request-cdi.md`, placeholders unfilled): commitment counts and current nonrenewal data, the two gaps the Take action page asks about.
 
 ### Later
 
 - [ ] `Trust` Methodology and data-dictionary page; source-freshness badges.
 - [ ] `Trust` Data-quality tests on exports in CI (row counts, totals, no-null invariants).
 - [ ] `Trust` Export JSON metadata: `site_stats.json` and `quarterly_totals.json` lack the required `as_of_date`, `coverage_*`, `generated_at`, `methodology`, `source_urls` fields.
-- [ ] `Craft` Accessibility pass; performance and bundle budget.
-- [ ] `Craft` Shareable stat cards for press.
-- [ ] `Depth` Total insured value trends (`zip_tiv_history.csv`).
-- [ ] `Depth` FAIR share of total market by ZIP (`cdi/zip_yearly.csv`, denominator as of 2023; current-year denominators wait on the CPRA response).
-- [ ] `Depth` Send the CPRA request to CDI (`notes/cpra-request-cdi.md`, placeholders unfilled).
+- [ ] `Craft` Accessibility pass; performance and bundle budget; hover detail on the bar chart.
+- [ ] `Depth` Total insured value trends (`zip_tiv_history.csv`); FAIR share of market by ZIP (`cdi/zip_yearly.csv`, denominator as of 2023).
 - [ ] `Pipeline` New-quarter ingestion runbook.
-- [ ] `Pipeline` Remove dead `site/build.py`; drop `california_city_data.csv` from the contract; retire `site_stats.json.stats_cards`; remove unused `quarterly_totals.json` sync or use it.
+- [ ] `Pipeline` Remove dead `site/build.py`; drop `california_city_data.csv` from the contract; retire `site_stats.json.stats_cards` and its now-unused `hero` and `map.title` text; remove the unused `quarterly_totals.json` sync or use it.
 
 ### Parked
 
 - Senate-district view (open question: legal sign-off to name senators).
-- Summary-panel design system (replaced by the section components above).
-- Trajectory multi-series toggle.
+- Shareable stat cards for press.
 
 ## Data available
 
@@ -159,9 +167,13 @@ nonrenewed through 2023), `cdi/zip_yearly.csv`, `analysis/senate_district_pif.cs
 
 ## Done (rolling log)
 
-- [x] 2026-11-23 — **Homepage restructured by regulatory era** after Rishi's review: "It is a regulatory problem", the 2019 to 2026 Lara era (scorecard, regulation and legislation tried, SIS, result), the 2027 to 2030 Kim era (starting line, what is on the table, NDIFA benefits and risks, how we score it). Signup and all contact elements removed site-wide. Branches `explainer-panels` and `data/2026q3` deleted.
-- [x] 2026-11-23 — **Integrated homepage built** (branch `redesign/integrated-home`): hero with ZIP lookup, Why this matters, The numbers, county map and table, the 2023 deal scorecard ("Stalled, not reversed"), the new commissioner and NDIFA explainer, What you can do, Read deeper. Static sections ship no JavaScript; islands are the header, ZIP lookup, map and table, and signup. Policy facts sourced into `web/src/lib/policy.ts`. Retired `?view=zip`, `ZipMap`, `ZipTable`, `CrisisStats`, `Solutions`, and the 2.8 MB ZIP geometry. Bill memos carry a "signed Sept 27, 2026" note. Sitemap and meta description refreshed.
-- [x] 2026-11-23 — **Direction reset.** Plan and backlog consolidated into this file; homepage redirected to a homeowner-first integrated story covering SIS, the new commissioner, and NDIFA.
+- [x] 2026-11-23 — **Site rebuilt around the five-step message** (branch `redesign/integrated-home`, 14 commits, not yet merged):
+  - Plan and backlog consolidated into this file; `AGENTS.md` now holds agent instructions, with pipeline conventions in `src/fairplan/CLAUDE.md`.
+  - Homepage: hero with the problem, the blame and four key facts; Why this matters; county map and table; ZIP panel pre-filled with an example chosen from the data; Who is responsible, ending in links to the two scorecards; the Lara scorecard with a bar-per-year chart, regulation and legislation tried, and the SIS and risk-model explainer; the Kim starting-line scorecard with NDIFA benefits and risks.
+  - `/take-action` page. Signup, contact email, "Read deeper", and the header's Analysis and Data links removed.
+  - Policy facts researched and stored in `web/src/lib/policy.ts`. Bill memos carry a "signed Sept 27, 2026" note. The Depopulation Promise article says the latest quarter is flat.
+  - Retired: `?view=zip`, `ZipMap`, `ZipTable`, `CrisisStats`, `Solutions`, `Signup`, the 2.8 MB ZIP geometry. Branches `explainer-panels` and `data/2026q3` deleted.
+  - Checked: typecheck, build, pipeline tests (20 of 20 on the first commit; no pipeline changes since), section anchors, 18 of 20 external source links.
 - [x] 2026-10-28 — **Q3 2026 quarterly release ingested** (as of 2026-09-30, published
   2026-10-19; branch `data/2026q3`): 3 DWE sources + FY2026 5-year PIF/TIV files;
   goldens 665,673 statewide / 665,673 FY2026 / Alameda 11,969; exports synced; ZIP

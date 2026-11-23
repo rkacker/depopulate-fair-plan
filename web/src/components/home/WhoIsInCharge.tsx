@@ -5,7 +5,7 @@ export function WhoIsInCharge() {
   return (
     <section id="regulation" className="bg-navy-blue py-20 text-white scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <h2 className="mb-6 text-3xl font-bold lg:text-4xl">Who is in charge</h2>
+        <h2 className="mb-6 text-3xl font-bold lg:text-4xl">Who is responsible</h2>
         <p className="max-w-3xl text-lg leading-relaxed text-gray-100">
           Home insurance in California is not left to the market. Three sets
           of elected officials decide what insurers may charge, where they
@@ -57,6 +57,32 @@ export function WhoIsInCharge() {
           the FAIR Plan get smaller. Laws passed by the Legislature are
           recorded in the term they were passed.
         </p>
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <a
+            href="#lara-era"
+            className="group rounded-lg border-2 border-white/30 bg-white/10 p-5 text-left transition-colors hover:border-golden-yellow"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wide text-golden-yellow">
+              2019 to 2026 · Commissioner Lara
+            </p>
+            <p className="mt-1 text-xl font-bold">Eight years of failed regulation</p>
+            <p className="mt-1 text-sm text-gray-200 group-hover:text-white">
+              See the scorecard →
+            </p>
+          </a>
+          <a
+            href="#kim-era"
+            className="group rounded-lg border-2 border-white/30 bg-white/10 p-5 text-left transition-colors hover:border-golden-yellow"
+          >
+            <p className="text-xs font-semibold uppercase tracking-wide text-golden-yellow">
+              2027 onward · Commissioner Kim
+            </p>
+            <p className="mt-1 text-xl font-bold">What will the next four bring?</p>
+            <p className="mt-1 text-sm text-gray-200 group-hover:text-white">
+              See the starting line →
+            </p>
+          </a>
+        </div>
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ const HOME_SECTIONS: Array<{ id: string; label: string }> = [
   { id: "why", label: "Why it matters" },
   { id: "where", label: "By county" },
   { id: "zip", label: "Your ZIP code" },
-  { id: "regulation", label: "Who is in charge" },
+  { id: "regulation", label: "Who is responsible" },
   { id: "lara-era", label: "The last 8 years" },
   { id: "kim-era", label: "The next 4 years" },
 ];
@@ -47,14 +47,14 @@ export function Header({ pathname }: { pathname: string }) {
               </a>
             ),
           )}
-          <a
-            href="/take-action"
-            aria-current={pathname.startsWith("/take-action") ? "page" : undefined}
-            className="rounded-md bg-patriot-red px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-patriot-red-dark"
-          >
-            Take action
-          </a>
         </nav>
+        <a
+          href="/take-action"
+          aria-current={pathname.startsWith("/take-action") ? "page" : undefined}
+          className="rounded-md bg-patriot-red px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-patriot-red-dark"
+          >
+          Take action
+        </a>
       </div>
     </header>
   );
