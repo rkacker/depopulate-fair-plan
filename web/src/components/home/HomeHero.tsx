@@ -56,17 +56,13 @@ export function HomeHero({ stats }: { stats: HomeStats }) {
             <span className="text-golden-yellow">{rounded} home policies</span>.
             Every homeowner shares the risk.
           </h1>
-          <p className="mx-auto mb-4 max-w-3xl text-lg leading-relaxed text-gray-100">
+          <p className="mx-auto mb-10 max-w-3xl text-lg leading-relaxed text-gray-100">
             The FAIR Plan is California's insurer of last resort, built as a
             small backstop for homes no company would cover. Californians
             elect one official to regulate insurance, the insurance
             commissioner, and that office sets the rules that decide how big
             the Plan gets. Under the last commissioner it grew{" "}
             {stats.sinceFirstMultiple.toFixed(1)} times over.
-          </p>
-          <p className="mx-auto mb-10 max-w-3xl text-base font-semibold leading-relaxed text-golden-yellow">
-            This site does three things: it states the problem, shows the
-            data, and keeps a scorecard on the officials responsible.
           </p>
         </div>
 

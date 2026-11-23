@@ -34,11 +34,12 @@ Rules that follow:
 - **Score the office, one term at a time.** Policy is always discussed inside a term,
   split into regulation (the commissioner) and legislation (the Legislature and
   governor). New policy content goes into the term it belongs to.
-- **The site's purpose is three things: the problem, the data, and the
-  blame, kept as scorecards.** The hero says exactly that: the problem, who is
-  responsible, four key facts, and one line naming the three things. No 2023 deal, no
-  quarterly movement. The links to the two scorecards sit at the end of "Who is
-  responsible", not in the hero.
+- **The site's purpose is three things: state the problem, show the data, and keep
+  a scorecard on the officials responsible.** This is the internal brief. It is not
+  printed on the site; the reader should see it in the structure, not be told it.
+- **The hero sets up the problem and the blame:** the headline, who is responsible,
+  and four key facts. No 2023 deal, no quarterly movement, no statement of purpose.
+  The links to the two scorecards sit at the end of "Who is responsible".
 - **NDIFA gets no endorsement; it gets a scorecard,** with possible benefits and risks
   attributed to named people and to the state's own study.
 - **Fact and advocacy page.** No signup form, no "contact us", no contact email.
