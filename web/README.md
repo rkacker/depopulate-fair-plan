@@ -7,9 +7,9 @@ Built per data refresh, deployed to GitHub Pages.
 
 An information hub on the California FAIR Plan crisis. The home page (`/`) carries the
 narrative + the interactive county map and table; `/data` exposes the underlying datasets
-(statewide history, ZIP history, FAIR market share) as tables and downloads. A single-page
-consolidation of these is planned — see [`../docs/redesign-brief.md`](../docs/redesign-brief.md)
-and [`../BACKLOG.md`](../BACKLOG.md).
+(statewide history, ZIP history, FAIR market share) as tables and downloads. `/analysis`
+holds the long-form pieces and bill memos. The home page is being rebuilt as one
+integrated, homeowner-first story that links into both; see [`../PLAN.md`](../PLAN.md).
 
 ## Architecture
 

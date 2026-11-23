@@ -4,8 +4,8 @@ Development context and conventions for accelerated work with Claude Code.
 
 ## Start here
 
-- **What to work on next →** [`BACKLOG.md`](BACKLOG.md). Current focus is **redesign-first**
-  (see [`docs/redesign-brief.md`](docs/redesign-brief.md)). Read the **Now** items, pick the
+- **What to work on next →** [`PLAN.md`](PLAN.md): the single plan and backlog. Current
+  focus is the **integrated, homeowner-first homepage**. Read the **Now** items, pick the
   top unblocked one, and follow the session ritual: branch/worktree → implement →
   `just test` (pipeline) and `npm run typecheck` (web) → commit → move to Done → re-rank.
 - **Project facts / outputs / quickstart →** [`README.md`](README.md).

@@ -21,10 +21,9 @@ story with current figures, so this README stays focused on the pipeline.**
 
 ## Start here (returning contributors)
 
-- **What to work on next →** [`BACKLOG.md`](BACKLOG.md) — ranked, with a session ritual
+- **What to work on next →** [`PLAN.md`](PLAN.md): direction, page design, and the backlog, with a session ritual
 - **How the code works / conventions →** [`CLAUDE.md`](CLAUDE.md)
 - **The website (Astro app) →** [`web/README.md`](web/README.md)
-- **Planned single-page redesign →** [`docs/redesign-brief.md`](docs/redesign-brief.md)
 
 ## Quickstart
 
