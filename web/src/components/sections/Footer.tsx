@@ -12,8 +12,15 @@ export function Footer() {
         <p className="mb-6 text-xs text-gray-500">501(c)(3) status pending</p>
         <nav
           aria-label="Site links"
-          className="mt-6 flex items-center justify-center gap-4 text-sm"
+          className="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm"
         >
+          <a
+            href="/take-action"
+            className="text-golden-yellow transition-colors hover:text-golden-yellow-soft"
+          >
+            Take action
+          </a>
+          <span aria-hidden className="text-gray-600">·</span>
           <a
             href="/analysis"
             className="text-golden-yellow transition-colors hover:text-golden-yellow-soft"

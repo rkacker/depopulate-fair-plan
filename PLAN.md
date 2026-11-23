@@ -62,7 +62,7 @@ Rules that follow:
 | 5 Next term | `KimEra` | Same exports, read against the starting line | none yet | Results column each quarter; log of the term's regulatory and legislative actions; NDIFA explainer |
 | Companion | `WhatYouCanDo` on `/take-action` | none | none | none |
 
-Navigation: the header links to the home sections and has a Take action button.
+Navigation: the header reads Why it matters, The impact (county and ZIP panels), Who is responsible, 2019-2026, 2027 onward. Take action is linked from the footer and from the last line of the home page.
 `/analysis` and `/data` are linked from the footer and inline from steps 2, 4 and 5.
 They are the evidence layer, not destinations in the main story. When either is next
 revised, group its contents under the five steps (analysis index by step; `/data`
