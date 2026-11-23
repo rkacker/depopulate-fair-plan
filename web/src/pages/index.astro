@@ -18,6 +18,7 @@ import {
   buildHomeStats,
   fmtLongDate,
   loadDistressedCounties,
+  pickDefaultZip,
 } from "@/lib/homeStats";
 import { fmtPolicies } from "@/lib/historyFormat";
 
@@ -28,6 +29,7 @@ const promise = loadPromiseStatsServer();
 const stats = buildHomeStats(history);
 const distressed = loadDistressedCounties();
 const asOf = fmtLongDate(stats.latest.coverage_end);
+const defaultZip = pickDefaultZip(distressed.counties);
 
 const description = `California's insurer of last resort holds ${fmtPolicies(stats.latest.policy_count)} home policies, ${stats.sinceFirstMultiple.toFixed(1)} times what it held in 2019. What that costs homeowners, what eight years of regulation produced, and how the next term will be scored.`;
 ---
@@ -49,8 +51,13 @@ const description = `California's insurer of last resort holds ${fmtPolicies(sta
   </Fragment>
   <HomeHero stats={stats} />
   <WhyYouCare stats={stats} />
-  <ZipLookup distressedCounties={distressed.counties} asOf={asOf} client:visible />
   <WhereIsland countyData={countyData} stats={siteStats} client:visible />
+  <ZipLookup
+    initial={defaultZip}
+    distressedCounties={distressed.counties}
+    asOf={asOf}
+    client:visible
+  />
   <RegulatoryProblem />
   <LaraEra stats={stats} promise={promise} history={history} />
   <KimEra stats={stats} promise={promise} />

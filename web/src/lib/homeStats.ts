@@ -3,7 +3,18 @@
 import Papa from "papaparse";
 import marketShareCsv from "../../public/data/cdi_county_market_share.csv?raw";
 import distressedListCsv from "../../public/data/cdi_distressed_list.csv?raw";
-import type { StatewideHistoryRow } from "@/lib/loadData.server";
+import distressedReconCsv from "../../public/data/distressed_zip_reconciliation.csv?raw";
+import {
+  loadZipDataServer,
+  loadZipHistoryServer,
+  type StatewideHistoryRow,
+} from "@/lib/loadData.server";
+import {
+  buildZipSnapshot,
+  ZIP_MIN_BASE,
+  type ZipReconRow,
+  type ZipSnapshot,
+} from "@/lib/zipSnapshot";
 
 // A quarterly change under this share of the base is reported as "flat".
 export const FLAT_THRESHOLD = 0.005;
@@ -114,4 +125,36 @@ export function fmtLongDate(iso: string): string {
   const [y, m, d] = iso.split("-").map(Number);
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return `${months[(m ?? 1) - 1]} ${d}, ${y}`;
+}
+
+// The ZIP shown by default on the home page: the one outside the state's
+// distressed list (ZIP and county) with the largest increase in FAIR Plan
+// policies since fiscal 2023. Chosen from the data at build time so the
+// claim on the page stays true after each quarterly release.
+export function pickDefaultZip(distressedCounties: string[]): ZipSnapshot {
+  const zips = loadZipDataServer();
+  const history = new Map(loadZipHistoryServer().map((h) => [h.zip, h]));
+  const recon = new Map<string, ZipReconRow>();
+  for (const r of Papa.parse<ZipReconRow>(distressedReconCsv, {
+    header: true,
+    skipEmptyLines: true,
+  }).data) {
+    if (r.zip) recon.set(r.zip, r);
+  }
+  let best: ZipSnapshot | null = null;
+  let bestGain = -Infinity;
+  for (const row of zips.rows) {
+    const h = history.get(row.zip);
+    const a = h?.fy[2023] ?? null;
+    const b = h?.fy[2026] ?? null;
+    if (a === null || b === null || a < ZIP_MIN_BASE) continue;
+    const snap = buildZipSnapshot(row, recon.get(row.zip), h, distressedCounties);
+    if (snap.zipListed || snap.countyListed) continue;
+    if (b - a > bestGain) {
+      bestGain = b - a;
+      best = snap;
+    }
+  }
+  if (!best) throw new Error("no default ZIP code could be chosen");
+  return best;
 }

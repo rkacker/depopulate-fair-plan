@@ -12,8 +12,8 @@ export function WhereIsland({
   stats: SiteStats;
 }) {
   return (
-    <div>
-      <CrisisMap countyData={countyData} stats={stats} loading={false} showHeader={false} />
+    <div id="where" className="scroll-mt-16">
+      <CrisisMap countyData={countyData} stats={stats} loading={false} />
       <CountyTable countyData={countyData} stats={stats} loading={false} />
     </div>
   );
