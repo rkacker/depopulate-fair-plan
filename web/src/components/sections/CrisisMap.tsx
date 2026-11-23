@@ -38,7 +38,7 @@ export function CrisisMap({ countyData, stats, loading }: CrisisMapProps) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
           <h2 className="mb-4 text-3xl font-bold text-charcoal lg:text-4xl">
-            {stats?.map.title ?? "FY 2025 FAIR Plan Crisis Map"}
+            {stats?.map.title ?? "Where the FAIR Plan is concentrated"}
           </h2>
           <p className="mx-auto max-w-2xl text-lg text-gray-600">
             {stats?.map.description ??

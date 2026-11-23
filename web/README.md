@@ -25,7 +25,6 @@ data into the HTML, so first paint has real data and no loading skeleton). Large
 | File in `public/data/` | Source | Notes |
 |---|---|---|
 | `california-counties.json` | committed once | CA county TopoJSON (static) |
-| `california-zips.json` | committed once | CA ZIP TopoJSON (static) |
 | `site_stats.json` | pipeline export | Headline copy + every stat on the page |
 | `quarterly_totals.json` | pipeline export | Statewide quarterly totals |
 | `california_county_data.csv` | pipeline export | County → policies + quarter/YoY deltas |
@@ -104,9 +103,9 @@ web/
 │   ├── pages/               # index.astro (home), data.astro (data page)
 │   ├── layouts/             # Base.astro (shared shell, <head>, scripts)
 │   ├── components/
-│   │   ├── Home.tsx         # composes the home-page island
-│   │   ├── sections/        # Hero, CrisisStats, CrisisMap, CountyTable,
-│   │   │                    # ZipMap, ZipTable, DataPage + tab components
+│   │   ├── home/            # home-page sections (static) + ZipLookup, WhereIsland islands
+│   │   ├── sections/        # CrisisMap, CountyTable, Signup, DataPage + tabs,
+│   │   │                    # analysis articles and memos
 │   │   └── ui/              # Button, Card primitives
 │   ├── lib/
 │   │   ├── data.ts          # client-side CSV/JSON loaders, color tier scales

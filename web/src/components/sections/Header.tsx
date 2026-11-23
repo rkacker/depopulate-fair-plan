@@ -2,9 +2,15 @@ import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
 
 const HOME_SECTIONS: Array<{ id: string; label: string }> = [
-  { id: "mission", label: "Mission" },
-  { id: "crisis", label: "Crisis" },
-  { id: "heatmap", label: "Map" },
+  { id: "why", label: "Why it matters" },
+  { id: "numbers", label: "Numbers" },
+  { id: "deal", label: "The 2023 deal" },
+  { id: "next", label: "What's next" },
+];
+
+const PAGES: Array<{ href: string; label: string }> = [
+  { href: "/analysis", label: "Analysis" },
+  { href: "/data", label: "Data" },
 ];
 
 export function Header({ pathname }: { pathname: string }) {
@@ -21,11 +27,11 @@ export function Header({ pathname }: { pathname: string }) {
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-patriot-red">
             <span className="text-sm font-bold text-white">DP</span>
           </div>
-          <h1 className="text-lg font-bold text-charcoal sm:text-xl">
+          <span className="text-lg font-bold text-charcoal sm:text-xl">
             Depopulate the FAIR Plan
-          </h1>
+          </span>
         </a>
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-5 lg:flex">
           {HOME_SECTIONS.map((item) =>
             onHome ? (
               <button
@@ -45,6 +51,16 @@ export function Header({ pathname }: { pathname: string }) {
               </a>
             ),
           )}
+          {PAGES.map((p) => (
+            <a
+              key={p.href}
+              href={p.href}
+              aria-current={pathname.startsWith(p.href) ? "page" : undefined}
+              className="text-sm font-medium text-charcoal transition-colors hover:text-patriot-red"
+            >
+              {p.label}
+            </a>
+          ))}
           <Button
             size="sm"
             onClick={() => {

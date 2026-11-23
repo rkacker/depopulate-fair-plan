@@ -16,14 +16,13 @@ interface Props {
 
 const {
   title = "Depopulate the FAIR Plan",
-  description = "California's insurer of last resort has grown 2.8x since 2021. Track the FAIR Plan crisis by county with data sourced directly from CFP and CDI.",
+  description = "What California's insurer of last resort costs homeowners, what the state promised in 2023, and what the data shows. Sourced from the FAIR Plan and the Department of Insurance.",
   canonical = new URL(Astro.url.pathname, Astro.site).toString(),
   ogImage = new URL("/og-image.png", Astro.site).toString(),
   ogType = "website",
 } = Astro.props;
 
-const ogDescription =
-  "California's insurer of last resort has grown 2.8x since 2021. Track the crisis by county.";
+const ogDescription = description;
 ---
 
 <!doctype html>

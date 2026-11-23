@@ -37,12 +37,28 @@ effect in October. The site mentioned none of it and gave homeowners nothing to 
 - **Copy.** Follows `.claude/skills/copy-review/SKILL.md`. Every number traces to a `/data` export or to a dated, sourced entry in `web/src/lib/policy.ts`.
 - **Pipeline.** `config/export_contract.json` is authoritative for exports. Phase 1 changes no exports.
 
-## Open blocker: the Q3 2026 count
+## Counting rule (decided 2026-11-23)
 
-Our series shows 665,673 policies at 2026-09-30, down 189 from Q2. CDI's SIS page
-(updated 2026-11-20) shows 677,449 FAIR Plan homeowner policies, "+2,230 from July
-2026", and the LA Times repeats +2,230. The verdict holds on either basis, but the page
-cannot say "first decline" until the bases are reconciled. See backlog item 1.
+The site uses one FAIR Plan count: our integrated ZIP-level data (665,673 at
+2026-09-30). It does not show the FAIR Plan dashboard's or CDI's higher totals beside
+it. A quarterly move that is tiny against the base is reported as **flat**
+(`quarterIsFlat` in `web/src/lib/homeStats.ts`, under 0.5% of the base). Q3 2026 was
+flat. The message is that the base is not declining. The counts-basis note on `/data`
+is the only place the dashboard difference is explained.
+
+## What the November 2026 research settled
+
+- SB 1301 (ch. 693), AB 69 (ch. 496) and AB 1680 (ch. 540) were all signed on
+  2026-09-27. SB 1301 raises nonrenewal notice from 75 to 90 days on 2028-01-01.
+- Insurer commitments run 730 days from each rate approval (10 CCR § 2644.4.8). The
+  first approval under the model rule was Mercury, December 2025, so the first
+  deadline is about December 2027.
+- CDI has not published policies written against commitments (CalMatters, Sept 2026).
+- Verisk, KCC and Moody's RMS wildfire models cleared CDI review by 2025-08-01.
+- Jane Kim won the commissioner race (AP call 2026-11-07) and is due to take office
+  2027-01-04. On SIS: "we're going to be examining this program."
+- Every such fact is in `web/src/lib/policy.ts` with its source and a
+  `primary` or `press` level.
 
 ## Homepage outline (`/`)
 
@@ -64,7 +80,7 @@ Each section makes one claim, shows one number or chart, and offers one deep lin
 Each row carries a source and an as-of date.
 
 - FAIR Plan size at the deal and now (320,572 to 665,673).
-- Last-quarter change (pending item 1).
+- Last quarter: flat (see the counting rule above).
 - Distressed ZIPs that grew since the deal (505 of 550).
 - Growth inside and outside the distressed list (+55% and +184%).
 - Insurer groups expanding under SIS (CDI: 12, against 0 in 2025).
@@ -85,21 +101,17 @@ Each row carries a source and an as-of date.
 
 ### Now
 
-- [ ] **0. One plan document.** This file; remove the three old docs; repoint `CLAUDE.md`, `README.md`, `web/README.md`.
-- [ ] **1. Reconcile the Q3 count basis.** Our 665,673 (−189) against CDI's 677,449 (+2,230). Use the source PDFs in `sources/` and the counts-basis note in `DataPage.tsx`. Record the result here and in the note.
-- [ ] **2. Source the policy facts** into `web/src/lib/policy.ts`: commissioner swearing-in date, NDIFA brief, SB 254 study (primary PDF), assessment figures, FAIR Plan rate increase, 2026 rate approvals, wildfire model approvals, final status of SB 1301 and AB 69/1680.
-- [ ] **3. Page skeleton.** Astro sections, new nav, shared `TrajectoryChart`, `MetricStrip`.
-- [ ] **4. Why you care + What you can do** (sections 1 and 6). Salvage structure from the `explainer-panels` branch, rewrite the copy, then delete that branch with Rishi's OK.
-- [ ] **5. ZIP lookup + Where** (sections 0 and 3).
-- [ ] **6. SIS scorecard and verdict** (section 4).
-- [ ] **7. Commissioner and NDIFA explainer** (section 5).
-- [ ] **8. Read deeper, OG text, sitemap, footer and 404 links** (section 7).
-- [ ] **9. `/copy-review`, local review with Rishi, merge.**
+- [ ] **Rishi's review of the new homepage** on the dev server, then merge and push.
+- [ ] **Run `/copy-review`** on the home page before it ships.
+- [ ] **Upgrade press-level facts to primary sources** in `policy.ts`: FAIR Plan 29.1% rate increase (find the CDI or FAIR Plan document), insurer rate approvals (CDI approval lists), swearing-in date (state source).
+- [ ] **Confirm SB 254 study page numbers by eye** (pp. 46-49 came from automated extraction).
+- [ ] **Click-test the ZIP lookup** in a browser: 95667 (listed), 94110 (unlisted), 99999 (no data), "12" (invalid).
+- [ ] **Delete branches** `explainer-panels` and `data/2026q3` (needs Rishi's OK).
 
 ### Next (after launch)
 
 - [ ] **Analysis page: the quarter growth stopped (Q3 2026).** Facts and draft framing in `notes/q3-2026-status-update.md`; Q2 setup in `notes/q2-2026-status-update.md`. Respect the re-geocoding caveat (Arnold −250 is not real).
-- [ ] **Refresh the two bill memos** with final outcomes (statuses are dated July 2026).
+- [ ] **Rewrite the two bill memos against the enacted text.** Both pages carry a dated "signed" note; the bodies still describe the July 2026 versions.
 - [ ] **NDIFA standalone explainer** at `/analysis/ndifa`, if the home section outgrows itself.
 - [ ] **Commissioner tracker.** A dated log of actions against the "what we will track" list.
 - [ ] **Premium-burden panel.** Premium per policy and exposure per policy by county. Needs premium and exposure added to the export contract (`fair/county_quarterly.csv` has them). Spread is about 12× across counties.
@@ -141,6 +153,7 @@ nonrenewed through 2023), `cdi/zip_yearly.csv`, `analysis/senate_district_pif.cs
 
 ## Done (rolling log)
 
+- [x] 2026-11-23 — **Integrated homepage built** (branch `redesign/integrated-home`): hero with ZIP lookup, Why this matters, The numbers, county map and table, the 2023 deal scorecard ("Stalled, not reversed"), the new commissioner and NDIFA explainer, What you can do, Read deeper. Static sections ship no JavaScript; islands are the header, ZIP lookup, map and table, and signup. Policy facts sourced into `web/src/lib/policy.ts`. Retired `?view=zip`, `ZipMap`, `ZipTable`, `CrisisStats`, `Solutions`, and the 2.8 MB ZIP geometry. Bill memos carry a "signed Sept 27, 2026" note. Sitemap and meta description refreshed.
 - [x] 2026-11-23 — **Direction reset.** Plan and backlog consolidated into this file; homepage redirected to a homeowner-first integrated story covering SIS, the new commissioner, and NDIFA.
 - [x] 2026-10-28 — **Q3 2026 quarterly release ingested** (as of 2026-09-30, published
   2026-10-19; branch `data/2026q3`): 3 DWE sources + FY2026 5-year PIF/TIV files;

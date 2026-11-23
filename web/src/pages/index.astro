@@ -1,23 +1,44 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { Home } from "@/components/Home";
+import { HomeHero } from "@/components/home/HomeHero";
+import { ZipLookup } from "@/components/home/ZipLookup";
+import { WhyYouCare } from "@/components/home/WhyYouCare";
+import { Numbers } from "@/components/home/Numbers";
+import { WhereIsland } from "@/components/home/WhereIsland";
+import { SisScorecard } from "@/components/home/SisScorecard";
+import { WhatsNext } from "@/components/home/WhatsNext";
+import { WhatYouCanDo } from "@/components/home/WhatYouCanDo";
+import { ReadDeeper } from "@/components/home/ReadDeeper";
+import { Signup } from "@/components/sections/Signup";
 import {
   loadCountyDataServer,
+  loadPromiseStatsServer,
   loadSiteStatsServer,
   loadStatewideHistoryServer,
 } from "@/lib/loadData.server";
+import {
+  buildHomeStats,
+  fmtLongDate,
+  loadDistressedCounties,
+} from "@/lib/homeStats";
+import { fmtPolicies } from "@/lib/historyFormat";
 
-const initialStats = loadSiteStatsServer();
-const initialCountyData = loadCountyDataServer();
-const initialStatewideRows = loadStatewideHistoryServer();
+const siteStats = loadSiteStatsServer();
+const countyData = loadCountyDataServer();
+const history = loadStatewideHistoryServer();
+const promise = loadPromiseStatsServer();
+const stats = buildHomeStats(history);
+const distressed = loadDistressedCounties();
+const asOf = fmtLongDate(stats.latest.coverage_end);
+
+const description = `California's insurer of last resort holds ${fmtPolicies(stats.latest.policy_count)} home policies, ${stats.sinceDealMultiple.toFixed(1)} times its size at the state's 2023 deal to shrink it. Growth has stopped, but the Plan is not shrinking. What that costs homeowners, what the state promised, and what changes in 2027.`;
 ---
 
-<Base>
+<Base description={description}>
   <Fragment slot="head-extra">
     <script is:inline>
       // Legacy redirect: pre-router URLs used ?page=data. Static hosting
-      // means this can't be server-side — Astro.url.searchParams is empty
-      // at build time. Inline in <head> so it fires before Home hydrates.
+      // means this can't be server-side, so it runs inline in <head>.
       (function () {
         if (!window.location.search) return;
         var params = new URLSearchParams(window.location.search);
@@ -28,10 +49,15 @@ const initialStatewideRows = loadStatewideHistoryServer();
       })();
     </script>
   </Fragment>
-  <Home
-    initialStats={initialStats}
-    initialCountyData={initialCountyData}
-    initialStatewideRows={initialStatewideRows}
-    client:load
-  />
+  <HomeHero stats={stats}>
+    <ZipLookup distressedCounties={distressed.counties} asOf={asOf} client:load />
+  </HomeHero>
+  <WhyYouCare stats={stats} />
+  <Numbers stats={stats} history={history} />
+  <WhereIsland countyData={countyData} stats={siteStats} client:visible />
+  <SisScorecard stats={stats} promise={promise} />
+  <WhatsNext stats={stats} />
+  <WhatYouCanDo />
+  <Signup client:visible />
+  <ReadDeeper asOf={asOf} />
 </Base>
