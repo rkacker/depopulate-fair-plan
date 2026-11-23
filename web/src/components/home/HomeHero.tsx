@@ -1,5 +1,5 @@
 import type { HomeStats } from "@/lib/homeStats";
-import { fmtLongDate, fmtSigned } from "@/lib/homeStats";
+import { fmtLongDate } from "@/lib/homeStats";
 import { fmtBillions, fmtCoverage, fmtPolicies } from "@/lib/historyFormat";
 
 // Static hero: the problem and its key facts in one view. Ships no JavaScript.
@@ -22,13 +22,6 @@ export function HomeHero({ stats }: { stats: HomeStats }) {
       label: "Insured value",
       value: fmtBillions(latest.exposure),
       detail: "What the Plan could owe if every insured home were lost",
-    },
-    {
-      label: "Last quarter",
-      value: stats.quarterIsFlat ? "Flat" : fmtSigned(stats.quarterChange),
-      detail: stats.quarterIsFlat
-        ? "Growth has stopped. The Plan has not shrunk"
-        : `${fmtCoverage(stats.prior.coverage_end)} to ${fmtCoverage(latest.coverage_end)}`,
     },
   ];
   if (marketShare) {
@@ -73,7 +66,7 @@ export function HomeHero({ stats }: { stats: HomeStats }) {
           </p>
         </div>
 
-        <dl className="grid grid-cols-2 gap-3 lg:grid-cols-5">
+        <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           {facts.map((f) => (
             <div
               key={f.label}
