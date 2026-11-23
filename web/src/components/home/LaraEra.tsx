@@ -4,7 +4,7 @@ import type { PromiseStats } from "@/lib/distressed";
 import { fmtBillions, fmtCoverage, fmtPolicies } from "@/lib/historyFormat";
 import { FACTS } from "@/lib/policy";
 import { Cite, Sources } from "@/components/home/Sources";
-import { EraTrajectoryChart } from "@/components/TrajectoryChart";
+import { EraBarChart } from "@/components/TrajectoryChart";
 
 interface LaraEraProps {
   stats: HomeStats;
@@ -238,7 +238,7 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
         </div>
 
         <div className="mt-10">
-          <EraTrajectoryChart points={points} />
+          <EraBarChart points={points} />
           <details className="mt-4 text-sm">
             <summary className="cursor-pointer font-semibold text-patriot-red">
               Show the chart as a table

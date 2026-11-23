@@ -147,152 +147,77 @@ export function DealTrajectoryChart({ points }: { points: StatewideHistoryRow[] 
   );
 }
 
-// Era chart for the home page: the full Lara term (Jan 2019 to Jan 2027) on a
-// true time axis, with the term boundaries as the frame and the 2023 strategy
-// as events inside it. The x-domain is the term, so the months before our
-// series begins (Sept 2019) show as an honest gap.
-const ERA_START = "2019-01-07"; // Lara sworn in
-const ERA_SECOND_TERM = "2023-01-02";
-const ERA_END = "2027-01-04"; // successor due to be sworn in
-
-export function EraTrajectoryChart({ points }: { points: StatewideHistoryRow[] }) {
-  if (points.length < 2) return null;
+// Era chart for the home page: one bar per fiscal year of the Lara era
+// (each September 30). Every bar is taller than the last; only the final
+// year is in full color. Chosen in review over a line with term markers,
+// which read as busy.
+export function EraBarChart({ points }: { points: StatewideHistoryRow[] }) {
+  const fy = points.filter((p) => p.coverage_end.endsWith("-09-30"));
+  if (fy.length < 2) return null;
+  const RED = "#cb181d";
   const W = 640;
-  const H = 280;
-  const PAD = { top: 50, right: 20, bottom: 30, left: 52 };
-  const ROW1 = 14;
-  const ROW2 = 32;
-  const t = (iso: string) => new Date(iso).getTime();
-  const t0 = t(ERA_START);
-  const t1 = t(ERA_END);
-  const first = points[0];
-  const last = points[points.length - 1];
-  const vMax = Math.max(...points.map((p) => p.policy_count ?? 0));
-  const x = (iso: string) =>
-    PAD.left + ((t(iso) - t0) / (t1 - t0)) * (W - PAD.left - PAD.right);
-  const y = (v: number) => PAD.top + (1 - v / vMax) * (H - PAD.top - PAD.bottom);
-  const axisY = H - PAD.bottom;
-  const path = points
-    .map(
-      (p, i) =>
-        `${i === 0 ? "M" : "L"}${x(p.coverage_end).toFixed(1)},${y(p.policy_count ?? 0).toFixed(1)}`,
-    )
-    .join(" ");
-  const years = [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027];
+  const H = 270;
+  const PAD = { top: 30, right: 12, bottom: 44, left: 12 };
+  const vMax = Math.max(...fy.map((p) => p.policy_count ?? 0));
+  const slot = (W - PAD.left - PAD.right) / fy.length;
+  const bw = Math.min(46, slot - 14);
+  const base = H - PAD.bottom;
+  const h = (v: number) => (v / vMax) * (base - PAD.top);
   const fmt = (n: number | null) => (n ?? 0).toLocaleString("en-US");
-  const multiple = (last.policy_count ?? 0) / (first.policy_count ?? 1);
-  const secondX = x(ERA_SECOND_TERM);
-  const strategyX = x(CHART_DEAL_ANNOUNCED);
-  const rulesX = x(CHART_SIS_OPERATIVE);
-  const event = (ex: number, top: number) => (
-    <line
-      x1={ex}
-      x2={ex}
-      y1={top + 4}
-      y2={axisY}
-      stroke="#9ca3af"
-      strokeWidth={1}
-      strokeDasharray="3 3"
-    />
-  );
+  const dealYear = CHART_DEAL_ANNOUNCED.slice(0, 4);
+  const firstRow = fy[0];
+  const lastRow = fy[fy.length - 1];
   return (
     <figure>
       <svg
         viewBox={`0 0 ${W} ${H}`}
-        className="w-full rounded-lg border border-gray-200 bg-gray-50"
+        className="w-full rounded-lg border border-gray-200 bg-white"
         role="img"
-        aria-label={`FAIR Plan policies in force across Commissioner Lara's two terms, January 2019 to January 2027. From ${fmt(first.policy_count)} in ${first.coverage_end.slice(0, 4)} to ${fmt(last.policy_count)} in ${last.coverage_end.slice(0, 4)}, ${multiple.toFixed(1)} times larger. Marked: the start of the second term in January 2023, the Sustainable Insurance Strategy announcement in September 2023, and its rules taking effect in January 2025.`}
+        aria-label={`FAIR Plan policies each September from ${firstRow.coverage_end.slice(0, 4)} to ${lastRow.coverage_end.slice(0, 4)}, higher every year: from ${fmt(firstRow.policy_count)} to ${fmt(lastRow.policy_count)}.`}
       >
-        {/* The era itself is the frame. */}
-        <rect
-          x={PAD.left}
-          y={PAD.top}
-          width={W - PAD.left - PAD.right}
-          height={axisY - PAD.top}
-          fill="#1e3a8a"
-          opacity={0.04}
-        />
-        {[0.25, 0.5, 0.75, 1].map((f) => (
-          <g key={f}>
-            <line
-              x1={PAD.left}
-              x2={W - PAD.right}
-              y1={y(vMax * f)}
-              y2={y(vMax * f)}
-              stroke="#e5e7eb"
-              strokeWidth={1}
-            />
-            <text x={PAD.left - 6} y={y(vMax * f) + 4} textAnchor="end" fontSize={11} fill="#6b7280">
-              {Math.round((vMax * f) / 1000)}K
-            </text>
-          </g>
-        ))}
-
-        {/* Term boundaries: solid, labeled on the top row. */}
-        {[PAD.left, secondX, W - PAD.right].map((tx) => (
-          <line key={tx} x1={tx} x2={tx} y1={ROW1 + 4} y2={axisY} stroke="#1e3a8a" strokeWidth={1.5} />
-        ))}
-        <text x={PAD.left + 5} y={ROW1} fontSize={11} fontWeight={600} fill="#1e3a8a">
-          Jan 2019: Lara takes office
-        </text>
-        <text x={secondX - 5} y={ROW2} textAnchor="end" fontSize={10} fill="#1e3a8a">
-          second term begins
-        </text>
-        <text x={W - PAD.right - 5} y={ROW1} textAnchor="end" fontSize={11} fontWeight={600} fill="#1e3a8a">
-          Jan 2027: term ends
-        </text>
-
-        {/* Events inside the era: dashed, labeled on the second row. */}
-        {event(strategyX, ROW2)}
-        {event(rulesX, ROW2)}
-        <text x={strategyX + 4} y={ROW2} fontSize={10} fill="#374151">
-          strategy announced
-        </text>
-        <text x={rulesX + 4} y={ROW2 + 13} fontSize={10} fill="#374151">
-          rules in effect
-        </text>
-
-        <path d={path} fill="none" stroke="#cb181d" strokeWidth={2.5} strokeLinejoin="round" />
-        <circle cx={x(first.coverage_end)} cy={y(first.policy_count ?? 0)} r={3.5} fill="#cb181d" />
-        <circle cx={x(last.coverage_end)} cy={y(last.policy_count ?? 0)} r={3.5} fill="#cb181d" />
-        <text
-          x={x(first.coverage_end) + 6}
-          y={y(first.policy_count ?? 0) + 16}
-          fontSize={12}
-          fontWeight={700}
-          fill="#1f2937"
-        >
-          {fmt(first.policy_count)}
-        </text>
-        <text
-          x={x(last.coverage_end) + 2}
-          y={y(last.policy_count ?? 0) + 40}
-          textAnchor="end"
-          fontSize={12}
-          fontWeight={700}
-          fill="#1f2937"
-        >
-          {fmt(last.policy_count)} · {multiple.toFixed(1)}×
-        </text>
-
-        {years.map((yr) => {
-          const tx = x(`${yr}-01-01`);
-          if (tx < PAD.left - 1 || tx > W - PAD.right + 1) return null;
+        <line x1={PAD.left} x2={W - PAD.right} y1={base} y2={base} stroke="#d1d5db" strokeWidth={1} />
+        {fy.map((p, i) => {
+          const v = p.policy_count ?? 0;
+          const cx = PAD.left + slot * i + slot / 2;
+          const isLast = i === fy.length - 1;
+          const yr = p.coverage_end.slice(0, 4);
+          const top = base - h(v);
+          const l = cx - bw / 2;
+          const r = cx + bw / 2;
           return (
             <g key={yr}>
-              <line x1={tx} x2={tx} y1={axisY} y2={axisY + 4} stroke="#9ca3af" strokeWidth={1} />
-              <text x={tx} y={H - 9} textAnchor="middle" fontSize={11} fill="#6b7280">
+              <path
+                d={`M${l},${base} V${top + 4} Q${l},${top} ${l + 4},${top} H${r - 4} Q${r},${top} ${r},${top + 4} V${base} Z`}
+                fill={RED}
+                opacity={isLast ? 1 : 0.35}
+              />
+              <text
+                x={cx}
+                y={top - 7}
+                textAnchor="middle"
+                fontSize={isLast ? 14 : 12}
+                fontWeight={isLast || i === 0 ? 700 : 500}
+                fill="#1f2937"
+              >
+                {Math.round(v / 1000)}K
+              </text>
+              <text x={cx} y={base + 17} textAnchor="middle" fontSize={12} fill="#6b7280">
                 {yr}
               </text>
+              {yr === dealYear && (
+                <text x={cx} y={base + 33} textAnchor="middle" fontSize={10} fill="#6b7280">
+                  strategy announced
+                </text>
+              )}
             </g>
           );
         })}
       </svg>
       <figcaption className="mt-2 text-xs text-gray-500">
-        FAIR Plan residential policies in force across Commissioner Lara's two
-        terms. Our series begins September 30, 2019, nine months after he took
-        office. Dashed lines mark the Sustainable Insurance Strategy: announced
-        September 21, 2023, rules in effect January 2025. Full table on{" "}
+        FAIR Plan residential policies in force each September 30, in
+        thousands. Our series begins in September 2019, nine months after
+        Commissioner Lara took office. The Sustainable Insurance Strategy was
+        announced on September 21, 2023. Quarterly figures are on{" "}
         <a href="/data?tab=statewide_history" className="underline">
           /data
         </a>

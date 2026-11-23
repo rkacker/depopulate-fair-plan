@@ -79,7 +79,7 @@ is the only place the dashboard difference is explained.
 | 2 | County map and table (`#where`) | `WhereIsland` (island) |
 | 2b | Your ZIP code (`#zip`), its own panel after the counties | `ZipLookup` (island), `lib/zipSnapshot.ts` |
 | 3 | Failed regulation (`#regulation`); states that the site tracks regulatory and legislative success or failure | `RegulatoryProblem` |
-| 4 | Under Commissioner Lara, 2019 to 2026 (`#lara-era`) | `LaraEra`, `EraTrajectoryChart` |
+| 4 | Under Commissioner Lara, 2019 to 2026 (`#lara-era`) | `LaraEra`, `EraBarChart` (one bar per fiscal year; chosen in review over a line chart) |
 | 5 | Under Commissioner Kim, 2027 onward (`#kim-era`) | `KimEra` |
 | 6 | Take action (`#act`) | `WhatYouCanDo` |
 
