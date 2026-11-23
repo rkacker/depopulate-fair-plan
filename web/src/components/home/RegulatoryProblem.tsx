@@ -4,7 +4,7 @@ export function RegulatoryProblem() {
     <section id="regulation" className="bg-navy-blue py-20 text-white scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <h2 className="mb-6 text-3xl font-bold lg:text-4xl">
-          It is a regulatory problem
+          Failed regulation
         </h2>
         <div className="max-w-3xl space-y-4 text-lg leading-relaxed text-gray-100">
           <p>

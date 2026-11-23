@@ -4,7 +4,7 @@ const HOME_SECTIONS: Array<{ id: string; label: string }> = [
   { id: "why", label: "Why it matters" },
   { id: "where", label: "By county" },
   { id: "zip", label: "Your ZIP code" },
-  { id: "regulation", label: "A regulatory problem" },
+  { id: "regulation", label: "Failed regulation" },
   { id: "lara-era", label: "2019 to 2026" },
   { id: "kim-era", label: "2027 onward" },
   { id: "act", label: "Take action" },
