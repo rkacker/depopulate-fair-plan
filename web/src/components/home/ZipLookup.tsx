@@ -103,14 +103,14 @@ export function ZipLookup({ initial, distressedCounties, asOf }: ZipLookupProps)
   }
 
   return (
-    <section id="zip" className="bg-white py-20 scroll-mt-16">
+    <section id="zip" className="bg-white py-20 scroll-mt-28 lg:scroll-mt-16">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         <h2 className="mb-4 text-center text-3xl font-bold text-charcoal lg:text-4xl">
-          Your ZIP code
+          By ZIP code
         </h2>
         <p className="mx-auto mb-6 max-w-2xl text-center text-lg text-gray-600">
-          County totals hide large differences inside each county. Look up
-          any California ZIP code.
+          County totals mask wide differences within counties. Enter any
+          California ZIP code.
         </p>
         <form onSubmit={onSubmit} className="mx-auto flex max-w-xl flex-col gap-3 sm:flex-row">
           <label htmlFor="zip-lookup" className="sr-only">
@@ -161,8 +161,8 @@ export function ZipLookup({ initial, distressedCounties, asOf }: ZipLookupProps)
           )}
         </div>
         <p className="mt-10 text-center text-lg text-gray-700">
-          Where the FAIR Plan grows follows from rules set in Sacramento.
-          The next section explains who sets them.
+          How much of California's wildfire risk lands on the FAIR Plan
+          depends on rules set in Sacramento.
         </p>
       </div>
     </section>
@@ -195,9 +195,9 @@ function ZipCard({ snap, isDefault, asOf }: { snap: ZipSnapshot; isDefault: bool
     <div className="rounded-xl border border-gray-200 bg-white p-6 text-charcoal shadow-lg">
       {isDefault && (
         <p className="mb-4 rounded-md bg-red-50 p-3 text-sm text-gray-700">
-          <span className="font-semibold text-patriot-red">Shown as an example.</span>{" "}
-          Of every ZIP code outside the state's distressed list, this one
-          added the most FAIR Plan policies since 2023
+          <span className="font-semibold text-patriot-red">Example.</span>{" "}
+          Among ZIP codes outside the state's distressed list, this one added
+          the most FAIR Plan policies since 2023
           {fy2023 !== null && fy2026 !== null && (
             <>
               : from {fy2023.toLocaleString("en-US")} to{" "}
@@ -264,15 +264,15 @@ function ZipCard({ snap, isDefault, asOf }: { snap: ZipSnapshot; isDefault: bool
           <>
             This {snap.zipListed ? "ZIP code" : "county"} is on the state's
             distressed list: the areas where insurers promised to write more
-            policies in exchange for permission to charge higher rates.
+            policies in exchange for the state's new pricing rules.
           </>
         ) : (
           <>
             This ZIP code is not on the state's distressed list, the areas
             where insurers promised to write more policies in exchange for
-            permission to charge higher rates. No such promise applies here.
+            the state's new pricing rules. No such promise applies here.
             {snap.meetsFireTest &&
-              " By our calculation it meets the fire-risk half of the state's own test for the list."}
+              " It meets the fire-risk half of the state's test for the list, by this site's calculation."}
           </>
         )}
       </p>

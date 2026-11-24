@@ -56,6 +56,7 @@ type TabId = "fair_share" | "statewide_history" | "zip_history" | "distressed_li
 interface TabDef {
   id: TabId;
   label: string;
+  supports: string; // which step of the site's argument this table backs
   render: () => ReactNode;
 }
 
@@ -72,21 +73,25 @@ export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
     {
       id: "statewide_history",
       label: "FAIR Plan History (Quarterly)",
+      supports: "The problem, and both scorecards: the statewide count every quarter.",
       render: () => <StatewideHistoryTab initialRows={initialStatewideRows} />,
     },
     {
       id: "zip_history",
       label: "FAIR Plan History (by ZIP)",
+      supports: "The impact: every ZIP code, six fiscal years.",
       render: () => <ZipHistoryTab />,
     },
     {
       id: "fair_share",
       label: "FAIR Share of Total Market",
+      supports: "The problem: the FAIR Plan as a share of all home policies, by county.",
       render: () => <FairShareTab />,
     },
     {
       id: "distressed_list",
       label: "CDI Distressed List",
+      supports: "The 2019 to 2026 scorecard: the areas where insurers committed to write more policies.",
       render: () => <DistressedListTab />,
     },
   ];
@@ -111,8 +116,9 @@ export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
             Data &amp; Downloads
           </h1>
           <p className="max-w-2xl text-base text-gray-600">
-            Underlying datasets that power this site, available as CSV
-            downloads for further analysis.
+            The datasets behind every figure on this site, as tables and
+            CSV downloads. Each tab notes which part of the site's argument
+            it supports.
           </p>
         </div>
 
@@ -143,7 +149,7 @@ export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
         <div className="mb-8 rounded-md border border-gray-200 bg-white p-4 text-sm text-gray-700">
           <p className="font-semibold text-charcoal">A note on policy counts</p>
           <p className="mt-1">
-            Our FAIR Plan figures come from the Plan&apos;s ZIP-level data
+            This site's FAIR Plan figures come from the Plan&apos;s ZIP-level data
             files and match the totals printed in those files (665,673
             residential policies as of September 30, 2026, the same figure
             the Plan reports in its fiscal-year-end summary). The FAIR
@@ -151,17 +157,16 @@ export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
             residential and commercial policies as of that date, while the
             Plan&apos;s county-level file for the same date totals 686,376, a
             difference of 11,931. Last quarter the dwelling-only gap was
-            9,367. We could find no published document that defines or
-            reconciles the two bases. The Plan&apos;s reporting materials
-            note that &ldquo;Totals may vary based on data source.&rdquo; We
-            use the ZIP-level files because they are the only FAIR Plan
+            9,367. No published document that defines or reconciles the two bases was
+            found. The Plan&apos;s reporting materials
+            note that &ldquo;Totals may vary based on data source.&rdquo; This site uses the ZIP-level files because they are the only FAIR Plan
             publication with geographic detail.
           </p>
           <p className="mt-2">
             One correction this quarter: the Plan&apos;s September 30, 2026
             policy-count file omits two Yuba County ZIP codes (95962 Oregon
             House and 95972 Rackerby) that appear in its premium and exposure
-            files for the same date. We fill their counts (273 and 32) from
+            files for the same date. Their counts (273 and 32) are filled from
             the Plan&apos;s own five-year policies-in-force file. The
             correction is documented in the repository and would otherwise
             have shown a spurious drop to zero in both ZIP codes.
@@ -173,8 +178,8 @@ export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
             City) with offsetting declines in neighboring ZIP codes such as
             Arnold and Magalia, a pattern consistent with the Plan
             re-geocoding addresses rather than with policies leaving. And the
-            Plan moved seven ZIP codes to different counties; we apply each
-            ZIP code&apos;s most recent county assignment to every quarter so
+            Plan moved seven ZIP codes to different counties. Each ZIP code&apos;s most recent county
+            assignment is applied to every quarter so
             county totals stay comparable over time.
           </p>
         </div>
@@ -203,6 +208,11 @@ export function DataPage({ initialStatewideRows = null }: DataPageProps = {}) {
             );
           })}
         </div>
+
+        <p className="mb-6 text-sm text-gray-600">
+          <span className="font-semibold text-charcoal">Supports:</span>{" "}
+          {current.supports}
+        </p>
 
         {current.render()}
       </div>

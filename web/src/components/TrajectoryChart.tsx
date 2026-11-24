@@ -114,7 +114,7 @@ export function DealTrajectoryChart({ points }: { points: StatewideHistoryRow[] 
           fill="#374151"
         >
           <tspan x={operativeX + 5} y={LABEL_Y1}>Jan 2025:</tspan>
-          <tspan x={operativeX + 5} y={LABEL_Y2}>rules live · LA fires</tspan>
+          <tspan x={operativeX + 5} y={LABEL_Y2}>rules open · LA fires</tspan>
         </text>
         {/* Distressed-list revision: axis tick only; labeled in the caption. */}
         <path
@@ -138,7 +138,7 @@ export function DealTrajectoryChart({ points }: { points: StatewideHistoryRow[] 
       <figcaption className="mt-2 text-xs text-gray-500">
         FAIR Plan residential policies in force. Shaded span: the rulemaking
         period between the deal's announcement (Sept 21, 2023) and the SIS
-        becoming fully operative (Jan 2025). ▲ marks the March 2025
+        opening for insurers to use (Jan 2025). ▲ marks the March 2025
         distressed-list revision. Sources mix fiscal-year and quarterly
         releases; the x-axis is a true time axis. Full table on{" "}
         <a href="/data" className="underline">/data</a>.
@@ -215,8 +215,7 @@ export function EraBarChart({ points }: { points: StatewideHistoryRow[] }) {
       </svg>
       <figcaption className="mt-2 text-xs text-gray-500">
         FAIR Plan residential policies in force each September 30, in
-        thousands. Our series begins in September 2019, nine months after
-        Commissioner Lara took office. The Sustainable Insurance Strategy was
+        thousands. The data begins in September 2019. The Sustainable Insurance Strategy was
         announced on September 21, 2023. Quarterly figures are on{" "}
         <a href="/data?tab=statewide_history" className="underline">
           /data

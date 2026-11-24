@@ -35,6 +35,13 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+      <p className="mb-6 rounded-md bg-gray-50 p-3 text-sm text-gray-700">
+        Part of the{" "}
+        <a href="/#lara-era" className="font-semibold underline">
+          scorecard for 2019 to 2026
+        </a>
+        , Commissioner Ricardo Lara's two terms. This piece examines the centerpiece of those years, the 2023 Sustainable Insurance Strategy.
+      </p>
       <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-patriot-red">
         Analysis
       </p>
@@ -73,9 +80,8 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
         <a href={NYT_URL} className="underline" rel="noopener">
           New York Times investigation
         </a>{" "}
-        later documented loopholes that weakened that commitment. We asked a
-        simpler question: in the ZIP codes the state itself named, are fewer
-        households on the FAIR Plan today?
+        later documented loopholes that weakened that commitment. This analysis asks a narrower question: in the ZIP codes the state
+        named, are fewer households on the FAIR Plan today?
       </p>
 
       {/* ——— PRIMARY: the named zones ——— */}
@@ -157,7 +163,7 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
         shaded band shows the
         sixteen months it took to turn the announcement into working rules;
         enrollment sped up during that stretch and kept climbing after the
-        rules took effect. And growth outside the listed ZIP codes (+
+        rules opened for use. And growth outside the listed ZIP codes (+
         {stats.unlisted.growthPct}%) has outpaced growth inside them (+
         {stats.designated.growthPct}%). The crisis is spreading fastest in
         places the list doesn't cover at all.
@@ -165,13 +171,12 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
 
       {/* ——— Timeline: what CDI did (and didn't do) ——— */}
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
-        3. What the state did — and didn't — do along the way
+        3. What the state did along the way
       </h2>
       <p className="mb-6 leading-relaxed text-gray-700">
-        Here is the record since the announcement, in one place. One pattern
-        is worth noticing: progress is reported in insurer commitments and
-        approved rate increases. We could find no published count of
-        households that have actually moved off the FAIR Plan.
+        The record since the announcement follows. Progress is reported in
+        insurer commitments and approved rate increases. No published count
+        of households that have moved off the FAIR Plan was found.
       </p>
       <ol className="mb-4 space-y-4 border-l-2 border-gray-200 pl-5">
         {[...SIS_TIMELINE]
@@ -211,8 +216,8 @@ export function DepopulationPromise({ history, stats }: DepopulationPromiseProps
       {/* ——— Punchline ——— */}
       <div className="my-10 rounded-r-lg border-l-4 border-patriot-red bg-red-50 p-6">
         <p className="text-lg font-semibold leading-relaxed text-charcoal">
-          On the list or off it, we found no group of ZIP codes where FAIR
-          Plan enrollment has fallen since the deal. The list decides where
+          On the list or off it, no group of ZIP codes shows FAIR Plan
+          enrollment falling since the deal. The list decides where
           the promise applies. The data, so far, shows no place where it has
           been delivered.
         </p>

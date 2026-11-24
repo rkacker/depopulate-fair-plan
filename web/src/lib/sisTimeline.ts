@@ -40,7 +40,7 @@ export const SIS_TIMELINE: TimelineEntry[] = [
     dateLabel: "July 2024",
     actor: "CDI",
     title:
-      "FAIR Plan Modernization order — including the 50% assessment-recoupment mechanism that lets insurers pass half of FAIR Plan assessments to policyholders.",
+      "FAIR Plan Modernization order, including the 50% assessment-recoupment mechanism that lets insurers pass half of FAIR Plan assessments to policyholders.",
     category: "fair_plan",
   },
   {
@@ -48,7 +48,7 @@ export const SIS_TIMELINE: TimelineEntry[] = [
     dateLabel: "Aug–Sept 2024",
     actor: "CDI",
     title:
-      "Rate-review reforms and the final phase of the wildfire catastrophe-modeling regulation — forward-looking models replace the 20-year historical average in ratemaking.",
+      "Rate-review reforms and the final phase of the wildfire catastrophe-modeling regulation: forward-looking models replace the 20-year historical average in ratemaking.",
     category: "rulemaking",
   },
   {
@@ -56,7 +56,7 @@ export const SIS_TIMELINE: TimelineEntry[] = [
     dateLabel: "Nov 2024",
     actor: "CDI",
     title:
-      "Distressed-area availability regulation — the 85% test and the § 2644.4.8 distressed/undermarketed definitions take regulatory form, fourteen months after the announcement.",
+      "Distressed-area availability regulation: the 85% test and the § 2644.4.8 distressed/undermarketed definitions take regulatory form, fourteen months after the announcement.",
     category: "rulemaking",
   },
   {
@@ -64,7 +64,7 @@ export const SIS_TIMELINE: TimelineEntry[] = [
     dateLabel: "Dec 30, 2024",
     actor: "CDI",
     title:
-      "Final net-cost-of-reinsurance regulation — the last core SIS rule; insurers may pass California-specific reinsurance costs into rates if they expand high-risk coverage.",
+      "Final net-cost-of-reinsurance regulation, the last core SIS rule: insurers may pass California-specific reinsurance costs into rates if they expand high-risk coverage.",
     category: "rulemaking",
   },
   {
@@ -72,7 +72,7 @@ export const SIS_TIMELINE: TimelineEntry[] = [
     dateLabel: "Jan 2025",
     actor: "—",
     title:
-      "The new system takes full effect, days before the Palisades and Eaton fires destroy roughly $30 billion in insured value and put every piece of it to the test.",
+      "The new rules open for insurers to use, days before the Palisades and Eaton fires destroy roughly $30 billion in insured value and put every piece of it to the test.",
     category: "framework",
   },
   {
@@ -88,7 +88,7 @@ export const SIS_TIMELINE: TimelineEntry[] = [
     dateLabel: "Mar 6, 2025",
     actor: "CDI",
     title:
-      "Distressed counties / undermarketed-ZIP list revised — the 663-ZIP list this analysis reconciles against. It has not been re-run since.",
+      "Distressed counties / undermarketed-ZIP list revised: the 663-ZIP list this analysis reconciles against. It has not been re-run since.",
     category: "list",
     sourceUrl:
       "https://www.insurance.ca.gov/01-consumers/180-climate-change/upload/catastrophe-modeling-and-ratemaking-insurer-commitments-to-increase-writing-of-policies-in-high-risk-wildfire-areas-list-of-distressed-counties-and-undermarketed-zip-codes-residential-property-insurance-commitments.pdf",
@@ -98,7 +98,7 @@ export const SIS_TIMELINE: TimelineEntry[] = [
     dateLabel: "May 2025",
     actor: "CDI",
     title:
-      "State Farm interim rate decision: ~17% homeowners increase approved, conditioned on a $400 million capital infusion — effective June 1, 2025.",
+      "State Farm interim rate decision: ~17% homeowners increase approved, conditioned on a $400 million capital infusion, effective June 1, 2025.",
     category: "rate",
   },
   {
@@ -130,7 +130,7 @@ export const SIS_TIMELINE: TimelineEntry[] = [
     dateLabel: "Apr 2026",
     actor: "Market",
     title:
-      "Travelers announces a California homeowners expansion under the SIS — the first major new commitment from a top-10 carrier since the fires. The FAIR Plan, meanwhile, files for a 35.8% rate increase.",
+      "Travelers announces a California homeowners expansion under the SIS, the first major new commitment from a top-10 carrier since the fires. The FAIR Plan, meanwhile, files for a 35.8% rate increase.",
     category: "market",
   },
 ];

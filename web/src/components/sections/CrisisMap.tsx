@@ -33,7 +33,7 @@ export function CrisisMap({ countyData, stats, loading, showHeader = true }: Cri
   }
 
   return (
-    <section id="heatmap" className={`bg-gray-50 scroll-mt-16 ${showHeader ? "py-20" : "pb-20 pt-10"}`}>
+    <section id="heatmap" className={`bg-gray-50 scroll-mt-28 lg:scroll-mt-16 ${showHeader ? "py-20" : "pb-20 pt-10"}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {showHeader && (
           <div className="mb-12 text-center">
@@ -144,9 +144,8 @@ export function CrisisMap({ countyData, stats, loading, showHeader = true }: Cri
 
               <div className="mt-6 border-t border-gray-200 pt-6">
                 <p className="mb-4 text-sm text-gray-600">
-                  This map shows the concentration of FAIR Plan policies across
-                  California counties. Darker red areas indicate counties with
-                  more properties unable to obtain standard insurance coverage.
+                  This map shows FAIR Plan policies in each California county.
+                  Darker red means more policies.
                 </p>
 
                 <div className="rounded-lg border border-red-200 bg-red-50 p-3">

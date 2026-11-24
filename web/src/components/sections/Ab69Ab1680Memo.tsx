@@ -27,6 +27,13 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+      <p className="mb-6 rounded-md bg-gray-50 p-3 text-sm text-gray-700">
+        Part of the{" "}
+        <a href="/#lara-era" className="font-semibold underline">
+          scorecard for 2019 to 2026
+        </a>
+        , Commissioner Ricardo Lara's two terms. These laws were passed in that term and take effect in the next.
+      </p>
       <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-patriot-red">
         Analysis · Legislation
       </p>
@@ -36,8 +43,8 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
       <p className="mb-2 text-xl leading-relaxed text-gray-600">
         Assemblymember Calderon's package strengthens FAIR Plan reporting and
         oversight. With the Plan now larger than it has ever been, a handful
-        of reporting details will decide whether the public — and the
-        Legislature — can see what the Plan is actually doing.
+        of reporting details will decide whether the public and the
+        Legislature can see what the Plan is actually doing.
       </p>
       <p className="mb-10 text-sm text-gray-500">
         depopulatefairplan.com · Data through{" "}
@@ -57,7 +64,7 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
       </h2>
       <p className="mb-4 leading-relaxed text-gray-700">
         <a href={AB69_URL} className="underline" rel="noopener">AB 69</a>{" "}
-        (Calderon) builds out the FAIR Plan clearinghouse — the mechanism for
+        (Calderon) builds out the FAIR Plan clearinghouse, the mechanism for
         moving policyholders back to the private market. It requires clear
         notices to policyholders about their options, broker education, and,
         beginning May 2027, quarterly reporting by participating insurers of
@@ -84,7 +91,7 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
             <br />
             FAIR Plan policies in force since the September 2023 insurer
             deal, including growth in {scorecard.grew} of the{" "}
-            {scorecard.total} ZIP codes the state designated as distressed —
+            {scorecard.total} ZIP codes the state designated as distressed,
             where the deal itself promised the opposite. The larger the
             Plan's role becomes, the more its reporting matters.
           </p>
@@ -92,9 +99,8 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
       )}
       <p className="mb-4 leading-relaxed text-gray-700">
         Today, the public record consists of insurer commitments and rate
-        approvals: policies a carrier <em>plans</em> to write. We could find
-        no public dataset that counts households actually moving between the
-        FAIR Plan and the private market, in either direction. The reporting
+        approvals: policies a carrier <em>plans</em> to write. No public dataset was found that counts households moving between
+        the FAIR Plan and the private market, in either direction. The reporting
         AB 69 creates is the first real chance to change that. Whether it
         does comes down to the details below.
       </p>
@@ -104,12 +110,12 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
       </h2>
       <p className="mb-4 leading-relaxed text-gray-700">
         Nearly all of this data already exists inside the FAIR Plan and the
-        Department of Insurance. The six amendments below — three per bill —
+        Department of Insurance. The six amendments below, three per bill,
         make it public, regular, and usable, and are small enough to adopt in
         the time the bills have left.
       </p>
       <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
-        AB 69 — three amendments to make the clearinghouse count meaningful
+        AB 69: three amendments to make the clearinghouse count meaningful
       </p>
       <ul className="mb-6 list-disc space-y-3 pl-6 leading-relaxed text-gray-700">
         <li>
@@ -134,7 +140,7 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
         </li>
       </ul>
       <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
-        AB 1680 — three amendments to put data duties inside FAIR Plan
+        AB 1680: three amendments to put data duties inside FAIR Plan
         oversight
       </p>
       <ul className="mb-4 list-disc space-y-3 pl-6 leading-relaxed text-gray-700">
@@ -159,8 +165,7 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
         </li>
         <li>
           <span className="font-semibold">Cost-of-coverage reporting.</span>{" "}
-          Average premium per policy by county. Our analysis of the FAIR
-          Plan's own releases found a roughly twelve-fold spread across
+          Average premium per policy by county. This site's analysis of the FAIR Plan's releases found a roughly twelve-fold spread across
           counties, from about $621 to $7,234 per policy per year, a figure
           not available in any official publication.
         </li>
@@ -175,7 +180,7 @@ export function Ab69Ab1680Memo({ history, stats }: Ab69Ab1680MemoProps) {
           already creates the reporting channel. The 2023 Sustainable
           Insurance Strategy already committed the FAIR Plan to expanded
           reporting on reducing its policyholder count. These amendments are
-          about detail, completeness, timing, and format — publishing data
+          about detail, completeness, timing, and format: publishing data
           the Plan already holds.
         </p>
       </div>

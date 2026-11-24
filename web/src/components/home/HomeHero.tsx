@@ -35,7 +35,7 @@ export function HomeHero({ stats }: { stats: HomeStats }) {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-navy-blue py-16 text-white scroll-mt-16 lg:py-24"
+      className="relative overflow-hidden bg-navy-blue py-16 text-white scroll-mt-28 lg:scroll-mt-16 lg:py-24"
     >
       <div className="absolute inset-0">
         <img
@@ -57,12 +57,12 @@ export function HomeHero({ stats }: { stats: HomeStats }) {
             Every homeowner shares the risk.
           </h1>
           <p className="mx-auto mb-10 max-w-3xl text-lg leading-relaxed text-gray-100">
-            The FAIR Plan is California's insurer of last resort, built as a
-            small backstop for homes no company would cover. Californians
-            elect one official to regulate insurance, the insurance
-            commissioner, and that office sets the rules that decide how big
-            the Plan gets. Under the last commissioner it grew{" "}
-            {stats.sinceFirstMultiple.toFixed(1)} times over.
+            The FAIR Plan insures California homes that no private insurer
+            will cover. It was designed to be small and temporary. It is now {stats.sinceFirstMultiple.toFixed(1)} times
+            its 2019 size, and when it runs short, policyholders across the
+            state share the cost. The elected insurance commissioner and the
+            Legislature set the rules that govern it. This site tracks their
+            actions and the results.
           </p>
         </div>
 

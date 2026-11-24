@@ -39,7 +39,7 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
       measure: "Insurer commitments",
       start: (
         <>
-          <Cite k="noComplianceCount">No published count</Cite>; first
+          <Cite k="noComplianceCount">No published count found</Cite>; first
           deadline December 2027
         </>
       ),
@@ -64,7 +64,7 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
   ];
 
   return (
-    <section id="kim-era" className="bg-coastal-beige py-20 scroll-mt-16">
+    <section id="kim-era" className="bg-coastal-beige py-20 scroll-mt-28 lg:scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-patriot-red">
           The next four years · Commissioner Jane Kim, 2027 onward
@@ -76,21 +76,20 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
           <p>
             California elected Jane Kim insurance commissioner in November
             2026, with about{" "}
-            <Cite k="election">{FACTS.election.value} of the vote</Cite>. She
-            is due to take office on{" "}
-            <Cite k="takesOffice">{FACTS.takesOffice.value}</Cite> for a
-            four-year term. She inherits the FAIR Plan at its largest and
-            the 2023 strategy mid-course.
+            <Cite k="election">{FACTS.election.value} of the vote</Cite>. Her
+            four-year term begins on{" "}
+            <Cite k="takesOffice">{FACTS.takesOffice.value}</Cite>. She inherits a FAIR Plan more than four times
+            its 2019 size and the 2023 strategy mid-course.
           </p>
         </div>
 
         <div className="mt-10 max-w-3xl rounded-r-lg border-l-4 border-patriot-red bg-white p-6">
-          <p className="mb-2 font-semibold text-patriot-red">The test</p>
+          <p className="mb-2 font-semibold text-patriot-red">The measure</p>
           <p className="text-gray-700">
-            This term will be scored by the test the last one did not pass:
-            does the FAIR Plan get smaller. We take no position on any
-            proposal described below. We will report the count each quarter
-            against the starting line.
+            The measure for this term is the same as for the last: whether
+            the FAIR Plan gets smaller. This site takes no position on the
+            proposals described below. The count will be reported each
+            quarter against the starting line.
           </p>
         </div>
 
@@ -119,13 +118,13 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
             </tbody>
           </table>
           <p className="mt-4 text-sm text-gray-600">
-            We will fill in a results column each quarter, using the same
-            measures we applied to the last eight years.
+            A results column will be added each quarter, using the same
+            measures as the 2019 to 2026 scorecard.
           </p>
         </div>
 
         <h3 className="mb-4 mt-12 text-xl font-bold text-charcoal">
-          What is on the table
+          Proposed and pending
         </h3>
         <div className="grid gap-8 lg:grid-cols-2">
           <div className="rounded-xl bg-white p-6 shadow">
@@ -144,8 +143,8 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
               </li>
               <li>
                 The first commitment deadline, December 2027, falls in her
-                first year. Whether insurers met it will be her call to
-                enforce and to publish.
+                first year. Enforcement and publication of the results fall to her
+                office.
               </li>
             </ul>
           </div>
@@ -201,7 +200,7 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
             <p className="mt-3 text-gray-700">
               For comparison, the same study estimates that today's system
               would bill policyholders $500 to $550 a year after a fire of
-              that size, through FAIR Plan assessments.
+              that size, through the FAIR Plan's bills to insurers.
             </p>
           </div>
         </div>
@@ -211,17 +210,19 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
             <h4 className="mb-3 font-bold text-charcoal">Possible benefits</h4>
             <ul className="list-disc space-y-2 pl-5 text-gray-700">
               <li>
-                Wildfire risk would leave private policies, removing the
-                main reason insurers decline homes. The need for a last
-                resort plan for fire could shrink with it.
+                The brief argues that taking wildfire out of private
+                policies would remove the main reason insurers decline
+                homes. The need for a last-resort plan for fire could shrink
+                with it.
               </li>
               <li>
-                One pool and one set of claim rules after a major fire,
-                where survivors now deal with dozens of insurers.
+                The brief promises one pool and one set of claim rules
+                after a major fire, where survivors now deal with dozens of
+                insurers.
               </li>
               <li>
-                A nonprofit holding the risk for decades has a reason to pay
-                for prevention. Moira Birss of the Climate and Community
+                The brief argues a nonprofit that holds the risk for
+                decades has a reason to pay for prevention. Moira Birss of the Climate and Community
                 Institute, who helped write the brief, argues a nonprofit
                 plan would cost less, and that insurers' pricing models
                 cannot be inspected by the public today.
@@ -240,7 +241,9 @@ export function KimEra({ stats, promise }: { stats: HomeStats; promise: PromiseS
               <li>
                 A program that leans on reinsurance can end up with high
                 premiums or high deductibles, as Carmen Balber of Consumer
-                Watchdog says the state's earthquake insurer has.
+                Watchdog says the state's earthquake insurer has. Kim says
+                the comparison does not hold, because the earthquake program
+                is voluntary and covers a smaller pool.
               </li>
               <li>
                 A major fire could arrive before reserves are built. The

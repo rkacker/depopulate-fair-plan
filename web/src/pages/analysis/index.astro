@@ -1,10 +1,10 @@
 ---
 import Base from "@/layouts/Base.astro";
-import { PIECES as pieces } from "@/lib/pieces";
+import { PIECES as pieces, STEPS } from "@/lib/pieces";
 
-const title = "Analysis — Depopulate the FAIR Plan";
+const title = "Analysis | Depopulate the FAIR Plan";
 const description =
-  "Long-form, data-grounded analysis of the FAIR Plan crisis: the depopulation promise, and the reporting California's insurance bills need to make it real.";
+  "The analysis behind the site's scorecards, filed by commissioner's term: the depopulation promise, and the reporting California's insurance laws need.";
 
 ---
 
@@ -14,32 +14,45 @@ const description =
       Analysis
     </p>
     <h1 class="mb-4 text-4xl font-bold leading-tight text-charcoal lg:text-5xl">
-      Data-grounded analysis of the FAIR Plan crisis
+      The evidence behind the scorecards
     </h1>
     <p class="mb-10 text-lg text-gray-600">
-      Original analysis built on the FAIR Plan's and the Department of
-      Insurance's own published data. Every figure is reproducible from the
-      datasets on <a href="/data" class="underline">Data &amp; Downloads</a>.
+      Long-form analysis built on the FAIR Plan's and the Department of
+      Insurance's own published data, filed under the commissioner's term it
+      examines. Every figure is reproducible from the datasets on
+      <a href="/data" class="underline">Data &amp; Downloads</a>.
     </p>
-    <ul class="space-y-8">
-      {
-        pieces.map((p) => (
-          <li class="border-l-4 border-patriot-red pl-5">
-            <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">
-              {p.date}
-            </p>
-            <h2 class="mt-1 text-2xl font-bold text-charcoal">
-              <a href={p.href} class="hover:underline">
-                {p.title}
-              </a>
+    {
+      STEPS.map((step) => {
+        const items = pieces.filter((p) => p.step === step.id);
+        return (
+          <div class="mb-12">
+            <h2 class="mb-5 text-sm font-semibold uppercase tracking-wide text-gray-500">
+              <a href={step.home} class="hover:underline">{step.label}</a>
             </h2>
-            <p class="mt-2 leading-relaxed text-gray-600">{p.dek}</p>
-            <a href={p.href} class="mt-2 inline-block font-semibold text-patriot-red hover:underline">
-              Read →
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+            {items.length === 0 ? (
+              <p class="text-gray-600">{step.empty}</p>
+            ) : (
+              <ul class="space-y-8">
+                {items.map((p) => (
+                  <li class="border-l-4 border-patriot-red pl-5">
+                    <p class="text-xs font-semibold uppercase tracking-wide text-gray-500">
+                      {p.date}
+                    </p>
+                    <h3 class="mt-1 text-2xl font-bold text-charcoal">
+                      <a href={p.href} class="hover:underline">{p.title}</a>
+                    </h3>
+                    <p class="mt-2 leading-relaxed text-gray-600">{p.dek}</p>
+                    <a href={p.href} class="mt-2 inline-block font-semibold text-patriot-red hover:underline">
+                      Read →
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        );
+      })
+    }
   </section>
 </Base>

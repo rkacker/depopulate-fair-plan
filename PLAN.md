@@ -39,7 +39,7 @@ Rules that follow:
   printed on the site; the reader should see it in the structure, not be told it.
 - **The hero sets up the problem and the blame:** the headline, who is responsible,
   and four key facts. No 2023 deal, no quarterly movement, no statement of purpose.
-  The links to the two scorecards sit at the end of "Who is responsible".
+  The header is the only route to the two scorecards; there are no link cards.
 - **Each section leads with its point.** The Lara era opens with the chart and the
   verdict, then the scorecard, then what was tried. The Kim era states the test before
   the starting line and the proposals. "Why it matters" stays on the household effect
@@ -47,6 +47,12 @@ Rules that follow:
   where they first appear. The page closes on the one test and the Take action link.
 - **NDIFA gets no endorsement; it gets a scorecard,** with possible benefits and risks
   attributed to named people and to the state's own study.
+- **Neutral reporter voice.** No "we" or "our" anywhere on the site; say "this site"
+  or use the passive ("no published count was found"). No "you" on the home page
+  (Take action may address the reader). No signposting ("the next section explains"),
+  no metaphor, no em dashes in prose.
+- **Every home section has its own address.** Header links are plain anchors
+  (`/#lara-era`), so a section can be bookmarked, shared, and opened from other pages.
 - **Fact and advocacy page.** No signup form, no "contact us", no contact email.
 - **One count.** Our integrated ZIP-level data (665,673 at 2026-09-30). Never show the
   FAIR Plan dashboard's or CDI's higher totals beside it. A quarterly move under 0.5%
@@ -112,18 +118,13 @@ Implementation notes:
 
 ### Now (launched 2026-11-23; these are follow-ups on the live site)
 
-- [ ] **Click-test the ZIP panel** in a browser: 95667 (listed), 94110 (unlisted), 99999 (no data), "12" (invalid).
-- [ ] **Verify facts that came from memory, not a checked source:**
-  - Step 3 civics: four-year term, two-term limit, 80 Assembly and 40 Senate members, governor does not appoint the commissioner.
-  - Step 4 timeline dates: Safer from Wildfires (2022), nonrenewal moratorium in effect (2019), SB 254 (2025).
-- [ ] **Upgrade press-level facts to primary sources** in `policy.ts`: FAIR Plan 29.1% increase, insurer rate approvals, swearing-in date, Becerra rate-freeze proposal.
-- [ ] **Confirm SB 254 study page numbers by eye** (pp. 46-49 came from automated extraction), and that the Sacramento Bee and study links open in a browser (both timed out to an automated check).
-- [ ] **Mobile navigation.** Section links are hidden below the `lg` breakpoint; only the logo and the Take action button show. Add a compact menu or accept it.
+- [ ] **Rishi's review of the copy pass** (branch `copy/review-pass`: new hero intro, copy-review fixes, fact corrections), then merge and push.
+- [ ] **Facts still resting on press reports only** (marked `press` in `policy.ts`): the FAIR Plan's 29.1% increase and its approval date; the 6.9% (Mercury, CSAA) and 1.5% (Farmers) rate figures; the Becerra rate-freeze proposal (one source); that the commissioner approves the FAIR Plan's rates (CDI approved 29.1% of a 35.8% request, per press).
 
 ### Next, by step
 
 Step 1, the problem
-- [ ] **Earlier baseline.** Our series starts Sept 2019; find a FAIR Plan count for Dec 2018 or Jan 2019 so the scorecard covers Lara's full term.
+- [ ] **Earlier baseline: ask the FAIR Plan.** Researched 2026-11-23: no policies-in-force figure for Sept or Dec 2018 is online (the FAIR Plan's site now lists only FY2022 to FY2026 files). Keep Sept 30, 2019 (155,243) as the start of the Lara scorecard, labeled as the earliest figure in the Plan's files. Request the FY2018 "Policies in Force" report from the FAIR Plan. Context only, on a different basis: CDI counts about 140,000 FAIR Plan policies written (new plus renewed) in each year from 2015 to 2018, and 189,790 in 2019 (CDI fact sheet, Dec 2022). Do not mix that series with ours.
 
 Step 2, why it matters
 - [ ] **Premium burden by county.** Premium and exposure per policy. Needs both added to the export contract (`fair/county_quarterly.csv` has them). Spread is about 12× across counties.
@@ -132,7 +133,6 @@ Step 2, why it matters
 Step 4, the last eight years
 - [ ] **Analysis: the quarter growth stopped (Q3 2026),** written in the flat framing. Facts in `notes/q3-2026-status-update.md`. Respect the re-geocoding caveat (Arnold −250 is not real).
 - [ ] **Rewrite the two bill memos against the enacted text.** Both carry a dated "signed" note; the bodies describe the July 2026 versions.
-- [ ] **Bring the Depopulation Promise article into the era frame** (title, intro, links back to the scorecard).
 
 Step 5, the next term
 - [ ] **Results column.** Each quarterly release, fill in results against the starting line in `KimEra.tsx`.
@@ -140,7 +140,6 @@ Step 5, the next term
 - [ ] **NDIFA explainer** at `/analysis/ndifa` once there is a bill.
 
 Evidence layer
-- [ ] **Regroup `/analysis` and `/data` under the five steps.**
 - [ ] **Send the CPRA request to CDI** (`notes/cpra-request-cdi.md`, placeholders unfilled): commitment counts and current nonrenewal data, the two gaps the Take action page asks about.
 
 ### Later
@@ -172,9 +171,17 @@ nonrenewed through 2023), `cdi/zip_yearly.csv`, `analysis/senate_district_pif.cs
 
 ## Done (rolling log)
 
+- [x] 2026-11-24 — **Neutral-voice pass and section links.** First-person and second-person wording removed across the home page, `/data`, the article and the memos; em dashes removed from prose and page titles; header links are bookmarkable anchors that work from every page, tested at desktop and phone widths.
+
+- [x] 2026-11-23 — **Evidence layer regrouped.** `/analysis` files each piece under the scorecard it supports (`step` in `web/src/lib/pieces.ts`), with an empty state for the Kim term. Each `/data` tab states which step it supports. The article and both bill memos open with a line tying them to the 2019 to 2026 scorecard.
+
+- [x] 2026-11-23 — **Small-screen navigation:** the section links now show as a scrollable row under the logo. **Depopulation Promise article:** January 2025 is described as the rules opening for use, not taking effect (they were finalized in December 2024).
+
+- [x] 2026-11-23 — **Verification and copy-review pass** (branch `copy/review-pass`): ZIP panel click-tested in headless Chrome (listed, unlisted, no data, invalid); civics facts, timeline dates and the SB 254 figures checked against primary sources (study pages corrected to printed pp. 95-98); term start sourced to the Secretary of State; `/copy-review` run and its findings fixed, including a wrong claim that the Plan "grew every year until the last"; `.claude/skills/copy-review/SKILL.md` updated with the relaunch decisions.
+
 - [x] 2026-11-23 — **Site rebuilt around the five-step message** (branch `redesign/integrated-home`, merged and deployed the same day after Rishi's review):
   - Plan and backlog consolidated into this file; `AGENTS.md` now holds agent instructions, with pipeline conventions in `src/fairplan/CLAUDE.md`.
-  - Homepage: hero with the problem, the blame and four key facts; Why this matters; county map and table; ZIP panel pre-filled with an example chosen from the data; Who is responsible, ending in links to the two scorecards; the Lara scorecard with a bar-per-year chart, regulation and legislation tried, and the SIS and risk-model explainer; the Kim starting-line scorecard with NDIFA benefits and risks.
+  - Homepage: hero with the problem, the blame and four key facts; Why this matters; county map and table; ZIP panel pre-filled with an example chosen from the data; Who is responsible; the Lara scorecard with a bar-per-year chart, regulation and legislation tried, and the SIS and risk-model explainer; the Kim starting-line scorecard with NDIFA benefits and risks.
   - `/take-action` page. Signup, contact email, "Read deeper", and the header's Analysis and Data links removed.
   - Policy facts researched and stored in `web/src/lib/policy.ts`. Bill memos carry a "signed Sept 27, 2026" note. The Depopulation Promise article says the latest quarter is flat.
   - Retired: `?view=zip`, `ZipMap`, `ZipTable`, `CrisisStats`, `Solutions`, `Signup`, the 2.8 MB ZIP geometry. Branches `explainer-panels` and `data/2026q3` deleted.

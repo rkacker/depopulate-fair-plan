@@ -73,6 +73,16 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
 
   const regulation: Item[] = [
     {
+      when: "Dec 2019",
+      what: (
+        <>
+          First statewide use of the{" "}
+          <Cite k="moratorium">one-year ban on nonrenewals</Cite> around
+          declared wildfire disasters, under a 2018 law.
+        </>
+      ),
+    },
+    {
       when: "2022",
       what: (
         <>
@@ -96,9 +106,9 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
       when: "July 2024",
       what: (
         <>
-          FAIR Plan changes, including the rule that lets insurers pass{" "}
-          <Cite k="recoupRule">half of an assessment</Cite> to their own
-          customers.
+          A FAIR Plan agreement lets insurers pass{" "}
+          <Cite k="recoupRule">half of an assessment</Cite>, up to $1
+          billion, to their own customers with the commissioner's approval.
         </>
       ),
     },
@@ -135,9 +145,9 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
       when: "Dec 2025",
       what: (
         <>
-          <Cite k="firstApproval">First rate approval</Cite> tied to the
-          model rule. Its two-year commitment deadline falls in December
-          2027.
+          <Cite k="firstApproval">First rate approvals</Cite> under the
+          strategy, for Mercury and CSAA. The two-year commitment deadline
+          falls in December 2027.
         </>
       ),
     },
@@ -153,15 +163,6 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
   ];
 
   const legislation: Item[] = [
-    {
-      when: "2019",
-      what: (
-        <>
-          A <Cite k="moratorium">one-year ban on nonrenewals</Cite> in and
-          around declared wildfire disasters takes effect.
-        </>
-      ),
-    },
     {
       when: "2025",
       what: (
@@ -194,7 +195,7 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
   ];
 
   return (
-    <section id="lara-era" className="bg-white py-20 scroll-mt-16">
+    <section id="lara-era" className="bg-white py-20 scroll-mt-28 lg:scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <p className="mb-2 text-sm font-semibold uppercase tracking-wide text-patriot-red">
           The last eight years · Commissioner Ricardo Lara, 2019 to 2026
@@ -204,8 +205,7 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
         </h2>
         <p className="max-w-3xl text-lg leading-relaxed text-gray-700">
           Ricardo Lara took office in January 2019 and leaves in January
-          2027. Our FAIR Plan series begins in September 2019, nine months
-          into his first term. This is the record of his two terms, measured
+          2027. This is the record of his two terms, measured
           by the size of the insurer of last resort.
         </p>
 
@@ -245,11 +245,10 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
           <p className="text-gray-700">
             The FAIR Plan ends these eight years{" "}
             {stats.sinceFirstMultiple.toFixed(1)} times the size it started.
-            It grew every year until the last, when it went flat. A 2023
-            strategy meant to shrink it, explained below, stopped the growth
-            and has not brought a decline. Homeowners are paying the higher
-            rates that were the price of that strategy, and the policies it
-            was meant to move off the Plan are still on it.
+            It grew in every one of those years. Only the most recent quarter
+            was flat. A 2023 strategy meant to shrink it, explained
+            below, has not brought a decline. Insurers received the rate increases the strategy allowed, and
+            the Plan's count has not come down.
           </p>
           <p className="mt-3 text-gray-700">
             <a href="/analysis/depopulation-promise" className="font-semibold underline">
@@ -291,7 +290,7 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
         </div>
 
         <h3 className="mb-4 mt-12 text-xl font-bold text-charcoal">
-          What the era tried
+          Actions taken
         </h3>
         <div className="grid gap-8 lg:grid-cols-2">
           {[
@@ -315,14 +314,14 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
         </div>
 
         <h3 className="mb-4 mt-12 text-xl font-bold text-charcoal">
-          The centerpiece: the Sustainable Insurance Strategy
+          The Sustainable Insurance Strategy
         </h3>
         <div className="max-w-3xl space-y-4 leading-relaxed text-gray-700">
           <p>
-            The strategy was a trade. Insurers got two things they had asked
-            for: they may price wildfire with a catastrophe model, and they
-            may charge customers for the cost of the insurers' own
-            reinsurance. In return, an insurer that uses either tool must
+            The strategy was an exchange. Insurers gained two pricing tools:
+            they may price wildfire with a catastrophe model, and they
+            may charge customers for the cost of reinsurance, the insurance
+            that insurers buy for themselves. In return, an insurer that uses either tool must
             commit to write policies in distressed areas at{" "}
             <Cite k="commitmentRule">
               85% of its statewide market share, or to grow there by 5%
@@ -347,12 +346,12 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
         </div>
         <ul className="max-w-3xl list-disc space-y-2 pl-5 text-gray-700">
           <li>
-            <span className="font-semibold text-charcoal">What insurers got:</span>{" "}
-            approved increases under the new rules, including{" "}
+            <span className="font-semibold text-charcoal">Rate increases:</span>{" "}
+            approvals under the new rules include{" "}
             <Cite k="rateApprovals">6.9% for Mercury and for CSAA</Cite>.
           </li>
           <li>
-            <span className="font-semibold text-charcoal">What came back:</span>{" "}
+            <span className="font-semibold text-charcoal">Insurers expanding:</span>{" "}
             the Department counts{" "}
             <Cite k="insurersExpanding">
               {FACTS.insurersExpanding.value} insurance groups
@@ -360,17 +359,16 @@ export function LaraEra({ stats, promise, history }: LaraEraProps) {
             expanding in California, against {FACTS.insurersExpanding.note}.
           </li>
           <li>
-            <span className="font-semibold text-charcoal">What did not happen:</span>{" "}
-            the FAIR Plan did not shrink. It grew in {grewPct}% of the listed
-            ZIP codes, and grew faster outside the list (+
-            {promise.unlisted.growthPct}%) than inside it (+
-            {promise.designated.growthPct}%), where no commitment applies.
+            <span className="font-semibold text-charcoal">FAIR Plan size:</span>{" "}
+            the Plan grew in {grewPct}% of the listed
+            ZIP codes. It grew faster outside the list, where no commitment
+            applies (+{promise.unlisted.growthPct}%), than inside it (+
+            {promise.designated.growthPct}%).
           </li>
           <li>
-            <span className="font-semibold text-charcoal">What cannot be checked:</span>{" "}
-            the Department has published{" "}
-            <Cite k="noComplianceCount">no count</Cite> of policies written
-            against the commitments.
+            <span className="font-semibold text-charcoal">Compliance data:</span>{" "}
+            <Cite k="noComplianceCount">no published count</Cite> of policies
+            written against the commitments was found as of November 2026.
           </li>
         </ul>
 

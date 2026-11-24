@@ -6,10 +6,10 @@ export function NotFound() {
       <div className="mx-auto max-w-xl px-4 sm:px-6 lg:px-8">
         <Card className="border-0 p-8 text-center lg:p-12">
           <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-patriot-red">
-            404 — Page not found
+            404: Page not found
           </p>
           <h1 className="mb-4 text-2xl font-bold text-charcoal">
-            We couldn't find that page.
+            That page was not found.
           </h1>
           <p className="mb-6 text-sm text-gray-600">
             The link may be out of date. Try the home page or the data

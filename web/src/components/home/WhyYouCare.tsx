@@ -7,27 +7,27 @@ import { Cite, Sources } from "@/components/home/Sources";
 export function WhyYouCare({ stats }: { stats: HomeStats }) {
   const exposure = fmtBillions(stats.latest.exposure).replace(" B", " billion");
   return (
-    <section id="why" className="bg-coastal-beige py-20 scroll-mt-16">
+    <section id="why" className="bg-coastal-beige py-20 scroll-mt-28 lg:scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
           <h2 className="mb-4 text-3xl font-bold text-charcoal lg:text-4xl">
-            Why this matters to you
+            Why it matters
           </h2>
           <p className="text-lg text-gray-700">
-            The FAIR Plan is not a state agency and holds no public money. It
+            The FAIR Plan is not a state agency and is not funded by taxpayers. It
             is a pool that every licensed home insurer in California must
-            belong to, and it insures {exposure} in property. Its size reaches
-            your household in three ways, whether or not you are on it.
+            belong to, and it insures {exposure} in property. Its size affects homeowners in three ways, including those it does
+            not insure.
           </p>
         </div>
 
         <div className="grid gap-6 lg:grid-cols-3">
           <article className="rounded-xl bg-white p-6 shadow">
             <p className="text-xs font-semibold uppercase tracking-wide text-patriot-red">
-              If you have any home policy
+              All policyholders
             </p>
             <h3 className="mt-2 text-xl font-bold text-charcoal">
-              You help cover its shortfalls
+              Shortfalls are shared
             </h3>
             <p className="mt-3 text-gray-700">
               After the January 2025 Los Angeles fires the Plan billed
@@ -39,10 +39,10 @@ export function WhyYouCare({ stats }: { stats: HomeStats }) {
               <Cite k="medianSurcharge">{FACTS.medianSurcharge.value} a year</Cite>.
             </p>
             <p className="mt-3 text-gray-700">
-              A larger fire costs more. A state-commissioned study estimates
+              A state-commissioned study estimates
               that a wildfire season expected once in 100 years would bring{" "}
               <Cite k="bigFireAssessment">
-                {FACTS.bigFireAssessment.value} in assessments
+                {FACTS.bigFireAssessment.value} in such bills
               </Cite>
               , or $500 to $550 a year for each policyholder in the state.
             </p>
@@ -50,22 +50,23 @@ export function WhyYouCare({ stats }: { stats: HomeStats }) {
 
           <article className="rounded-xl bg-white p-6 shadow">
             <p className="text-xs font-semibold uppercase tracking-wide text-patriot-red">
-              If a private insurer covers you
+              Privately insured homeowners
             </p>
             <h3 className="mt-2 text-xl font-bold text-charcoal">
-              You are paying for the fix
+              New pricing rules
             </h3>
             <p className="mt-3 text-gray-700">
-              Since 2025 the state has let insurers charge more for wildfire
-              risk. Increases approved since then include{" "}
+              Since 2025 the state has let insurers price wildfire risk
+              with new tools that can raise rates. Increases approved since
+              then include{" "}
               <Cite k="rateApprovals">6.9% for Mercury and for CSAA</Cite>.
             </p>
             <p className="mt-3 text-gray-700">
-              The state's stated reason was to bring insurers back and shrink
-              the FAIR Plan. You are paying for that plan whether or not it
-              works.{" "}
+              The state's stated aim was to bring insurers back and shrink
+              the FAIR Plan. The approved rates do not depend on that
+              outcome.{" "}
               <a href="#lara-era" className="font-semibold underline">
-                See whether it has
+                The 2019 to 2026 scorecard shows the result
               </a>
               .
             </p>
@@ -73,10 +74,10 @@ export function WhyYouCare({ stats }: { stats: HomeStats }) {
 
           <article className="rounded-xl bg-white p-6 shadow">
             <p className="text-xs font-semibold uppercase tracking-wide text-patriot-red">
-              If you end up on the Plan
+              FAIR Plan policyholders
             </p>
             <h3 className="mt-2 text-xl font-bold text-charcoal">
-              You pay more for less
+              Higher cost, narrower coverage
             </h3>
             <p className="mt-3 text-gray-700">
               FAIR Plan home rates rose an average of{" "}
@@ -88,8 +89,7 @@ export function WhyYouCare({ stats }: { stats: HomeStats }) {
             </p>
             <p className="mt-3 text-gray-700">
               Most households on the Plan buy a second policy, called a
-              Difference in Conditions policy, to fill those gaps. That means
-              two premiums and two insurers for one home.
+              Difference in Conditions policy, to fill those gaps. The result is two premiums and two insurers for one home.
             </p>
           </article>
         </div>

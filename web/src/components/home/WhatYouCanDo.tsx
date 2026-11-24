@@ -4,15 +4,15 @@ import { Cite, Sources } from "@/components/home/Sources";
 // Section 6: practical steps for a homeowner. Static.
 export function WhatYouCanDo({ asOf }: { asOf: string }) {
   return (
-    <section id="act" className="bg-white py-20 scroll-mt-16">
+    <section id="act" className="bg-white py-20 scroll-mt-28 lg:scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-3xl">
           <h1 className="mb-4 text-3xl font-bold text-charcoal lg:text-4xl">
             Take action
           </h1>
           <p className="text-lg text-gray-700">
-            Two kinds of action: ask the people who set the rules to publish
-            the record, and use the rights you already have. None of this is
+            Homeowners can ask the officials who set the rules to publish the
+            record, and can use rights that already exist. This page is not
             legal or insurance advice.
           </p>
         </div>
@@ -22,11 +22,12 @@ export function WhatYouCanDo({ asOf }: { asOf: string }) {
             Ask for the scorecard to be public
           </h2>
           <p className="mt-2 max-w-3xl text-gray-700">
-            The state has not published how many policies insurers have
-            written against their commitments, and its nonrenewal data ends
-            in 2023. Both already exist inside the Department of Insurance.
-            Ask your state senator and assemblymember, and the commissioner's
-            office, to publish them every quarter.{" "}
+            No published count of the policies insurers have written against
+            their commitments was found as of November 2026, and the state's
+            published nonrenewal data ends in 2023. The Department of Insurance has
+            said it collects this data from insurers every year. Ask your state senator and
+            assemblymember, and the commissioner's office, to publish them
+            every quarter.{" "}
             <a
               href="https://findyourrep.legislature.ca.gov/"
               className="font-semibold underline"

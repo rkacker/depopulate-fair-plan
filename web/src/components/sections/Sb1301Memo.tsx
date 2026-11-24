@@ -23,6 +23,13 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+      <p className="mb-6 rounded-md bg-gray-50 p-3 text-sm text-gray-700">
+        Part of the{" "}
+        <a href="/#lara-era" className="font-semibold underline">
+          scorecard for 2019 to 2026
+        </a>
+        , Commissioner Ricardo Lara's two terms. This law was passed in that term and takes effect in the next.
+      </p>
       <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-patriot-red">
         Analysis · Legislation
       </p>
@@ -62,8 +69,8 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
       </p>
       <p className="mb-4 leading-relaxed text-gray-700">
         The bill responds to the nonrenewal wave that pushed hundreds of
-        thousands of households onto the FAIR Plan — the state's insurer of
-        last resort — after the September 2023 regulatory deal with insurers.
+        thousands of households onto the FAIR Plan, the state's insurer of
+        last resort, after the September 2023 regulatory deal with insurers.
       </p>
 
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">

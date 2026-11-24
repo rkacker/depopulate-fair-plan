@@ -3,19 +3,18 @@
 // It also states why the site scores that one office. Static.
 export function WhoIsInCharge() {
   return (
-    <section id="regulation" className="bg-navy-blue py-20 text-white scroll-mt-16">
+    <section id="regulation" className="bg-navy-blue py-20 text-white scroll-mt-28 lg:scroll-mt-16">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <h2 className="mb-6 text-3xl font-bold lg:text-4xl">Who is responsible</h2>
         <p className="max-w-3xl text-lg leading-relaxed text-gray-100">
-          Home insurance in California is not left to the market. Three sets
-          of elected officials decide what insurers may charge, where they
-          must sell, and what happens to homeowners no company will cover.
-          One of them holds most of the power.
+          Three sets of elected officials regulate home insurance in
+          California. The insurance commissioner holds the most direct
+          authority.
         </p>
 
         <div className="mt-10 rounded-xl border-2 border-golden-yellow bg-white/10 p-6">
           <p className="text-xs font-semibold uppercase tracking-wide text-golden-yellow">
-            The office this site scores
+            The office this site tracks
           </p>
           <h3 className="mt-1 text-2xl font-bold">The insurance commissioner</h3>
           <p className="mt-3 max-w-3xl text-gray-100">
@@ -44,45 +43,18 @@ export function WhoIsInCharge() {
             <p className="text-gray-100">
               The governor signs or vetoes the bills the Legislature passes
               and can direct state agencies by executive order. The governor
-              does not set insurance rates and does not appoint the
-              commissioner.
+              does not set insurance rates and does not choose the
+              commissioner, except to fill a vacancy with the Legislature's
+              confirmation.
             </p>
           </div>
         </div>
 
         <p className="mt-10 max-w-3xl text-lg leading-relaxed text-gray-100">
-          Wildfire is the pressure on the market. These officials decide
-          where the pressure goes, and the commissioner decides the most. So
-          this site keeps one scorecard per commissioner, with one test: did
-          the FAIR Plan get smaller. Laws passed by the Legislature are
-          recorded in the term they were passed.
+          This site keeps one scorecard for each commissioner's term. The
+          measure is whether the FAIR Plan got smaller. Laws passed by the
+          Legislature are listed under the term in which they passed.
         </p>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          <a
-            href="#lara-era"
-            className="group rounded-lg border-2 border-white/30 bg-white/10 p-5 text-left transition-colors hover:border-golden-yellow"
-          >
-            <p className="text-xs font-semibold uppercase tracking-wide text-golden-yellow">
-              2019 to 2026 · Commissioner Lara
-            </p>
-            <p className="mt-1 text-xl font-bold">Eight years of failed regulation</p>
-            <p className="mt-1 text-sm text-gray-200 group-hover:text-white">
-              See the scorecard →
-            </p>
-          </a>
-          <a
-            href="#kim-era"
-            className="group rounded-lg border-2 border-white/30 bg-white/10 p-5 text-left transition-colors hover:border-golden-yellow"
-          >
-            <p className="text-xs font-semibold uppercase tracking-wide text-golden-yellow">
-              2027 onward · Commissioner Kim
-            </p>
-            <p className="mt-1 text-xl font-bold">What will the next four bring?</p>
-            <p className="mt-1 text-sm text-gray-200 group-hover:text-white">
-              See the starting line →
-            </p>
-          </a>
-        </div>
       </div>
     </section>
   );
