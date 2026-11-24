@@ -21,10 +21,9 @@ story with current figures, so this README stays focused on the pipeline.**
 
 ## Start here (returning contributors)
 
-- **What to work on next →** [`BACKLOG.md`](BACKLOG.md) — ranked, with a session ritual
-- **How the code works / conventions →** [`CLAUDE.md`](CLAUDE.md)
+- **What to work on next →** [`PLAN.md`](PLAN.md): direction, page design, and the backlog, with a session ritual
+- **How the code works / conventions →** [`AGENTS.md`](AGENTS.md)
 - **The website (Astro app) →** [`web/README.md`](web/README.md)
-- **Planned single-page redesign →** [`docs/redesign-brief.md`](docs/redesign-brief.md)
 
 ## Quickstart
 
@@ -44,7 +43,7 @@ just test                          # run test suite (no network needed)
 `just build` runs Normalize + Export; Fetch is separate because it needs network and the
 `sources/` PDFs are committed. The CLI also has an `insights` subcommand that emits a
 Markdown market report to `insights/` — run manually, not part of `just build`. Conventions
-for running the CLI directly (`PYTHONPATH=src`, `uv`, Python 3.11) are in [`CLAUDE.md`](CLAUDE.md).
+for running the CLI directly (`PYTHONPATH=src`, `uv`, Python 3.11) are in [`AGENTS.md`](AGENTS.md).
 
 ## Data Sources
 
@@ -107,7 +106,7 @@ config/
   sources.toml       # registry of upstream PDF sources (URLs, dates, dataset types)
   export_contract.json # the list of website-facing exports
 src/fairplan/        # cli.py, pipeline.py, parsers.py, fetch.py, manifest.py,
-                     # models.py, io_utils.py  (see CLAUDE.md for which file does what)
+                     # models.py, io_utils.py  (see AGENTS.md for which file does what)
 web/                 # the live website — Astro app deployed to GitHub Pages (see web/README.md)
 tests/               # test_parsers.py + golden/expected_metrics.json
 site/build.py        # legacy static generator, superseded by web/ — unused by the deploy

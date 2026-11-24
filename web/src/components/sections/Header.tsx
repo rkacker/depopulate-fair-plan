@@ -1,10 +1,11 @@
-import { Button } from "@/components/ui/button";
 import { scrollToSection } from "@/lib/utils";
 
 const HOME_SECTIONS: Array<{ id: string; label: string }> = [
-  { id: "mission", label: "Mission" },
-  { id: "crisis", label: "Crisis" },
-  { id: "heatmap", label: "Map" },
+  { id: "why", label: "Why it matters" },
+  { id: "where", label: "The impact" },
+  { id: "regulation", label: "Who is responsible" },
+  { id: "lara-era", label: "2019-2026" },
+  { id: "kim-era", label: "2027 onward" },
 ];
 
 export function Header({ pathname }: { pathname: string }) {
@@ -21,11 +22,11 @@ export function Header({ pathname }: { pathname: string }) {
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-patriot-red">
             <span className="text-sm font-bold text-white">DP</span>
           </div>
-          <h1 className="text-lg font-bold text-charcoal sm:text-xl">
+          <span className="text-lg font-bold text-charcoal sm:text-xl">
             Depopulate the FAIR Plan
-          </h1>
+          </span>
         </a>
-        <nav className="hidden items-center gap-6 md:flex">
+        <nav className="hidden items-center gap-5 lg:flex">
           {HOME_SECTIONS.map((item) =>
             onHome ? (
               <button
@@ -45,15 +46,6 @@ export function Header({ pathname }: { pathname: string }) {
               </a>
             ),
           )}
-          <Button
-            size="sm"
-            onClick={() => {
-              if (onHome) scrollToSection("signup");
-              else window.location.href = "/#signup";
-            }}
-          >
-            Get Updates
-          </Button>
         </nav>
       </div>
     </header>

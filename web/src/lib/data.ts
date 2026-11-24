@@ -86,16 +86,6 @@ export function colorForPolicies(policies: number | undefined): string {
   return "var(--color-tier-low)";
 }
 
-// ZIP-scale palette: max ~7,400 / p99 ~3,000 / p50 ~130. Visible peach for
-// the long tail, transparent No-Data so the county base shows through.
-export function colorForZipPolicies(policies: number | undefined): string {
-  if (policies === undefined || policies <= 0) return "transparent";
-  if (policies > 2500) return "#67000d";
-  if (policies > 500) return "#cb181d";
-  if (policies > 100) return "#fb6a4a";
-  return "#fcbba1";
-}
-
 interface RawZipRow {
   zip?: string;
   city?: string;

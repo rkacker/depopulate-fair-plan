@@ -41,6 +41,14 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
         {latest ? fmtDate(latest.coverage_end) : "—"}
       </p>
 
+      <p className="mb-6 rounded-r-lg border-l-4 border-navy-blue bg-gray-50 p-4 text-sm leading-relaxed text-gray-700">
+        <span className="font-semibold text-charcoal">Update, November 2026.</span>{" "}
+        The Governor signed SB 1301 on September 27, 2026 (Chapter 693,
+        Statutes of 2026). This analysis was written in July 2026, before the
+        final amendments, and describes the bill as it stood then. Check the
+        enacted text for the final provisions.
+      </p>
+
       <h2 className="mb-3 mt-10 text-2xl font-bold text-charcoal">
         What the bill does
       </h2>
@@ -133,11 +141,6 @@ export function Sb1301Memo({ history, stats }: Sb1301MemoProps) {
       <p className="mt-8 border-t border-gray-200 pt-4 text-sm text-gray-500">
         Every figure on this page is reproducible from the datasets on{" "}
         <a href="/data" className="underline">Data &amp; Downloads</a>.
-        Questions, corrections, or data requests:{" "}
-        <a href="mailto:info@depopulatefairplan.com" className="underline">
-          info@depopulatefairplan.com
-        </a>
-        .
       </p>
     </article>
   );

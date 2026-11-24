@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { AlertTriangle } from "lucide-react";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { colorForPolicies } from "@/lib/data";
-import { scrollToSection } from "@/lib/utils";
 import type { CountyData, SiteStats } from "@/types";
 
 const TIERS = [
@@ -19,9 +17,10 @@ interface CrisisMapProps {
   countyData: CountyData | null;
   stats: SiteStats | null;
   loading: boolean;
+  showHeader?: boolean; // false when a parent section supplies the heading
 }
 
-export function CrisisMap({ countyData, stats, loading }: CrisisMapProps) {
+export function CrisisMap({ countyData, stats, loading, showHeader = true }: CrisisMapProps) {
   const [hovered, setHovered] = useState<{ name: string; policies: number } | null>(
     null
   );
@@ -34,17 +33,19 @@ export function CrisisMap({ countyData, stats, loading }: CrisisMapProps) {
   }
 
   return (
-    <section id="heatmap" className="bg-gray-50 py-20 scroll-mt-16">
+    <section id="heatmap" className={`bg-gray-50 scroll-mt-16 ${showHeader ? "py-20" : "pb-20 pt-10"}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold text-charcoal lg:text-4xl">
-            {stats?.map.title ?? "FY 2025 FAIR Plan Crisis Map"}
-          </h2>
-          <p className="mx-auto max-w-2xl text-lg text-gray-600">
-            {stats?.map.description ??
-              "Explore how FAIR Plan policies are distributed across California's 58 counties."}
-          </p>
-        </div>
+        {showHeader && (
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-charcoal lg:text-4xl">
+              {stats?.map.title ?? "Where the FAIR Plan is concentrated"}
+            </h2>
+            <p className="mx-auto max-w-2xl text-lg text-gray-600">
+              {stats?.map.description ??
+                "Explore how FAIR Plan policies are distributed across California's 58 counties."}
+            </p>
+          </div>
+        )}
 
         <div className="grid gap-6 lg:grid-cols-4">
           <div className="lg:col-span-3">
@@ -159,11 +160,6 @@ export function CrisisMap({ countyData, stats, loading }: CrisisMapProps) {
                 </div>
               </div>
 
-              <div className="mt-6">
-                <Button className="w-full" onClick={() => scrollToSection("signup")}>
-                  Stay Informed
-                </Button>
-              </div>
             </Card>
           </div>
         </div>
