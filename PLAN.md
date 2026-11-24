@@ -110,9 +110,8 @@ Implementation notes:
 
 ## Backlog
 
-### Now (before launch)
+### Now (launched 2026-11-23; these are follow-ups on the live site)
 
-- [ ] **Rishi's final read** of `/` and `/take-action` on the dev server, then merge `redesign/integrated-home` and push.
 - [ ] **Click-test the ZIP panel** in a browser: 95667 (listed), 94110 (unlisted), 99999 (no data), "12" (invalid).
 - [ ] **Verify facts that came from memory, not a checked source:**
   - Step 3 civics: four-year term, two-term limit, 80 Assembly and 40 Senate members, governor does not appoint the commissioner.
@@ -173,13 +172,13 @@ nonrenewed through 2023), `cdi/zip_yearly.csv`, `analysis/senate_district_pif.cs
 
 ## Done (rolling log)
 
-- [x] 2026-11-23 — **Site rebuilt around the five-step message** (branch `redesign/integrated-home`, 14 commits, not yet merged):
+- [x] 2026-11-23 — **Site rebuilt around the five-step message** (branch `redesign/integrated-home`, merged and deployed the same day after Rishi's review):
   - Plan and backlog consolidated into this file; `AGENTS.md` now holds agent instructions, with pipeline conventions in `src/fairplan/CLAUDE.md`.
   - Homepage: hero with the problem, the blame and four key facts; Why this matters; county map and table; ZIP panel pre-filled with an example chosen from the data; Who is responsible, ending in links to the two scorecards; the Lara scorecard with a bar-per-year chart, regulation and legislation tried, and the SIS and risk-model explainer; the Kim starting-line scorecard with NDIFA benefits and risks.
   - `/take-action` page. Signup, contact email, "Read deeper", and the header's Analysis and Data links removed.
   - Policy facts researched and stored in `web/src/lib/policy.ts`. Bill memos carry a "signed Sept 27, 2026" note. The Depopulation Promise article says the latest quarter is flat.
   - Retired: `?view=zip`, `ZipMap`, `ZipTable`, `CrisisStats`, `Solutions`, `Signup`, the 2.8 MB ZIP geometry. Branches `explainer-panels` and `data/2026q3` deleted.
-  - Checked: typecheck, build, pipeline tests (20 of 20 on the first commit; no pipeline changes since), section anchors, 18 of 20 external source links.
+  - Checked before merge: typecheck, build, pipeline tests (20 of 20), section anchors, 18 of 20 external source links.
 - [x] 2026-10-28 — **Q3 2026 quarterly release ingested** (as of 2026-09-30, published
   2026-10-19; branch `data/2026q3`): 3 DWE sources + FY2026 5-year PIF/TIV files;
   goldens 665,673 statewide / 665,673 FY2026 / Alameda 11,969; exports synced; ZIP
